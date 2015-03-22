@@ -1,0 +1,16 @@
+!!!
+%html
+	%head
+		%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+	%body
+		%p
+			Bonjour,
+		%p
+			Nous sommes au regret de vous annoncer que votre réservation concernant l'annonce
+			= @advert.title
+			a été annulée par le propriétaire.
+		%p
+			N'hésitez pas à vous connecter à votre espace personnel et à prendre contact avec le propriétaire pour en savoir plus sur les raisons de cette annulation en cliquant sur le lien ci-dessous:
+		%p= link_to "Accéder à mon compte", @url
+		%br
+		%p À bientôt sur Sharing Space.

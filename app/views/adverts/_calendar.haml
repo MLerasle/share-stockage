@@ -1,0 +1,29 @@
+#calendar
+%ul.legend
+	%li
+		%span.legend_free
+		Libre
+	%li
+		%span.legend_occupied
+		Réservé
+	%li
+		%span.legend_pending
+		Pré-réservé
+
+- content_for :scripts do
+	:javascript
+		$('#date_tab').on('click', function() {
+			$('#calendar').fullCalendar({
+				lang: 'fr',
+		    eventSources: [
+		        {
+		            url: '/adverts/#{@advert.id}/reservations.json'
+		        },
+						{
+		            url: '/adverts/#{@advert.id}/reservations/pending.json',
+		            color: 'orange',
+		            textColor: 'black'
+						}
+		    ]
+			});
+		});

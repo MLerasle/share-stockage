@@ -1,0 +1,31 @@
+%section#main-content
+	.row
+		- unless notice.nil?
+			.alert-box.info.radius{ "data-alert" => "" }
+				= notice
+				%a.close{ href:"#" } x
+			
+	.row.body.sign-in
+		.large-8.medium-12.small-12.columns.large-centered.small-centered
+			.create-account
+				.row
+					.large-12.small-12.columns
+						- if @advert.pictures.any? and @advert.pictures.count > 1
+							%h4 Photos déjà présentes
+							%ul.clearing-thumbs.large-block-grid-6.medium-block-grid-3.small-block-grid-3{ "data-clearing" => "" }
+								- @advert.pictures.each do |p|
+									-	unless p.id.nil?
+										%li
+											= image_tag p.image(:medium)
+				.row.sign-up
+					.large-12.small-12.columns
+						%h1 Ajouter des photos à votre annonce
+						%hr
+
+						= form_for @picture, url: advert_pictures_path(@advert), html: { multipart: true, class: "dropzone", id: "new-picture" } do |f|
+							.fallback
+								= f.file_field :image
+								= f.submit "Ajouter"
+					
+						%br		
+						= link_to "Terminer", user_path(current_user), class: "button radius right"

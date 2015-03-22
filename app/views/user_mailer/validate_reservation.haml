@@ -1,0 +1,16 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %p Bonjour,
+    %p
+      Nous avons le plaisir de vous informer que votre réservation concernant l'annonce
+      = @advert.title
+      a été validée par le propriétaire.
+    %p Vous trouverez en pièce jointe un exemplaire du contrat de location à imprimer et à remplir.
+    %p Il ne vous reste plus qu'à convenir d'un rendez-vous avec le propriétaire pour commencer à stocker vos affaires!
+    %p Vous pouvez également à tout moment laisser une évaluation pour cette annonce en vous rendant sur cette page:
+    %p= link_to "Laisser un commentaire", @advert_url
+    %br
+    %p Nous vous remercions d'avoir choisi Sharing Space.

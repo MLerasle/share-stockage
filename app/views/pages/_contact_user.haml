@@ -1,0 +1,11 @@
+%h1 Contacter l'utilisateur
+%hr
+
+= form_for '#', url: contact_user_path(advert: @advert, reservation: reservation), method: :post do
+	= label_tag "Sujet"
+	= text_field_tag "subject"
+	
+	= label_tag "Votre message"
+	= text_area_tag "body", nil, rows: 8
+	
+	= submit_tag "Envoyer", class: "button radius expand"

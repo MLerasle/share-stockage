@@ -1,0 +1,18 @@
+%h1 Evaluez l'annonceur
+%hr
+
+= form_for [@advert, @advert.evaluations.build], url: evaluations_path(advert: @advert), method: :post do
+	= label_tag "Note"
+	#evaluation_note
+	%br
+	
+	= label_tag "Votre commentaire"
+	= text_area_tag "comment", nil, rows: 8
+	
+	= submit_tag "Valider", class: "button radius expand"
+	
+- content_for :scripts do
+	:javascript
+		$('#evaluation_note').raty({
+			path: '/assets'
+		});

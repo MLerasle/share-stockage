@@ -1,0 +1,50 @@
+%section#main-content
+	.row.body.sign-in
+		.large-10.small-12.columns.large-centered.small-centered
+			.create-account
+				.row.sign-up
+					.large-12.small-12.columns
+						%h1
+							Réservations
+							= @advert.title
+						%hr
+					
+						.panel
+							%dl.tabs{"data-tab" => ""}
+								%dd.active
+									%a{:href => "#panel2"} Réservations en attente
+								%dd
+									%a{:href => "#panel3", id: "date_tab"} Calendrier
+							.tabs-content
+								#panel2.content.active
+									#reservations_section
+										- if @advert.reservations_waiting_validation.any?
+											%p
+												%i.fa.fa-exclamation-triangle
+												Avant de valider une réservation, assurez-vous que votre espace est disponible à ces dates en consultant la section "Calendrier". Autrement dit, veillez à ce que 2 réservations ne se chevauchent pas. En cas de problème, veuillez contacter le demandeur.
+										
+											%table#reservations_table{ style: "width:100%;" }
+												%thead
+													%tr
+														%th Début
+														%th Fin
+														%th Valider la réservation
+														%th Annuler la réservation
+														%th Contacter le demandeur
+												%tbody
+													- @advert.reservations_waiting_validation.each do |r|
+														%tr{ id: "row-#{r.id}" }
+															%td= r.start_date
+															%td= r.end_date
+															%td= link_to "Valider", preview_validate_advert_reservation_path(@advert, r)
+															%td= link_to "Annuler", preview_cancel_advert_reservation_path(@advert, r)
+															%td
+																= link_to "Contacter", '#', data: {'reveal-id' => 'contactModal'}
+																#contactModal.reveal-modal{"data-reveal" => ""}
+																	= render partial: 'pages/contact_user', locals: { advert: @advert, reservation: r }
+																	%a.close-reveal-modal ×
+
+										- else
+											%h4.subheader Vous n'avez aucune demande de réservation en attente.										
+								#panel3.content
+									= render partial: "calendar"

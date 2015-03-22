@@ -1,0 +1,40 @@
+%section#main-content
+  .row.body.sign-in
+    .large-10.small-12.columns.large-centered.small-centered
+      .create-account
+        .row.sign-up
+          .large-12.small-12.columns
+            %h1 Annulation la réservation
+            %hr
+            %h6
+              %i.fa.fa-info-circle
+              \ Vous êtes sur le point d'annuler la réservation. Cette action est irréversible.
+            %br
+            %h4 Récapitulatif de la demande
+            %br
+            %h5 Votre annonce:
+            %table#adverts_table
+              %tbody
+                %tr
+                  = render partial: 'adverts/advert_line', locals: { advert: @advert }
+
+            %h5
+              Demande de réservation du
+              %strong= @reservation.start_date
+              au
+              %strong= @reservation.end_date
+            %h5
+              Durée de la location:
+              %strong
+                = @reservation.duration
+                jours
+            %h5
+              Coût total de la réservation:
+              %strong
+                CHF
+                = @reservation.price
+            %br
+            %h6
+              Êtes-vous sûr de vouloir annuler définitevement la demande de réservation?
+            %br
+            = link_to "Cliquez ici pour annuler la réservation", advert_reservation_path(@advert, @reservation), method: :delete, class: "button radius expand"

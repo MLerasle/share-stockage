@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Sharing Space" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+		<div class="contain-to-grid sticky">
+			<nav class="top-bar" data-topbar role="navigation">
+			  <ul class="title-area">
+			    <li class="name">
+			      <h1><%= link_to "Sharing Space", root_path %></a></h1>
+			    </li>
+					<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+			  </ul>
+			  <section class="top-bar-section">
+			    <ul class="right">
+			      <li class="divider"></li>
+						<li><%= link_to "Publier une annonce", new_advert_path %></li>
+			      <li class="divider"></li>
+						<% if user_signed_in? %>
+							<li><%= link_to "Mon compte", user_path(current_user) %></li>
+							<li class="divider"></li>
+							<li><%= link_to "Faire un don", new_charge_path %></li>
+							<li class="divider"></li>
+							<li><%= link_to "Déconnexion", destroy_user_session_path, "data-method" => :delete %></li>
+						<% else %>
+				      <li><%= link_to "Connexion", new_user_session_path %></li>
+				      <li class="divider"></li>
+				      <li><%= link_to "Inscription", new_user_registration_path %></li>
+						<% end %>
+			    </ul>
+			  </div>
+			</nav>
+		</div>
+		
+		
+		<!-- <div class="row">
+			<% unless notice.nil? %>
+				<div data-alert class="alert-box info radius">
+				  <%= notice %>
+				  <a href="#" class="close">&times;</a>
+				</div>
+			<% end %>
+			<% unless alert.nil? %>
+				<div data-alert class="alert-box alert radius">
+					<%= alert %>
+					<a href="#" class="close">&times;</a>
+				</div>
+			<% end %>
+		</div> -->
+
+    <%= yield %>
+		
+		
+		<!-- FOOTER SECTION -->
+		<footer>
+		    <div class="row">
+		        <div class="small-12 medium-6 large-6 columns section">
+		            <h4>À propos</h4>
+								<hr/>
+		            <p>Sharing Space est le garde-meuble entre particuliers en Suisse Romande. Trouvez un garage, une cave ou n'importe quel espace de stockage près de chez vous tout en réduisant les coûts.</p>
+								<p>Sharing Space suit la tendance de la consommation collaborative en permettant à tout un chacun de mettre à disposition un espace de sa maison pour le proposer à un autre particulier en ayant besoin pour stocker ses affaires pendant une durée définie.</p>
+		        </div>
+						
+		        <div class="small-12 medium-3 large-3 columns section">
+		            <h4>Restons connectés!</h4>
+								<hr/>
+		            <p><i class="fa fa-envelope"></i> <%= mail_to "maxlerasle@gmail.com", "Mail"%> 
+								</p>
+								<p><i class="fa fa-facebook"></i> Facebook</p>
+								<p><i class="fa fa-twitter"></i> Twitter</p>
+								<p><i class="fa fa-google-plus"></i> Google plus</p>
+		        </div>
+ 
+		        <div class="small-12 medium-3 large-3 columns section">
+		            <h4>Aide</h4>
+								<hr/>
+								<p><%= link_to "Comment ça marche?", help_path %></p>
+								<p><%= link_to "FAQ", faq_path %></p>
+								<p><%= link_to "Conditions générales", cgu_path %></p>
+								<p><%= link_to "Modèle de lettre pour la régie", 'files/lettre_agence_model.pdf', target: '_blank' %></p>
+		        </div>
+		    </div> <!-- END ROW -->
+		</footer> <!-- END FOOTER -->
+ 
+		<!-- COPYRIGHT SECTION -->
+		<section class="full-width copyright-section">
+		    <div class="row">
+		        <div class="large-6 medium-6 small-12 columns">
+		            <p>&copy; <%= Date.today.year %> Sharing Space - All rights reserved</p>
+		        </div>
+		    </div>
+		</section>
+		
+		
+    <%= javascript_include_tag "application" %>
+		<%= yield :scripts %>
+  </body>
+</html>

@@ -1,0 +1,185 @@
+%script{:src => "http://maps.google.com/maps/api/js?sensor=false&amp;language=en", :type => "text/javascript"}
+%section#main-content
+	.row
+		.small-12.large-12.columns
+			- unless notice.nil?
+				.alert-box.info.radius{ "data-alert" => "" }
+					= notice
+					%a{ href: "#", class: "close" } &times;
+			- unless alert.nil?
+				.alert-box.alert.radius{ "data-alert" => "" }
+					= alert
+					%a{ href: "#", class: "close" } &times;
+	.row
+		.small-12.large-12.columns
+			%h2= @advert.title
+			%h4.subheader= "#{@advert.type_name} - #{@advert.volume} m³ - #{@advert.full_address}" 
+			%br
+	
+		.small-12.medium-12.large-8.columns	
+			.panel
+				%dl.tabs{"data-tab" => ""}
+					%dd.active
+						%a{:href => "#panel1"} Photos
+					%dd
+						%a{:href => "#panel2", id: "date_tab"} Calendrier
+
+				.tabs-content
+					#panel1.content.active
+						.row
+							- if @advert.pictures.any?
+								.small-12.medium-12.large-10.columns.large-centered.small-centered
+									.slick_images
+										- @advert.pictures.each do |p|
+											%div= image_tag p.image(:large)
+							- else
+								= image_tag "camera.png"
+								Aucune photo n'est disponible pour cette annonce.
+					#panel2.content
+						= render partial: "calendar"
+		
+				%hr
+				%h3.subheader Description
+				%p= @advert.description.gsub(/\n/,"<br/>").html_safe
+			
+				%h3.subheader Détails
+				%ul
+					%li
+						Conditions d'accès:
+						= @advert.access_type_hr
+					%li
+						Type d'espace:
+						= @advert.type_name
+					%li
+						Ascenseur:
+						= @advert.elevator_hr
+					%li
+						Accessible en voiture:
+						= @advert.car_access_hr
+					%li
+						Gardien:
+						= @advert.concierge_hr
+					%li
+						Eclairage:
+						= @advert.light_hr
+			
+			%br
+			%fieldset
+				%legend Commentaires sur cet espace
+				%h5 Evaluation moyenne
+				#star
+				= @advert.evaluation_number
+				- if @advert.evaluation_number == 0 or @advert.evaluation_number == 1
+					vote
+				- else
+					votes
+				\(
+				= @advert.evaluation_average
+				\/ 5
+				\)
+				%hr
+				- if @advert.evaluations.where(validated: true).any?
+					- @advert.evaluations.where(validated: true).each do |e|
+						%h5
+							%span{ style: "color:rgb(46,121,168)" }
+								= e.user.username
+							%span{ style: "font-size: 0.8em" }
+								le
+								= e.created_at.strftime("%d/%m/%y")
+							
+						%h6= e.comment
+						- unless e == @advert.evaluations.last
+							%hr
+				- else
+					%h5.subheader Il n'y a actuellement aucun commentaire pour cet espace.
+								
+	
+		.small-12.medium-12.large-4.columns
+			- if @advert.authorize_evaluation_for_user?(current_user)
+				= link_to "Laisser une évaluation", '#', data: {'reveal-id' => 'evaluationModal'}, class: "button radius expand"
+				#evaluationModal.reveal-modal{"data-reveal" => ""}
+					= render partial: 'evaluations/new', locals: { advert: @advert }
+					%a.close-reveal-modal ×
+			.panel.map_panel
+				#map
+		.small-12.medium-12.large-4.columns
+			.panel
+				%h3 Pré-réserver
+				%hr
+				= form_for([@advert, @advert.reservations.build]) do |f|
+					= f.label "Choisissez vos dates"
+					.row.collapse
+						.small-9.large-10.columns
+							= f.text_field :start_date, placeholder: "Début de la location", label: false
+						.small-3.large-2.columns
+							%span.postfix
+								%i.fa.fa-calendar
+					.row.collapse
+						.small-9.large-10.columns
+							= f.text_field :end_date, placeholder: "Fin souhaitée", label: false
+						.small-3.large-2.columns
+							%span.postfix
+								%i.fa.fa-calendar
+					%p
+						= f.submit "Pré-réserver", class: "button radius expand"
+					%p
+						%i.fa.fa-exclamation-triangle
+						Véfifier les disponibilités de l'espace dans la section "Calendrier" pour que votre demande puisse aboutir!
+					
+			.panel
+				%h3 Plus de renseignements
+				%hr
+				= link_to "Contacter le propriétaire", '#', data: {'reveal-id' => 'contactModal'}, class: "button radius expand"
+				#contactModal.reveal-modal{"data-reveal" => ""}
+					= render partial: 'pages/contact_announcer', locals: { advert: @advert }
+					%a.close-reveal-modal ×
+					
+- content_for :scripts do
+	:javascript
+		var nowTemp = new Date();
+		var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+		var checkin = $('#reservation_start_date').fdatepicker({
+			format: 'yyyy-mm-dd',
+			onRender: function (date) {
+				return date.valueOf() < now.valueOf() ? 'disabled' : '';
+			}
+		}).on('changeDate', function (ev) {
+			if (ev.date.valueOf() > checkout.date.valueOf()) {
+				var newDate = new Date(ev.date)
+				newDate.setDate(newDate.getDate() + 1);
+				checkout.update(newDate);
+				}
+				checkin.hide();
+				$('#reservation_end_date')[0].focus();
+		}).data('datepicker');
+		var checkout = $('#reservation_end_date').fdatepicker({
+			format: 'yyyy-mm-dd',
+			onRender: function (date) {
+				return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+			}
+		}).on('changeDate', function (ev) {
+			checkout.hide();
+		}).data('datepicker');
+		
+		$('.slick_images').slick({
+			arrows: true
+		});
+		$("#map").width("100%").height("350px").gmap3({
+		  marker:{
+		     latLng:["#{@advert.latitude}", "#{@advert.longitude}"]
+		  },
+			map:{
+			  options:{
+			   center:["#{@advert.latitude}", "#{@advert.longitude}"],
+			   zoom:16,
+			   mapTypeControl: true,
+			   navigationControl: true,
+			   scrollwheel: false
+			  }
+			}
+		});
+		$('#star').raty({
+			readOnly: true,
+			score: "#{@advert.evaluation_average}",
+			path: '/assets'
+		});

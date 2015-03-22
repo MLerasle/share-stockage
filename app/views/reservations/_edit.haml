@@ -1,0 +1,10 @@
+%h1 Modifier les dates
+%hr
+
+= form_for reservation, url: advert_reservation_path(advert, reservation), method: :put do |f|
+	= f.label "Début de la réservation"
+	= f.text_field :start_date, label: false
+	= f.label "Fin souhaitée"
+	= f.text_field :end_date, label: false
+
+	= f.submit "Confirmer les changements", class: "button radius expand"

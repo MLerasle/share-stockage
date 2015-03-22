@@ -1,0 +1,23 @@
+- if advert.pictures.any?
+	%td.image_cell= image_tag advert.pictures.first.image.url(:medium)
+- else
+	%td.image_cell= image_tag "camera.png"
+%td
+	%h5
+		%i.fa.fa-map-marker
+		= advert.full_address
+	%ul
+		%li
+			Type d'espace:
+			%strong= advert.type_name
+		%li
+			Peut accueillir
+			%strong
+				= advert.volume
+				m³
+		%li
+			= advert.access_type_hr
+%td{ style: "text-align:right;" }
+	%h4
+		CHF
+		= advert.price

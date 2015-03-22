@@ -1,0 +1,91 @@
+source 'https://rubygems.org'
+
+
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.1.7'
+# Use sqlite3 as the database for Active Record
+# gem 'sqlite3'
+gem 'mysql2'
+# Use SCSS for stylesheets
+gem 'sass-rails'
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails'
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer',  platforms: :ruby
+
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 2.0'
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc', '~> 0.4.0',          group: :doc
+
+# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+gem 'spring',        group: :development
+
+# Cleaner html syntax
+gem 'haml'
+
+# Awesome icons
+gem "font-awesome-rails"
+
+# Styling
+gem 'foundation-rails'
+gem 'foundation_rails_helper'
+
+# Authentication
+gem 'devise'
+
+# Geocode adverts
+gem "geocoder"
+
+# Images
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+
+# Paginator
+gem "kaminari"
+
+# Easy default values
+gem "default_value_for", "~> 3.0.0"
+
+# Admin interface
+gem 'rails_admin'
+
+# PDF
+gem 'prawn'
+gem 'prawn-table'
+
+# Payment
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+
+# Background jobs
+gem 'sinatra', require: false
+gem 'slim'
+gem 'sidekiq'
+
+# Use ActiveModel has_secure_password
+# gem 'bcrypt', '~> 3.1.7'
+
+# Use unicorn as the app server
+gem 'unicorn'
+
+# Monitoring
+gem 'newrelic_rpm'
+
+# Deploy with Capistrano
+group :development do
+  gem 'capistrano', '~> 3.3.0', require: false
+  gem 'capistrano-rbenv', '~> 2.0', require: false 
+  gem 'capistrano-rails', '~> 1.1', require: false
+  gem 'capistrano-bundler', '~> 1.1', require: false
+  gem 'capistrano-passenger'
+  gem 'capistrano-sidekiq'
+end
+
+# Use debugger
+# gem 'debugger', group: [:development, :test]
+

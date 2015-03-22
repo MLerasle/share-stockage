@@ -1,0 +1,117 @@
+%script{:src => "http://maps.google.com/maps/api/js?sensor=false&libraries=places&amp;language=en", :type => "text/javascript"}
+.row{style: "margin-top: 20px;"}
+	.small-12.medium-4.large-3.columns
+		%fieldset
+			%legend Que recherchez-vous?
+			= form_for '#', method: :get, id: "adverts_filter_form" do
+				= label_tag "Ville"
+				= text_field_tag "filter[city]", (params[:filter][:city] rescue nil)
+				
+				= label_tag "Dans un rayon de"
+				.row.collapse
+					.small-9.large-10.columns
+						= text_field_tag "filter[kilometers]", (params[:filter][:kilometers] rescue nil)
+					.small-3.large-2.columns
+						%span.postfix Km
+				
+				= label_tag "Type"
+				= select_tag "filter[advert_type]", options_for_select([["Box", 1], ["Cave", 2], ["Garage", 3], ["Grenier", 4]]), { include_blank: true }
+				
+				= label_tag "Dates"
+				= text_field_tag "filter[start_date]", (params[:filter][:start_date] rescue nil), placeholder: "Début"
+				
+				= text_field_tag "filter[end_date]", (params[:filter][:end_date] rescue nil), placeholder: "Fin"
+				
+				= submit_tag "Rechercher", class: "button radius expand"
+				
+	.small-12.medium-8.large-9.columns
+		- if @adverts.any?
+			.row
+				.panel.map_panel
+					#map
+			.row
+				%table#adverts_table
+					%tbody
+						- @adverts.each do |advert|
+							%tr{ "data-link" => advert_path(advert) }
+								= render partial: 'advert_line', locals: { advert: advert }
+
+		- else
+			%fieldset
+				%legend Aucun résultat
+				%h4.subheader
+					Désolé, nous n'avons trouvé aucune annonce correspondant à votre recherche.
+				%br
+				%h5.subheader Veuillez modifier vos critères de recherche.
+		
+		= paginate @adverts
+		
+- content_for :scripts do
+	:javascript
+		var nowTemp = new Date();
+		var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+		var checkin = $('#filter_start_date').fdatepicker({
+			format: 'yyyy-mm-dd',
+			onRender: function (date) {
+				return date.valueOf() < now.valueOf() ? 'disabled' : '';
+			}
+		}).on('changeDate', function (ev) {
+			if (ev.date.valueOf() > checkout.date.valueOf()) {
+				var newDate = new Date(ev.date)
+				newDate.setDate(newDate.getDate() + 1);
+				checkout.update(newDate);
+				}
+				checkin.hide();
+				$('#filter_end_date')[0].focus();
+		}).data('datepicker');
+		var checkout = $('#filter_end_date').fdatepicker({
+			format: 'yyyy-mm-dd',
+			onRender: function (date) {
+				return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+			}
+		}).on('changeDate', function (ev) {
+			checkout.hide();
+		}).data('datepicker');
+		$("#map").width("100%").height("350px").gmap3({
+		  marker:{
+		    values: #{@my_json_address},
+				events:{
+				  mouseover: function(marker, event, context){
+				    var map = $(this).gmap3("get"),
+				      infowindow = $(this).gmap3({get:{name:"infowindow"}});
+				    if (infowindow){
+				      infowindow.open(map, marker);
+				      infowindow.setContent(context.data);
+				    } else {
+				      $(this).gmap3({
+				        infowindow:{
+				          anchor:marker,
+				          options:{content: context.data}
+				        }
+				      });
+				    }
+				  },
+					click: function(marker, event, context){
+						window.location = context.tag;
+					},
+				  mouseout: function(){
+				    var infowindow = $(this).gmap3({get:{name:"infowindow"}});
+				    if (infowindow){
+				      infowindow.close();
+				    }
+				  }
+				}
+		  },
+			map:{
+			  options:{
+			   zoom:10,
+			   mapTypeControl: true,
+			   navigationControl: true,
+			   scrollwheel: false
+			  }
+			}
+		});
+		$("tr[data-link]").click(function() {
+		  window.location = $(this).data("link");
+		})
+		$("#filter_city").geocomplete();
