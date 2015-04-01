@@ -17,7 +17,7 @@
 //= require moment.min
 //= require fullcalendar
 //= require lang-all
-//= require dropzone.min
+//= require dropzone
 //= require gmap3.min
 //= require raty
 //= require geocomplete.min

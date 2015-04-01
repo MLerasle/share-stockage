@@ -7,6 +7,7 @@ class Advert < ActiveRecord::Base
   after_validation :geocode, :if => :address_changed?
   
   default_value_for :validated, false
+  default_value_for :activated, true
   default_value_for :light, false
   default_value_for :concierge, false
   default_value_for :car_access, false

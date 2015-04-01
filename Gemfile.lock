@@ -93,6 +93,8 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    dropzonejs-rails (0.7.1)
+      rails (> 3.1)
     erubis (2.7.0)
     execjs (2.4.0)
     figaro (1.1.0)
@@ -270,6 +272,7 @@ DEPENDENCIES
   coffee-rails
   default_value_for (~> 3.0.0)
   devise
+  dropzonejs-rails
   figaro
   font-awesome-rails
   foundation-rails

@@ -17,6 +17,6 @@
  *= require fullcalendar
  *= require slick
  *= require slick-theme
- *= require dropzone
+ *= require dropzone/dropzone
 
  */
