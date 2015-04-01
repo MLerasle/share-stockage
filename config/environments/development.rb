@@ -23,8 +23,8 @@ Rails.application.configure do
     domain: "localhost",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: "maxlerasle",
-    password: "begdabeuft86123"
+    user_name: ENV["mail_username"],
+    password: ENV["mail_password"]
   }
    
 

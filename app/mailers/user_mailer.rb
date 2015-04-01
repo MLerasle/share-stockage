@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "maxlerasle@gmail.com"
+  default from: ENV["contact_email"]
   
   def prereservation_email(receiver, advert)
     @receiver = receiver

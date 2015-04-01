@@ -76,6 +76,9 @@ gem 'unicorn'
 # Monitoring
 gem 'newrelic_rpm'
 
+# Handle environments variables
+gem "figaro"
+
 # Deploy with Capistrano
 group :development do
   gem 'capistrano', '~> 3.3.0', require: false

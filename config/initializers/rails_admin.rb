@@ -1,5 +1,5 @@
 RailsAdmin.config do |config|
-  ADMIN_EMAILS = ['maxlerasle@gmail.com']
+  ADMIN_EMAILS = ENV["admin_email"]
 
   ### Popular gems integration
 
