@@ -31,6 +31,9 @@ fr:
               too_short: "Votre mot de passe doit contenir 8 caractères minimum."
             password_confirmation:
               confirmation: "Les mots de passe saisis sont différents. Veuillez réessayer s'il vous plaît."
+            current_password:
+              blank: "Vous devez saisir votre mot de passe pour mettre vos informations à jour."
+              invalid: "Le mot de passe saisi est incorrect."
             username:
               blank: "Merci de choisir  un nom d'utilisateur."
               taken: "Ce nom d'utilisateur est déjà utilisé. Merci d'en choisir un autre."
