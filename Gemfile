@@ -80,6 +80,9 @@ gem 'newrelic_rpm'
 # Handle environments variables
 gem "figaro"
 
+# Wizard
+gem 'wicked'
+
 # Deploy with Capistrano
 group :development do
   gem 'capistrano', '~> 3.3.0', require: false

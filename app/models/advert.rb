@@ -1,30 +1,38 @@
 class Advert < ActiveRecord::Base
+  cattr_accessor :form_steps do
+    %w(general location description price)
+  end
+  attr_accessor :form_step
+
   belongs_to :user
   has_many :reservations
   has_many :evaluations
   has_many :pictures, dependent: :destroy
-  geocoded_by :full_address
+  geocoded_by :address
   after_validation :geocode, :if => :address_changed?
   
   default_value_for :validated, false
-  default_value_for :activated, true
+  default_value_for :activated, false
   default_value_for :light, false
   default_value_for :concierge, false
   default_value_for :car_access, false
   default_value_for :elevator, false
   default_value_for :access_type, 0
+
+  validates :title, :area, :height, :advert_type, presence: true, if: -> { required_for_step?(:general) }
+  validates :area, :height, numericality: true, if: -> { required_for_step?(:general) }
+  validates :address, presence: true, if: -> { required_for_step?(:location) }
+  validates :description, :access_type, presence: true, if: -> { required_for_step?(:description) }
+  validates :price, presence: true, numericality: true, if: -> { required_for_step?(:price) }
   
-  validates :title, presence: true
-  validates :city, presence: true
-  validates :address, presence: true
-  validates :area, presence: true, numericality: true
-  validates :price, presence: true, numericality: true
-  validates :advert_type, presence: true
-  validates :description, presence: true
-  validates :height, presence: true, numericality: true
-  validates :access_type, presence: true
-  
-  
+  def required_for_step?(step)
+    # All fields are required if no form step is present
+    return true if form_step.nil?
+    # All fields from previous steps are required if the
+    # step parameter appears before or we are on the current step
+    return true if self.form_steps.index(step.to_s) == self.form_steps.index(form_step)
+  end
+
   def area=(area)
     write_attribute(:area, area.gsub(',', '.'))
   end
@@ -56,10 +64,10 @@ class Advert < ActiveRecord::Base
   def self.for_filter(filter)
     result = self.all
     
-    if filter["city"].present? and filter["kilometers"].present? and filter["kilometers"].to_i > 9
-      result = result.near(filter['city'], filter['kilometers'].to_i, units: :km)
-    elsif filter["city"].present?
-      result = result.near(filter['city'], 10, units: :km)
+    if filter["address"].present? and filter["kilometers"].present? and filter["kilometers"].to_i > 9
+      result = result.near(filter['address'], filter['kilometers'].to_i, units: :km)
+    elsif filter["address"].present?
+      result = result.near(filter['address'], 10, units: :km)
     end
     result = result.where(advert_type: filter["advert_type"]) unless filter["advert_type"].blank?
     result = result.where("id NOT IN (SELECT advert_id FROM reservations WHERE advert_id IS NOT NULL AND reservations.start_date < ? AND reservations.end_date > ?)", filter["end_date"], filter["start_date"])
@@ -68,10 +76,6 @@ class Advert < ActiveRecord::Base
   
   def volume
     (area * height).round
-  end
-  
-  def full_address
-    "#{address}, #{city}"
   end
   
   def light_hr

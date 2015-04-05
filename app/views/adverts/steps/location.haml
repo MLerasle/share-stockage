@@ -1,0 +1,117 @@
+%script{:src => "http://maps.google.com/maps/api/js?sensor=false&libraries=places&amp;language=en", :type => "text/javascript"}
+/ %script{:src => "https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places", :type => "text/javascript" }
+%section#main-content
+	.row.body.sign-in
+		.large-10.small-12.columns.large-centered.small-centered
+			.create-account
+				.row.sign-up
+					.large-12.small-12.columns
+						%h2 Création de votre annonce
+						%hr
+						
+					.row
+						.large-4.medium-4.small-4.columns
+							.panel{ style: "background-color:white" }
+								%h4{ style: "color:rgb(185, 185, 185)" }
+									%i.fa.fa-info
+									Informations générales
+							.panel{ style: "background-color:white; border: 1px solid rgb(84, 151, 86)" }
+								%h4{ style: "color:rgb(84, 151, 86)" }
+									%i.fa.fa-map-marker
+									Localisation
+							.panel{ style: "background-color:white" }
+								%h4{ style: "color:rgb(185, 185, 185)" }
+									%i.fa.fa-edit
+									Description
+							.panel{ style: "background-color:white" }
+								%h4{ style: "color:rgb(185, 185, 185)" }
+									%i.fa.fa-euro
+									Prix
+							.panel{ style: "background-color:white" }
+								%h4{ style: "color:rgb(185, 185, 185)" }
+									%i.fa.fa-file-image-o
+									Photos
+
+						.large-8.medium-8.small-8.columns
+							%h4 Indiquez l'addresse exacte de votre espace
+							%br
+							= form_for @advert, url: wizard_path, method: :put do |f|
+								= f.label "Adresse", nil, class: 'required'
+								= f.text_field :address, id: "address_field", label: false
+
+								.row
+									#map
+								%br
+								= f.submit "Continuer", class: "button right"
+
+- content_for :scripts do
+	:javascript
+		$("form").on("keypress", function (e) {
+			if (e.keyCode == 13) {
+				return false;
+			}
+		});
+		var map = $("#map").width("100%").height("350px").gmap3({
+			map:{
+			  options:{
+				 center:[46.890482,8.239746],
+			   zoom:7,
+			   mapTypeControl: true,
+			   navigationControl: true,
+			   scrollwheel: false
+			  }
+			}
+		});
+		var lat = 26.535266981346876,
+				lng = 54.02773082256317,
+				latlng = new google.maps.LatLng(lat, lng),
+				image = 'http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png';
+		mapG = new google.maps.Map(document.getElementById('map')),
+		marker = new google.maps.Marker({
+			position: latlng,
+			map: mapG,
+			icon: image
+		});
+		var input = document.getElementById('address_field');
+		var autocomplete = new google.maps.places.Autocomplete(input, {
+			types: ["geocode"]
+		});
+		autocomplete.bindTo('bounds', mapG);
+		var infowindow = new google.maps.InfoWindow();
+		google.maps.event.addListener(autocomplete, 'place_changed', function() {
+			infowindow.close();
+			marker.setVisible(false);
+			input.className = '';
+			var place = autocomplete.getPlace();
+				console.log(place);
+			if (!place.geometry) {
+				// Inform the user that the place was not found and return.
+				input.className = 'notfound';
+				return;
+			}
+			// If the place has a geometry, then present it on a map.
+			if (place.geometry.viewport) {
+				mapG.fitBounds(place.geometry.viewport);
+			} else {
+				mapG.setCenter(place.geometry.location);
+				mapG.setZoom(17);  // Why 17? Because it looks good.
+			}
+			var image = new google.maps.MarkerImage(
+					place.icon,
+					new google.maps.Size(71, 71),
+					new google.maps.Point(0, 0),
+					new google.maps.Point(17, 34),
+					new google.maps.Size(35, 35));
+			marker.setIcon(image);
+			marker.setPosition(place.geometry.location);
+			var address = '';
+			if (place.address_components) {
+				address = [
+					(place.address_components[0] && place.address_components[0].short_name || ''),
+					(place.address_components[1] && place.address_components[1].short_name || ''),
+					(place.address_components[2] && place.address_components[2].short_name || '')
+				].join(' ');
+			}
+			infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+			infowindow.open(mapG, marker);
+		});

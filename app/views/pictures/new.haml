@@ -6,7 +6,7 @@
 				%a.close{ href:"#" } x
 			
 	.row.body.sign-in
-		.large-8.medium-12.small-12.columns.large-centered.small-centered
+		.large-10.medium-12.small-12.columns.large-centered.small-centered
 			.create-account
 				.row
 					.large-12.small-12.columns
@@ -18,14 +18,37 @@
 										%li
 											= image_tag p.image(:medium)
 				.row.sign-up
-					.large-12.small-12.columns
-						%h1 Ajouter des photos à votre annonce
-						%hr
+					.row
+						.large-4.medium-4.small-4.columns
+							.panel{ style: "background-color:white" }
+								%h4{ style: "color:rgb(185, 185, 185)" }
+									%i.fa.fa-info
+									Informations générales
+							.panel{ style: "background-color:white" }
+								%h4{ style: "color:rgb(185, 185, 185)" }
+									%i.fa.fa-map-marker
+									Localisation
+							.panel{ style: "background-color:white" }
+								%h4{ style: "color:rgb(185, 185, 185)" }
+									%i.fa.fa-edit
+									Description
+							.panel{ style: "background-color:white" }
+								%h4{ style: "color:rgb(185, 185, 185)" }
+									%i.fa.fa-euro
+									Prix
+							.panel{ style: "background-color:white; border: 1px solid rgb(84, 151, 86)" }
+								%h4{ style: "color:rgb(84, 151, 86)" }
+									%i.fa.fa-file-image-o
+									Photos
 
-						= form_for @picture, url: advert_pictures_path(@advert), html: { multipart: true, class: "dropzone", id: "new-picture" } do |f|
-							.fallback
-								= f.file_field :image
-								= f.submit "Ajouter"
+						.large-8.medium-8.small-8.columns
+							%h4 Ajouter des photos à votre annonce
+							%hr
+
+							= form_for @picture, url: advert_pictures_path(@advert), html: { multipart: true, class: "dropzone", id: "new-picture" } do |f|
+								.fallback
+									= f.file_field :image
+									= f.submit "Ajouter"
 					
-						%br		
-						= link_to "Terminer", user_path(current_user), class: "button radius right"
+							%br		
+							= link_to "Terminer", user_path(current_user), class: "button radius right"

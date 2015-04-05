@@ -4,8 +4,8 @@
 		%fieldset
 			%legend Que recherchez-vous?
 			= form_for '#', method: :get, id: "adverts_filter_form" do
-				= label_tag "Ville"
-				= text_field_tag "filter[city]", (params[:filter][:city] rescue nil)
+				= label_tag "Lieu"
+				= text_field_tag "filter[address]", (params[:filter][:address] rescue nil)
 				
 				= label_tag "Dans un rayon de"
 				.row.collapse
@@ -114,4 +114,4 @@
 		$("tr[data-link]").click(function() {
 		  window.location = $(this).data("link");
 		})
-		$("#filter_city").geocomplete();
+		$("#filter_address").geocomplete();

@@ -10,7 +10,7 @@
 					.large-3.small-6.columns
 						.row.collapse
 							.small-9.large-10.columns
-								= text_field_tag "filter[city]", (params[:filter][:city] rescue nil), placeholder: "Ville"
+								= text_field_tag "filter[address]", (params[:filter][:address] rescue nil), placeholder: "Ville"
 							.small-3.large-2.columns
 								%span.postfix
 									%i.fa.fa-map-marker
@@ -149,4 +149,4 @@
 		}).on('changeDate', function (ev) {
 			checkout.hide();
 		}).data('datepicker');
-		$("#filter_city").geocomplete();
+		$("#filter_address").geocomplete();

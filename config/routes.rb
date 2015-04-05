@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users, only: :show
   
   resources :adverts do
+    resources :steps, only: [:show, :update], controller: 'adverts/steps'
     put 'activate', on: :member
     resources :reservations do
       get 'preview_validate', on: :member

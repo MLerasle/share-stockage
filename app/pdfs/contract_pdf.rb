@@ -66,7 +66,7 @@ class ContractPdf < Prawn::Document
       move_down 5
       text "<strong>Conditions d'accès :</strong> #{@advert.access_type_hr}", size: 10, inline_format: true
       move_down 5
-      text "<strong>Adresse :</strong> #{@advert.full_address}", size: 10, inline_format: true
+      text "<strong>Adresse :</strong> #{@advert.address}", size: 10, inline_format: true
     end
     
     bounding_box([300, 490], width: 240, height: 70) do
