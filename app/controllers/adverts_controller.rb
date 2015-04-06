@@ -14,46 +14,12 @@ class AdvertsController < ApplicationController
   
   def show
   end
-  
-  # def new
-  #   @advert = Advert.new
-  # end
-  
-  # def create
-  #   @advert = Advert.new(advert_params)
-  #   @advert.user_id = current_user.id
-  #
-  #   respond_to do |format|
-  #     if @advert.save
-  #       format.html { redirect_to new_advert_picture_path(@advert), notice: 'Merci! Votre annonce nous a bien été transmise. Elle apparaitra sur le site une fois validée.' }
-  #       format.json { render json: @advert, status: :created, location: @advert }
-  #     else
-  #       format.html { render action: "new" }
-  #       format.json { render json: @advert.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+
   def create
     @advert = current_user.adverts.new
     @advert.save(validate: false)
     redirect_to advert_step_path(@advert, Advert.form_steps.first)
   end
-  
-  # def edit
-  #   unless @advert.user == current_user
-  #     flash[:alert] = "Vous n'êtes pas autorisé à accéder à cette page."
-  #     redirect_to advert_path(@advert)
-  #   end
-  # end
-  
-  # def update
-  #   if @advert.update_attributes(advert_params)
-  #     redirect_to user_path(current_user)
-  #   else
-  #     flash[:alert] = "Une erreur est survenue durant la mise à jour. Veuillez réessayer s'il vous plaît. Si le problème persiste, n'hésitez pas à contacter le support."
-  #     redirect_to user_path(current_user)
-  #   end
-  # end
   
   def activate
     return redirect_to edit_advert_path(@advert) unless current_user == @advert.user

@@ -62,4 +62,5 @@
 											= f.label "Ascenceur"
 											= f.select :elevator, options_for_select([["Non", false], ["Oui", true]]), label: false
 									%br
+									= link_to "Précédent", previous_wizard_path, method: :get, class: "button"
 									= f.submit "Continuer", class: "button right"

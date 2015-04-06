@@ -30,6 +30,5 @@ class Adverts::StepsController < ApplicationController
       end
 
     params.require(:advert).permit(permitted_attributes).merge(form_step: step)
-    # Manque user, activated, validated
   end
 end
