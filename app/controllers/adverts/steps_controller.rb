@@ -24,7 +24,7 @@ class Adverts::StepsController < ApplicationController
       when "location"
         [:address]
       when "description"
-        [:description, :access_type, :light, :elevator, :concierge, :car_access]
+        [:description, :access_type, :light, :elevator, :concierge, :car_access, :floor, :preservation, :security]
       when "price"
         [:price]
       end

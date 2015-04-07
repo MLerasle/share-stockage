@@ -11,29 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150321090850) do
+ActiveRecord::Schema.define(version: 20150407170126) do
 
   create_table "adverts", force: true do |t|
     t.string   "address"
-    t.string   "city"
     t.integer  "advert_type"
-    t.decimal  "area",                   precision: 8, scale: 2
-    t.decimal  "price",                  precision: 8, scale: 2
-    t.decimal  "height",                 precision: 8, scale: 2
-    t.float    "longitude",   limit: 24
-    t.float    "latitude",    limit: 24
+    t.decimal  "area",                    precision: 8, scale: 2
+    t.decimal  "price",                   precision: 8, scale: 2
+    t.decimal  "height",                  precision: 8, scale: 2
+    t.float    "longitude",    limit: 24
+    t.float    "latitude",     limit: 24
     t.integer  "user_id"
     t.string   "title"
-    t.boolean  "validated",                                      default: false
-    t.boolean  "activated",                                      default: false
-    t.boolean  "light",                                          default: false
-    t.boolean  "concierge",                                      default: false
-    t.boolean  "car_access",                                     default: false
-    t.boolean  "elevator",                                       default: false
+    t.boolean  "validated",                                       default: false
+    t.boolean  "activated",                                       default: false
+    t.boolean  "light",                                           default: false
+    t.boolean  "concierge",                                       default: false
+    t.boolean  "car_access",                                      default: false
+    t.boolean  "elevator",                                        default: false
     t.integer  "access_type"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "security"
+    t.integer  "preservation"
+    t.integer  "floor"
   end
 
   create_table "evaluations", force: true do |t|

@@ -43,9 +43,19 @@
 								%fieldset
 									%legend Détails
 									.row
-										.large-12.medium-12.small-12.columns
+										.large-6.medium-6.small-6.columns
 											= f.label "Type d'accès", nil, class: 'required'
 											= f.select :access_type, options_for_select([["Accès sur rendez-vous", 0], ["Accès permanent", 1]]), label: false
+										.large-6.medium-6.small-6.columns
+											= f.label "Sécurité", nil, class: 'required'
+											= f.select :security, options_for_select([["1 porte verrouillée", 1], ["2 portes verrouillées", 2], ["3 portes verrouillées", 3], ["4 portes verrouillées", 4], ["5 portes verrouillées", 5]]), label: false
+									.row
+										.large-6.medium-6.small-6.columns
+											= f.label "Etage", nil, class: 'required'
+											= f.select :floor, options_for_select([["-3", -3], ["-2", -2], ["-1", -1], ["0", 0], ["1", 1], ["2", 2], ["3", 3], ["4", 4], ["5", 5]]), label: false
+										.large-6.medium-6.small-6.columns
+											= f.label "Conservation", nil, class: 'required'
+											= f.select :preservation, options_for_select([["De base (résisitant à l'humidité)", 0], ["Normale (cartons)", 1], ["Haute (électronique)", 2]]), label: false
 			
 									.row
 										.large-6.medium-6.small-6.columns
@@ -63,4 +73,4 @@
 											= f.select :elevator, options_for_select([["Non", false], ["Oui", true]]), label: false
 									%br
 									= link_to "Précédent", previous_wizard_path, method: :get, class: "button"
-									= f.submit "Continuer", class: "button right"
+									= f.submit "Suivant", class: "button right"

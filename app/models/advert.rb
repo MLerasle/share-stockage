@@ -22,7 +22,7 @@ class Advert < ActiveRecord::Base
   validates :title, :area, :height, :advert_type, presence: true, if: -> { required_for_step?(:general) }
   validates :area, :height, numericality: true, if: -> { required_for_step?(:general) }
   validates :address, presence: true, if: -> { required_for_step?(:location) }
-  validates :description, :access_type, presence: true, if: -> { required_for_step?(:description) }
+  validates :description, :access_type, :floor, :preservation, :security, presence: true, if: -> { required_for_step?(:description) }
   validates :price, presence: true, numericality: true, if: -> { required_for_step?(:price) }
   
   def required_for_step?(step)
