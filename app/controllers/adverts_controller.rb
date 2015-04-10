@@ -16,8 +16,10 @@ class AdvertsController < ApplicationController
   end
 
   def create
+    existing_advert = current_user.adverts.where("adverts.created_at >= ?", Time.now - 5).last if current_user.adverts.where(created_at: Time.now).any?
+    return redirect_to advert_step_path(existing_advert, Advert.form_steps.first) if existing_advert
     @advert = current_user.adverts.new
-    @advert.save(validate: false)
+    @advert.save(validate: false) unless current_user.adverts.where(created_at: Time.now).any?
     redirect_to advert_step_path(@advert, Advert.form_steps.first)
   end
   
@@ -29,12 +31,17 @@ class AdvertsController < ApplicationController
     else
       flash[:notice] = "Votre annonce a été désactivée avec succès! Vous pouvez la réactiver à tout moment."
     end
-    redirect_to user_path(current_user)
+    redirect_to edit_user_registration_path(current_user)
   end
   
   def destroy
-    @advert.destroy
-    redirect_to adverts_path
+    if current_user == @advert.user and @advert.is_deletable?
+      @advert.destroy
+      flash[:alert] = "Votre annonce a bien été supprimée."
+    else
+      flash[:alert] = "Vous n'êtes pas autorisé à supprimer cette annonce. Consulter les FAQ pour connaître les conditions de suppression d'une annonce."
+    end
+    redirect_to edit_user_registration_path(current_user)
   end
   
   private

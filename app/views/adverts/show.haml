@@ -12,18 +12,26 @@
 					%a{ href: "#", class: "close" } &times;
 	.row
 		.small-12.large-12.columns
+			- if current_user == @advert.user
+				%h4 Que souhaitez-vous faire?
+				= link_to "Modifier l'annonce", advert_step_path(@advert, Advert.form_steps.first), class: "button radius"
+				= link_to @advert.activate_title, activate_advert_path(@advert), method: :put, class: "button radius success"
+				- if @advert.is_deletable?
+					= link_to "Supprimer l'annonce", advert_path(@advert), method: :delete, data: { confirm: "Ètes-vous sûr de vouloir supprimer cette annonce?" }, class: "button radius alert"
+					
+			%hr
 			%h2= @advert.title
-			%h4.subheader= "#{@advert.type_name} - #{@advert.volume} m³ - #{@advert.address}" 
+			%h4.subheader= "#{@advert.type_name} - #{@advert.volume} m³ - #{@advert.address}"
 			%br
 	
 		.small-12.medium-12.large-8.columns	
-			.panel
+			.panel{ style: "background-color: white" }
 				%dl.tabs{"data-tab" => ""}
 					%dd.active
 						%a{:href => "#panel1"} Photos
 					%dd
 						%a{:href => "#panel2", id: "date_tab"} Calendrier
-
+				%hr
 				.tabs-content
 					#panel1.content.active
 						.row
@@ -41,27 +49,46 @@
 				%hr
 				%h3.subheader Description
 				%p= @advert.description.gsub(/\n/,"<br/>").html_safe
-			
+				%br
+				%h3.subheader Tarif mensuel
+				%p
+					CHF
+					= @advert.price
+				%br
 				%h3.subheader Détails
 				%ul
-					%li
-						Conditions d'accès:
-						= @advert.access_type_hr
-					%li
-						Type d'espace:
-						= @advert.type_name
-					%li
-						Ascenseur:
-						= @advert.elevator_hr
-					%li
-						Accessible en voiture:
-						= @advert.car_access_hr
-					%li
-						Gardien:
-						= @advert.concierge_hr
-					%li
-						Eclairage:
-						= @advert.light_hr
+					.row
+						.small-6.large-6.columns
+							%li
+								Conditions d'accès:
+								= @advert.access_type_hr
+							%li
+								Type d'espace:
+								= @advert.type_name
+								\/
+								= @advert.complete_hr
+							%li
+								Etage:
+								= @advert.floor
+							%li
+								Sécurité:
+								= @advert.security_hr
+							%li
+								Conservation:
+								= @advert.preservation_hr
+						.small-6.large-6.columns
+							%li
+								Ascenseur:
+								= @advert.elevator_hr
+							%li
+								Accessible en voiture:
+								= @advert.car_access_hr
+							%li
+								Gardien:
+								= @advert.concierge_hr
+							%li
+								Eclairage:
+								= @advert.light_hr
 			
 			%br
 			%fieldset
@@ -96,7 +123,7 @@
 	
 		.small-12.medium-12.large-4.columns
 			- if @advert.authorize_evaluation_for_user?(current_user)
-				= link_to "Laisser une évaluation", '#', data: {'reveal-id' => 'evaluationModal'}, class: "button radius expand"
+				= link_to "Laisser une évaluation", '#', data: {'reveal-id' => 'evaluationModal'}, class: "button radius expand success"
 				#evaluationModal.reveal-modal{"data-reveal" => ""}
 					= render partial: 'evaluations/new', locals: { advert: @advert }
 					%a.close-reveal-modal ×

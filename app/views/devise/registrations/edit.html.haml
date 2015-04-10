@@ -1,40 +1,170 @@
 %section#main-content
-	.row.body.sign-in
-		.large-8.small-12.columns.large-centered.small-centered
-			.create-account
-				.row.sign-up
-					.large-12.small-12.columns
-						%h1.subheader Modifier mes informations personnelles
+	.row
+		.small-12.large-12.columns
+			- unless notice.nil?
+				.alert-box.info.radius{ "data-alert" => "" }
+					= notice
+					%a{ href: "#", class: "close" } &times;
+			- unless alert.nil?
+				.alert-box.alert.radius{ "data-alert" => "" }
+					= alert
+					%a{ href: "#", class: "close" } &times;
+	.row
+		%dl.tabs{"data-tab" => ""}
+			%dd.active
+				%a{:href => "#panel1"} Mon profil
+			%dd
+				%a{:href => "#panel2", id: "date_tab"} Espace propriétaire
+			%dd
+				%a{:href => "#panel3", id: "date_tab"} Espace locataire
+		%hr
+		.tabs-content
+			#panel1.content.active
+				.row.body.sign-in
+					.large-8.small-12.columns.large-centered.small-centered
+						.create-account
+							.row.sign-up
+								.large-12.small-12.columns
+									%h1.subheader Modifier mes informations personnelles
+									%hr
+									= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "mean", method: :put }) do |f|
+										= f.label "Nom d'utilisateur", nil, class: "required"
+										= f.text_field :username, autofocus: true, label: false
+
+										= f.label "Email", nil, class: "required"
+										= f.email_field :email, label: false
+
+										- if devise_mapping.confirmable? && resource.pending_reconfirmation?
+											%span Currently waiting confirmation for: <%= resource.unconfirmed_email
+
+										= f.label "Nouveau Mot de passe (ne pas remplir si vous ne souhaitez pas le changer)"
+										= f.password_field :password, autocomplete: "off", label: false
+
+										= f.label "Confirmer le nouveau mot de passe"
+										= f.password_field :password_confirmation, autocomplete: "off", label: false
+
+										= f.label "Mot de passe actuel (requis pour valider vos changements)", nil, class: "required"
+										= f.password_field :current_password, autocomplete: "off", label: false
+
+										= f.submit "Mettre à jour", class: "button right"
+
+									.row
+										.large-12.small-12.columns
+											%h3 Supprimer mon compte
+
+											%h6 Pour supprimer votre compte, veuillez cliquer sur le bouton ci-dessous. 
+											%h6 Attention si vous avez un espace en location ou que vous louez un espace, vous devez attendre la fin de la réservation en cours pour supprimer votre compte!
+											%h6 Toutes vos données et vos annonces seront supprimées. Cette action est irrévocable.
+											%br
+											= link_to "Supprimer mon compte", registration_path(resource_name), data: { confirm: "Êtes-vous sûr de vouloir supprimer votre compte?" }, method: :delete, class: "button radius expand"
+			#panel2.content
+				.row
+					.small-12.large-12.columns
+						%h2 Mes annonces
 						%hr
-						= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "mean", method: :put }) do |f|
-							= f.label "Nom d'utilisateur"
-							= f.text_field :username, autofocus: true, label: false
+		
+						- if @user.adverts.any?
+							%table#adverts_table
+								%thead
+									%tr{ style: "border-bottom: 1px solid black" }
+										%th.hide-for-medium-down
+										%th Informations
+										%th{ style: "text-align:center;" } Réservations
+										%th{ style: "text-align:center;" } En attente
+										%th{ style: "text-align:center;" } Statut
+										%th{ style: "text-align:center;" } Activer/Désactiver
+										%th
+										%th
+								%tbody
+									- @user.adverts.each do |advert|
+										%tr
+											%td.image_cell.hide-for-medium-down
+												- if advert.pictures.any?
+													= image_tag advert.pictures.first.image(:medium)
+												- else
+													= image_tag "camera.png"
+											%td
+												%h5
+													%i.fa.fa-map-marker
+													= advert.address
+												%ul.hide-for-medium-down
+													%li
+														Type d'espace:
+														%strong= advert.type_name
+													- if advert.area and advert.height
+														%li
+															Peut accueillir
+															%strong
+																= advert.volume
+																m³
+													- if advert.access_type_hr
+														%li
+															= advert.access_type_hr
+											%td{ style: "text-align:center;" }= advert.reservations.count
+											%td{ style: "text-align:center;" }= advert.reservations_waiting_validation.count
+											%td{ style: "text-align:center;" }
+												- if advert.validated
+													%span{ style: "color: green" } Validée
+												- else
+													%span{ style: "color: red" } En attente de validation
+											%td{ style: "text-align:center;" }= link_to advert.activate_title, activate_advert_path(advert), method: :put
+											%td= link_to "Modifier l'annonce", advert_step_path(advert, Advert.form_steps.first)
+											%td= link_to "Gérer les réservations", edit_advert_path(advert)
 
-							= f.label "Email"
-							= f.email_field :email, label: false
+						- else
+							%h4.subheader Vous n'avez créé aucune annonce.
+							= link_to "Publier une annonce maintenant", new_advert_path, class: "button radius"
+			#panel3.content
+				.row
+					.small-12.large-12.columns
+						%h2 Mes réservations
+						%hr 
+		
+						- if @user.reservations.pending.any?
+							%table{ style: "width: 100%" }
+								%thead
+									%tr
+										%th Titre annonce
+										%th Début
+										%th Fin
+										%th
+								%tbody
+									- @user.reservations.pending.each do |r|
+										%tr
+											%td= link_to r.advert.title, advert_path(r.advert)
+											%td= r.start_date
+											%td= r.end_date
+											%td= link_to "Modifier les dates", edit_advert_reservation_path(r.advert, r), data: {'reveal-id' => 'editReservationModal'}
+						
+											#editReservationModal.reveal-modal{"data-reveal" => ""}
+												= render partial: 'reservations/edit', locals: { advert: r.advert, reservation: r }
+												%a.close-reveal-modal ×
+						- else
+							%h4.subheader Vous n'avez aucune demande de réservation en attente.
 
-							- if devise_mapping.confirmable? && resource.pending_reconfirmation?
-								%span Currently waiting confirmation for: <%= resource.unconfirmed_email
-
-							= f.label "Nouveau Mot de passe (ne pas remplir si vous ne souhaitez le changer)"
-							= f.password_field :password, autocomplete: "off", label: false
-
-							= f.label "Confirmer le nouveau mot de passe"
-							= f.password_field :password_confirmation, autocomplete: "off", label: false
-
-							= f.label "Mot de passe actuel (requis pour valider vos changements)", nil, class: "required"
-							= f.password_field :current_password, autocomplete: "off", label: false
-
-							= f.submit "Mettre à jour", class: "button right"
-
-						.row
-							.large-12.small-12.columns
-								%h3 Supprimer mon compte
-
-								%h6 Pour supprimer votre compte, veuillez cliquer sur le bouton ci-dessous. 
-								%h6 Attention si vous avez un espace en location ou que vous louez un espace, vous devez attendre la fin de la réservation en cours pour supprimer votre compte!
-								%h6 Toutes vos données et vos annonces seront supprimées. Cette action est irrévocable.
-								%br
-								= link_to "Supprimer mon compte", registration_path(resource_name), data: { confirm: "Êtes-vous sûr de vouloir supprimer votre compte?" }, method: :delete, class: "button radius expand"
-								%br
-								= link_to "Retour", :back, class: "button"
+- content_for :scripts do
+	:javascript
+		var nowTemp = new Date();
+		var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+		var checkin = $('#reservation_start_date').fdatepicker({
+			format: 'yyyy-mm-dd',
+			onRender: function (date) {
+				return date.valueOf() < now.valueOf() ? 'disabled' : '';
+			}
+		}).on('changeDate', function (ev) {
+			if (ev.date.valueOf() > checkout.date.valueOf()) {
+				var newDate = new Date(ev.date)
+				newDate.setDate(newDate.getDate() + 1);
+				checkout.update(newDate);
+				}
+				checkin.hide();
+				$('#reservation_end_date')[0].focus();
+		}).data('datepicker');
+		var checkout = $('#reservation_end_date').fdatepicker({
+			format: 'yyyy-mm-dd',
+			onRender: function (date) {
+				return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+			}
+		}).on('changeDate', function (ev) {
+			checkout.hide();
+		}).data('datepicker');

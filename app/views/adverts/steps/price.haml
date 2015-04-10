@@ -4,7 +4,7 @@
 			.create-account
 				.row.sign-up
 					.large-12.small-12.columns
-						%h2 Création de votre annonce
+						%h2 À propos de votre espace
 						%hr
 						
 					.row
@@ -32,15 +32,27 @@
 
 						.large-8.medium-8.small-8.columns
 							%h4 Choisissez le prix de votre espace
-							%br
+							%hr
 							= form_for @advert, url: wizard_path, method: :put do |f|
 								%br
-								= f.label "Prix par jour", nil, class: 'required'
+								= f.label "Prix mensuel", nil, class: 'required'
 								.row.collapse
-									.small-9.large-10.columns
-										= f.text_field :price, label: false
 									.small-3.large-2.columns
-										%span.postfix CHF
-								%br
-								= link_to "Précédent", previous_wizard_path, class: "button"
-								= f.submit "Suivant", class: "button right"
+										%span.prefix CHF
+									.small-9.large-10.columns
+										= f.number_field :price, step: "any", label: false, id: "price"
+								.row
+									.small-12.large-12.columns
+										%h6#monthly_price
+											Soit un montant quotidien de CHF
+											= @advert.daily_price if @advert.price
+								%hr
+								= link_to "Précédent", previous_wizard_path, class: "button small"
+								= f.submit "Suivant", class: "button right small"
+
+- content_for :scripts do
+	:javascript
+		$('#price').bind("keyup mouseup", function(event) {
+			var price = document.getElementById('price').value;
+			$('#monthly_price').html("Soit un montant quotidien de CHF " + Math.round(price / 30 * 100) / 100);
+		});

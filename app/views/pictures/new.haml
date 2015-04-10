@@ -4,10 +4,14 @@
 			.alert-box.info.radius{ "data-alert" => "" }
 				= notice
 				%a.close{ href:"#" } x
-			
+
 	.row.body.sign-in
 		.large-10.medium-12.small-12.columns.large-centered.small-centered
 			.create-account
+				.row.sign-up
+					.large-12.small-12.columns
+						%h2 À propos de votre espace
+						%hr
 				.row
 					.large-12.small-12.columns
 						- if @advert.pictures.any? and @advert.pictures.count > 1
@@ -50,6 +54,6 @@
 									= f.file_field :image
 									= f.submit "Ajouter"
 					
-							%br
-							= link_to "Précédent", advert_step_path(@advert, Advert.form_steps.last), class: "button"
-							= link_to "Valider", user_path(current_user), class: "button radius right"
+							%hr
+							= link_to "Précédent", advert_step_path(@advert, Advert.form_steps.last), class: "button small"
+							= link_to "Valider", advert_path(@advert), class: "button right small", method: :get

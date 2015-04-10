@@ -4,7 +4,7 @@
 			.create-account
 				.row.sign-up
 					.large-12.small-12.columns
-						%h2 Création de votre annonce
+						%h2 À propos de votre espace
 						%hr
 				.row
 					.large-4.medium-4.small-4.columns
@@ -31,20 +31,24 @@
 
 					.large-8.medium-8.small-8.columns
 						%h4 Informations générales
-						%br
+						%hr
 						= form_for @advert, url: wizard_path, method: :put do |f|
 							= f.label "Choisissez le titre de votre annonce", nil, class: 'required'
 							= f.text_field :title, label: false
-							%br
-							= f.label "Quel type d'espace proposez-vous?", nil, class: 'required'
-							= f.select :advert_type, options_for_select([["Box", 1], ["Cave", 2], ["Garage", 3], ["Grenier", 4]]), label: false
+							.row
+								.large-6.medium-6.small-6.columns
+									= f.label "Quel type d'espace proposez-vous?", nil, class: 'required'
+									= f.select :advert_type, options_for_select([["Box", 1], ["Cave", 2], ["Garage", 3], ["Grenier", 4]]), label: false
+								.large-6.medium-6.small-6.columns
+									= f.label "S'agit-il d'en espace complet ou partagé?", nil
+									= f.select :complete, options_for_select([["Espace partagé", false], ["Espace complet", true]]), label: false
 							.row
 								.large-6.medium-6.small-6.columns
 									%br
 									= f.label "Surface", nil, class: 'required'
 									.row.collapse
 										.small-9.large-10.columns
-											= f.text_field :area, label: false
+											= f.number_field :area, label: false, step: "any", id: "area"
 										.small-3.large-2.columns
 											%span.postfix m²
 								.large-6.medium-6.small-6.columns
@@ -52,8 +56,27 @@
 									= f.label "Hauteur", nil, class: 'required'
 									.row.collapse
 										.small-9.large-10.columns
-											= f.text_field :height, label: false
+											= f.number_field :height, label: false, step: "any", id: "height"
 										.small-3.large-2.columns
 											%span.postfix m
-							%br
-							= f.submit "Suivant", class: "button right"
+							.row
+								.large-12.medium-12.small-12.columns
+									%h6#volume
+										Ce qui équivaut à un volume de
+										= @advert.volume if @advert.area and @advert.height
+										m³
+							%hr
+							= f.submit "Suivant", class: "button right small"
+
+- content_for :scripts do
+	:javascript
+		$('#area').bind("keyup mouseup", function(event) {
+			var height = document.getElementById('height').value;
+			var area = document.getElementById('area').value;
+			$('#volume').html("Ce qui équivaut à un volume de " + height * area + " m³");
+		});
+		$('#height').bind("keyup mouseup", function(event) {
+			var height = document.getElementById('height').value;
+			var area = document.getElementById('area').value;
+			$('#volume').html("Ce qui équivaut à un volume de " + height * area + " m³");
+		});

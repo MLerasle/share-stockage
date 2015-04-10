@@ -20,7 +20,7 @@ class Adverts::StepsController < ApplicationController
   def advert_params(step)
     permitted_attributes = case step
       when "general"
-        [:title, :area, :height, :advert_type]
+        [:title, :area, :height, :advert_type, :complete]
       when "location"
         [:address]
       when "description"

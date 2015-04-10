@@ -18,6 +18,7 @@ class Advert < ActiveRecord::Base
   default_value_for :car_access, false
   default_value_for :elevator, false
   default_value_for :access_type, 0
+  default_value_for :complete, false
 
   validates :title, :area, :height, :advert_type, presence: true, if: -> { required_for_step?(:general) }
   validates :area, :height, numericality: true, if: -> { required_for_step?(:general) }
@@ -78,6 +79,10 @@ class Advert < ActiveRecord::Base
     (area * height).round
   end
   
+  def daily_price
+    BigDecimal.new((price / 30.0).to_s).round(2)
+  end
+  
   def light_hr
     light ? "Oui" : "Non"
   end
@@ -112,6 +117,27 @@ class Advert < ActiveRecord::Base
       "Autre"
     end
   end
+
+  def complete_hr
+    complete ? "Espace complet" : "Espace partagé"
+  end
+
+  def security_hr
+    string = security == 1 ? "porte verrouillée" : "portes verrouillées"
+    "#{security} #{string}"
+  end
+
+  def preservation_hr
+    if preservation == 0
+      "De base (résisitant à l'humidité)"
+    elsif preservation == 1
+      "Normale (cartons)"
+    elsif preservation == 2
+      "Haute (électronique)"
+    else
+      "Non renseigné"
+    end
+  end
   
   def reservations_waiting_validation
     self.reservations.where(validated: false)
@@ -119,6 +145,14 @@ class Advert < ActiveRecord::Base
   
   def validated_reservations
     self.reservations.where(validated: true)
+  end
+  
+  def has_running_reservations?
+    self.validated_reservations.where("start_date <= ? and end_date >= ?", Date.today, Date.today).any?
+  end
+  
+  def is_deletable?
+    self.reservations_waiting_validation.empty? and !self.has_running_reservations?
   end
   
   def activate_title

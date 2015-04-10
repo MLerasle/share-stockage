@@ -93,13 +93,26 @@
 				%p
 					Remplissez alors le formulaire en y ajoutant une description aussi précise que possible. Vous pouvez ensuite ajouter une ou plusieurs photos à votre annonce.
 				%p Enfin, validez et patientez jusqu’à ce que notre équipe ait approuvé votre annonce!
-				
+					
 				%br
-				%h4{ style: "color:rgb(46, 121, 168)" } Comment activer/désactiver mon annonce?
+				%h4{ style: "color:rgb(46, 121, 168)" } Comment modifier/supprimer/activer/désactiver mon annonce?
 				%br
 				%p
 					Depuis la page d’accueil, cliquez sur “Mon compte” dans le menu en haut à droite.
-					Dans la liste de vos annonces, cliquez sur “Activer” ou “Désactiver” l’annonce de votre choix.
+					Choisissez ensuite l'"Espace propriétaire".
+				%p
+					Vous trouverez la liste de toutes vos annonces dans laquelle vous pouvez modifier, activer/désactiver ou supprimer votre annonce en cliquant sur le lien correspondant.
+				%p
+					Attention toutefois, la suppression de votre annonce n'est possible que si certaines conditions sont remplies.
+					
+				%br
+				%h4{ style: "color:rgb(46, 121, 168)" } Quand puis-je supprimer mon annonce?
+				%br
+				%p
+					Une annonce ne peut être supprimée que par son propriétaire si:
+					%ul
+						%li L'espace n'est pas loué au moment où vous souhaitez supprimer l'annonce. Si ce n'est pas le cas, vous devrez patienter jusqu'à la fin de ladite réservation.
+						%li Aucune demande de réservation n'existe pour votre espace. Dans le cas contraire, vous devrez vous assurer de refuser au préalable la demande de réservation.
 					
 				%br
 				%h4{ style: "color:rgb(46, 121, 168)" } Combien de temps puis-je louer mon espace?
@@ -111,7 +124,9 @@
 				%h4{ style: "color:rgb(46, 121, 168)" } Quel prix pour mon espace?
 				%br
 				%p
-					En tant que propriétaire, vous êtes libre de choisir le prix de votre location. Si vous êtes locataire, commencez par informer votre régie ou votre propriétaire que vous souhaitez louer votre espace en utilisant le modèle de lettre que nous mettons à votre disposition.
+					En tant que propriétaire, vous êtes libre de choisir le prix de votre location. Si vous êtes locataire, commencez par informer votre régie ou votre propriétaire que vous souhaitez louer votre espace en utilisant 
+					= link_to "le modèle de lettre", '/files/lettre_agence_model.pdf', target: '_blank' 
+					que nous mettons à votre disposition.
 				%p
 					Ensuite, voyez avec eux ce que vous êtes en mesure d’appliquer comme tarif.
 				

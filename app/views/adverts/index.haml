@@ -5,7 +5,7 @@
 			%legend Que recherchez-vous?
 			= form_for '#', method: :get, id: "adverts_filter_form" do
 				= label_tag "Lieu"
-				= text_field_tag "filter[address]", (params[:filter][:address] rescue nil)
+				= text_field_tag "filter[address]", (params[:filter][:address] rescue nil), id: "location_field"
 				
 				= label_tag "Dans un rayon de"
 				.row.collapse
@@ -48,6 +48,10 @@
 		
 - content_for :scripts do
 	:javascript
+		var input = document.getElementById('location_field');
+		var autocomplete = new google.maps.places.Autocomplete(input, {
+			types: ["geocode"]
+		});
 		var nowTemp = new Date();
 		var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 		var checkin = $('#filter_start_date').fdatepicker({

@@ -5,7 +5,7 @@
 			.create-account
 				.row.sign-up
 					.large-12.small-12.columns
-						%h2 Création de votre annonce
+						%h2 À propos de votre espace
 						%hr
 						
 					.row
@@ -33,16 +33,16 @@
 
 						.large-8.medium-8.small-8.columns
 							%h4 Indiquez l'addresse exacte de votre espace
-							%br
+							%hr
 							= form_for @advert, url: wizard_path, method: :put do |f|
 								= f.label "Adresse", nil, class: 'required'
 								= f.text_field :address, id: "address_field", label: false
 
 								.row
 									#map
-								%br
-								= link_to "Précédent", previous_wizard_path, class: "button"
-								= f.submit "Suivant", class: "button right"
+								%hr
+								= link_to "Précédent", previous_wizard_path, class: "button small"
+								= f.submit "Suivant", class: "button right small"
 
 - content_for :scripts do
 	:javascript

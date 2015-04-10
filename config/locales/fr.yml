@@ -21,6 +21,8 @@ fr:
             height:
               blank: "Doit être rempli"
               not_a_number: "Doit être un nombre"
+            complete:
+              blank: "Doit être rempli"
         user:
           attributes:
             email:

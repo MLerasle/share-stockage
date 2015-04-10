@@ -16,7 +16,7 @@
 			<nav class="top-bar" data-topbar role="navigation">
 			  <ul class="title-area">
 			    <li class="name">
-			      <h1><%= link_to "Sharing Space", root_path %></a></h1>
+			      <h1><%= link_to "Sharing Space", root_path, method: :get %></a></h1>
 			    </li>
 					<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
 			  </ul>
@@ -26,7 +26,7 @@
 						<li><%= link_to 'Publier une annonce', adverts_path, method: :post %></li>
 			      <li class="divider"></li>
 						<% if user_signed_in? %>
-							<li><%= link_to "Mon compte", user_path(current_user) %></li>
+							<li><%= link_to "Mon compte", edit_user_registration_path(current_user) %></li>
 							<li class="divider"></li>
 							<li><%= link_to "Faire un don", new_charge_path %></li>
 							<li class="divider"></li>
@@ -85,7 +85,7 @@
 								<hr/>
 								<p><%= link_to "Comment ça marche?", help_path %></p>
 								<p><%= link_to "FAQ", faq_path %></p>
-								<p><%= link_to "Conditions générales", cgu_path %></p>
+								<p><%= link_to "Conditions générales d'utilisation", cgu_path %></p>
 								<p><%= link_to "Modèle de lettre pour la régie", '/files/lettre_agence_model.pdf', target: '_blank' %></p>
 		        </div>
 		    </div> <!-- END ROW -->

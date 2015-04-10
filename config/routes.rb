@@ -6,7 +6,6 @@ Rails.application.routes.draw do
     mount Sidekiq::Web, at: "/sidekiq"
   end
   devise_for :users, controllers: { registrations: 'registrations' }
-  resources :users, only: :show
   
   resources :adverts do
     resources :steps, only: [:show, :update], controller: 'adverts/steps'

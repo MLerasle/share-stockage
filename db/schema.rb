@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20150407170126) do
     t.integer  "security"
     t.integer  "preservation"
     t.integer  "floor"
+    t.boolean  "complete",                                        default: false
   end
 
   create_table "evaluations", force: true do |t|

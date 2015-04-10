@@ -22,6 +22,6 @@ class Reservation < ActiveRecord::Base
   end
   
   def price
-  	advert.price * duration
+  	advert.daily_price * duration
   end
 end

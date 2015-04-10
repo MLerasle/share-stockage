@@ -3,10 +3,10 @@ class PicturesController < ApplicationController
   before_filter :find_advert, except: :destroy
   
   def new
-    return redirect_to root_path if @advert.validated
+    # return redirect_to root_path if @advert.validated
     if @advert.user != current_user
       flash[:alert] = "Vous n'êtes pas autorisé à accéder à cette page."
-      redirect_to user_path(current_user)
+      redirect_to edit_user_registration_path(current_user)
     else
       @picture = @advert.pictures.new
     end

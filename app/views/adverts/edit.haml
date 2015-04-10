@@ -9,12 +9,13 @@
 							= @advert.title
 						%hr
 					
-						.panel
+						.panel{ style: "background-color: white" }
 							%dl.tabs{"data-tab" => ""}
 								%dd.active
 									%a{:href => "#panel2"} Réservations en attente
 								%dd
 									%a{:href => "#panel3", id: "date_tab"} Calendrier
+							%br
 							.tabs-content
 								#panel2.content.active
 									#reservations_section
@@ -45,6 +46,8 @@
 																	%a.close-reveal-modal ×
 
 										- else
-											%h4.subheader Vous n'avez aucune demande de réservation en attente.										
+											%h4.subheader Vous n'avez aucune demande de réservation en attente pour cet espace.									
 								#panel3.content
 									= render partial: "calendar"
+						%br
+						= link_to "Retour à mon compte", edit_user_registration_path(current_user), class: "button radius"

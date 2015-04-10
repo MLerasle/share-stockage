@@ -20,7 +20,7 @@ class ReservationsController < ApplicationController
   def create
     if !@advert.validated
       flash[:alert] = "Vous pourrez réserver cet espace une fois l'annonce validée."
-      return redirect_to user_path(current_user)
+      return redirect_to edit_user_registration_path(current_user)
     end
     @reservation = @advert.reservations.new(reservation_params)
     @reservation.user = current_user
@@ -44,7 +44,7 @@ class ReservationsController < ApplicationController
     else
       flash[:alert] = "Une erreur est survenue durant la validation de la réservation. Veuillez réessayer s'il vous plaît. Si le problème persiste, n'hésitez pas à contacter le support."
     end
-    redirect_to user_path(current_user)
+    redirect_to edit_user_registration_path(current_user)
   end
   
   def preview_cancel
@@ -60,7 +60,7 @@ class ReservationsController < ApplicationController
     else
       flash[:alert] = "Une erreur est survenue durant la mise à jour de votre réservation. Veuillez réessayer s'il vous plaît. Si le problème persiste, n'hésitez pas à contacter le support."
     end
-    redirect_to user_path(current_user)
+    redirect_to edit_user_registration_path(current_user)
   end
   
   def destroy
@@ -70,7 +70,7 @@ class ReservationsController < ApplicationController
     else
       flash[:alert] = "Une erreur est survenue durant l'annulation de la réservation. Veuillez réessayer s'il vous plaît. Si le problème persiste, n'hésitez pas à contacter le support."
     end
-    redirect_to user_path(current_user)
+    redirect_to edit_user_registration_path(current_user)
   end
   
   private

@@ -4,7 +4,7 @@
 			.create-account
 				.row.sign-up
 					.large-12.small-12.columns
-						%h2 Création de votre annonce
+						%h2 À propos de votre espace
 						%hr
 						
 					.row
@@ -32,7 +32,7 @@
 
 						.large-8.medium-8.small-8.columns
 							%h4 Description de votre espace
-							%br
+							%hr
 							= form_for @advert, url: wizard_path, method: :put do |f|
 								%fieldset
 									%legend Description générale
@@ -71,6 +71,6 @@
 										.large-6.medium-6.small-6.columns
 											= f.label "Ascenceur"
 											= f.select :elevator, options_for_select([["Non", false], ["Oui", true]]), label: false
-									%br
-									= link_to "Précédent", previous_wizard_path, method: :get, class: "button"
-									= f.submit "Suivant", class: "button right"
+									%hr
+									= link_to "Précédent", previous_wizard_path, method: :get, class: "button small"
+									= f.submit "Suivant", class: "button right small"

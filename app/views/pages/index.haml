@@ -1,4 +1,4 @@
-%script{:src => "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"}
+%script{:src => "http://maps.google.com/maps/api/js?sensor=false&libraries=places&amp;language=en", :type => "text/javascript"}
 %section#homepage-hero
 	.row
 		.medium-10.large-10.small-12.columns.large-centered.small-centered.panel.index-header-panel
@@ -10,7 +10,7 @@
 					.large-3.small-6.columns
 						.row.collapse
 							.small-9.large-10.columns
-								= text_field_tag "filter[address]", (params[:filter][:address] rescue nil), placeholder: "Ville"
+								= text_field_tag "filter[address]", (params[:filter][:address] rescue nil), placeholder: "Ville", id: "location_field"
 							.small-3.large-2.columns
 								%span.postfix
 									%i.fa.fa-map-marker
@@ -125,6 +125,10 @@
 						
 - content_for :scripts do
 	:javascript
+		var input = document.getElementById('location_field');
+		var autocomplete = new google.maps.places.Autocomplete(input, {
+			types: ["geocode"]
+		});
 		var nowTemp = new Date();
 		var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 		var checkin = $('#filter_start_date').fdatepicker({
