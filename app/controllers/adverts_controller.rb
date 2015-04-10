@@ -47,7 +47,7 @@ class AdvertsController < ApplicationController
   private
   
   def find_advert
-    @advert = Advert.find(params[:id])
+    @advert = Advert.friendly.find(params[:id])
   end
   
   def advert_params

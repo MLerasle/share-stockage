@@ -1,4 +1,7 @@
 class Advert < ActiveRecord::Base
+  include FriendlyId
+  friendly_id :slug_candidates, use: :slugged
+
   cattr_accessor :form_steps do
     %w(general location description price)
   end
@@ -19,12 +22,26 @@ class Advert < ActiveRecord::Base
   default_value_for :elevator, false
   default_value_for :access_type, 0
   default_value_for :complete, false
+  default_value_for :slug, ""
 
   validates :title, :area, :height, :advert_type, presence: true, if: -> { required_for_step?(:general) }
   validates :area, :height, numericality: true, if: -> { required_for_step?(:general) }
   validates :address, presence: true, if: -> { required_for_step?(:location) }
   validates :description, :access_type, :floor, :preservation, :security, presence: true, if: -> { required_for_step?(:description) }
   validates :price, presence: true, numericality: true, if: -> { required_for_step?(:price) }
+
+  def slug_candidates
+    [
+      :title,
+      [:title, :address],
+      [:title, :address, :type_name],
+      [:title, :address, :type_name, :id]
+    ]
+  end
+
+  def should_generate_new_friendly_id?
+    title_changed? || address_changed? || advert_type_changed? || super
+  end
   
   def required_for_step?(step)
     # All fields are required if no form step is present

@@ -4,13 +4,13 @@ class Adverts::StepsController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @advert = Advert.find(params[:advert_id])
+    @advert = Advert.friendly.find(params[:advert_id])
     return redirect_to new_advert_picture_path(@advert) if step == Wicked::FINISH_STEP
     render_wizard
   end
 
   def update
-    @advert = Advert.find(params[:advert_id])
+    @advert = Advert.friendly.find(params[:advert_id])
     @advert.update_attributes(advert_params(step))
     render_wizard @advert
   end

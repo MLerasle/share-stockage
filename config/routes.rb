@@ -19,8 +19,8 @@ Rails.application.routes.draw do
     resources :pictures, except: :destroy
   end
   resources :pictures, only: :destroy
-  resources :evaluations
-  resources :charges
+  resources :evaluations, only: :create
+  resources :charges, only: [:new, :create]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

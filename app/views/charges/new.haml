@@ -32,25 +32,25 @@
 
 							%button#customButton.button.radius.expand Faire un don
 
-:javascript
-	var handler = StripeCheckout.configure({
-		key: 'sk_test_klYc0uPTKRpd0fvXFlQEUf9O',
-		image: '/square-image.png',
-		token: function(token) {
-			document.getElementById("stripeToken").value = token.id;                              
-			document.getElementById("stripeEmail").value = token.email;
-			document.getElementById("chargeForm").submit();
-		}
-	});
-
-	document.getElementById('customButton').addEventListener('click', function(e) {
-		var amount = $("#custom-donation-amount").val() * 100;
-		handler.open({
-			name: 'Sharing Space',
-			description: "Coordonnées bancaires",
-			amount: amount,
-			currency: 'chf',
-			allowRememberMe: false
+- content_for :scripts do
+	:javascript
+		var handler = StripeCheckout.configure({
+			key: 'sk_test_klYc0uPTKRpd0fvXFlQEUf9O',
+			image: '/square-image.png',
+			token: function(token) {
+				document.getElementById("stripeToken").value = token.id;                              
+				document.getElementById("stripeEmail").value = token.email;
+				document.getElementById("chargeForm").submit();
+			}
 		});
-		e.preventDefault();
-	});
+		document.getElementById('customButton').addEventListener('click', function(e) {
+			var amount = $("#custom-donation-amount").val() * 100;
+			handler.open({
+				name: 'Sharing Space',
+				description: "Coordonnées bancaires",
+				amount: amount,
+				currency: 'chf',
+				allowRememberMe: false
+			});
+			e.preventDefault();
+		});

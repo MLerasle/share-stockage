@@ -76,7 +76,7 @@ class ReservationsController < ApplicationController
   private
   
   def find_advert
-    @advert = Advert.find(params[:advert_id])
+    @advert = Advert.friendly.find(params[:advert_id])
   end
   
   def find_reservation
