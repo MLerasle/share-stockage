@@ -9,6 +9,9 @@
 	%li
 		%span.legend_pending
 		Pré-réservé
+	%li
+		%span.legend_unavailable
+		Indisponible
 
 - content_for :scripts do
 	:javascript
@@ -23,6 +26,11 @@
 		            url: '/adverts/#{@advert.id}/reservations/pending.json',
 		            color: 'orange',
 		            textColor: 'black'
+						},
+						{
+								url: '/adverts/#{@advert.id}/unavailable_dates.json',
+								color: 'red',
+								textColor: 'white'
 						}
 		    ]
 			});

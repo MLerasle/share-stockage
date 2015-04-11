@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :adverts do
     resources :steps, only: [:show, :update], controller: 'adverts/steps'
     put 'activate', on: :member
+    get 'unavailable_dates', on: :member
     resources :reservations do
       get 'preview_validate', on: :member
       get 'preview_cancel', on: :member

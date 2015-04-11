@@ -85,6 +85,7 @@ footer .section:first-child {
 .legend .legend_free { background-color: white; }
 .legend .legend_occupied { background-color: rgb(61,116,154); }
 .legend_pending { background-color: rgb(238,150,40); }
+.legend_unavailable { background-color: red; }
 
 #map img { max-width:none; }
 .map_panel { background-color: white; padding:0; }

@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20150410130528) do
     t.integer  "preservation"
     t.integer  "floor"
     t.boolean  "complete",                                        default: false
+    t.date     "from_date"
     t.string   "slug",                                                            null: false
   end
 

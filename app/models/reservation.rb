@@ -8,7 +8,7 @@ class Reservation < ActiveRecord::Base
   def self.json_format
     reservations = []
     self.all.each do |reservation|
-      reservations << { title: reservation.validated ? 'Réservé' : 'En attente', start: reservation.start_date, end: reservation.end_date, allDay: true }
+      reservations << { title: reservation.validated ? 'Réservé' : 'En attente', start: reservation.start_date, end: reservation.end_date + 1.day, allDay: true }
     end
     reservations
   end

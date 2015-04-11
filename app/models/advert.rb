@@ -23,6 +23,9 @@ class Advert < ActiveRecord::Base
   default_value_for :access_type, 0
   default_value_for :complete, false
   default_value_for :slug, ""
+  default_value_for :from_date do
+    Date.today
+  end
 
   validates :title, :area, :height, :advert_type, presence: true, if: -> { required_for_step?(:general) }
   validates :area, :height, numericality: true, if: -> { required_for_step?(:general) }
@@ -32,11 +35,19 @@ class Advert < ActiveRecord::Base
 
   def slug_candidates
     [
-      :title,
+      [:title, :id],
       [:title, :address],
       [:title, :address, :type_name],
       [:title, :address, :type_name, :id]
     ]
+  end
+
+  def starting_date
+    from_date > Date.today ? from_date : Date.today
+  end
+  
+  def unavailable_dates
+    [{ title: "Indisponible", start: Date.today, end: from_date, allDay: true }]
   end
 
   def should_generate_new_friendly_id?

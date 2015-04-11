@@ -43,6 +43,13 @@ class AdvertsController < ApplicationController
     end
     redirect_to edit_user_registration_path(current_user)
   end
+
+  def unavailable_dates
+    @dates = @advert.unavailable_dates
+    respond_to do |format|
+      format.json { render json: @dates }
+    end
+  end
   
   private
   

@@ -55,6 +55,13 @@
 					CHF
 					= @advert.price
 				%br
+				%h3.subheader Disponibilité
+				%p
+					À partir du
+					= @advert.from_date.strftime("%d/%m/%Y")
+					%br
+					Voir la section calendrier pour plus de détails.
+				%br
 				%h3.subheader Détails
 				%ul
 					.row
@@ -163,7 +170,7 @@
 					
 - content_for :scripts do
 	:javascript
-		var nowTemp = new Date();
+		var nowTemp = new Date("#{@advert.starting_date}");
 		var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 		var checkin = $('#reservation_start_date').fdatepicker({
 			format: 'yyyy-mm-dd',
