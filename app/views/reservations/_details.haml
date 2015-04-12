@@ -1,0 +1,16 @@
+%h5
+	Demande de réservation du
+	%strong= reservation.start_date.strftime("%d/%m/%Y")
+	au
+	%strong= reservation.end_date.strftime("%d/%m/%Y")
+%h5
+	Durée de la location:
+	%strong
+		= reservation.duration
+		jours
+%h5
+	Coût total de la réservation:
+	%strong
+		CHF
+		= reservation.price
+%br

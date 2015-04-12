@@ -65,51 +65,26 @@
 		
 						- if @user.adverts.any?
 							%table#adverts_table
-								%thead
-									%tr{ style: "border-bottom: 1px solid black" }
-										%th.hide-for-medium-down
-										%th Informations
-										%th{ style: "text-align:center;" } Réservations
-										%th{ style: "text-align:center;" } En attente
-										%th{ style: "text-align:center;" } Statut
-										%th{ style: "text-align:center;" } Activer/Désactiver
-										%th
-										%th
 								%tbody
 									- @user.adverts.each do |advert|
+										%tr{ "data-link" => advert_path(advert) }
+											= render partial: 'adverts/advert_line', locals: { advert: advert }
 										%tr
-											%td.image_cell.hide-for-medium-down
-												- if advert.pictures.any?
-													= image_tag advert.pictures.first.image(:medium)
-												- else
-													= image_tag "camera.png"
-											%td
-												%h5
-													%i.fa.fa-map-marker
-													= advert.address
-												%ul.hide-for-medium-down
-													%li
-														Type d'espace:
-														%strong= advert.type_name
-													- if advert.area and advert.height
-														%li
-															Peut accueillir
-															%strong
-																= advert.volume
-																m³
-													- if advert.access_type_hr
-														%li
-															= advert.access_type_hr
-											%td{ style: "text-align:center;" }= advert.reservations.count
-											%td{ style: "text-align:center;" }= advert.reservations_waiting_validation.count
 											%td{ style: "text-align:center;" }
 												- if advert.validated
-													%span{ style: "color: green" } Validée
+													%span{ style: "color: green" } ANNONCE VALIDEE
 												- else
 													%span{ style: "color: red" } En attente de validation
-											%td{ style: "text-align:center;" }= link_to advert.activate_title, activate_advert_path(advert), method: :put
-											%td= link_to "Modifier l'annonce", advert_step_path(advert, Advert.form_steps.first)
-											%td= link_to "Gérer les réservations", edit_advert_path(advert)
+											%td
+												= link_to "Modifier l'annonce", advert_step_path(advert, Advert.form_steps.first), class: "button radius small"
+												= link_to "Gérer les réservations", edit_advert_path(advert), class: "button radius small"
+												- button_color = advert.activated ? "alert small" : "success small"
+												%span#activation_link= link_to advert.activate_title, activate_advert_path(advert), method: :put, remote: true, class: "button radius #{button_color}"
+											%td
+												- if advert.reservations.pending.any?
+													%span.right{ style: "color: red" }
+														= advert.reservations.pending.count
+														demandes de réservation en attente
 
 						- else
 							%h4.subheader Vous n'avez créé aucune annonce.
@@ -118,23 +93,33 @@
 				.row
 					.small-12.large-12.columns
 						%h2 Mes réservations
-						%hr 
-		
-						- if @user.reservations.pending.any?
-							%table{ style: "width: 100%" }
-								%thead
-									%tr
-										%th Titre annonce
-										%th Début
-										%th Fin
-										%th
+						%hr
+						- if @user.reservations.pending_or_running.any?
+							%table#adverts_table{ style: "width: 100%" }
 								%tbody
-									- @user.reservations.pending.each do |r|
+									- @user.reservations.pending_or_running.each do |r|
+										%tr{ "data-link" => advert_path(r.advert) }
+											= render partial: 'adverts/advert_line', locals: { advert: r.advert }
 										%tr
-											%td= link_to r.advert.title, advert_path(r.advert)
-											%td= r.start_date
-											%td= r.end_date
-											%td= link_to "Modifier les dates", edit_advert_reservation_path(r.advert, r), data: {'reveal-id' => 'editReservationModal'}
+											%td{ style: "text-align:center;" }
+												- if r.validated
+													%span{ style: "color: green" } RESERVATION VALIDEE
+												- else
+													%span{ style: "color: red" } En attente de validation
+											%td
+												Réservation du
+												%strong= r.start_date.strftime("%d/%m/%Y")
+												au
+												%strong= r.end_date.strftime("%d/%m/%Y")
+												\-
+												Durée:
+												%strong= r.duration
+												jours
+												\-
+												Prix: CHF
+												%strong= r.price
+											%td
+												= link_to "Modifier les dates", edit_advert_reservation_path(r.advert, r), data: {'reveal-id' => 'editReservationModal'}, class: "button tiny success right" unless r.validated
 						
 											#editReservationModal.reveal-modal{"data-reveal" => ""}
 												= render partial: 'reservations/edit', locals: { advert: r.advert, reservation: r }

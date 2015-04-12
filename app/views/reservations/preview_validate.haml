@@ -1,44 +1,34 @@
 %section#main-content
-  .row.body.sign-in
-    .large-10.small-12.columns.large-centered.small-centered
-      .create-account
-        .row.sign-up
-          .large-12.small-12.columns
-            %h1 Veuillez confirmer la réservation
-            %hr
-            %h6
-              %i.fa.fa-info-circle
-              \ Avant de valider la réservation, veuillez vous assurer que les informations ci-dessous sont exactes.
-            %br
-            %h4 Récapitulatif de la demande
-            %br
-            %h5 Votre annonce:
-            %table#adverts_table
-              %tbody
-                %tr
-                  = render partial: 'adverts/advert_line', locals: { advert: @advert }
+	.row.body.sign-in
+		.large-10.small-12.columns.large-centered.small-centered
+			.create-account
+				.row.sign-up
+					.large-12.small-12.columns
+						%h1 Confirmation de la réservation
+						%hr
+						%h6
+							%i.fa.fa-info-circle
+							\ Avant de valider la réservation, veuillez vous assurer que les informations ci-dessous sont exactes.
+						%br
+						%h4 Récapitulatif de la demande
+						%br
+						%h5 Votre annonce:
+						%table#adverts_table
+							%tbody
+								%tr
+									= render partial: 'adverts/advert_line', locals: { advert: @advert }
 
-            %h5
-              Demande de réservation du
-              %strong= @reservation.start_date
-              au
-              %strong= @reservation.end_date
-            %h5
-              Durée de la location:
-              %strong
-                = @reservation.duration
-                jours
-            %h5
-              Coût total de la réservation:
-              %strong
-                CHF
-                = @reservation.price
-            %br
-            %h6
-              Une fois la réservation validée, le locataire et vous recevrez par email un exemplaire du contrat de location prérempli.
-            %h6
-              En validant la réservation, vous certifiez avoir pris connaissance des 
-              = link_to "conditions générales d'utilisation", cgu_path 
-              du site.
-            %br
-            = link_to "Cliquez ici pour valider la réservation", validate_advert_reservation_path(@advert, @reservation), method: :put, class: "button radius expand"
+						= render partial: 'details', locals: { reservation: @reservation }
+
+						%h6
+							Une fois la réservation validée, le locataire et vous recevrez par email un exemplaire du contrat de location prérempli.
+						%h6
+							En validant la réservation, vous certifiez avoir pris connaissance des 
+							= link_to "conditions générales d'utilisation", cgu_path 
+							du site.
+						%br
+						.row
+							.small-6.large-6.columns
+								= link_to "Cliquez ici pour valider la réservation", validate_advert_reservation_path(@advert, @reservation), method: :put, class: "button radius expand success"
+							.small-6.large-6.columns
+								= link_to "Annuler", edit_advert_path(@advert), class: "button radius expand"

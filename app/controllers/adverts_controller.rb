@@ -26,12 +26,9 @@ class AdvertsController < ApplicationController
   def activate
     return redirect_to edit_advert_path(@advert) unless current_user == @advert.user
     @advert.update_attributes(activated: !@advert.activated)
-    if @advert.activated
-      flash[:notice] = "Votre annonce a été activée avec succès! Vous pouvez la désactiver à tout moment."
-    else
-      flash[:notice] = "Votre annonce a été désactivée avec succès! Vous pouvez la réactiver à tout moment."
+    respond_to do |format|
+      format.js
     end
-    redirect_to edit_user_registration_path(current_user)
   end
   
   def destroy

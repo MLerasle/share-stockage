@@ -35,8 +35,8 @@
 												%tbody
 													- @advert.reservations_waiting_validation.each do |r|
 														%tr{ id: "row-#{r.id}" }
-															%td= r.start_date
-															%td= r.end_date
+															%td= r.start_date.strftime("%d/%m/%Y")
+															%td= r.end_date.strftime("%d/%m/%Y")
 															%td= link_to "Valider", preview_validate_advert_reservation_path(@advert, r)
 															%td= link_to "Annuler", preview_cancel_advert_reservation_path(@advert, r)
 															%td
@@ -49,5 +49,5 @@
 											%h4.subheader Vous n'avez aucune demande de réservation en attente pour cet espace.									
 								#panel3.content
 									= render partial: "calendar"
-						%br
-						= link_to "Retour à mon compte", edit_user_registration_path(current_user), class: "button radius"
+							%br
+							= link_to "Retour à mon compte", edit_user_registration_path(current_user), class: "button radius"

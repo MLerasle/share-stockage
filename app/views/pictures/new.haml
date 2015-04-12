@@ -12,15 +12,7 @@
 					.large-12.small-12.columns
 						%h2 À propos de votre espace
 						%hr
-				.row
-					.large-12.small-12.columns
-						- if @advert.pictures.any? and @advert.pictures.count > 1
-							%h4 Photos déjà présentes
-							%ul.clearing-thumbs.large-block-grid-6.medium-block-grid-3.small-block-grid-3{ "data-clearing" => "" }
-								- @advert.pictures.each do |p|
-									-	unless p.id.nil?
-										%li
-											= image_tag p.image(:medium)
+
 				.row.sign-up
 					.row
 						.large-4.medium-4.small-4.columns
@@ -46,6 +38,13 @@
 									Photos
 
 						.large-8.medium-8.small-8.columns
+							- if @advert.pictures.any? and @advert.pictures.count > 1
+								%h4 Photos déjà présentes
+								%ul.clearing-thumbs.large-block-grid-6.medium-block-grid-3.small-block-grid-3{ "data-clearing" => "" }
+									- @advert.pictures.each do |p|
+										-	unless p.id.nil?
+											%li
+												= image_tag p.image(:medium)
 							%h4 Ajouter des photos à votre annonce
 							%hr
 
