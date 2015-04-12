@@ -12,6 +12,9 @@
 	.row
 		%dl.tabs{"data-tab" => ""}
 			%dd.active
+				%a{:href => "#panel0"}
+					%i.fa.fa-home
+			%dd
 				%a{:href => "#panel1"} Mon profil
 			%dd
 				%a{:href => "#panel2", id: "date_tab"} Espace propriétaire
@@ -19,7 +22,53 @@
 				%a{:href => "#panel3", id: "date_tab"} Espace locataire
 		%hr
 		.tabs-content
-			#panel1.content.active
+			#panel0.content.active
+				#main-conten
+					.row
+						.medium-8.medium-centered.columns.centered-text
+							%h5.subheader.margin-top-40px
+								Votre espace personnel vous permet de gérer vos données, vos annonces et vos réservations.
+				#main-content
+					.row
+						%hr
+						.medium-8.medium-centered.columns.centered-text{ style: "text-align: center" }
+							%h2{ style: "color:rgb(46, 121, 168)" } Mon profil
+							%br
+							%h5.subheader
+								Vous permet de modifier vos données personnelles: nom d'utilisateur, email ou mot de passe.
+								%br
+								%br
+								C'est aussi dans cette section que vous pouvez supprimer votre compte.
+				#main-content
+					.row
+						%hr
+						.medium-8.medium-centered.columns.centered-text{ style: "text-align: center" }
+							%h2{ style: "color:rgb(46, 121, 168)" } Espace propriétaire
+							%br
+							%h5.subheader
+								L'espace propriétaire permet aux utilisateurs de gérer leurs annonces créées sur le site.
+								%br
+								%br
+								Vous pouvez ainsi modifier, activer, désactiver ou supprimer vos annonces. C'est aussi depuis cette section que vous pouvez gérer les réservations que vous recevez pour vos espaces à louer.
+								%br
+								%br
+								L'activation et la désactivation des annonces vous permettent de les rendre visibles ou non sur le site.
+								%br
+								%br
+								Notez qu'après leur création, les annonces sont soumises à validation par le site et ne seront visibles qu'une fois validées et activées.
+				#main-content
+					.row
+						%hr
+						.medium-8.medium-centered.columns.centered-text{ style: "text-align: center" }
+							%h2{ style: "color:rgb(46, 121, 168)" } Espace locataire
+							%br
+							%h5.subheader
+								L'espace locataire permet aux utilisateurs ayant effectué une réservation sur le site de retrouver les informations s'y rapportant.
+								%br
+								%br
+								Vous pouvez ainsi retrouver l'annonce de l'espace correspondant et ainsi contacter le propriétaire, modifier les dates de réservation si cette dernière n'a pas encore été validée par le propriétaire, ou encore consulter les dates et le tarif de votre réservation.
+							
+			#panel1.content
 				.row.body.sign-in
 					.large-8.small-12.columns.large-centered.small-centered
 						.create-account
