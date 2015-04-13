@@ -24,7 +24,7 @@ class AdvertsController < ApplicationController
   end
   
   def activate
-    return redirect_to edit_advert_path(@advert) unless current_user == @advert.user
+    return redirect_to edit_advert_path(@advert) unless current_user == @advert.user and @advert.valid?
     @advert.update_attributes(activated: !@advert.activated)
     respond_to do |format|
       format.js

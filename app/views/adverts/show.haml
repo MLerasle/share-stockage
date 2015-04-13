@@ -16,14 +16,15 @@
 				%h4 Que souhaitez-vous faire?
 				= link_to "Accéder à mon compte", edit_user_registration_path(current_user), class: "button radius success"
 				= link_to "Modifier l'annonce", advert_step_path(@advert, Advert.form_steps.first), class: "button radius"
-				- button_color = @advert.activated ? "alert" : "success"
-				%span#activation_link= link_to @advert.activate_title, activate_advert_path(@advert), method: :put, class: "button radius #{button_color}", remote: true
+				- if @advert.valid?
+					- button_color = @advert.activated ? "alert" : "success"
+					%span#activation_link= link_to @advert.activate_title, activate_advert_path(@advert), method: :put, class: "button radius #{button_color}", remote: true
 				- if @advert.is_deletable?
 					= link_to "Supprimer l'annonce", advert_path(@advert), method: :delete, data: { confirm: "Ètes-vous sûr de vouloir supprimer cette annonce?" }, class: "button radius alert"
 					
 			%hr
 			%h2= @advert.title
-			%h4.subheader= "#{@advert.type_name} - #{@advert.volume} m³ - #{@advert.address}"
+			%h4.subheader= "#{@advert.type_name} - #{@advert.volume if @advert.area and @advert.height} m³ - #{@advert.address}"
 			%br
 	
 		.small-12.medium-12.large-8.columns	
@@ -50,7 +51,7 @@
 		
 				%hr
 				%h3.subheader Description
-				%p= @advert.description.gsub(/\n/,"<br/>").html_safe
+				%p= @advert.description.gsub(/\n/,"<br/>").html_safe if @advert.description
 				%br
 				%h3.subheader Tarif mensuel
 				%p
@@ -136,8 +137,9 @@
 				#evaluationModal.reveal-modal{"data-reveal" => ""}
 					= render partial: 'evaluations/new', locals: { advert: @advert }
 					%a.close-reveal-modal ×
-			.panel.map_panel
-				#map
+			- if @advert.address
+				.panel.map_panel
+					#map
 		.small-12.medium-12.large-4.columns
 			.panel
 				%h3 Pré-réserver

@@ -23,6 +23,8 @@ fr:
               not_a_number: "Doit être un nombre"
             complete:
               blank: "Doit être rempli"
+            advert_type:
+              blank: "Doit être rempli"
         user:
           attributes:
             email:

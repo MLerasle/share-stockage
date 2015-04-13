@@ -127,8 +127,9 @@
 											%td
 												= link_to "Modifier l'annonce", advert_step_path(advert, Advert.form_steps.first), class: "button radius small"
 												= link_to "Gérer les réservations", edit_advert_path(advert), class: "button radius small"
-												- button_color = advert.activated ? "alert small" : "success small"
-												%span#activation_link= link_to advert.activate_title, activate_advert_path(advert), method: :put, remote: true, class: "button radius #{button_color}"
+												- if advert.valid?
+													- button_color = advert.activated ? "alert small" : "success small"
+													%span#activation_link= link_to advert.activate_title, activate_advert_path(advert), method: :put, remote: true, class: "button radius #{button_color}"
 											%td
 												- if advert.reservations.pending.any?
 													%span.right{ style: "color: red" }

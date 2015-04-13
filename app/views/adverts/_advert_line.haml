@@ -13,7 +13,7 @@
 		%li
 			Peut accueillir
 			%strong
-				= advert.volume
+				= advert.volume if advert.area and advert.height
 				m³
 		%li
 			= advert.access_type_hr
