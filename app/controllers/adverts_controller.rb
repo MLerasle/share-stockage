@@ -47,6 +47,22 @@ class AdvertsController < ApplicationController
       format.json { render json: @dates }
     end
   end
+
+  def preload_pictures
+    if @advert.pictures
+      images = []
+      @advert.pictures.each do |pic|
+        images << { id: pic.id, name: pic.image_file_name, size: pic.image_file_size, url: pic.image.url }
+      end
+    end
+    respond_to do |format|
+      if images.any?
+        format.json { render json: images }
+      else
+        format.json { render json: {error: "No images"} }
+      end
+    end
+  end
   
   private
   

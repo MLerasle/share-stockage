@@ -25,6 +25,10 @@ fr:
               blank: "Doit être rempli"
             advert_type:
               blank: "Doit être rempli"
+        picture:
+          attributes:
+            image_content_type:
+              invalid: Le format de l'image est invalide.
         user:
           attributes:
             email:

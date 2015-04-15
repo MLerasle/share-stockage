@@ -148,3 +148,8 @@ tr[data-link] {
 .wizard_link .panel:hover {
   border: 1px solid rgb(84, 151, 86);
 }
+
+.dz-image img {
+  width: 120px;
+  height: 120px;
+}
