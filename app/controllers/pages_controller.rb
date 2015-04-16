@@ -28,7 +28,7 @@ class PagesController < ApplicationController
   
   def contact_announcer
     @advert = Advert.find(params[:advert])
-    if EmailAnnouncer.perform_async(@advert.user_id, params[:subject], params[:body])
+    if EmailAnnouncer.perform_async(@advert.id, params[:subject], params[:body])
       flash[:notice] = "Votre demande de renseignements a bien été envoyée au propriétaire."
       redirect_to advert_path(@advert)
     else

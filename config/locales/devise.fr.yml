@@ -18,7 +18,7 @@ fr:
       unconfirmed: "Vous devez valider votre adresse email pour continuer."
     mailer:
       confirmation_instructions:
-        subject: "Instructions de confirmation de votre compte."
+        subject: "Confirmation de votre adresse email."
       reset_password_instructions:
         subject: "Instructions pour réinitialiser votre mot de passe."
       unlock_instructions:

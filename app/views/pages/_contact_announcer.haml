@@ -1,7 +1,7 @@
 %h1 Contacter l'annonceur
 %hr
 
-= form_for '#', url: contact_announcer_path(advert: @advert), method: :post do
+= form_for '#', url: contact_announcer_path(advert: @advert.id), method: :post do
 	= label_tag "Sujet"
 	= text_field_tag "subject"
 	

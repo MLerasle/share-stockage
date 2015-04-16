@@ -1,5 +1,9 @@
-<p>Bienvenue sur Toque et Stocke <%= @email %>!</p>
+<p>Bonjour <%= @resource.username %>!</p>
 
-<p>Merci de valider votre compte en cliquant sur le lien ci-dessous:</p>
+<p>Bienvenue sur <%= link_to "Toque et Stocke", root_url %>, la plateforme suisse de stockage entre particuliers.</p>
 
-<p><%= link_to 'Confirmer mon inscription', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p>La création de votre compte est presque terminée. Veuillez cliquer sur le lien ci-dessous pour valider votre adresse email:</p>
+
+<p><%= link_to 'Confirmer mon adresse email', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+<p>Meilleures salutations.<br/><%= link_to "Toque et Stocke", root_url %></p>
