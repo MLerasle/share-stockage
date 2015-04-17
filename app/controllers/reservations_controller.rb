@@ -20,7 +20,7 @@ class ReservationsController < ApplicationController
   def create
     if !@advert.validated
       flash[:alert] = "Vous pourrez réserver cet espace une fois l'annonce validée."
-      return redirect_to edit_user_registration_path(current_user)
+      return redirect_to advert_path(@advert)
     end
     @reservation = @advert.reservations.new(reservation_params)
     @reservation.user = current_user

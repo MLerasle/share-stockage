@@ -55,7 +55,6 @@ Rails.application.routes.draw do
   get 'cgu' => 'pages#cgu'
   get 'help' => 'pages#help'
   get 'pending_signup' => 'pages#pending_signup'
-  post 'contact_user' => 'pages#contact_user'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

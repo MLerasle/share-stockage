@@ -29,25 +29,23 @@
 													%tr
 														%th Début
 														%th Fin
+														%th Prix
 														%th Valider la réservation
 														%th Annuler la réservation
-														%th Contacter le demandeur
 												%tbody
 													- @advert.reservations_waiting_validation.each do |r|
 														%tr{ id: "row-#{r.id}" }
 															%td= r.start_date.strftime("%d/%m/%Y")
 															%td= r.end_date.strftime("%d/%m/%Y")
+															%td
+																CHF
+																= r.price
 															%td= link_to "Valider", preview_validate_advert_reservation_path(@advert, r)
 															%td= link_to "Annuler", preview_cancel_advert_reservation_path(@advert, r)
-															%td
-																= link_to "Contacter", '#', data: {'reveal-id' => 'contactModal'}
-																#contactModal.reveal-modal{"data-reveal" => ""}
-																	= render partial: 'pages/contact_user', locals: { advert: @advert, reservation: r }
-																	%a.close-reveal-modal ×
 
 										- else
 											%h4.subheader Vous n'avez aucune demande de réservation en attente pour cet espace.									
 								#panel3.content
 									= render partial: "calendar"
 							%br
-							= link_to "Retour à mon compte", edit_user_registration_path(current_user), class: "button radius"
+							= link_to "Retour à mon compte", owner_space_user_path(current_user), class: "button radius"

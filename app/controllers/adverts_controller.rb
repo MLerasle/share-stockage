@@ -38,7 +38,7 @@ class AdvertsController < ApplicationController
     else
       flash[:alert] = "Vous n'êtes pas autorisé à supprimer cette annonce. Consulter les FAQ pour connaître les conditions de suppression d'une annonce."
     end
-    redirect_to edit_user_registration_path(current_user)
+    redirect_to user_path(current_user)
   end
 
   def unavailable_dates

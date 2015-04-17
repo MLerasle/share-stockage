@@ -2,7 +2,7 @@ class RegistrationsController < Devise::RegistrationsController
   def destroy
     unless current_user and current_user.can_be_destroyed and (current_user == resource or current_user.admin)
       flash[:alert] = "Vous n'êtes pas autorisé à supprimer ce compte."
-      return redirect_to edit_user_registration_path(resource)
+      return redirect_to user_path(resource)
     end
     resource.destroy
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
