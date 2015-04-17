@@ -69,6 +69,11 @@ GEM
       capistrano
       sidekiq
     capistrano-stats (1.1.1)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
     celluloid (0.16.0)
       timers (~> 4.0.0)
     climate_control (0.0.3)
@@ -101,6 +106,8 @@ GEM
       thor (~> 0.14)
     font-awesome-rails (4.3.0.0)
       railties (>= 3.2, < 5.0)
+    foreigner (1.7.4)
+      activerecord (>= 3.0.0)
     foundation-rails (5.5.1.0)
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
@@ -133,6 +140,10 @@ GEM
     kgio (2.9.3)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    mailboxer (0.12.5)
+      carrierwave (>= 0.5.8)
+      foreigner (>= 0.9.1)
+      rails (>= 3.2.0)
     mime-types (2.4.3)
     mini_portile (0.6.2)
     minitest (5.5.1)
@@ -287,6 +298,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
+  mailboxer
   mysql2
   newrelic_rpm
   paperclip!

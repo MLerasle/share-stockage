@@ -1,0 +1,14 @@
+%h1 Conversation
+
+= @conversation.subject
+ 
+- @conversation.receipts_for(current_user).each do |receipt|
+	- message = receipt.message
+	= message.sender.username
+	says at
+	= message.created_at.strftime("%-d %B %Y, %H:%M:%S")
+	= message.body
+	
+= form_tag reply_conversation_path(@conversation), method: :post do
+	= text_area_tag 'body', nil, cols: 3, class: 'form-control', placeholder: 'Type something...', required: true
+	= submit_tag "Send Message"

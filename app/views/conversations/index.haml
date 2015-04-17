@@ -1,0 +1,15 @@
+%h1 Messagerie
+
+%ul
+	%li= mailbox_section 'inbox', @box
+	%li= mailbox_section 'sent', @box
+	%li= mailbox_section 'trash', @box
+
+- if @box == 'trash'
+	= link_to 'Empty trash', empty_trash_conversations_path, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' }
+
+%ul
+	= render partial: 'conversations/conversation', collection: @conversations
+
+= link_to 'Start conversation', new_message_path
+= paginate @conversations

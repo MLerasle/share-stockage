@@ -9,20 +9,35 @@ Rails.application.routes.draw do
   
   resources :adverts do
     resources :steps, only: [:show, :update], controller: 'adverts/steps'
-    put 'activate', on: :member
-    get 'unavailable_dates', on: :member
-    get 'preload_pictures', on: :member
+    member do
+      put 'activate'
+      get 'unavailable_dates'
+      get 'preload_pictures'
+    end
     resources :reservations do
-      get 'preview_validate', on: :member
-      get 'preview_cancel', on: :member
+      member do
+        get 'preview_validate'
+        get 'preview_cancel'
+        put 'validate'
+      end
       get 'pending', on: :collection
-      put 'validate', on: :member
     end
     resources :pictures, except: :destroy
   end
   resources :pictures, only: :destroy
   resources :evaluations, only: :create
   resources :charges, only: [:new, :create]
+  resources :conversations, only: [:index, :show, :destroy] do
+    member do
+      post :reply
+      post :restore
+      post :mark_as_read
+    end
+    collection do
+      delete :empty_trash
+    end
+  end
+  resources :messages, only: [:new, :create]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
