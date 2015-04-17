@@ -25,7 +25,10 @@ class ReservationsController < ApplicationController
     @reservation = @advert.reservations.new(reservation_params)
     @reservation.user = current_user
     if @reservation.save
-      PrereservationEmail.perform_async(@advert.user_id, @advert.id)
+      body = "Vous avez reçu une demande de réservation de la part de #{@reservation.user.username}\n\nAccédez dès maintenant à votre espace propriétaire pour valider ou annuler cette réservation.\n\nMeilleures salutations,\nToque et Stocke"
+      subject = "Demande de réservation pour l'espace #{@advert.title}"
+      recipients = User.where(id: @advert.user_id)
+      current_user.send_message(recipients, body, subject).conversation
       flash[:notice] = "Votre demande de réservation a bien été envoyée au propriétaire."
     else
       flash[:alert] = "Les données saisies pour votre réservation sont incorrectes. Veuillez vérifier que les dates choisies sont valides et réessayer."

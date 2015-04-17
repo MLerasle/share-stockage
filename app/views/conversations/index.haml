@@ -26,7 +26,6 @@
 							%th Date
 							%th
 						%tbody
-							%tr
-								= render partial: 'conversations/conversation', collection: @conversations
+							= render partial: 'conversations/conversation', collection: @conversations
 
 					= paginate @conversations
