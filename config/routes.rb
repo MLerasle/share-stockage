@@ -56,7 +56,6 @@ Rails.application.routes.draw do
   get 'help' => 'pages#help'
   get 'pending_signup' => 'pages#pending_signup'
   post 'contact_user' => 'pages#contact_user'
-  post 'contact_announcer' => 'pages#contact_announcer'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

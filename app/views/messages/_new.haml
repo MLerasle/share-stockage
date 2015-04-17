@@ -1,0 +1,11 @@
+%h1 Contacter l'annonceur
+%hr
+ 
+= form_tag messages_path(advert_id: @advert.id), method: :post do
+	= label_tag 'message[subject]', 'Sujet'
+	= text_field_tag 'message[subject]', nil, required: true
+ 
+	= label_tag 'message[body]', 'Votre message'
+	= text_area_tag 'message[body]', nil, rows: 8, required: true
+ 
+	= submit_tag 'Envoyer', class: 'button radius expand'

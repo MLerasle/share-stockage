@@ -5,9 +5,10 @@ class MessagesController < ApplicationController
   end
  
   def create
-    recipients = User.where(id: params['recipients'])
+    @advert = Advert.find(params[:advert_id])
+    recipients = User.where(id: @advert.user_id)
     conversation = current_user.send_message(recipients, params[:message][:body], params[:message][:subject]).conversation
-    flash[:success] = "Message has been sent!"
-    redirect_to conversation_path(conversation)
+    flash[:notice] = "Votre demande a bien été envoyée au propriétaire."
+    redirect_to advert_path(@advert)
   end
 end
