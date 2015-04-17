@@ -9,170 +9,52 @@
 				.alert-box.alert.radius{ "data-alert" => "" }
 					= alert
 					%a{ href: "#", class: "close" } &times;
+
 	.row
-		%dl.tabs{"data-tab" => ""}
-			%dd.active
-				%a{:href => "#panel0"}
+		%dl.tabs
+			%dd
+				= link_to user_path(current_user) do
 					%i.fa.fa-home
-			%dd
-				%a{:href => "#panel1"} Mon profil
-			%dd
-				%a{:href => "#panel2", id: "date_tab"} Espace propriétaire
-			%dd
-				%a{:href => "#panel3", id: "date_tab"} Espace locataire
+			%dd.active= link_to "Mon profil", edit_user_registration_path(current_user)
+			%dd= link_to "Espace propriétaire", owner_space_user_path(current_user)
+			%dd= link_to "Espace locataire", lodger_space_user_path(current_user)
+			%dd= link_to "Messagerie", conversations_path
 		%hr
-		.tabs-content
-			#panel0.content.active
-				#main-conten
-					.row
-						.medium-8.medium-centered.columns.centered-text
-							%h5.subheader.margin-top-40px
-								Votre espace personnel vous permet de gérer vos données, vos annonces et vos réservations.
-				#main-content
-					.row
-						%hr
-						.medium-8.medium-centered.columns.centered-text{ style: "text-align: center" }
-							%h2{ style: "color:rgb(46, 121, 168)" } Mon profil
-							%br
-							%h5.subheader
-								Vous permet de modifier vos données personnelles: nom d'utilisateur, email ou mot de passe.
-								%br
-								%br
-								C'est aussi dans cette section que vous pouvez supprimer votre compte.
-				#main-content
-					.row
-						%hr
-						.medium-8.medium-centered.columns.centered-text{ style: "text-align: center" }
-							%h2{ style: "color:rgb(46, 121, 168)" } Espace propriétaire
-							%br
-							%h5.subheader
-								L'espace propriétaire permet aux utilisateurs de gérer leurs annonces créées sur le site.
-								%br
-								%br
-								Vous pouvez ainsi modifier, activer, désactiver ou supprimer vos annonces. C'est aussi depuis cette section que vous pouvez gérer les réservations que vous recevez pour vos espaces à louer.
-								%br
-								%br
-								L'activation et la désactivation des annonces vous permettent de les rendre visibles ou non sur le site.
-								%br
-								%br
-								Notez qu'après leur création, les annonces sont soumises à validation par le site et ne seront visibles qu'une fois validées et activées.
-				#main-content
-					.row
-						%hr
-						.medium-8.medium-centered.columns.centered-text{ style: "text-align: center" }
-							%h2{ style: "color:rgb(46, 121, 168)" } Espace locataire
-							%br
-							%h5.subheader
-								L'espace locataire permet aux utilisateurs ayant effectué une réservation sur le site de retrouver les informations s'y rapportant.
-								%br
-								%br
-								Vous pouvez ainsi retrouver l'annonce de l'espace correspondant et ainsi contacter le propriétaire, modifier les dates de réservation si cette dernière n'a pas encore été validée par le propriétaire, ou encore consulter les dates et le tarif de votre réservation.
-							
-			#panel1.content
-				.row.body.sign-in
-					.large-8.small-12.columns.large-centered.small-centered
-						.create-account
-							.row.sign-up
-								.large-12.small-12.columns
-									%h1.subheader Modifier mes informations personnelles
-									%hr
-									= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "mean", method: :put }) do |f|
-										= f.label "Nom d'utilisateur", nil, class: "required"
-										= f.text_field :username, autofocus: true, label: false
+		#main-content
+			.row.body.sign-in
+				.large-8.small-12.columns.large-centered.small-centered
+					.create-account
+						.row.sign-up
+							.large-12.small-12.columns
+								%h1.subheader Modifier mes informations personnelles
+								%hr
+								= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "mean", method: :put }) do |f|
+									= f.label "Nom d'utilisateur", nil, class: "required"
+									= f.text_field :username, autofocus: true, label: false
 
-										= f.label "Email", nil, class: "required"
-										= f.email_field :email, label: false
+									= f.label "Email", nil, class: "required"
+									= f.email_field :email, label: false
 
-										- if devise_mapping.confirmable? && resource.pending_reconfirmation?
-											%span Currently waiting confirmation for: <%= resource.unconfirmed_email
+									- if devise_mapping.confirmable? && resource.pending_reconfirmation?
+										%span Currently waiting confirmation for: <%= resource.unconfirmed_email
 
-										= f.label "Nouveau Mot de passe (ne pas remplir si vous ne souhaitez pas le changer)"
-										= f.password_field :password, autocomplete: "off", label: false
+									= f.label "Nouveau Mot de passe (ne pas remplir si vous ne souhaitez pas le changer)"
+									= f.password_field :password, autocomplete: "off", label: false
 
-										= f.label "Confirmer le nouveau mot de passe"
-										= f.password_field :password_confirmation, autocomplete: "off", label: false
+									= f.label "Confirmer le nouveau mot de passe"
+									= f.password_field :password_confirmation, autocomplete: "off", label: false
 
-										= f.label "Mot de passe actuel (requis pour valider vos changements)", nil, class: "required"
-										= f.password_field :current_password, autocomplete: "off", label: false
+									= f.label "Mot de passe actuel (requis pour valider vos changements)", nil, class: "required"
+									= f.password_field :current_password, autocomplete: "off", label: false
 
-										= f.submit "Mettre à jour", class: "button right"
+									= f.submit "Mettre à jour", class: "button right"
 
-									.row
-										.large-12.small-12.columns
-											%h3 Supprimer mon compte
+								.row
+									.large-12.small-12.columns
+										%h3 Supprimer mon compte
 
-											%h6 Pour supprimer votre compte, veuillez cliquer sur le bouton ci-dessous. 
-											%h6 Attention si vous avez un espace en location ou que vous louez un espace, vous devez attendre la fin de la réservation en cours pour supprimer votre compte!
-											%h6 Toutes vos données et vos annonces seront supprimées. Cette action est irrévocable.
-											%br
-											= link_to "Supprimer mon compte", registration_path(resource_name), data: { confirm: "Êtes-vous sûr de vouloir supprimer votre compte?" }, method: :delete, class: "button radius expand"
-			#panel2.content
-				.row
-					.small-12.large-12.columns
-						%h2 Mes annonces
-						%hr
-		
-						- if @user.adverts.any?
-							%table#adverts_table
-								%tbody
-									- @user.adverts.each do |advert|
-										%tr{ "data-link" => advert_path(advert) }
-											= render partial: 'adverts/advert_line', locals: { advert: advert }
-										%tr
-											%td{ style: "text-align:center;" }
-												- if advert.validated
-													%span{ style: "color: green" } ANNONCE VALIDEE
-												- else
-													%span{ style: "color: red" } En attente de validation
-											%td
-												= link_to "Modifier l'annonce", advert_step_path(advert, Advert.form_steps.first), class: "button radius small"
-												= link_to "Gérer les réservations", edit_advert_path(advert), class: "button radius small"
-												- if advert.valid?
-													- button_color = advert.activated ? "alert small" : "success small"
-													%span#activation_link= link_to advert.activate_title, activate_advert_path(advert), method: :put, remote: true, class: "button radius #{button_color}"
-											%td
-												- if advert.reservations.pending.any?
-													%span.right{ style: "color: red" }
-														= advert.reservations.pending.count
-														demandes de réservation en attente
-
-						- else
-							%h4.subheader Vous n'avez créé aucune annonce.
-							= link_to "Publier une annonce maintenant", new_advert_path, class: "button radius"
-			#panel3.content
-				.row
-					.small-12.large-12.columns
-						%h2 Mes réservations
-						%hr
-						- if @user.reservations.pending_or_running.any?
-							%table#adverts_table{ style: "width: 100%" }
-								%tbody
-									- @user.reservations.pending_or_running.each do |r|
-										%tr{ "data-link" => advert_path(r.advert) }
-											= render partial: 'adverts/advert_line', locals: { advert: r.advert }
-										%tr
-											%td{ style: "text-align:center;" }
-												- if r.validated
-													%span{ style: "color: green" } RESERVATION VALIDEE
-												- else
-													%span{ style: "color: red" } En attente de validation
-											%td
-												Réservation du
-												%strong= r.start_date.strftime("%d/%m/%Y")
-												au
-												%strong= r.end_date.strftime("%d/%m/%Y")
-												\-
-												Durée:
-												%strong= r.duration
-												jours
-												\-
-												Prix: CHF
-												%strong= r.price
-											%td
-												= link_to "Modifier les dates", edit_advert_reservation_path(r.advert, r), data: {'reveal-id' => 'editReservationModal'}, class: "button tiny success right" unless r.validated
-						
-											#editReservationModal.reveal-modal{"data-reveal" => ""}
-												= render partial: 'reservations/edit', locals: { advert: r.advert, reservation: r }
-												%a.close-reveal-modal ×
-						- else
-							%h4.subheader Vous n'avez aucune demande de réservation en attente.
+										%h6 Pour supprimer votre compte, veuillez cliquer sur le bouton ci-dessous. 
+										%h6 Attention si vous avez un espace en location ou que vous louez un espace, vous devez attendre la fin de la réservation en cours pour supprimer votre compte!
+										%h6 Toutes vos données et vos annonces seront supprimées. Cette action est irrévocable.
+										%br
+										= link_to "Supprimer mon compte", registration_path(resource_name), data: { confirm: "Êtes-vous sûr de vouloir supprimer votre compte?" }, method: :delete, class: "button radius expand"

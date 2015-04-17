@@ -167,10 +167,13 @@
 			.panel
 				%h3 Plus de renseignements
 				%hr
-				= link_to "Contacter le propriétaire", '#', data: {'reveal-id' => 'contactModal'}, class: "button radius expand"
-				#contactModal.reveal-modal{"data-reveal" => ""}
-					= render partial: 'pages/contact_announcer', locals: { advert: @advert }
-					%a.close-reveal-modal ×
+				- if current_user
+					= link_to "Contacter le propriétaire", '#', data: {'reveal-id' => 'contactModal'}, class: "button radius expand"
+					#contactModal.reveal-modal{"data-reveal" => ""}
+						= render partial: 'pages/contact_announcer', locals: { advert: @advert }
+						%a.close-reveal-modal ×
+				- else
+					= link_to "Me connecter pour contacter le propriétaire", new_user_session_path, class: "button radius expand"
 					
 - content_for :scripts do
 	:javascript

@@ -1,15 +1,33 @@
-%h1 Messagerie
+%section#main-content
+	.row
+		%dl.tabs
+			%dd
+				= link_to user_path(current_user) do
+					%i.fa.fa-home
+			%dd= link_to "Mon profil", edit_user_registration_path(current_user)
+			%dd= link_to "Espace propriétaire", owner_space_user_path(current_user)
+			%dd= link_to "Espace locataire", lodger_space_user_path(current_user)
+			%dd.active= link_to "Messagerie", conversations_path
+		%hr
+		#main-content
+			.row
+				.small-12.large-12.columns
+					%h1.subheader Messagerie
+					%hr
+		
+				.small-3.large-3.columns
+					= render partial: "mailboxes", locals: { box: @box }
 
-%ul
-	%li= mailbox_section 'inbox', @box
-	%li= mailbox_section 'sent', @box
-	%li= mailbox_section 'trash', @box
+				.small-9.large-9.columns
+					%table#messages_table
+						%thead
+							%th Sujet
+							%th Contenu
+							%th Date
+							%th
+						%tbody
+							%tr
+								= render partial: 'conversations/conversation', collection: @conversations
 
-- if @box == 'trash'
-	= link_to 'Empty trash', empty_trash_conversations_path, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' }
-
-%ul
-	= render partial: 'conversations/conversation', collection: @conversations
-
-= link_to 'Start conversation', new_message_path
-= paginate @conversations
+					= link_to 'Start conversation', new_message_path
+					= paginate @conversations

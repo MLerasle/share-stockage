@@ -1,12 +1,10 @@
-%li
-	= link_to conversation.subject, conversation_path(conversation)
-
+%td= link_to conversation.subject, conversation_path(conversation, box: params[:box] || 'inbox')
+%td= conversation.last_message.body
+%td= conversation.last_message.created_at.strftime("%d %B %Y, %H:%M")
+%td
 	- if conversation.is_trashed?(current_user)
-		= link_to 'Restore', restore_conversation_path(conversation), class: 'btn btn-xs btn-info', method: :post
+		= link_to 'Restore', restore_conversation_path(conversation), method: :post
 	- else
-		= link_to 'Move to trash', conversation_path(conversation), class: 'btn btn-xs btn-danger', method: :delete, data: { confirm: 'Are you sure?' }
+		= link_to 'Move to trash', conversation_path(conversation), method: :delete
 		- if conversation.is_unread?(current_user)
-			= link_to 'Mark as read', mark_as_read_conversation_path(conversation), class: 'btn btn-xs btn-info', method: :post
- 
-= conversation.last_message.body
-= conversation.last_message.created_at.strftime("%-d %B %Y, %H:%M:%S")
+			= link_to 'Mark as read', mark_as_read_conversation_path(conversation), method: :post

@@ -131,6 +131,11 @@ tr[data-link] {
   border-bottom: 1px solid white;
 }
 
+#messages_table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
 #index_help_section .panel {
   background-color: white;
 }

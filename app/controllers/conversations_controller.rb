@@ -1,11 +1,10 @@
 class ConversationsController < ApplicationController
   before_action :authenticate_user!
   before_action :get_mailbox
-  before_action :get_box, only: [:index]
+  before_action :get_box, only: [:index, :show]
   before_action :get_conversation, except: [:index]
  
   def index
-    # @conversations = @mailbox.inbox.page(params[:page]).per(10)
     if @box.eql? "inbox"
       @conversations = @mailbox.inbox
     elsif @box.eql? "sent"

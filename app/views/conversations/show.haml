@@ -1,14 +1,28 @@
-%h1 Conversation
+%section#main-content
+	.row
+		.small-12.large-12.columns
+			%h1 Messagerie
+		
+		.small-3.large-3.columns
+			= render partial: "mailboxes", locals: { box: @box }
 
-= @conversation.subject
+		.small-9.large-9.columns
+			.row
+				.small-12.large-12.columns
+					%h4= @conversation.subject
  
-- @conversation.receipts_for(current_user).each do |receipt|
-	- message = receipt.message
-	= message.sender.username
-	says at
-	= message.created_at.strftime("%-d %B %Y, %H:%M:%S")
-	= message.body
+			- @conversation.receipts_for(current_user).each do |receipt|
+				- message = receipt.message
+				.row
+					.small-12.large-12.columns
+						%strong
+							= message.sender.username
+						.right= message.created_at.strftime("%d %B %Y, %H:%M")
+				.row
+					.small-12.large-12.columns
+						= message.body
+						%hr
 	
-= form_tag reply_conversation_path(@conversation), method: :post do
-	= text_area_tag 'body', nil, cols: 3, class: 'form-control', placeholder: 'Type something...', required: true
-	= submit_tag "Send Message"
+			= form_tag reply_conversation_path(@conversation), method: :post do
+				= text_area_tag 'body', nil, cols: 3, class: 'form-control', placeholder: 'Type something...', required: true
+				= submit_tag "Send Message"
