@@ -32,10 +32,11 @@
 								.right= message.created_at.strftime("%d %B %Y, %H:%M")
 						.row
 							.small-12.large-12.columns
-								= message.body.gsub(/<br(| \/)>/, "\n")
+								= message.body.gsub(/\n/,"<br/>").html_safe
 								%hr
 					.row
 						.small-12.large-12.columns
-							= form_tag reply_conversation_path(@conversation), method: :post do
-								= text_area_tag 'body', nil, rows: 6, placeholder: 'Répondez ici...', required: true
-								= submit_tag "Envoyer", class: "button radius"
+							- unless @conversation.messages.first.sender_id == @admin_user.id
+								= form_tag reply_conversation_path(@conversation), method: :post do
+									= text_area_tag 'body', nil, rows: 6, placeholder: 'Répondez ici...', required: true
+									= submit_tag "Envoyer", class: "button radius"
