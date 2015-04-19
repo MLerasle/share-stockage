@@ -24,7 +24,9 @@
 							%th Sujet
 							%th Contenu
 							%th Date
-							%th
+							%th.right
+								- if @box == 'trash'
+									= link_to 'Vider la corbeille', empty_trash_conversations_path, method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir vider la corbeille?' }
 						%tbody
 							= render partial: 'conversations/conversation', collection: @conversations
 

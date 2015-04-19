@@ -2,7 +2,7 @@ class ConversationsController < ApplicationController
   before_action :authenticate_user!
   before_action :get_mailbox
   before_action :get_box, only: [:index, :show]
-  before_action :get_conversation, except: [:index]
+  before_action :get_conversation, except: [:index, :empty_trash]
  
   def index
     if @box.eql? "inbox"
@@ -16,6 +16,7 @@ class ConversationsController < ApplicationController
   end
 
   def show
+    @conversation.mark_as_read(current_user)
   end
   
   def reply
@@ -41,12 +42,6 @@ class ConversationsController < ApplicationController
       conversation.receipts_for(current_user).update_all(deleted: true)
     end
     flash[:success] = 'Your trash was cleaned!'
-    redirect_to conversations_path
-  end
-  
-  def mark_as_read
-    @conversation.mark_as_read(current_user)
-    flash[:success] = 'The conversation was marked as read.'
     redirect_to conversations_path
   end
  

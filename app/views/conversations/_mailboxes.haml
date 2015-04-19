@@ -1,9 +1,6 @@
 .panel
 	%ul.side-nav
 		%li.heading Mailbox
-		%li= mailbox_section 'inbox', box
-		%li= mailbox_section 'sent', box
-		%li= mailbox_section 'trash', box
-
-	- if box == 'trash'
-		= link_to 'Empty trash', empty_trash_conversations_path, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' }
+		%li= mailbox_section "Boîte de réception", 'inbox', box
+		%li= mailbox_section "Envoyés", 'sent', box
+		%li= mailbox_section "Corbeille", 'trash', box

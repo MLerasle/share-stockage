@@ -22,18 +22,20 @@
 					.row
 						.small-12.large-12.columns
 							%h4= @conversation.subject
+							%br
  
 					- @conversation.receipts_for(current_user).each do |receipt|
 						- message = receipt.message
-						.row
-							.small-12.large-12.columns
-								%strong
-									= message.sender.username
-								.right= message.created_at.strftime("%d %B %Y, %H:%M")
-						.row
-							.small-12.large-12.columns
-								= message.body.gsub(/\n/,"<br/>").html_safe
-								%hr
+						.panel{ class: message.sender_id == current_user.id ? "white_background" : "" }
+							.row
+								.small-12.large-12.columns
+									%strong{ style: "font-size: 120%" }
+										= message.sender.username
+									.right{ style: "font-size: 90%" }= message.created_at.strftime("%d %B %Y, %H:%M")
+							.row{ style: "margin-top: 10px;" }
+								.small-12.large-12.columns
+									= message.body.gsub(/\n/,"<br/>").html_safe
+									
 					.row
 						.small-12.large-12.columns
 							- unless @conversation.messages.first.sender_id == @admin_user.id

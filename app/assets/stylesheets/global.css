@@ -158,3 +158,11 @@ tr[data-link] {
   width: 120px;
   height: 120px;
 }
+
+.bold {
+  font-weight: bold;
+}
+
+.white_background {
+  background-color: white;
+}

@@ -1,11 +1,16 @@
-%tr
-	%td= link_to truncate(conversation.subject, length: 30, omission: '...'), conversation_path(conversation, box: params[:box] || 'inbox')
+%tr{ class: conversation.is_unread?(current_user) ? "bold" : "", "data-link" => conversation_path(conversation, box: params[:box] || 'inbox') }
+	%td= truncate(conversation.subject, length: 30, omission: '...')
 	%td= truncate(conversation.last_message.body, length: 50, omission: '...')
 	%td= conversation.last_message.created_at.strftime("%d %B %Y, %H:%M")
 	%td
 		- if conversation.is_trashed?(current_user)
 			= link_to 'Restore', restore_conversation_path(conversation), method: :post
 		- else
-			= link_to 'Move to trash', conversation_path(conversation), method: :delete
-			- if conversation.is_unread?(current_user)
-				= link_to 'Mark as read', mark_as_read_conversation_path(conversation), method: :post
+			= link_to conversation_path(conversation), method: :delete, :'data-tooltip' => "", :'aria-haspopup' => "true", class: "has-tip", title:"Mettre à la corbeille" do
+				%i.fa.fa-trash{ style: "font-size: 1.3em" }
+
+- content_for :scripts do
+	:javascript
+		$("tr[data-link]").click(function() {
+		  window.location = $(this).data("link");
+		})
