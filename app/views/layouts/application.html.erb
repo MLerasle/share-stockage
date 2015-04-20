@@ -49,6 +49,12 @@
 				  <a href="#" class="close">&times;</a>
 				</div>
 			<% end %>
+			<% unless alert.nil? %>
+				<div data-alert class="alert-box alert radius">
+					<%= alert %>
+					<a href="#" class="close">&times;</a>
+				</div>
+			<% end %>
 		</div>
 		
 		
