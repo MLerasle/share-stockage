@@ -100,7 +100,7 @@ class ContractPdf < Prawn::Document
       horizontal_rule
       move_down 25
     end
-    text "Je soussigné(e), .........................................., ai examiné attentivement l’état de l’espace et confirme qu’il est fidèlement décrit ci-dessus. Je prends la responsabilité de cet espace et m’engage à le restituer dans l’état initial, à la date indiquée sur ce contrat. J’autorise irrévocablement Toque et Stocke à prélever sur ma carte bancaire toute somme due au propriétaire au titre du contrat de location, dont les clauses détaillées figurent sur la page #, et toute somme due à Toque et Stocke au titre des conditions générales du site.", size: 8
+    text "Je soussigné(e), .........................................., ai examiné attentivement l’état de l’espace et confirme qu’il est fidèlement décrit ci-dessus. Je prends la responsabilité de cet espace et m’engage à le restituer dans l’état initial, à la date indiquée sur ce contrat. J’autorise irrévocablement Sharing Space à prélever sur ma carte bancaire toute somme due au propriétaire au titre du contrat de location, dont les clauses détaillées figurent sur la page #, et toute somme due à Sharing Space au titre des conditions générales du site.", size: 8
     move_down 15
     bounding_box([0, 200], width: 240, height: 20) do
       transparent(0) { stroke_bounds }
