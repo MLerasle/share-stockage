@@ -6,7 +6,9 @@ class User < ActiveRecord::Base
   validates :accept_cgu, presence: true
   has_many :adverts, dependent: :destroy
   has_many :reservations, dependent: :destroy
-  has_many :evaluations
+  has_many :evaluations, dependent: :destroy
+  has_attached_file :avatar, styles: { thumb: "100x100#" }, default_url: "/images/avatars/:style/user.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
          
@@ -41,5 +43,23 @@ class User < ActiveRecord::Base
       return false if (r.start_date..r.end_date).include?(Date.today)
     end
     true
+  end
+
+  def evaluations_score
+    return 0 if self.total_evaluation == 0
+    total_score = 0.0
+    self.adverts.each do |advert|
+      total_score += advert.evaluations.where(validated: true).sum(:score).to_f
+    end
+    result = (total_score / self.total_evaluation.to_f).to_f.round(1)
+    result = result % 1 == 0 ? result.to_i : result.to_f
+  end
+
+  def total_evaluation
+    total = 0
+    self.adverts.each do |advert|
+      total += advert.evaluation_number
+    end
+    total
   end
 end

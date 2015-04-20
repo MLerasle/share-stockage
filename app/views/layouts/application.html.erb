@@ -39,6 +39,16 @@
 			    </ul>
 				</section>
 			</nav>
+			<%- if current_user and current_user.mailbox.inbox(unread: true).count(:id, distinct: true) > 0 %>
+				<div data-alert class="alert-box success radius">
+					<%= link_to conversations_path, style: "color: white;" do %>
+					  Vous avez
+						<%= current_user.mailbox.inbox(unread: true).count(:id, distinct: true) %>
+						nouveau(x) message(s).
+					<% end %>
+				  <a href="#" class="close">&times;</a>
+				</div>
+			<% end %>
 		</div>
 		
 		

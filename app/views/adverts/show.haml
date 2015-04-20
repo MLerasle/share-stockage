@@ -117,16 +117,20 @@
 				%hr
 				- if @advert.evaluations.where(validated: true).any?
 					- @advert.evaluations.where(validated: true).each do |e|
-						%h5
-							%span{ style: "color:rgb(46,121,168)" }
-								= e.user.username
-							%span{ style: "font-size: 0.8em" }
-								le
-								= e.created_at.strftime("%d/%m/%y")
+						.row
+							.small-2.large-2.columns
+								= image_tag e.user.avatar(:thumb)
+							.small-10.large-10.columns
+								%h5
+									%span{ style: "color:rgb(46,121,168)" }
+										= e.user.username
+									%span{ style: "font-size: 0.8em" }
+										le
+										= e.created_at.strftime("%d/%m/%y")
 							
-						%h6= e.comment
-						- unless e == @advert.evaluations.last
-							%hr
+								%h6= e.comment
+								- unless e == @advert.evaluations.last
+									%hr
 				- else
 					%h5.subheader Il n'y a actuellement aucun commentaire pour cet espace.
 								
@@ -165,15 +169,26 @@
 						Véfifier les disponibilités de l'espace dans la section "Calendrier" pour que votre demande puisse aboutir!
 					
 			.panel
-				%h3 Plus de renseignements
+				%h3 Propriétaire
 				%hr
-				- if current_user
-					= link_to "Contacter le propriétaire", '#', data: {'reveal-id' => 'contactModal'}, class: "button radius expand"
-					#contactModal.reveal-modal{"data-reveal" => ""}
-						= render partial: 'messages/new'
-						%a.close-reveal-modal ×
-				- else
-					= link_to "Me connecter pour contacter le propriétaire", new_user_session_path, class: "button radius expand"
+				.row
+					.small-4.large-4.columns
+						= image_tag @advert.user.avatar(:thumb)
+					.small-8.large-8.columns
+						%h5
+							%strong= @advert.user.username
+						%h6{ style: "margin-top: 20px" }
+							Evaluation:
+							%span#user_star
+				.row{ style: "margin-top: 30px" }
+					.small-12.large-12.columns
+						- if current_user
+							= link_to "Contacter le propriétaire", '#', data: {'reveal-id' => 'contactModal'}, class: "button radius expand"
+							#contactModal.reveal-modal{"data-reveal" => ""}
+								= render partial: 'messages/new'
+								%a.close-reveal-modal ×
+						- else
+							= link_to "Me connecter pour contacter le propriétaire", new_user_session_path, class: "button radius expand"
 					
 - content_for :scripts do
 	:javascript
@@ -222,5 +237,10 @@
 		$('#star').raty({
 			readOnly: true,
 			score: "#{@advert.evaluation_average}",
+			path: '/assets'
+		});
+		$('#user_star').raty({
+			readOnly: true,
+			score: "#{@advert.user.evaluations_score}",
 			path: '/assets'
 		});
