@@ -1,0 +1,13 @@
+%section#main-content
+	.row.body.sign-in
+		.large-7.small-12.columns.large-centered.small-centered
+			.create-account
+				.row.sign-up
+					.large-12.small-12.columns
+						%h1.subheader Renvoyer les instructions de confirmation
+						%hr
+						%h6.subheader Veuillez entrer votre adresse email, nous vous renverrons les instructions pour valider votre compte.
+						%br
+						= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+							= f.email_field :email, autofocus: true
+							= f.submit "Valider", class: "button radius"
