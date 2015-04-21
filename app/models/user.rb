@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   validates :accept_cgu, presence: true
   has_many :adverts, dependent: :destroy
   has_many :reservations, dependent: :destroy
-  has_many :evaluations, dependent: :destroy
+  has_many :evaluations
   has_attached_file :avatar, styles: { thumb: "100x100#" }, default_url: "/images/avatars/:style/user.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   devise :database_authenticatable, :registerable, :confirmable,

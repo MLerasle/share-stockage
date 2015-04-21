@@ -22,7 +22,9 @@ class Advert < ActiveRecord::Base
   default_value_for :elevator, false
   default_value_for :access_type, 0
   default_value_for :complete, false
-  default_value_for :slug, ""
+  default_value_for :slug do
+    SecureRandom.uuid
+  end
   default_value_for :from_date do
     Date.today
   end
@@ -35,7 +37,7 @@ class Advert < ActiveRecord::Base
 
   def slug_candidates
     [
-      [:title, :id],
+      [:title],
       [:title, :address],
       [:title, :address, :type_name],
       [:title, :address, :type_name, :id]
