@@ -38,7 +38,7 @@ class ReservationsController < ApplicationController
   end
   
   def validate
-    return if current_user != @advert.user or @reservation.validated
+    return redirect_to user_path(current_user) if current_user != @advert.user or @reservation.validated
     if @reservation.update_attributes(validated: true)
       ValidateReservationEmail.perform_async(@reservation.user_id, @reservation.id)
       FeedbackEmail.perform_at((@reservation.end_date.to_time + 10.hours).to_i, @reservation.advert_id, @reservation.advert.user_id, @reservation.user_id)
@@ -52,7 +52,7 @@ class ReservationsController < ApplicationController
   end
   
   def cancel
-    return if current_user != @advert.user or @reservation.validated
+    return redirect_to user_path(current_user) if current_user != @advert.user or @reservation.validated
     if @reservation.update_attributes(canceled: true)
       recipients = User.where(id: @reservation.user_id)
       admin_user.send_message(recipients, @reservation.email_cancel[:body], @reservation.email_cancel[:subject]).conversation
@@ -70,7 +70,7 @@ class ReservationsController < ApplicationController
   end
   
   def update
-    return if current_user != @reservation.user or @reservation.validated
+    return redirect_to user_path(current_user) if current_user != @reservation.user or @reservation.validated
     if @reservation.update_attributes(reservation_params)
       recipients = User.where(id: @advert.user_id)
       admin_user.send_message(recipients, @reservation.email_update[:body], @reservation.email_update[:subject]).conversation
