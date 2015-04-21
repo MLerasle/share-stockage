@@ -119,11 +119,17 @@
 					- @advert.evaluations.where(validated: true).each do |e|
 						.row
 							.small-2.large-2.columns
-								= image_tag e.user.avatar(:thumb)
+								- if User.exists?(e.user_id)
+									= image_tag e.user.avatar(:thumb)
+								- else
+									= image_tag "user.png"
 							.small-10.large-10.columns
 								%h5
 									%span{ style: "color:rgb(46,121,168)" }
-										= e.user.username
+										- if User.exists?(e.user_id)
+											= e.user.username
+										- else
+											Anonyme
 									%span{ style: "font-size: 0.8em" }
 										le
 										= e.created_at.strftime("%d/%m/%y")

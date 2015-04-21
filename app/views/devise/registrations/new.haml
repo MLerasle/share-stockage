@@ -4,7 +4,14 @@
 			.create-account
 				.row.sign-up
 					.large-12.small-12.columns
-					
+						- unless notice.nil?
+							.alert-box.info.radius{ "data-alert" => "" }
+								= notice
+								%a{ href: "#", class: "close" } &times;
+						- unless alert.nil?
+							.alert-box.alert.radius{ "data-alert" => "" }
+								= alert
+								%a{ href: "#", class: "close" } &times;
 						%h1.subheader Inscription
 						%hr			
 						= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'mean'}) do |f|
