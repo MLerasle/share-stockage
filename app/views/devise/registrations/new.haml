@@ -20,21 +20,31 @@
 									%canvas#myCanvas{ width: 100, height: 100 }
 									#user_avatar= image_tag "user.png"
 									= f.file_field :avatar, label: false, id: "pictureInput"
-									
-							= f.label "Email", nil, class: 'required'
-							= f.email_field :email, autofocus: true, label: false
-              
-							= f.label "Nom d'utilisateur", nil, class: 'required'
-							= f.text_field :username, label: false
-						
-							= f.label "Mot de passe", nil, class: 'required'
-							= f.password_field :password, autocomplete: "off", placeholder: "8 caractères minimum", label: false
-							
-							= f.label "Confirmer le mot de passe", nil, class: 'required'
-							= f.password_field :password_confirmation, autocomplete: "off", placeholder: "8 caractères minimum", label: false
-							
-							= f.check_box :accept_cgu, label: false, style: "float:left; margin-top: 5px; margin-right:10px"
-							= "J'ai lu et j'accepte les <a href='/cgu'>conditions générales d'utilisation</a>".html_safe
+							.row
+								.small-12.medium-6.large-6.columns
+									= f.label "Prénom", nil, class: 'required'
+									= f.text_field :first_name, autofocus: true, label: false
+								.small-12.medium-6.large-6.columns
+									= f.label "Nom", nil, class: 'required'
+									= f.text_field :last_name, label: false
+							.row
+								.small-12.medium-6.large-6.columns
+									= f.label "Email", nil, class: 'required'
+									= f.email_field :email, label: false
+								.small-12.medium-6.large-6.columns
+									= f.label "Choisissez un nom d'utilisateur", nil, class: 'required'
+									= f.text_field :username, label: false
+							.row
+								.small-12.medium-6.large-6.columns
+									= f.label "Mot de passe", nil, class: 'required'
+									= f.password_field :password, autocomplete: "off", placeholder: "8 caractères minimum", label: false
+								.small-12.medium-6.large-6.columns
+									= f.label "Confirmer le mot de passe", nil, class: 'required'
+									= f.password_field :password_confirmation, autocomplete: "off", placeholder: "8 caractères minimum", label: false
+							.row
+								.small-12.large-12.columns
+									= f.check_box :accept_cgu, label: false, style: "float:left; margin-top: 5px; margin-right:10px"
+									= "J'ai lu et j'accepte les <a href='/cgu'>conditions générales d'utilisation</a>".html_safe
 							
 							= f.submit "Valider", class: "button radius right"
 						
