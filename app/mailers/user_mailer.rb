@@ -1,12 +1,12 @@
 class UserMailer < ActionMailer::Base
   default from: ENV["contact_email"]
   
-  def prereservation_email(receiver, advert)
-    @receiver = receiver
-    @advert = advert
-    @url = "http://localhost:8080/adverts/#{@advert.id}/edit"
-    mail(to: @receiver.email, subject: "Sharing Space - Demande de réservation pour votre annonce #{@advert.title}")
-  end
+  # def prereservation_email(receiver, advert)
+  #   @receiver = receiver
+  #   @advert = advert
+  #   @url = "http://localhost:8080/adverts/#{@advert.id}/edit"
+  #   mail(to: @receiver.email, subject: "Sharing Space - Demande de réservation pour votre annonce #{@advert.title}")
+  # end
   
   def validate_reservation(receiver, reservation)
     @receiver = receiver
@@ -31,11 +31,11 @@ class UserMailer < ActionMailer::Base
     mail(to: @receiver.email, subject: "Sharing Space - Modification d'une réservation concernant votre annonce #{@advert.title}")
   end
   
-  def contact_announcer(user, subject, body)
-    @receiver = user
-    @body = body
-    mail(to: @receiver.email, subject: "Sharing Space - #{subject}")
-  end
+  # def contact_announcer(user, subject, body)
+  #   @receiver = user
+  #   @body = body
+  #   mail(to: @receiver.email, subject: "Sharing Space - #{subject}")
+  # end
 
   def reservation_feedback(advert, reservation_user)
     @advert = advert

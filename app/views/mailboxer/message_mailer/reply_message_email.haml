@@ -1,0 +1,17 @@
+!!!
+%html
+	%head
+		%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+	%body
+		%p
+			Bonjour,
+		%p	
+			Vous avez reçu une réponse à votre message "
+			= @subject
+			\" sur Sharing Space.
+		%p Rendez-vous sur votre messagerie personnelle pour consulter le message.
+		%p= link_to "Accéder à mon compte", root_url
+		%p
+			Meilleures salutations,
+			%br
+			= link_to "Sahring Space", root_url

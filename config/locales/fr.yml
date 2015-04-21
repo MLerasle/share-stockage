@@ -51,6 +51,10 @@ fr:
     failure:
       user:
         invalid: "Nous n'avons pas pu vous authentifier. Veuillez vérifier que vos données sont exactes."
+  mailboxer:
+    message_mailer:
+      subject_new: "Sharing Space - Vous avez un nouveau message"
+      subject_reply: "Sharing Space - Vous avez reçu une réponse à votre message"
   admin:
     js:
       true: Vrai
