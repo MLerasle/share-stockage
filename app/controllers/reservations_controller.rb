@@ -40,7 +40,8 @@ class ReservationsController < ApplicationController
   def validate
     return if current_user != @advert.user or @reservation.validated
     if @reservation.update_attributes(validated: true)
-      # FeedbackEmail.perform_at((@reservation.end_date.to_time + 10.hours).to_i, @reservation.advert_id, @reservation.advert.user_id, @reservation.user_id)
+      ValidateReservationEmail.perform_async(@reservation.user_id, @reservation.id)
+      FeedbackEmail.perform_at((@reservation.end_date.to_time + 10.hours).to_i, @reservation.advert_id, @reservation.advert.user_id, @reservation.user_id)
       recipients = User.where(id: @reservation.user_id)
       admin_user.send_message(recipients, @reservation.email_validate[:body], @reservation.email_validate[:subject]).conversation
       flash[:notice] = "La réservation a bien été validée. Veuillez consulter vos mails pour obtenir un exemplaire du contrat de location."

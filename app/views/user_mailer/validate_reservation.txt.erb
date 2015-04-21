@@ -1,0 +1,16 @@
+Bonjour,
+
+Nous avons le plaisir de vous informer que votre réservation concernant l'annonce <%= @advert.title %> a été validée par le propriétaire.
+
+Rendez-vous désormais sur le site pour imprimer un exemplaire du contrat de location en cliquant sur le lien ci-dessous:
+
+<%= link_to "Télécharger le contrat", @contract_url %>
+
+Vous pouvez également à tout moment laisser une évaluation pour cette annonce en vous rendant sur cette page:
+
+<%= link_to "Laisser une commentaire", @advert_url %>
+
+Nous vous remercions d'avoir choisi Sharing Space.
+
+Meilleures salutations,
+<%= link_to "Sharing Space", root_url %>
