@@ -28,7 +28,7 @@
 					- if @user.adverts.any?
 						%table#adverts_table
 							%tbody
-								- @user.adverts.each do |advert|
+								- @user.adverts.order("id DESC").each do |advert|
 									%tr{ "data-link" => advert_path(advert) }
 										= render partial: 'adverts/advert_line', locals: { advert: advert }
 									%tr

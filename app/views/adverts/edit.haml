@@ -19,7 +19,7 @@
 							.tabs-content
 								#panel2.content.active
 									#reservations_section
-										- if @advert.reservations_waiting_validation.any?
+										- if @advert.reservations.pending.any?
 											%p
 												%i.fa.fa-exclamation-triangle
 												Avant de valider une réservation, assurez-vous que votre espace est disponible à ces dates en consultant la section "Calendrier". Autrement dit, veillez à ce que 2 réservations ne se chevauchent pas. En cas de problème, veuillez contacter le demandeur.
@@ -33,7 +33,7 @@
 														%th Valider la réservation
 														%th Annuler la réservation
 												%tbody
-													- @advert.reservations_waiting_validation.each do |r|
+													- @advert.reservations.pending.each do |r|
 														%tr{ id: "row-#{r.id}" }
 															%td= r.start_date.strftime("%d/%m/%Y")
 															%td= r.end_date.strftime("%d/%m/%Y")

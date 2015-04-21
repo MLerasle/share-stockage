@@ -170,7 +170,7 @@ class Advert < ActiveRecord::Base
   end
   
   def reservations_waiting_validation
-    self.reservations.where(validated: false)
+    self.reservations.where(validated: false, canceled: false)
   end
   
   def validated_reservations

@@ -27,7 +27,7 @@
 					- if @user.reservations.pending_or_running.any?
 						%table#adverts_table{ style: "width: 100%" }
 							%tbody
-								- @user.reservations.pending_or_running.each do |r|
+								- @user.reservations.pending_or_running.order("id DESC").each do |r|
 									%tr{ "data-link" => advert_path(r.advert) }
 										= render partial: 'adverts/advert_line', locals: { advert: r.advert }
 									%tr

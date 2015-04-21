@@ -2,6 +2,7 @@ class Reservation < ActiveRecord::Base
   belongs_to :user
   belongs_to :advert
   default_value_for :validated, false
+  default_value_for :canceled, false
   validates :start_date, presence: true
   validates :end_date, presence: true
 
@@ -15,11 +16,11 @@ class Reservation < ActiveRecord::Base
     end
   
     def pending
-      where(validated: false)
+      where(validated: false, canceled: false)
     end
   
     def pending_or_running
-      where("(reservations.validated = ?) or (reservations.validated = ? and end_date >= ?)", false, true, Date.today)
+      where("(reservations.validated = ? and reservations.canceled = ?) or (reservations.validated = ? and end_date >= ?)", false, false, true, Date.today)
     end
   end
   

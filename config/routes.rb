@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         get 'preview_validate'
         get 'preview_cancel'
         put 'validate'
+        put 'cancel'
       end
       get 'pending', on: :collection
     end

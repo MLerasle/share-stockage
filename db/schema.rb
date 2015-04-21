@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150419152847) do
+ActiveRecord::Schema.define(version: 20150421103946) do
 
   create_table "adverts", force: true do |t|
     t.string   "address"
@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(version: 20150419152847) do
     t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "canceled",   default: false
   end
 
   create_table "users", force: true do |t|

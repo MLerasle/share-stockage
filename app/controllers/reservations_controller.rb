@@ -1,7 +1,7 @@
 class ReservationsController < ApplicationController
   before_action :authenticate_user!, except: :index
   before_filter :find_advert
-  before_filter :find_reservation, only: [:edit, :update, :preview_validate, :preview_cancel, :destroy, :validate]
+  before_filter :find_reservation, only: [:edit, :update, :preview_validate, :preview_cancel, :destroy, :validate, :cancel]
   
   def index
     @reservations = @advert.validated_reservations.json_format
@@ -38,7 +38,7 @@ class ReservationsController < ApplicationController
   end
   
   def validate
-    return unless current_user == @advert.user
+    return if current_user != @advert.user or @reservation.validated
     if @reservation.update_attributes(validated: true)
       # FeedbackEmail.perform_at((@reservation.end_date.to_time + 10.hours).to_i, @reservation.advert_id, @reservation.advert.user_id, @reservation.user_id)
       recipients = User.where(id: @reservation.user_id)
@@ -50,6 +50,18 @@ class ReservationsController < ApplicationController
     redirect_to user_path(current_user)
   end
   
+  def cancel
+    return if current_user != @advert.user or @reservation.validated
+    if @reservation.update_attributes(canceled: true)
+      recipients = User.where(id: @reservation.user_id)
+      admin_user.send_message(recipients, @reservation.email_cancel[:body], @reservation.email_cancel[:subject]).conversation
+      flash[:notice] = "La réservation a bien été annulée. Un email a été envoyé au locataire pour l'en informer."
+    else
+      flash[:alert] = "Une erreur est survenue durant l'annulation de la réservation. Veuillez réessayer s'il vous plaît. Si le problème persiste, n'hésitez pas à contacter le support."
+    end
+    redirect_to user_path(current_user)
+  end
+  
   def preview_cancel
   end
   
@@ -57,7 +69,7 @@ class ReservationsController < ApplicationController
   end
   
   def update
-    return unless current_user == @reservation.user
+    return if current_user != @reservation.user or @reservation.validated
     if @reservation.update_attributes(reservation_params)
       recipients = User.where(id: @advert.user_id)
       admin_user.send_message(recipients, @reservation.email_update[:body], @reservation.email_update[:subject]).conversation
@@ -69,15 +81,15 @@ class ReservationsController < ApplicationController
   end
   
   def destroy
-    return unless current_user == @advert.user or current_user == @reservation.user
-    if @reservation.destroy
-      recipients = User.where(id: @reservation.user_id)
-      admin_user.send_message(recipients, @reservation.email_cancel[:body], @reservation.email_cancel[:subject]).conversation
-      flash[:notice] = "La réservation a bien été annulée. Un email a été envoyé au locataire pour l'en informer."
-    else
-      flash[:alert] = "Une erreur est survenue durant l'annulation de la réservation. Veuillez réessayer s'il vous plaît. Si le problème persiste, n'hésitez pas à contacter le support."
-    end
-    redirect_to edit_user_registration_path(current_user)
+    # return unless current_user == @advert.user or current_user == @reservation.user
+    # if @reservation.destroy
+    #   recipients = User.where(id: @reservation.user_id)
+    #   admin_user.send_message(recipients, @reservation.email_cancel[:body], @reservation.email_cancel[:subject]).conversation
+    #   flash[:notice] = "La réservation a bien été annulée. Un email a été envoyé au locataire pour l'en informer."
+    # else
+    #   flash[:alert] = "Une erreur est survenue durant l'annulation de la réservation. Veuillez réessayer s'il vous plaît. Si le problème persiste, n'hésitez pas à contacter le support."
+    # end
+    # redirect_to edit_user_registration_path(current_user)
   end
   
   private
