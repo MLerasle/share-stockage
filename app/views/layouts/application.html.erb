@@ -28,8 +28,6 @@
 						<% if user_signed_in? %>
 							<li><%= link_to "Mon compte", user_path(current_user) %></li>
 							<li class="divider"></li>
-							<li><%= link_to "Faire un don", new_charge_path, method: :get %></li>
-							<li class="divider"></li>
 							<li><%= link_to "Déconnexion", destroy_user_session_path, "data-method" => :delete %></li>
 						<% else %>
 				      <li><%= link_to "Connexion", new_user_session_path %></li>
@@ -97,6 +95,7 @@
 								<p><%= link_to "FAQ", faq_path %></p>
 								<p><%= link_to "Conditions générales d'utilisation", cgu_path %></p>
 								<p><%= link_to "Modèle de lettre pour la régie", '/files/lettre_agence_model.pdf', target: '_blank' %></p>
+								<p><%= link_to "Faire un don", new_charge_path, method: :get %></p>
 		        </div>
 		    </div> <!-- END ROW -->
 		</footer> <!-- END FOOTER -->
