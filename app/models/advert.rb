@@ -12,7 +12,7 @@ class Advert < ActiveRecord::Base
   has_many :evaluations
   has_many :pictures, dependent: :destroy
   geocoded_by :address
-  after_validation :geocode, :if => :address_changed?
+  after_validation :geocode, if: :address_changed?
   
   default_value_for :validated, false
   default_value_for :activated, false
@@ -53,12 +53,13 @@ class Advert < ActiveRecord::Base
   end
 
   def should_generate_new_friendly_id?
-    title_changed? || address_changed? || advert_type_changed? || super
+    return false unless self.validated
+    validated_changed? || title_changed? || address_changed? || advert_type_changed? || price_changed? || super
   end
   
   def required_for_step?(step)
     # All fields are required if no form step is present
-    return true if form_step.nil?
+    # return true if form_step.nil?
     # All fields from previous steps are required if the
     # step parameter appears before or we are on the current step
     return true if self.form_steps.index(step.to_s) == self.form_steps.index(form_step)
