@@ -48,6 +48,9 @@ GEM
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.10)
+    better_errors (1.1.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
     builder (3.2.2)
     capistrano (3.3.5)
       capistrano-stats (~> 1.1.0)
@@ -80,6 +83,7 @@ GEM
       activesupport (>= 3.0)
     cocaine (0.5.7)
       climate_control (>= 0.0.3, < 1.0)
+    coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -163,6 +167,8 @@ GEM
       pdf-core (~> 0.5.0)
       ttfunk (~> 1.4.0)
     prawn-table (0.2.1)
+    quiet_assets (1.0.3)
+      railties (>= 3.1, < 5.0)
     rack (1.5.2)
     rack-pjax (0.8.0)
       nokogiri (~> 1.5)
@@ -278,6 +284,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  better_errors
   capistrano (~> 3.3.0)
   capistrano-bundler (~> 1.1)
   capistrano-passenger
@@ -304,6 +311,7 @@ DEPENDENCIES
   paperclip!
   prawn
   prawn-table
+  quiet_assets
   rails (= 4.1.7)
   rails_admin
   sass-rails

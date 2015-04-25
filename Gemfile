@@ -97,6 +97,8 @@ group :development do
   gem 'capistrano-bundler', '~> 1.1', require: false
   gem 'capistrano-passenger'
   gem 'capistrano-sidekiq'
+  gem "better_errors"
+  gem "quiet_assets"
 end
 
 # Use debugger
