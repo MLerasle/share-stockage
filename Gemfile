@@ -66,9 +66,6 @@ gem 'rails_admin'
 gem 'prawn'
 gem 'prawn-table'
 
-# Payment
-gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
-
 # Background jobs
 gem 'sinatra', require: false
 gem 'slim'

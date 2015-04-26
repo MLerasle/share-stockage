@@ -95,7 +95,6 @@
 								<p><%= link_to "FAQ", faq_path %></p>
 								<p><%= link_to "Conditions générales d'utilisation", cgu_path %></p>
 								<p><%= link_to "Modèle de lettre pour la régie", '/files/lettre_agence_model.pdf', target: '_blank' %></p>
-								<p><%= link_to "Faire un don", new_charge_path, method: :get %></p>
 		        </div>
 		    </div> <!-- END ROW -->
 		</footer> <!-- END FOOTER -->
@@ -105,6 +104,9 @@
 		    <div class="row">
 		        <div class="large-6 medium-6 small-12 columns">
 		            <p>&copy; <%= Date.today.year %> Sharing Space - All rights reserved</p>
+		        </div>
+		        <div class="large-6 medium-6 small-12 columns">
+		            <p class="right"><%= render partial: 'pages/paypal_button' %></p>
 		        </div>
 		    </div>
 		</section>
