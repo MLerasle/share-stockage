@@ -50,6 +50,9 @@ gem 'dropzonejs-rails'
 # Paginator
 gem "kaminari"
 
+# Cache
+gem 'dalli'
+
 # Nice urls
 gem 'friendly_id', '~> 5.1.0'
 
