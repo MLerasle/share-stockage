@@ -1,9 +1,9 @@
 <p>Bonjour <%= @resource.username %>!</p>
 
-<p>Bienvenue sur <%= link_to "Sharing Space", root_url %>, la plateforme suisse de stockage entre particuliers.</p>
+<p>Bienvenue sur <%= link_to "Share Stockage", root_url %>, la plateforme suisse de stockage entre particuliers.</p>
 
 <p>La création de votre compte est presque terminée. Veuillez cliquer sur le lien ci-dessous pour valider votre adresse email:</p>
 
 <p><%= link_to 'Confirmer mon adresse email', confirmation_url(@resource, confirmation_token: @token) %></p>
 
-<p>Meilleures salutations.<br/><%= link_to "Sharing Space", root_url %></p>
+<p>Meilleures salutations.<br/><%= link_to "Share Stockage", root_url %></p>

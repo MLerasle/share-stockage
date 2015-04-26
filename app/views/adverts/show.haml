@@ -21,8 +21,8 @@
 					%span#activation_link= link_to @advert.activate_title, activate_advert_path(@advert), method: :put, class: "button radius #{button_color}", remote: true
 				- if @advert.is_deletable?
 					= link_to "Supprimer l'annonce", advert_path(@advert), method: :delete, data: { confirm: "Ètes-vous sûr de vouloir supprimer cette annonce?" }, class: "button radius alert"
-					
-			%hr
+					%hr
+
 			%h2= @advert.title
 			%h4.subheader= "#{@advert.type_name} - #{@advert.volume if @advert.area and @advert.height} m³ - #{@advert.address}"
 			%br
