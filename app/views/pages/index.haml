@@ -29,7 +29,9 @@
 								%span.postfix
 									%i.fa.fa-calendar
 					.large-3.small-6.columns
-						= submit_tag "Rechercher", class: "button radius tiny"
+						= button_tag(type: "submit", class: "button radius tiny") do
+							%i.fa.fa-search
+							Rechercher
 
 %section#main-content
 	.row

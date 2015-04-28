@@ -63,7 +63,7 @@
 									= f.label "Mot de passe actuel (requis pour valider vos changements)", nil, class: "required"
 									= f.password_field :current_password, autocomplete: "off", label: false
 
-									= f.submit "Mettre à jour", class: "button right"
+									= f.submit "Mettre à jour", class: "button right success"
 
 								.row
 									.large-12.small-12.columns
@@ -73,7 +73,7 @@
 										%h6 Attention si vous avez un espace en location ou que vous louez un espace, vous devez attendre la fin de la réservation en cours pour supprimer votre compte!
 										%h6 Toutes vos données et vos annonces seront supprimées. Cette action est irrévocable.
 										%br
-										= link_to "Supprimer mon compte", registration_path(resource_name), data: { confirm: "Êtes-vous sûr de vouloir supprimer votre compte?" }, method: :delete, class: "button radius expand"
+										= link_to "Supprimer mon compte", registration_path(resource_name), data: { confirm: "Êtes-vous sûr de vouloir supprimer votre compte?" }, method: :delete, class: "button radius expand alert"
 
 - content_for :scripts do
 	:javascript
