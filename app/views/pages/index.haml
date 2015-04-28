@@ -37,7 +37,10 @@
 			.row
 				%h3.subheader{ style: "text-align:center; margin-bottom: 40px;" } Share Stockage: Trouvez un garde-meuble plus proche et moins cher
 			.row
-				.small-12.medium-9.large-9.large-centered.small-centered.medium-centered.columns
+				.small-12.medium-6.large-5.hide-for-small.columns
+					= image_tag "share_stockage_screen.png"
+				-#.small-12.medium-9.large-9.large-centered.small-centered.medium-centered.columns
+				.small-12.medium-6.large-6.columns
 					%h4
 						%i.fa.fa-lightbulb-o{ style: "margin-right: 10px" }
 						Economique
@@ -58,70 +61,12 @@
 				%hr.margin-bottom-40px
 				%h3.subheader{ style: "text-align:center; margin-bottom: 40px;" } Avec Share Stockage, la location de cave, box ou garage est simple et rapide
 			
-			%h3 Vous proposez un espace?
-			%br
-			.row{ "data-equalizer" => "" }
-				.large-3.medium-6.small-12.columns
-					.panel{ "data-equalizer-watch" => "" }
-						%h3{ style: "color:rgb(210, 63, 47)" }
-							%i.fa.fa-edit
-							Créez
-						%hr
-						%p Proposez votre espace gratuitement en 2 minutes en cliquant sur "Publier une annonce" dans le menu en haut à droite.
-				.large-3.medium-6.small-12.columns
-					.panel{ "data-equalizer-watch" => "" }
-						%h3{ style: "color:rgb(210, 63, 47)" }
-							%i.fa.fa-comments
-							Communiquez
-						%hr
-						%p Répondez aux demandes de renseignements que vous envoient les utilisateurs depuis la messagerie interne du site.
-				.large-3.medium-6.small-12.columns
-					.panel{ "data-equalizer-watch" => "" }
-						%h3{ style: "color:rgb(210, 63, 47)" }
-							%i.fa.fa-check
-							Validez
-						%hr
-						%p Quand un utilisateur est intéressé, il préréserve. Vous pouvez alors valider ou non la réservation depuis votre espace propriétaire.
-				.large-3.medium-6.small-12.columns
-					.panel{ "data-equalizer-watch" => "" }
-						%h3{ style: "color:rgb(210, 63, 47)" }
-							%i.fa.fa-home
-							Accueillez
-						%hr
-						%p Signez le contrat avec le locataire et obtenez de bonnes appréciations pour augmenter vos chances de relouer!
-			
-			%hr	
-			%h3 Vous cherchez un espace?
-			%br
-			.row{ "data-equalizer" => "" }
-				.large-3.medium-6.small-12.columns
-					.panel{ "data-equalizer-watch" => "" }
-						%h3{ style: "color:rgb(84, 151, 86)" }
-							%i.fa.fa-search
-							Cherchez
-						%hr
-						%p Entrez le lieu et les dates qui vous intéressent puis choisissez l'espace qui vous convient le mieux!
-				.large-3.medium-6.small-12.columns
-					.panel{ "data-equalizer-watch" => "" }
-						%h3{ style: "color:rgb(84, 151, 86)" }
-							%i.fa.fa-envelope
-							Contactez
-						%hr
-						%p Si des informations vous manquent, contactez directement le propriétaire en vous rendant sur l'annonce de votre choix puis en cliquant sur "Contacter le propriétaire"
-				.large-3.medium-6.small-12.columns
-					.panel{ "data-equalizer-watch" => "" }
-						%h3{ style: "color:rgb(84, 151, 86)" }
-							%i.fa.fa-book
-							Réservez
-						%hr
-						%p Votre choix est fait, envoyez une demande de réservation au propriétaire.
-				.large-3.medium-6.small-12.columns
-					.panel{ "data-equalizer-watch" => "" }
-						%h3{ style: "color:rgb(84, 151, 86)" }
-							%i.fa.fa-suitcase
-							Déposez
-						%hr
-						%p Signez le contrat avec le propriétaire et déposez vos affaires en toute tranquillité!
+			.row
+				.small-12.large-10.large-centered.small-centered.medium-centered.columns
+					= link_to "Publier une annonce maintenant", adverts_path, method: :post, class: "button radius expand success"
+			.row
+				.small-12.large-10.large-centered.small-centered.medium-centered.columns
+					= link_to "Expliquez moi comment ça marche", help_path, class: "button radius expand"
 						
 - content_for :scripts do
 	:javascript

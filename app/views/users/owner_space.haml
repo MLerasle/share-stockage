@@ -42,7 +42,7 @@
 											= link_to "Gérer les réservations", edit_advert_path(advert), class: "button radius small"
 											- if advert.valid?
 												- button_color = advert.activated ? "alert small" : "success small"
-												%span#activation_link= link_to advert.activate_title, activate_advert_path(advert), method: :put, remote: true, class: "button radius #{button_color}"
+												%span{ id: "activation_link_#{advert.id}" }= link_to advert.activate_title, activate_advert_path(advert), method: :put, remote: true, class: "button radius #{button_color}"
 										%td
 											- if advert.reservations.pending.any?
 												%span.right{ style: "color: red" }

@@ -14,13 +14,13 @@
 		.small-12.large-12.columns
 			- if current_user == @advert.user
 				%h4 Que souhaitez-vous faire?
-				= link_to "Accéder à mon compte", user_path(current_user), class: "button radius success"
-				= link_to "Modifier l'annonce", advert_step_path(@advert, Advert.form_steps.first), class: "button radius"
+				= link_to "Accéder à mon compte", user_path(current_user), class: "button radius success small"
+				= link_to "Modifier l'annonce", advert_step_path(@advert, Advert.form_steps.first), class: "button radius small"
 				- if @advert.valid?
 					- button_color = @advert.activated ? "alert" : "success"
-					%span#activation_link= link_to @advert.activate_title, activate_advert_path(@advert), method: :put, class: "button radius #{button_color}", remote: true
+					%span{ id: "activation_link_#{@advert.id}" }= link_to @advert.activate_title, activate_advert_path(@advert), method: :put, class: "button radius #{button_color} small", remote: true
 				- if @advert.is_deletable?
-					= link_to "Supprimer l'annonce", advert_path(@advert), method: :delete, data: { confirm: "Ètes-vous sûr de vouloir supprimer cette annonce?" }, class: "button radius alert"
+					= link_to "Supprimer l'annonce", advert_path(@advert), method: :delete, data: { confirm: "Ètes-vous sûr de vouloir supprimer cette annonce?" }, class: "button radius alert small"
 					%hr
 
 			%h2= @advert.title
