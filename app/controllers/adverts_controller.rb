@@ -3,7 +3,8 @@ class AdvertsController < ApplicationController
   before_filter :find_advert, except: [:index, :new, :create, :preview]
   
   def index
-    @adverts = Advert.where(validated: true, activated: true).order("created_at DESC").page(params[:page]).per(12)
+    params[:filter][:sorting] ||= "created_at DESC"
+    @adverts = Advert.where(validated: true, activated: true).order(params[:filter][:sorting]).page(params[:page]).per(10)
     @adverts = @adverts.for_filter(params[:filter]) unless params[:filter].blank?
     my_adverts_address = []
     @adverts.each do |a|

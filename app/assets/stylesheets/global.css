@@ -127,6 +127,10 @@ tr[data-link] {
   margin-bottom: 10px;
 }
 
+#adverts_table tr:hover {
+  box-shadow: 0px 0px 5px #888888;
+}
+
 #adverts_table tr:last-child {
   border-bottom: 1px solid white;
 }
