@@ -34,6 +34,7 @@
 									%h4{ style: "color:rgb(185, 185, 185)" }
 										%i.fa.fa-file-image-o
 										Photos
+							= link_to "Retour à mon compte", owner_space_user_path(current_user), class: "button radius expand"
 						- else
 							.panel{ style: "background-color:white; border: 1px solid rgb(84, 151, 86)" }
 								%h4{ style: "color:rgb(84, 151, 86)" }
