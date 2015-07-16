@@ -27,6 +27,7 @@ class ReservationsController < ApplicationController
     if @reservation.save
       recipients = User.where(id: @advert.user_id)
       admin_user.send_message(recipients, @reservation.email_ask[:body], @reservation.email_ask[:subject]).conversation
+      NotificationEmail.perform_async(@advert.user_id)
       flash[:notice] = "Votre demande de réservation a bien été envoyée au propriétaire."
     else
       flash[:alert] = "Les données saisies pour votre réservation sont incorrectes. Veuillez vérifier que les dates choisies sont valides et réessayer."
@@ -56,6 +57,7 @@ class ReservationsController < ApplicationController
     if @reservation.update_attributes(canceled: true)
       recipients = User.where(id: @reservation.user_id)
       admin_user.send_message(recipients, @reservation.email_cancel[:body], @reservation.email_cancel[:subject]).conversation
+      NotificationEmail.perform_async(@reservation.user_id)
       flash[:notice] = "La réservation a bien été annulée. Un email a été envoyé au locataire pour l'en informer."
     else
       flash[:alert] = "Une erreur est survenue durant l'annulation de la réservation. Veuillez réessayer s'il vous plaît. Si le problème persiste, n'hésitez pas à contacter le support."
@@ -74,6 +76,7 @@ class ReservationsController < ApplicationController
     if @reservation.update_attributes(reservation_params)
       recipients = User.where(id: @advert.user_id)
       admin_user.send_message(recipients, @reservation.email_update[:body], @reservation.email_update[:subject]).conversation
+      NotificationEmail.perform_async(@advert.user_id)
       flash[:notice] = "Votre demande de modification concernant votre réservation a bien été envoyée au propriétaire."
     else
       flash[:alert] = "Une erreur est survenue durant la mise à jour de votre réservation. Veuillez réessayer s'il vous plaît. Si le problème persiste, n'hésitez pas à contacter le support."

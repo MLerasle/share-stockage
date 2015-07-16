@@ -8,7 +8,7 @@
 						%hr
 				.row
 					.large-4.medium-4.small-4.columns
-						- if @advert.valid?
+						- if @advert.validated
 							= link_to advert_step_path(@advert, Advert.form_steps[0]), class: "wizard_link" do
 								.panel{ style: "background-color:white; border: 1px solid rgb(84, 151, 86)" }
 									%h4{ style: "color:rgb(84, 151, 86)" }
@@ -97,9 +97,10 @@
 							.row
 								.large-12.medium-12.small-12.columns
 									%h6#volume
-										Ce qui équivaut à un volume de
-										= @advert.volume if @advert.area and @advert.height
-										m³
+										- if @advert.area and @advert.height
+											Ce qui équivaut à un volume de
+											= @advert.volume
+											m³
 							%hr
 							= f.submit "Suivant", class: "button right small"
 

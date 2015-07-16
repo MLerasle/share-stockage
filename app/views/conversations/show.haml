@@ -40,7 +40,7 @@
 												= message.sender.username
 											- else
 												Utilisateur désinscrit
-										.right{ style: "font-size: 90%" }= message.created_at.strftime("%d %B %Y, %H:%M")
+										.right{ style: "font-size: 90%" }= message.created_at.strftime("%d/%m/%Y, %H:%M")
 									%p= message.body.gsub(/\n/,"<br/>").html_safe
 									
 					.row

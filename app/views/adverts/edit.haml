@@ -1,4 +1,14 @@
 %section#main-content
+	.row
+		.small-12.large-12.columns
+			- unless notice.nil?
+				.alert-box.info.radius{ "data-alert" => "" }
+					= notice
+					%a{ href: "#", class: "close" } &times;
+			- unless alert.nil?
+				.alert-box.alert.radius{ "data-alert" => "" }
+					= alert
+					%a{ href: "#", class: "close" } &times;
 	.row.body.sign-in
 		.large-10.small-12.columns.large-centered.small-centered
 			.create-account
@@ -30,8 +40,7 @@
 														%th Début
 														%th Fin
 														%th Prix
-														%th Valider la réservation
-														%th Annuler la réservation
+														%th{ colspan: 3 } Réservation
 												%tbody
 													- @advert.reservations.pending.each do |r|
 														%tr{ id: "row-#{r.id}" }
@@ -42,6 +51,11 @@
 																= r.price
 															%td= link_to "Valider", preview_validate_advert_reservation_path(@advert, r)
 															%td= link_to "Annuler", preview_cancel_advert_reservation_path(@advert, r)
+															%td
+																= link_to "Contacter", '#', data: {'reveal-id' => 'contactModal'}
+																#contactModal.reveal-modal{"data-reveal" => ""}
+																	= render partial: 'messages/contact_asker', locals: { reservation: r }
+																	%a.close-reveal-modal ×
 
 										- else
 											%h4.subheader Vous n'avez aucune demande de réservation en attente pour cet espace.									

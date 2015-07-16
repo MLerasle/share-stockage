@@ -21,6 +21,8 @@ class ConversationsController < ApplicationController
   
   def reply
     current_user.reply_to_conversation(@conversation, params[:body])
+    user_to_reply = @conversation.participants.reject { |u| u.id == current_user.id }.last
+    NotificationEmail.perform_async(user_to_reply.id)
     flash[:success] = 'Reply sent'
     redirect_to conversation_path(@conversation)
   end

@@ -16,7 +16,7 @@
 				.row.sign-up
 					.row
 						.large-4.medium-4.small-4.columns
-							- if @advert.valid?
+							- if @advert.validated
 								= link_to advert_step_path(@advert, Advert.form_steps[0]), class: "wizard_link" do
 									.panel{ style: "background-color:white" }
 										%h4{ style: "color:rgb(185, 185, 185)" }
@@ -68,7 +68,12 @@
 						.large-8.medium-8.small-8.columns
 							%h4 Ajouter des photos à votre annonce
 							%hr
-
+							.row
+								.small-12.large-12.columns
+									%h6
+										Vous pouvez ajouter 3 photos au plus sur votre annonce.
+										%br
+										La taille maximale pour une photo est de 1 Mo.
 							#picture_advert{advert_id: @advert.id, data_present: @advert.pictures.count > 0 ? 1 : 0}
 								= form_for @picture, url: advert_pictures_path(@advert), html: { multipart: true, class: "dropzone", id: "new-picture" } do |f|
 									.fallback

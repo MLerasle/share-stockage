@@ -62,4 +62,8 @@ class User < ActiveRecord::Base
     end
     total
   end
+  
+  def admin?
+    email == ENV["admin_email"]
+  end
 end

@@ -10,7 +10,7 @@
 						
 					.row
 						.large-4.medium-4.small-4.columns
-							- if @advert.valid?
+							- if @advert.validated
 								= link_to advert_step_path(@advert, Advert.form_steps[0]), class: "wizard_link" do
 									.panel{ style: "background-color:white" }
 										%h4{ style: "color:rgb(185, 185, 185)" }

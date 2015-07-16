@@ -1,16 +1,5 @@
 %section#main-content
 	.row
-		.small-12.large-12.columns
-			- unless notice.nil?
-				.alert-box.info.radius{ "data-alert" => "" }
-					= notice
-					%a{ href: "#", class: "close" } &times;
-			- unless alert.nil?
-				.alert-box.alert.radius{ "data-alert" => "" }
-					= alert
-					%a{ href: "#", class: "close" } &times;
-
-	.row
 		%dl.sub-nav
 			%dd
 				= link_to user_path(current_user) do
@@ -21,6 +10,16 @@
 			%dd= link_to "Messagerie", conversations_path
 		%hr
 		#main-content
+			.row
+				.small-12.large-12.columns
+					- unless notice.nil?
+						.alert-box.info.radius{ "data-alert" => "" }
+							= notice
+							%a{ href: "#", class: "close" } &times;
+					- unless alert.nil?
+						.alert-box.alert.radius{ "data-alert" => "" }
+							= alert
+							%a{ href: "#", class: "close" } &times;
 			.row.body.sign-in
 				.large-8.small-12.columns.large-centered.small-centered
 					.create-account

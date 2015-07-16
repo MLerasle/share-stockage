@@ -1,0 +1,16 @@
+!!!
+%html
+	%head
+		%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+	%body
+		%p Bonjour,
+		%p
+			Vous avez reçu un nouveau message sur votre messagerie interne
+			%strong Share Stockage.
+		%p Pour le consulter, connectez-vous simplement sur le site et rendez-vous dans votre espace personnel en cliquant sur le lien suivant:
+		%p= link_to "Me connecter à mon espace personnel", @url
+		%p À bientôt sur notre site.
+		%p
+			Meilleures salutations,
+			%br
+			= link_to "Share Stockage", root_url

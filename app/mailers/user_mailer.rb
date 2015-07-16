@@ -23,4 +23,10 @@ class UserMailer < ActionMailer::Base
     @gift_url = "http://localhost:8080/charges/new"
     mail(to: @user.email, subject: "Votre avis nous importe!")
   end
+
+  def notify_user(user)
+    @user = user
+    @url = "http://localhost:8080/users/sign_in"
+    mail(to: @user.email, subject: "Vous avez reçu un nouveau message sur Share Stockage")
+  end
 end
