@@ -32,22 +32,18 @@ class ContractPdf < Prawn::Document
       transparent(0) { stroke_bounds }
       text "LOCATAIRE", style: :bold, align: :center
       move_down 15
-      text "Nom :", style: :bold, size: 10
+      text "<strong>Nom :</strong> #{@reservation.user.first_name} #{@reservation.user.last_name}", size: 10, inline_format: true
       move_down 5
-      text "Tél : ", style: :bold, size: 10
-      move_down 5
-      text "Adresse :", style: :bold, size: 10
+      text "<strong>Email :</strong> #{@reservation.user.email}", size: 10, inline_format: true
     end
     
     bounding_box([300, 660], width: 240, height: 100) do
       transparent(0) { stroke_bounds }
       text "PROPRIETAIRE", style: :bold, align: :center
       move_down 15
-      text "Nom :", style: :bold, size: 10
+      text "<strong>Nom :</strong> #{@advert.user.first_name} #{@advert.user.last_name}", size: 10, inline_format: true
       move_down 5
-      text "Tél : ", style: :bold, size: 10
-      move_down 5
-      text "Adresse :", style: :bold, size: 10
+      text "<strong>Email :</strong> #{@advert.user.email}", size: 10, inline_format: true
     end
   end
   
@@ -71,9 +67,9 @@ class ContractPdf < Prawn::Document
     
     bounding_box([300, 490], width: 240, height: 70) do
       transparent(0) { stroke_bounds }
-      text "<strong>Début de la location :</strong> #{@reservation.start_date}", size: 10, inline_format: true
+      text "<strong>Début de la location :</strong> #{@reservation.start_date.strftime("%d/%m/%y")}", size: 10, inline_format: true
       move_down 5
-      text "<strong>Fin de la location :</strong> #{@reservation.end_date}", size: 10, inline_format: true
+      text "<strong>Fin de la location :</strong> #{@reservation.end_date.strftime("%d/%m/%y")}", size: 10, inline_format: true
       move_down 5
       text "<strong>Prix :</strong> CHF #{@reservation.price}", size: 10, inline_format: true
     end
@@ -100,7 +96,7 @@ class ContractPdf < Prawn::Document
       horizontal_rule
       move_down 25
     end
-    text "Je soussigné(e), .........................................., ai examiné attentivement l’état de l’espace et confirme qu’il est fidèlement décrit ci-dessus. Je prends la responsabilité de cet espace et m’engage à le restituer dans l’état initial, à la date indiquée sur ce contrat. J’autorise irrévocablement Share Stockage à prélever sur ma carte bancaire toute somme due au propriétaire au titre du contrat de location, dont les clauses détaillées figurent sur la page #, et toute somme due à Share Stockage au titre des conditions générales du site.", size: 8
+    text "Je soussigné(e), .........................................., ai examiné attentivement l’état de l’espace et confirme qu’il est fidèlement décrit ci-dessus. Je prends la responsabilité de cet espace et m’engage à le restituer dans l’état initial, à la date indiquée sur ce contrat.", size: 8
     move_down 15
     bounding_box([0, 200], width: 240, height: 20) do
       transparent(0) { stroke_bounds }

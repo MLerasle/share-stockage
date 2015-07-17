@@ -39,30 +39,30 @@ class ReservationsController < ApplicationController
   end
   
   def validate
-    return redirect_to user_path(current_user) if current_user != @advert.user or @reservation.validated
+    return redirect_to owner_space_user_path(current_user) if current_user != @advert.user or @reservation.validated
     if @reservation.update_attributes(validated: true)
-      ValidateReservationEmail.perform_async(@reservation.user_id, @reservation.id)
-      FeedbackEmail.perform_at((@reservation.end_date.to_time + 10.hours).to_i, @reservation.advert_id, @reservation.advert.user_id, @reservation.user_id)
       recipients = User.where(id: @reservation.user_id)
-      admin_user.send_message(recipients, @reservation.email_validate[:body], @reservation.email_validate[:subject]).conversation
+      # admin_user.send_message(recipients, @reservation.email_validate[:body], @reservation.email_validate[:subject]).conversation
+      ValidateReservationEmail.perform_async(@advert.user_id, @reservation.user_id, @reservation.id)
+      FeedbackEmail.perform_at((@reservation.end_date.to_time + 10.hours).to_i, @reservation.advert_id, @reservation.advert.user_id, @reservation.user_id)
       flash[:notice] = "La réservation a bien été validée. Veuillez consulter vos mails pour obtenir un exemplaire du contrat de location."
     else
       flash[:alert] = "Une erreur est survenue durant la validation de la réservation. Veuillez réessayer s'il vous plaît. Si le problème persiste, n'hésitez pas à contacter le support."
     end
-    redirect_to user_path(current_user)
+    redirect_to owner_space_user_path(current_user)
   end
   
   def cancel
-    return redirect_to user_path(current_user) if current_user != @advert.user or @reservation.validated
+    return redirect_to owner_space_user_path(current_user) if current_user != @advert.user or @reservation.canceled
     if @reservation.update_attributes(canceled: true)
       recipients = User.where(id: @reservation.user_id)
-      admin_user.send_message(recipients, @reservation.email_cancel[:body], @reservation.email_cancel[:subject]).conversation
+      # admin_user.send_message(recipients, @reservation.email_cancel[:body], @reservation.email_cancel[:subject]).conversation
       NotificationEmail.perform_async(@reservation.user_id)
       flash[:notice] = "La réservation a bien été annulée. Un email a été envoyé au locataire pour l'en informer."
     else
       flash[:alert] = "Une erreur est survenue durant l'annulation de la réservation. Veuillez réessayer s'il vous plaît. Si le problème persiste, n'hésitez pas à contacter le support."
     end
-    redirect_to user_path(current_user)
+    redirect_to owner_space_user_path(current_user)
   end
   
   def preview_cancel

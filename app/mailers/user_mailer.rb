@@ -10,6 +10,15 @@ class UserMailer < ActionMailer::Base
     mail(to: @receiver.email, subject: "Share Stockage - Votre réservation pour #{@advert.title} a été validée")
   end
 
+  def validate_reservation_owner(receiver, reservation)
+    @receiver = receiver
+    @advert = reservation.advert
+    contract = ContractPdf.new(@advert, reservation, view_context)
+    attachments["contrat.pdf"] = { mime_type: 'application/pdf', content: contract.render }
+    @advert_url = "http://localhost:8080/adverts/#{@advert.id}"
+    mail(to: @receiver.email, subject: "Share Stockage - La réservation pour #{@advert.title} a été validée")
+  end
+
   def reservation_feedback(advert, reservation_user)
     @advert = advert
     @reservation_user = reservation_user

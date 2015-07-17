@@ -1,5 +1,14 @@
 %section#main-content
 	.row
+		%dl.sub-nav
+			%dd.active
+				= link_to user_path(current_user) do
+					%i.fa.fa-home
+			%dd= link_to "Mon profil", edit_user_registration_path(current_user)
+			%dd= link_to "Espace propriétaire", owner_space_user_path(current_user)
+			%dd= link_to "Espace locataire", lodger_space_user_path(current_user)
+			%dd= link_to "Messagerie", conversations_path
+	.row
 		.small-12.large-12.columns
 			- unless notice.nil?
 				.alert-box.info.radius{ "data-alert" => "" }
@@ -9,15 +18,6 @@
 				.alert-box.alert.radius{ "data-alert" => "" }
 					= alert
 					%a{ href: "#", class: "close" } &times;
-	.row
-		%dl.sub-nav
-			%dd.active
-				= link_to user_path(current_user) do
-					%i.fa.fa-home
-			%dd= link_to "Mon profil", edit_user_registration_path(current_user)
-			%dd= link_to "Espace propriétaire", owner_space_user_path(current_user)
-			%dd= link_to "Espace locataire", lodger_space_user_path(current_user)
-			%dd= link_to "Messagerie", conversations_path
 		%hr
 		#main-content
 			.row

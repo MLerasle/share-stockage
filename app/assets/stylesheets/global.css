@@ -131,6 +131,18 @@ tr[data-link] {
   box-shadow: 0px 0px 5px #888888;
 }
 
+tr.adverts_action_line:hover {
+  box-shadow: none !important;
+}
+
+.red_link {
+  color: red;
+}
+
+.red_link:hover {
+  color: red;
+}
+
 #adverts_table tr:last-child {
   border-bottom: 1px solid white;
 }

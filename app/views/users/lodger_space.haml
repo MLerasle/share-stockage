@@ -30,7 +30,7 @@
 								- @user.reservations.pending_or_running.order("id DESC").each do |r|
 									%tr{ "data-link" => advert_path(r.advert) }
 										= render partial: 'adverts/advert_line', locals: { advert: r.advert }
-									%tr
+									%tr.adverts_action_line
 										%td{ style: "text-align:center;" }
 											- if r.validated
 												%span{ style: "color: green" } RESERVATION VALIDEE

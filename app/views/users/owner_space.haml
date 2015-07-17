@@ -1,5 +1,14 @@
 %section#main-content
 	.row
+		%dl.sub-nav
+			%dd
+				= link_to user_path(current_user) do
+					%i.fa.fa-home
+			%dd= link_to "Mon profil", edit_user_registration_path(current_user)
+			%dd.active= link_to "Espace propriétaire", owner_space_user_path(current_user)
+			%dd= link_to "Espace locataire", lodger_space_user_path(current_user)
+			%dd= link_to "Messagerie", conversations_path
+	.row
 		.small-12.large-12.columns
 			- unless notice.nil?
 				.alert-box.info.radius{ "data-alert" => "" }
@@ -9,15 +18,6 @@
 				.alert-box.alert.radius{ "data-alert" => "" }
 					= alert
 					%a{ href: "#", class: "close" } &times;
-	.row
-		%dl.sub-nav
-			%dd
-				= link_to user_path(current_user) do
-					%i.fa.fa-home
-			%dd= link_to "Mon profil", edit_user_registration_path(current_user)
-			%dd.active= link_to "Espace propriétaire", owner_space_user_path(current_user)
-			%dd= link_to "Espace locataire", lodger_space_user_path(current_user)
-			%dd= link_to "Messagerie", conversations_path
 		%hr
 		#main-content
 			.row
@@ -31,7 +31,7 @@
 								- @user.adverts.order("id DESC").each do |advert|
 									%tr{ "data-link" => advert_path(advert) }
 										= render partial: 'adverts/advert_line', locals: { advert: advert }
-									%tr
+									%tr.adverts_action_line
 										%td{ style: "text-align:center;" }
 											- if advert.validated
 												%span{ style: "color: green" } ANNONCE VALIDEE
@@ -45,9 +45,8 @@
 												%span{ id: "activation_link_#{advert.id}" }= link_to advert.activate_title, activate_advert_path(advert), method: :put, remote: true, class: "button radius #{button_color}"
 										%td
 											- if advert.reservations.pending.any?
-												%span.right{ style: "color: red" }
-													= advert.reservations.pending.count
-													demandes de réservation en attente
+												%span.right
+													= link_to "#{advert.reservations.pending.count} demande(s) de réservation en attente", edit_advert_path(advert), class: "red_link"
 
 					- else
 						%h4.subheader Vous n'avez créé aucune annonce.

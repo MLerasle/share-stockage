@@ -1,6 +1,6 @@
 class EvaluationsController < ApplicationController
   def create
-    @advert = Advert.find(params[:advert])
+    @advert = Advert.friendly.find(params[:advert])
     
     if @advert.authorize_evaluation_for_user?(current_user)
       @evaluation = @advert.evaluations.new(evaluation_params)
