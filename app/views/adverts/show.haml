@@ -14,7 +14,7 @@
 		.small-12.large-12.columns
 			- if current_user == @advert.user
 				%h4 Que souhaitez-vous faire?
-				= link_to "Accéder à mon compte", user_path(current_user), class: "button radius success small"
+				= link_to "Accéder à mon compte", users_path, class: "button radius success small"
 				= link_to "Modifier l'annonce", advert_step_path(@advert, Advert.form_steps.first), class: "button radius small"
 				- if @advert.valid?
 					- button_color = @advert.activated ? "alert" : "success"

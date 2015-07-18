@@ -39,7 +39,7 @@ class ReservationsController < ApplicationController
   end
   
   def validate
-    return redirect_to owner_space_user_path(current_user) if current_user != @advert.user or @reservation.validated
+    return redirect_to owner_space_users_path if current_user != @advert.user or @reservation.validated
     if @reservation.update_attributes(validated: true)
       recipients = User.where(id: @reservation.user_id)
       # admin_user.send_message(recipients, @reservation.email_validate[:body], @reservation.email_validate[:subject]).conversation
@@ -49,11 +49,11 @@ class ReservationsController < ApplicationController
     else
       flash[:alert] = "Une erreur est survenue durant la validation de la réservation. Veuillez réessayer s'il vous plaît. Si le problème persiste, n'hésitez pas à contacter le support."
     end
-    redirect_to owner_space_user_path(current_user)
+    redirect_to owner_space_users_path
   end
   
   def cancel
-    return redirect_to owner_space_user_path(current_user) if current_user != @advert.user or @reservation.canceled
+    return redirect_to owner_space_users_path if current_user != @advert.user or @reservation.canceled
     if @reservation.update_attributes(canceled: true)
       recipients = User.where(id: @reservation.user_id)
       # admin_user.send_message(recipients, @reservation.email_cancel[:body], @reservation.email_cancel[:subject]).conversation
@@ -62,7 +62,7 @@ class ReservationsController < ApplicationController
     else
       flash[:alert] = "Une erreur est survenue durant l'annulation de la réservation. Veuillez réessayer s'il vous plaît. Si le problème persiste, n'hésitez pas à contacter le support."
     end
-    redirect_to owner_space_user_path(current_user)
+    redirect_to owner_space_users_path
   end
   
   def preview_cancel
@@ -72,7 +72,7 @@ class ReservationsController < ApplicationController
   end
   
   def update
-    return redirect_to user_path(current_user) if current_user != @reservation.user or @reservation.validated
+    return redirect_to users_path if current_user != @reservation.user or @reservation.validated
     if @reservation.update_attributes(reservation_params)
       recipients = User.where(id: @advert.user_id)
       admin_user.send_message(recipients, @reservation.email_update[:body], @reservation.email_update[:subject]).conversation
@@ -81,7 +81,7 @@ class ReservationsController < ApplicationController
     else
       flash[:alert] = "Une erreur est survenue durant la mise à jour de votre réservation. Veuillez réessayer s'il vous plaît. Si le problème persiste, n'hésitez pas à contacter le support."
     end
-    redirect_to lodger_space_user_path(current_user)
+    redirect_to lodger_space_users_path
   end
   
   def destroy
@@ -93,7 +93,7 @@ class ReservationsController < ApplicationController
     # else
     #   flash[:alert] = "Une erreur est survenue durant l'annulation de la réservation. Veuillez réessayer s'il vous plaît. Si le problème persiste, n'hésitez pas à contacter le support."
     # end
-    # redirect_to edit_user_registration_path(current_user)
+    # redirect_to edit_user_registration_path
   end
   
   private

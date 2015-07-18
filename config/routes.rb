@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     mount Sidekiq::Web, at: "/sidekiq"
   end
   devise_for :users, controllers: { registrations: 'registrations' }
-  resources :users, only: :show do
+  resource :users, only: :show do
     member do
       get 'owner_space'
       get 'lodger_space'

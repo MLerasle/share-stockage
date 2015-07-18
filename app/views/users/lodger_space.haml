@@ -2,11 +2,11 @@
 	.row
 		%dl.sub-nav
 			%dd
-				= link_to user_path(current_user) do
+				= link_to users_path do
 					%i.fa.fa-home
-			%dd= link_to "Mon profil", edit_user_registration_path(current_user)
-			%dd= link_to "Espace propriétaire", owner_space_user_path(current_user)
-			%dd.active= link_to "Espace locataire", lodger_space_user_path(current_user)
+			%dd= link_to "Mon profil", edit_user_registration_path
+			%dd= link_to "Espace propriétaire", owner_space_users_path
+			%dd.active= link_to "Espace locataire", lodger_space_users_path
 			%dd= link_to "Messagerie", conversations_path
 	.row
 		.small-12.large-12.columns

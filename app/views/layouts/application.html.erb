@@ -26,7 +26,7 @@
 						<li><%= link_to 'Publier une annonce', adverts_path, method: :post %></li>
 			      <li class="divider"></li>
 						<% if user_signed_in? %>
-							<li><%= link_to "Mon compte", user_path(current_user) %></li>
+							<li><%= link_to "Mon compte", users_path %></li>
 							<li class="divider"></li>
 							<li><%= link_to "Déconnexion", destroy_user_session_path, "data-method" => :delete %></li>
 						<% else %>
