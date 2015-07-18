@@ -177,9 +177,14 @@ class Advert < ActiveRecord::Base
   def validated_reservations
     self.reservations.where(validated: true)
   end
+
+  def running_reservation
+    self.validated_reservations.where("start_date <= ? and end_date >= ?", Date.today, Date.today).last
+  end
   
   def has_running_reservations?
-    self.validated_reservations.where("start_date <= ? and end_date >= ?", Date.today, Date.today).any?
+    # self.validated_reservations.where("start_date <= ? and end_date >= ?", Date.today, Date.today).any?
+    running_reservation.present?
   end
   
   def is_deletable?

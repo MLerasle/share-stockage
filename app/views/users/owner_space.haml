@@ -43,6 +43,8 @@
 											- if advert.valid?
 												- button_color = advert.activated ? "alert small" : "success small"
 												%span{ id: "activation_link_#{advert.id}" }= link_to advert.activate_title, activate_advert_path(advert), method: :put, remote: true, class: "button radius #{button_color}"
+											- if advert.is_deletable?
+												= link_to "Supprimer l'annonce", advert_path(advert), method: :delete, data: { confirm: "Ètes-vous sûr de vouloir supprimer cette annonce?" }, class: "button radius alert small"
 										%td
 											- if advert.reservations.pending.any?
 												%span.right

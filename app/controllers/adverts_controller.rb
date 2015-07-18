@@ -35,11 +35,11 @@ class AdvertsController < ApplicationController
   def destroy
     if current_user == @advert.user and @advert.is_deletable?
       @advert.destroy
-      flash[:alert] = "Votre annonce a bien été supprimée."
+      flash[:notice] = "Votre annonce a bien été supprimée."
     else
       flash[:alert] = "Vous n'êtes pas autorisé à supprimer cette annonce. Consulter les FAQ pour connaître les conditions de suppression d'une annonce."
     end
-    redirect_to users_path
+    redirect_to owner_space_users_path
   end
 
   def unavailable_dates

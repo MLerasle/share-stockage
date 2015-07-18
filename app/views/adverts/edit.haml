@@ -22,13 +22,33 @@
 						.panel{ style: "background-color: white" }
 							%dl.tabs{"data-tab" => ""}
 								%dd.active
-									%a{:href => "#panel2"} Réservations en attente
+									%a{:href => "#panel2"} Réservations
 								%dd
 									%a{:href => "#panel3", id: "date_tab"} Calendrier
 							%br
 							.tabs-content
 								#panel2.content.active
 									#reservations_section
+										- if @advert.reservations.running.any?
+											%h4.subheader Votre espace est actuellement loué.
+											%p
+												Locataire:
+												%strong= @advert.running_reservation.user.username
+												\-
+												Réservation du
+												%strong= @advert.running_reservation.start_date.strftime("%d/%m/%Y")
+												au
+												%strong= @advert.running_reservation.end_date.strftime("%d/%m/%Y")
+												\-
+												Durée:
+												%strong= @advert.running_reservation.duration
+												jours
+												\-
+												Prix: CHF
+												%strong= @advert.running_reservation.price
+										- else
+											%h4.subheader Cet espace n'est pas loué actuellement.
+										%hr
 										- if @advert.reservations.pending.any?
 											%p
 												%i.fa.fa-exclamation-triangle
@@ -58,7 +78,8 @@
 																	%a.close-reveal-modal ×
 
 										- else
-											%h4.subheader Vous n'avez aucune demande de réservation en attente pour cet espace.									
+											%h4.subheader Vous n'avez aucune demande de réservation en attente pour cet espace.
+											
 								#panel3.content
 									= render partial: "calendar"
 							%br
