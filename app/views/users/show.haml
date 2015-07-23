@@ -8,18 +8,18 @@
 			%dd= link_to "Espace propriétaire", owner_space_users_path
 			%dd= link_to "Espace locataire", lodger_space_users_path
 			%dd= link_to "Messagerie", conversations_path
-	.row
-		.small-12.large-12.columns
-			- unless notice.nil?
-				.alert-box.info.radius{ "data-alert" => "" }
-					= notice
-					%a{ href: "#", class: "close" } &times;
-			- unless alert.nil?
-				.alert-box.alert.radius{ "data-alert" => "" }
-					= alert
-					%a{ href: "#", class: "close" } &times;
 		%hr
 		#main-content
+			.row
+				.small-12.large-12.columns
+					- unless notice.nil?
+						.alert-box.info.radius{ "data-alert" => "" }
+							= notice
+							%a{ href: "#", class: "close" } &times;
+					- unless alert.nil?
+						.alert-box.alert.radius{ "data-alert" => "" }
+							= alert
+							%a{ href: "#", class: "close" } &times;
 			.row
 				.medium-8.medium-centered.columns.centered-text
 					%h5.subheader.margin-top-40px
