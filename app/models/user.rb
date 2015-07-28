@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
   has_many :evaluations
   has_attached_file :avatar, styles: { thumb: "100x100#" }, 
                              default_url: "/images/avatars/:style/user.png",
-                             path: ":rails_root/public/images/avatars/:id/:style/:filename",
-                             url: "/images/avatars/:id/:style/:basename.:extension",
+                             path: "users/:id/:style/avatar",
+                             url: ':s3_domain_url',
                              use_timestamp: false
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   devise :database_authenticatable, :registerable, :confirmable,

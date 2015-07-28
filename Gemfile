@@ -46,6 +46,7 @@ gem "geocoder"
 # Images
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'dropzonejs-rails'
+gem 'aws-sdk', '< 2.0'
 
 # Paginator
 gem "kaminari"
