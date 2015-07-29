@@ -4,7 +4,6 @@ class RegistrationsController < Devise::RegistrationsController
       flash[:alert] = "Vous n'êtes pas autorisé à supprimer ce compte."
       return redirect_to users_path
     end
-    resource.avatar = nil if resource.avatar
     resource.destroy
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
     set_flash_message :alert, :destroyed if is_flashing_format?
