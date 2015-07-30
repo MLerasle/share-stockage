@@ -6,6 +6,12 @@ set :application, 'sharestockage'
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
+set :ssh_options, {
+  forward_agent: true,
+  port: 22,
+  user: "deploy"
+}
+
 set :rbenv_type, :deploy
 set :rbenv_ruby, '2.2.0'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
