@@ -57,6 +57,7 @@ namespace :figaro do
   task :setup do
     on roles(:app) do
       upload! "config/application.yml", "#{shared_path}/application.yml", via: :scp
+      upload! "config/secrets.yml", "#{shared_path}/secrets.yml", via: :scp
     end
   end
 
