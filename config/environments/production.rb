@@ -28,7 +28,8 @@ Rails.application.configure do
     port: 587,
     domain: "sharestockage.ch",
     authentication: "plain",
-    enable_starttls_auto: true,
+    tls: false,
+    enable_starttls_auto: false,
     user_name: ENV["mail_username"],
     password: ENV["mail_password"]
   }
