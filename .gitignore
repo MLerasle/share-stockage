@@ -31,6 +31,7 @@ rerun.txt
 
 config/google_analytics.yml
 .DS_Store
+.capistrano/
 
 *.rdb
 /public/images
