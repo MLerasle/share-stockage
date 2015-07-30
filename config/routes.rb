@@ -1,7 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => ENV['admin_path'], as: 'rails_admin'
+  mount RailsAdmin::Engine => '/my_admin_zone', as: 'rails_admin'
   authenticate :user, lambda { |u| u.admin? } do
     mount Sidekiq::Web, at: "/sidekiq"
   end
