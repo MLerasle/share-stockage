@@ -1,14 +1,26 @@
 # config valid only for current version of Capistrano
 lock '3.3.5'
 
-set :application, 'my_app_name'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :application, 'sharestockage'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
+set :rbenv_type, :deploy
+set :rbenv_ruby, '2.2.0'
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
+set :rbenv_map_bins, %w{rake gem bundle ruby rails}
+
 # Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, '/var/www/my_app_name'
+
+set :linked_files, %w{config/database.yml}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+
+set :deploy_user, :deploy
+set :pty, false
+set :scm, :git
+set :repo_url, 'git@bitbucket.org:mlerasle/sharing_space.git'
+set :deploy_to, '/home/deploy/sharestockage'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -35,14 +47,13 @@ set :repo_url, 'git@example.com:me/my_repo.git'
 # set :keep_releases, 5
 
 namespace :deploy do
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute :touch, release_path.join('tmp/restart.txt')
     end
   end
 
+  after :publishing, 'deploy:restart'
+  after :finishing, 'deploy:cleanup'
 end
