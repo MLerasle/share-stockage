@@ -65,6 +65,7 @@ namespace :figaro do
   task :symlink do
     on roles(:app) do
       execute "ln -sf #{shared_path}/application.yml #{release_path}/config/application.yml"
+      execute "ln -sf #{shared_path}/secrets.yml #{release_path}/config/secrets.yml"
     end
   end
 end
