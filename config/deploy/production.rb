@@ -4,9 +4,9 @@
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
-# role :app, "46.101.198.191"
-# role :web, "46.101.198.191"
-# role :db,  "46.101.198.191"
+role :app, "46.101.198.191"
+role :web, "46.101.198.191"
+role :db,  "46.101.198.191"
 
 
 # Extended Server Syntax
@@ -19,7 +19,7 @@ set :stage,     :production
 set :rails_env, :production
 set :branch,    :master
 
-server "46.101.198.191", user: 'deploy', roles: %w{web app db}
+# server "46.101.198.191", user: 'deploy', roles: %w{web app db}
 
 
 # Custom SSH Options
