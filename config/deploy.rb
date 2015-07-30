@@ -57,14 +57,15 @@ namespace :figaro do
   desc "Symlink application.yml to the release path"
   task :symlink do
     on roles(:app) do
-      execute "ln -sf #{shared_path}/application.yml #{current_path}/config/application.yml"
+      execute "ln -sf #{shared_path}/application.yml #{release_path}/config/application.yml"
     end
   end
 end
-after "deploy:started", "figaro:setup"
-after "deploy:symlink:release", "figaro:symlink"
 
 namespace :deploy do
+  before :updated, "figaro:setup"
+  before :updated, "figaro:symlink"
+  
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
