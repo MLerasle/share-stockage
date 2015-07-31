@@ -20,15 +20,16 @@ Rails.application.configure do
   # config.action_dispatch.rack_cache = true
   
   config.action_mailer.default_url_options = { host: 'sharestockage.ch' }
-  config.action_mailer.raise_delivery_errors = false
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default charset: "utf-8"
+  config.action_mailer.raise_delivery_errors = false
+
   config.action_mailer.smtp_settings = {
     address: "mail.gandi.net",
     port: 587,
-    domain: "gandi.net",
+    domain: "sharestockage.ch",
     authentication: :login,
+    enable_starttls_auto: true,
     user_name: ENV["mail_username"],
     password: ENV["mail_password"]
   }
