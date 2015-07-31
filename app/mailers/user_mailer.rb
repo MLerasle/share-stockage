@@ -1,13 +1,12 @@
 class UserMailer < ActionMailer::Base
   default from: ENV["contact_email"]
-  before_filter :set_domain
   
   def validate_reservation(receiver, reservation)
     @receiver = receiver
     @advert = reservation.advert
     contract = ContractPdf.new(@advert, reservation, view_context)
     attachments["contrat.pdf"] = { mime_type: 'application/pdf', content: contract.render }
-    @advert_url = "http://#{@domain}/adverts/#{@advert.id}"
+    @advert_url = "http://sharestockage.ch/adverts/#{@advert.id}"
     mail(to: @receiver.email, subject: "Votre réservation pour #{@advert.title} a été validée")
   end
 
@@ -16,37 +15,27 @@ class UserMailer < ActionMailer::Base
     @advert = reservation.advert
     contract = ContractPdf.new(@advert, reservation, view_context)
     attachments["contrat.pdf"] = { mime_type: 'application/pdf', content: contract.render }
-    @advert_url = "http://#{@domain}/adverts/#{@advert.id}"
+    @advert_url = "http://sharestockage.ch/adverts/#{@advert.id}"
     mail(to: @receiver.email, subject: "La réservation pour #{@advert.title} a été validée")
   end
 
   def reservation_feedback(advert, reservation_user)
     @advert = advert
     @reservation_user = reservation_user
-    @advert_url = "http://#{@domain}/adverts/#{@advert.id}"
-    @gift_url = "http://#{@domain}/charges/new"
+    @advert_url = "http://sharestockage.ch/adverts/#{@advert.id}"
+    @gift_url = "http://sharestockage.ch/charges/new"
     mail(to: @reservation_user.email, subject: "Votre avis nous importe!")
   end
 
   def advert_feedback(user)
     @user = user
-    @gift_url = "http://#{@domain}/charges/new"
+    @gift_url = "http://sharestockage.ch/charges/new"
     mail(to: @user.email, subject: "Votre avis nous importe!")
   end
 
   def notify_user(user)
     @user = user
-    @url = "http://#{@domain}/users/sign_in"
+    @url = "http://sharestockage.ch/users/sign_in"
     mail(to: @user.email, subject: "Vous avez reçu un nouveau message sur Share Stockage")
-  end
-
-  private
-
-  def set_domain
-    @domain = if Rails.env.production?
-      'sharestockage.ch'
-    else
-      'localhost:8080'
-    end
   end
 end
