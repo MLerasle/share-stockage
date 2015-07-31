@@ -14,7 +14,7 @@ Devise.setup do |config|
   config.mailer_sender = 'contact@sharestockage.ch'
 
   # Configure the class responsible to send e-mails.
-  config.mailer = 'ActionMailer'
+  config.mailer = 'Devise::Mailer'
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
