@@ -25,10 +25,10 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.smtp_settings = {
-    address: "mail.gandi.net",
+    address: "smtp.gmail.com",
     port: 587,
     domain: "sharestockage.ch",
-    authentication: :login,
+    authentication: "plain",
     enable_starttls_auto: true,
     user_name: ENV["mail_username"],
     password: ENV["mail_password"]
