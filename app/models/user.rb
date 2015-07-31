@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :reservations, dependent: :destroy
   has_many :evaluations
   has_attached_file :avatar, styles: { thumb: "100x100#" }, 
-                             default_url: "images/avatars/:style/user.png",
+                             default_url: ->(attachment) { ActionController::Base.helpers.asset_path('user.png') },
                              path: "users/:id/:style/avatar",
                              url: ':s3_domain_url',
                              use_timestamp: false
