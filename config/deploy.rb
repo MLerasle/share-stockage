@@ -20,7 +20,7 @@ set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 # Default deploy_to directory is /var/www/my_app_name
 
 set :linked_files, %w{config/database.yml}
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 set :deploy_user, :deploy
 set :pty, false
