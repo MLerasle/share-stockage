@@ -39,7 +39,8 @@ footer .section:first-child {
 /* Formulaire de recherche page d'accueil */
 
 .index-header-panel {
-	margin-top: 10%; 
+	margin-top: 10%;
+  margin-bottom: 10%;
 	background-color: rgba(0, 0, 0, 0.5); 	
 	border: 0; 
 	border-radius:5px; 
@@ -62,8 +63,9 @@ footer .section:first-child {
 #homepage-hero {
 	background-image: asset_url('sharing_space_header.png');
 	background-size: cover;
-	width:100%;
-	height:500px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
 }
 
 #main-content {
