@@ -17,8 +17,6 @@
 						= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'mean'}) do |f|
 							.row
 								.small-12.large-12.columns
-									%canvas#myCanvas{ width: 100, height: 100 }
-									#user_avatar= image_tag "user.png"
 									= f.file_field :avatar, label: false, id: "pictureInput"
 							.row
 								.small-12.medium-6.large-6.columns
@@ -51,24 +49,3 @@
 							%hr
 							%h3.subheader Vous possédez déjà un compte?
 							= link_to "Se connecter", new_session_path(resource_name), class: "button radius expand"
-							
-- content_for :scripts do
-	:javascript
-		$('#myCanvas').hide();
-		var imageLoader = document.getElementById('pictureInput');
-		imageLoader.addEventListener('change', handleImage, false);
-		var canvas = document.getElementById('myCanvas');
-		var ctx = canvas.getContext('2d');
-		function handleImage(e){
-			var reader = new FileReader();
-			reader.onload = function(event){
-				$('#user_avatar').hide();
-				$('#myCanvas').show();
-				var img = new Image();
-				img.onload = function(){
-					ctx.drawImage(img,0,0,img.width, img.height, 0, 0, canvas.width, canvas.height);
-				}
-				img.src = event.target.result;
-			}
-			reader.readAsDataURL(e.target.files[0]);     
-		}
