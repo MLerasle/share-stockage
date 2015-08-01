@@ -17,6 +17,7 @@
 						= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'mean'}) do |f|
 							.row
 								.small-12.large-12.columns
+									= f.label "Photo de profil"
 									= f.file_field :avatar, label: false, id: "pictureInput"
 							.row
 								.small-12.medium-6.large-6.columns
