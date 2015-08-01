@@ -72,6 +72,6 @@ class AdvertsController < ApplicationController
   end
   
   def advert_params
-    params.require(:advert).permit(:address, :area, :price, :advert_type, :user, :activated, :title, :light, :elevator, :concierge, :car_access, :access_type, :description, :height, :slug)
+    params.require(:advert).permit(:address, :city, :country, :area, :price, :advert_type, :user, :activated, :title, :light, :elevator, :concierge, :car_access, :access_type, :description, :height, :slug)
   end
 end

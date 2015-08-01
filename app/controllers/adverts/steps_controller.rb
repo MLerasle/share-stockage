@@ -22,7 +22,7 @@ class Adverts::StepsController < ApplicationController
       when "general"
         [:title, :area, :height, :advert_type, :complete, :from_date]
       when "location"
-        [:address]
+        [:address, :city, :country]
       when "description"
         [:description, :access_type, :light, :elevator, :concierge, :car_access, :floor, :preservation, :security]
       when "price"

@@ -11,7 +11,7 @@ class Advert < ActiveRecord::Base
   has_many :reservations
   has_many :evaluations
   has_many :pictures, dependent: :destroy
-  geocoded_by :address
+  geocoded_by :full_address
   after_validation :geocode, if: :address_changed?
   
   default_value_for :validated, false
@@ -31,7 +31,7 @@ class Advert < ActiveRecord::Base
 
   validates :title, :area, :height, :advert_type, presence: true, if: -> { required_for_step?(:general) }
   validates :area, :height, numericality: true, if: -> { required_for_step?(:general) }
-  validates :address, presence: true, if: -> { required_for_step?(:location) }
+  validates :address, :city, :country, presence: true, if: -> { required_for_step?(:location) }
   validates :description, :access_type, :floor, :preservation, :security, presence: true, if: -> { required_for_step?(:description) }
   validates :price, presence: true, numericality: true, if: -> { required_for_step?(:price) }
 
@@ -193,5 +193,9 @@ class Advert < ActiveRecord::Base
   
   def activate_title
     self.activated ? "Désactiver l'annonce" : "Activer l'annonce"
+  end
+
+  def full_address
+    "#{self.address}, #{self.city}, #{self.country}"
   end
 end
