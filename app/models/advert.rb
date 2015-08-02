@@ -49,7 +49,11 @@ class Advert < ActiveRecord::Base
   end
   
   def unavailable_dates
-    [{ title: "Indisponible", start: Date.today, end: from_date, allDay: true }]
+    if Date.today < from_date
+      [{ title: "Indisponible", start: Date.today, end: from_date, allDay: true }]
+    else
+      []
+    end
   end
 
   def should_generate_new_friendly_id?
