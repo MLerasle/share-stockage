@@ -12,7 +12,9 @@ class MessagesController < ApplicationController
     end
     recipients = User.where(id: @resource.user_id)
     if current_user.send_message(recipients, params[:message][:body], params[:message][:subject]).conversation
-      NotificationEmail.perform_async(@resource.user_id)
+      user = User.find(@resource.user_id)
+      UserMailer.notify_user(user).deliver
+      # NotificationEmail.perform_async(@resource.user_id)
       flash[:notice] = "Votre message a bien été envoyé."
     else
       flash[:alert] = "Une erreur est survenue durant l'envoi de votre message. Veuillez réessayer s'il vous plaît ou nous contacter si le problème persiste."
