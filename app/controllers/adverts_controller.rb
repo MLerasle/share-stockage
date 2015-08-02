@@ -8,7 +8,7 @@ class AdvertsController < ApplicationController
     @adverts = @adverts.for_filter(params[:filter]) unless params[:filter].blank?
     my_adverts_address = []
     @adverts.each do |a|
-      my_adverts_address << { address: a.address, data: a.address, tag: "/adverts/#{a.slug}" }
+      my_adverts_address << { address: a.full_address, data: a.full_address, tag: "/adverts/#{a.slug}" }
     end
     @my_json_address = my_adverts_address.to_json
   end
