@@ -9,7 +9,7 @@
 						%hr
 						
 					.row
-						.large-4.medium-4.small-4.columns
+						.large-4.medium-4.hide-for-small.columns
 							- if @advert.validated
 								= link_to advert_step_path(@advert, Advert.form_steps[0]), class: "wizard_link" do
 									.panel{ style: "background-color:white" }
@@ -59,7 +59,7 @@
 										%i.fa.fa-file-image-o
 										Photos
 
-						.large-8.medium-8.small-8.columns
+						.large-8.medium-8.small-12.columns
 							%h4 Indiquez l'addresse exacte de votre espace
 							%hr
 							= form_for @advert, url: wizard_path, method: :put do |f|
