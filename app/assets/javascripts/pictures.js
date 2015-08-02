@@ -17,7 +17,7 @@ $(document).ready(function(){
     dictCancelUpload: "Annuler",
     dictRemoveFile: "Supprimer",
     dictDefaultMessage: "Cliquez pour ajouter des photos ou insérez les directement dans cette zone.",
-    dictFileTooBig: "Fichier trop lourd. 1Mb maximum par photo.",
+    dictFileTooBig: "Fichier trop lourd. 3Mb maximum par photo.",
     dictMaxFilesExceeded: "Vous avez droit d'ajouter 3 images maximum par annonces.",
     // Preload images
     init: function() {
@@ -42,28 +42,42 @@ $(document).ready(function(){
         });
       }
     },
-		// if the upload was successful
-		success: function(file, response){
-			// find the remove button link of the uploaded file and give it an id
-			// based of the fileID response from the server
-			$(file.previewTemplate).find('.dz-remove').attr('id', response.fileID);
-			// add the dz-success class (the green tick sign)
-			$(file.previewElement).addClass("dz-success");
-		},
+    // if the upload was successful
+    success: function(file, response){
+      // find the remove button link of the uploaded file and give it an id
+      // based of the fileID response from the server
+      $(file.previewTemplate).find('.dz-remove').attr('id', response.fileID);
+      // add the dz-success class (the green tick sign)
+      $(file.previewElement).addClass("dz-success");
+    },
+    error: function(file, response){
+      file.previewElement.classList.add("dz-error");
+      var rep = file.previewElement.querySelectorAll("[data-dz-errormessage]");
+      var node = rep[0];
+      node.textContent = response;
+      $(file.previewTemplate).on('click', function() {
+        $(file.previewTemplate).hide();
+      });
+    },
 		//when the remove button is clicked
 		removedfile: function(file){
 			// grap the id of the uploaded file we set earlier
 			var id = $(file.previewTemplate).find('.dz-remove').attr('id');
  
 			// make a DELETE ajax request to delete the file
-			$.ajax({
-				type: 'DELETE',
-				url: '/pictures/' + id,
-				success: function(data){
-					$(file.previewTemplate).hide();
-					console.log(data.message);
-				}
-			});
+      if (id === undefined) {
+        $(file.previewTemplate).hide();
+      }
+      else {
+  			$.ajax({
+  				type: 'DELETE',
+  				url: '/pictures/' + id,
+  				success: function(data){
+  					$(file.previewTemplate).hide();
+  					console.log(data.message);
+  				}
+  			});
+      }
 		} 
 	});
 }); 
