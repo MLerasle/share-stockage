@@ -73,7 +73,7 @@
 									%h6
 										Vous pouvez ajouter 3 photos au plus sur votre annonce.
 										%br
-										La taille maximale pour une photo est de 1 Mo.
+										La taille maximale pour une photo est de 3 Mo.
 							#picture_advert{advert_id: @advert.id, data_present: @advert.pictures.count > 0 ? 1 : 0}
 								= form_for @picture, url: advert_pictures_path(@advert), html: { multipart: true, class: "dropzone", id: "new-picture" } do |f|
 									.fallback

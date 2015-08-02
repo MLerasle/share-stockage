@@ -5,8 +5,8 @@ $(document).ready(function(){
 	// grap our upload form by its id
 	$("#new-picture").dropzone({
 		// restrict image size to a maximum 1MB
-		maxFilesize: 1,
-    maxThumbnailFilesize: 1,
+		maxFilesize: 3,
+    maxThumbnailFilesize: 3,
     maxFiles: 3,
     acceptedFiles: 'image/*',
 		// changed the passed param to one accepted by
