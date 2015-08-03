@@ -23,6 +23,10 @@ class ReservationsController < ApplicationController
       return redirect_to advert_path(@advert)
     end
     @reservation = @advert.reservations.new(reservation_params)
+    if @advert.booked_dates.include?(@reservation.start_date) or @advert.booked_dates.include?(@reservation.end_date)
+      flash[:alert] = "Cet espace n'est pas disponible aux dates sélectionnées. Veuillez vérifier la disponibilité de l'espace dans la section Calendrier."
+      return redirect_to advert_path(@advert)
+    end
     @reservation.user = current_user
     if @reservation.save
       recipients = User.where(id: @advert.user_id)

@@ -201,6 +201,7 @@
 		var nowTemp = new Date("#{@advert.starting_date}");
 		var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 		var checkin = $('#reservation_start_date').fdatepicker({
+			language: 'fr',
 			format: 'yyyy-mm-dd',
 			onRender: function (date) {
 				return date.valueOf() < now.valueOf() ? 'disabled' : '';

@@ -56,6 +56,16 @@ class Advert < ActiveRecord::Base
     end
   end
 
+  def booked_dates
+    dates  = []
+    self.validated_reservations.each do |r|
+      (r.start_date..r.end_date).each do |date|
+        dates << date
+      end
+    end
+    dates
+  end
+
   def should_generate_new_friendly_id?
     return false unless self.validated
     validated_changed? || title_changed? || address_changed? || advert_type_changed? || price_changed? || super
