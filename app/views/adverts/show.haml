@@ -216,6 +216,7 @@
 				$('#reservation_end_date')[0].focus();
 		}).data('datepicker');
 		var checkout = $('#reservation_end_date').fdatepicker({
+			language: 'fr',
 			format: 'yyyy-mm-dd',
 			onRender: function (date) {
 				return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
