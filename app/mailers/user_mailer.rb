@@ -38,4 +38,11 @@ class UserMailer < ActionMailer::Base
     @url = "http://sharestockage.ch/users/sign_in"
     mail(to: @user.email, subject: "Vous avez reçu un nouveau message sur Share Stockage")
   end
+
+  def pending_reservation(reservation)
+    @user = reservation.user
+    @advert = reservation.advert
+    @advert_url = "http://sharestockage.ch/adverts/#{@advert.id}"
+    mail(to: @user.email, subject: "Merci pour votre demande de réservation")
+  end
 end

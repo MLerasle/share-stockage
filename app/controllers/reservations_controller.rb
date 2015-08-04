@@ -33,6 +33,7 @@ class ReservationsController < ApplicationController
       admin_user.send_message(recipients, @reservation.email_ask[:body], @reservation.email_ask[:subject]).conversation
       advert_user = User.find(@advert.user_id)
       UserMailer.notify_user(advert_user).deliver
+      UserMailer.pending_reservation(@reservation).deliver
       # NotificationEmail.perform_async(@advert.user_id)
       flash[:notice] = "Votre demande de réservation a bien été envoyée au propriétaire."
     else
