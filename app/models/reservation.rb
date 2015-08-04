@@ -33,7 +33,15 @@ class Reservation < ActiveRecord::Base
   end
   
   def price
-  	advert.daily_price * duration
+  	(advert.daily_price * duration).round(2)
+  end
+
+  def commission
+    (price * 0.15).round(2)
+  end
+
+  def price_with_commission
+    price + commission
   end
   
   def email_ask

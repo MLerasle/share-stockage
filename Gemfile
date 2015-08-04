@@ -92,6 +92,9 @@ gem 'wicked'
 
 gem 'therubyracer'
 
+# Payments
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+
 # Deploy with Capistrano
 group :development do
   gem 'capistrano', '~> 3.3.0', require: false

@@ -1,0 +1,75 @@
+%script{ src: "https://checkout.stripe.com/checkout.js" }
+%section#main-content
+	.row
+		.small-12.large-12.columns
+			- unless notice.nil?
+				.alert-box.info.radius{ "data-alert" => "" }
+					= notice
+					%a{ href: "#", class: "close" } &times;
+			- unless alert.nil?
+				.alert-box.alert.radius{ "data-alert" => "" }
+					= alert
+					%a{ href: "#", class: "close" } &times;
+	.row.body.sign-in
+		.large-10.small-12.columns.large-centered.small-centered
+			.create-account
+				.row.sign-up
+					.large-12.small-12.columns
+						%h1 Confirmation de votre demande
+						%hr
+						%h6
+							%i.fa.fa-info-circle
+							\ Avant de valider la réservation, veuillez vous assurer que les informations ci-dessous sont exactes. Une fois confirmée, vous ne pourrez plus modifier votre demande de réservation.
+						%br
+						%h4 Récapitulatif de la demande
+						%br
+						%h5 Annonce:
+						%table#adverts_table
+							%tbody
+								%tr
+									= render partial: 'adverts/advert_line', locals: { advert: @advert }
+
+						= render partial: 'details', locals: { reservation: @reservation }
+
+						%h6
+							Vous devez régler la commission pour soumettre votre demande de réservation au propriétaire. Celle-ci vous sera intégralement remboursée en cas d'annulation de la réservation par le propriétaire.
+						%h6
+							Une fois la réservation validée par le propriétaire, le propriétaire et vous recevrez par email un exemplaire du contrat de location prérempli.
+						%h6
+							En validant la réservation, vous certifiez avoir pris connaissance des 
+							= link_to "conditions générales d'utilisation", cgu_path 
+							du site.
+						%br
+						.row
+							.small-6.large-6.columns
+								= form_tag payments_path, id: "paymentForm" do
+									= hidden_field_tag 'reservation_id', @reservation.id
+									= hidden_field_tag 'stripeToken'
+									= hidden_field_tag 'stripeEmail'
+									= hidden_field_tag "amount", nil, id: "reservation-commission", value: "#{@reservation.commission}"
+									%button#customButton.button.success.radius.expand Valider la réservation
+							.small-6.large-6.columns
+								= link_to "Annuler", lodger_space_users_path, class: "button radius alert expand"
+
+- content_for :scripts do
+	:javascript
+		var handler = StripeCheckout.configure({
+			key: "#{Rails.configuration.stripe[:publishable_key]}",
+			image: '/square-image.png',
+			token: function(token) {
+				document.getElementById("stripeToken").value = token.id;
+				document.getElementById("stripeEmail").value = token.email;
+				document.getElementById("paymentForm").submit();
+			}
+		});
+		document.getElementById('customButton').addEventListener('click', function(e) {
+			var amount = $("#reservation-commission").val() * 100;
+			handler.open({
+				name: 'Share Stockage',
+				description: 'Règlement commission',
+				amount: amount,
+				currency: 'chf',
+				allowRememberMe: false
+			});
+			e.preventDefault();
+		});
