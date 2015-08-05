@@ -48,8 +48,6 @@ class ReservationsController < ApplicationController
     return redirect_to owner_space_users_path if current_user != @advert.user or @reservation.validated
     if @reservation.update_attributes(validated: true)
       recipients = User.where(id: @reservation.user_id)
-      # admin_user.send_message(recipients, @reservation.email_validate[:body], @reservation.email_validate[:subject]).conversation
-      # ValidateReservationEmail.perform_async(@advert.user_id, @reservation.user_id, @reservation.id)
       advert_user = User.find(@advert.user_id)
       reservation_user = User.find(@reservation.user_id)
       UserMailer.validate_reservation(reservation_user, @reservation).deliver
@@ -65,10 +63,9 @@ class ReservationsController < ApplicationController
   def cancel
     return redirect_to owner_space_users_path if current_user != @advert.user or @reservation.canceled
     if @reservation.update_attributes(canceled: true)
-      recipients = User.where(id: @reservation.user_id)
-      # admin_user.send_message(recipients, @reservation.email_cancel[:body], @reservation.email_cancel[:subject]).conversation
-      # NotificationEmail.perform_async(@reservation.user_id)
-      UserMailer.notify_user(recipients.first).deliver
+      ch = Stripe::Charge.retrieve(@reservation.charge_id)
+      ch.refunds.create
+      UserMailer.cancel_reservation(@reservation).deliver
       flash[:notice] = "La réservation a bien été annulée. Un email a été envoyé au locataire pour l'en informer."
     else
       flash[:alert] = "Une erreur est survenue durant l'annulation de la réservation. Veuillez réessayer s'il vous plaît. Si le problème persiste, n'hésitez pas à contacter le support."
@@ -85,15 +82,12 @@ class ReservationsController < ApplicationController
   def update
     return redirect_to users_path if current_user != @reservation.user or @reservation.paid or @reservation.validated
     if @reservation.update_attributes(reservation_params)
-      recipients = User.where(id: @advert.user_id)
-      admin_user.send_message(recipients, @reservation.email_update[:body], @reservation.email_update[:subject]).conversation
-      # NotificationEmail.perform_async(@advert.user_id)
-      UserMailer.notify_user(recipients.first).deliver
-      flash[:notice] = "Votre demande de modification concernant votre réservation a bien été envoyée au propriétaire."
+      flash[:notice] = "Votre demande de modification concernant votre réservation a bien été prise en compte."
+      redirect_to payment_advert_reservation_path(@advert, @reservation)
     else
       flash[:alert] = "Une erreur est survenue durant la mise à jour de votre réservation. Veuillez réessayer s'il vous plaît. Si le problème persiste, n'hésitez pas à contacter le support."
+      redirect_to lodger_space_users_path
     end
-    redirect_to lodger_space_users_path
   end
   
   def destroy

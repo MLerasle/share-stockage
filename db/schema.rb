@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 20150804133336) do
     t.datetime "updated_at"
     t.boolean  "canceled",   default: false
     t.boolean  "paid",       default: false
+    t.string   "charge_id"
   end
 
   create_table "users", force: true do |t|

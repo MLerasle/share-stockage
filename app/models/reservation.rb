@@ -37,7 +37,8 @@ class Reservation < ActiveRecord::Base
   end
 
   def commission
-    (price * 0.15).round(2)
+    c = (price * 0.08).round(2)
+    c < 0.5 ? 1 : c
   end
 
   def price_with_commission

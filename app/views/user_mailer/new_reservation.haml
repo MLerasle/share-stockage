@@ -1,0 +1,20 @@
+!!!
+%html
+	%head
+		%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+	%body
+		%p Bonjour,
+		%p
+			Vous avez reçu une demande de réservation de votre espace
+			= @advert.title
+			\.
+		%p
+			Vous pouvez dès à présent valider cette réservation depuis votre espace personnel dans la rubrique "Mon compte" > "Espace propriétaire" > "Gérer les réservations".
+		%p
+			= link_to "Me connecter à mon espace personnel", @url
+		%p
+			Un email de confirmation accompagné d'un modèle de contrat vous sera ensuite envoyé ainsi qu'au locataire afin que vous puissiez prendre contact directement.
+		%p
+			Bien cordialement,
+			%br
+			= link_to "L'équipe de Share Stockage", root_url

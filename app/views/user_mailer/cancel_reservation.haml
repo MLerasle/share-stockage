@@ -1,0 +1,21 @@
+!!!
+%html
+	%head
+		%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+	%body
+		%p Bonjour,
+		%p
+			Votre réservation de l'espace
+			= @advert.title
+			ne peut pas être effectuée pour le moment et a donc été annulée par le propriétaire.
+		%p
+			Le montant de
+			= @reservation.commission
+			CHF
+			a été reversé sur votre carte de crédit.
+		%p
+			Nous sommes désolés pour ce désagrément.
+		%p
+			Bien cordialement,
+			%br
+			= link_to "L'équipe de Share Stockage", root_url

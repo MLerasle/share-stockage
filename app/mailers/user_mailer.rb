@@ -45,4 +45,18 @@ class UserMailer < ActionMailer::Base
     @advert_url = "http://sharestockage.ch/adverts/#{@advert.id}"
     mail(to: @user.email, subject: "Merci pour votre demande de réservation")
   end
+
+  def cancel_reservation(reservation)
+    @user = reservation.user
+    @advert = reservation.advert
+    @reservation = reservation
+    mail(to: @user.email, subject: "Votre réservation n'a pas pu aboutir")
+  end
+
+  def new_reservation(reservation)
+    @advert = reservation.advert
+    @owner = @advert.user
+    @url = "http://sharestockage.ch/users/sign_in"
+    mail(to: @owner.email, subject: "Demande de réservation de votre espace")
+  end
 end

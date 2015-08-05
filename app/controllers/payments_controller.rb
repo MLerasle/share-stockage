@@ -17,11 +17,8 @@ class PaymentsController < ApplicationController
       currency:     'chf'
     )
     
-    reservation.update_attributes(paid: true)
-    recipients = User.where(id: advert.user_id)
-    admin_user.send_message(recipients, reservation.email_ask[:body], reservation.email_ask[:subject]).conversation
-    advert_user = User.find(advert.user_id)
-    UserMailer.notify_user(advert_user).deliver
+    reservation.update_attributes(paid: true, charge_id: charge.id)
+    UserMailer.new_reservation(reservation).deliver
     UserMailer.pending_reservation(reservation).deliver
     
   rescue Stripe::CardError => e
