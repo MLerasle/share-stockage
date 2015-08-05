@@ -29,25 +29,26 @@
 							.tabs-content
 								#panel2.content.active
 									#reservations_section
-										- if @advert.reservations.running.any?
-											%h4.subheader Votre espace est actuellement loué.
-											%p
-												Locataire:
-												%strong= @advert.running_reservation.user.username
-												\-
-												Réservation du
-												%strong= @advert.running_reservation.start_date.strftime("%d/%m/%Y")
-												au
-												%strong= @advert.running_reservation.end_date.strftime("%d/%m/%Y")
-												\-
-												Durée:
-												%strong= @advert.running_reservation.duration
-												jours
-												\-
-												Prix: CHF
-												%strong= @advert.running_reservation.price
+										- if @advert.reservations.pending_or_running.any?
+											%h4.subheader Locations en cours ou à venir
+											- @advert.reservations.pending_or_running.each do |r|
+												%p
+													Locataire:
+													%strong= r.user.username
+													\-
+													Réservation du
+													%strong= r.start_date.strftime("%d/%m/%Y")
+													au
+													%strong= r.end_date.strftime("%d/%m/%Y")
+													\-
+													Durée:
+													%strong= r.duration
+													jours
+													\-
+													Prix perçu: CHF
+													%strong= r.price
 										- else
-											%h4.subheader Cet espace n'est pas loué actuellement.
+											%h4.subheader Aucune location réservée à ce jour.
 										%hr
 										- if @advert.reservations.pending.any?
 											%p
@@ -59,7 +60,7 @@
 													%tr
 														%th Début
 														%th Fin
-														%th Prix
+														%th Prix perçu
 														%th{ colspan: 3 } Réservation
 												%tbody
 													- @advert.reservations.pending.each do |r|

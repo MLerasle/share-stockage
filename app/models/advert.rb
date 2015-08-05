@@ -127,6 +127,10 @@ class Advert < ActiveRecord::Base
   def daily_price
     BigDecimal.new((price / 30.0).to_s).round(2)
   end
+
+  def price_with_commission
+    BigDecimal.new((price * 1.08).to_s).round(2)
+  end
   
   def light_hr
     light ? "Oui" : "Non"
