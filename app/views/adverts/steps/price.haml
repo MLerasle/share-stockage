@@ -63,7 +63,7 @@
 							%hr
 							= form_for @advert, url: wizard_path, method: :put do |f|
 								%br
-								= f.label "Prix mensuel", nil, class: 'required'
+								= f.label "Le prix mensuel renseigné est le montant que vous percevrez", nil, class: 'required'
 								.row.collapse
 									.small-3.large-2.columns
 										%span.prefix CHF
@@ -71,9 +71,14 @@
 										= f.number_field :price, step: "any", label: false, id: "price"
 								.row
 									.small-12.large-12.columns
-										%h6#monthly_price
-											Soit un montant quotidien de CHF
-											= @advert.daily_price if @advert.price
+										%h6#daily_price
+											- if @advert.price
+												Soit un montant quotidien de CHF
+												= @advert.daily_price
+										%h6#price_with_commission
+											- if @advert.price
+												Le montant affiché sur le site, tenant compte de la commission perçue par Share Stockage, sera de CHF
+												= @advert.price_with_commission
 								%hr
 								= link_to "Précédent", previous_wizard_path, class: "button small"
 								= f.submit "Suivant", class: "button right small"
@@ -82,5 +87,6 @@
 	:javascript
 		$('#price').bind("keyup mouseup", function(event) {
 			var price = document.getElementById('price').value;
-			$('#monthly_price').html("Soit un montant quotidien de CHF " + Math.round(price / 30 * 100) / 100);
+			$('#daily_price').html("Vous toucherez CHF " + Math.round(price / 30 * 100) / 100 + " par jour de location.");
+			$('#price_with_commission').html("Le montant affiché sur le site, tenant compte de la commission perçue par Share Stockage, sera de CHF " + Math.round(price * 1.08 * 100) / 100);
 		});
