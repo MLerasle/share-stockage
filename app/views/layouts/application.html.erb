@@ -16,7 +16,11 @@
 			<nav class="top-bar" data-topbar role="navigation">
 			  <ul class="title-area">
 			    <li class="name">
-			      <h1><%= link_to "Share Stockage", root_path, method: :get %></a></h1>
+						<h1>
+				      <%= link_to root_path, method: :get do %>
+								<%= image_tag "logo.png", style: "margin-left: 10px; margin-right: 10px;" %>Share Stockage
+							<% end %>
+						</h1>
 			    </li>
 					<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
 			  </ul>

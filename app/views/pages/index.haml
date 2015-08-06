@@ -7,28 +7,28 @@
 			%h3 Espace de stockage entre particuliers
 			= form_for '#', method: :get, url: adverts_path, id: "adverts_filter_form" do
 				.row
-					.large-3.small-6.columns
+					.large-3.small-12.columns
 						.row.collapse
 							.small-9.large-10.columns
 								= text_field_tag "filter[address]", (params[:filter][:address] rescue nil), placeholder: "Ville", id: "location_field"
 							.small-3.large-2.columns
 								%span.postfix
 									%i.fa.fa-map-marker
-					.large-3.small-6.columns
+					.large-3.small-12.columns
 						.row.collapse
 							.small-9.large-10.columns
 								= text_field_tag "filter[start_date]", (params[:filter][:start_date] rescue nil), placeholder: "Début"
 							.small-3.large-2.columns
 								%span.postfix
 									%i.fa.fa-calendar
-					.large-3.small-6.columns
+					.large-3.small-12.columns
 						.row.collapse
 							.small-9.large-10.columns
 								= text_field_tag "filter[end_date]", (params[:filter][:end_date] rescue nil), placeholder: "Fin"
 							.small-3.large-2.columns
 								%span.postfix
 									%i.fa.fa-calendar
-					.large-3.small-6.columns
+					.large-3.small-12.columns
 						= button_tag(type: "submit", class: "button radius tiny") do
 							%i.fa.fa-search
 							Rechercher
