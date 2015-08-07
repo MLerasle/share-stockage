@@ -31,7 +31,7 @@
 									%tr{ "data-link" => advert_path(r.advert) }
 										= render partial: 'adverts/advert_line', locals: { advert: r.advert }
 									%tr.adverts_action_line
-										%td{ style: "text-align:center;" }
+										%td.hide-for-small{ style: "text-align:center;" }
 											- if r.validated
 												%span{ style: "color: green" } RESERVATION VALIDEE
 											- elsif r.paid and !r.validated
@@ -53,7 +53,8 @@
 										%td
 											- unless r.paid or r.validated
 												= link_to "Annuler la réservation", advert_reservation_path(r.advert, r), method: :delete, data: { confirm: "Êtes-vous sûr de vouloir supprimer cette réservation?" }, class: "button tiny alert right"
-												= link_to "Modifier les dates", edit_advert_reservation_path(r.advert, r), data: {'reveal-id' => 'editReservationModal'}, class: "button tiny success right"
+												= link_to "Modifier les dates", edit_advert_reservation_path(r.advert, r), data: {'reveal-id' => 'editReservationModal'}, class: "button tiny right"
+												= link_to "Payer", payment_advert_reservation_path(r.advert, r), class: "button tiny success right"
 					
 										#editReservationModal.reveal-modal{"data-reveal" => ""}
 											= render partial: 'reservations/edit', locals: { advert: r.advert, reservation: r }

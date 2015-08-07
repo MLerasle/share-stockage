@@ -60,4 +60,11 @@ class UserMailer < ActionMailer::Base
     @url = "http://sharestockage.ch/users/sign_in"
     mail(to: @owner.email, subject: "Demande de réservation de votre espace")
   end
+  
+  def payment_default(reservation)
+    @user = reservation.user
+    @advert = reservation.advert
+    @url = "http://sharestockage.ch/users/lodger_space"
+    mail(to: @user.email, subject: "Carte bancaire refusée")
+  end
 end

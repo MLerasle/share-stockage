@@ -23,6 +23,10 @@ class Reservation < ActiveRecord::Base
       where("(reservations.validated = ? and reservations.canceled = ?) or (reservations.validated = ? and end_date >= ?)", false, false, true, Date.today)
     end
 
+    def paid
+      where(paid: true)
+    end
+
     def running
       where(validated: true).where("start_date <= ? and end_date >= ?", Date.today, Date.today)
     end

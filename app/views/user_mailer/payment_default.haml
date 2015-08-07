@@ -1,0 +1,21 @@
+!!!
+%html
+	%head
+		%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+	%body
+		%p
+			Bonjour,
+		%p
+			Votre réservation de l'espace
+			= @advert.title
+			n'a pas pu aboutir car votre paiement de la commission par carte bancaire a été refusé.
+		%p
+			Votre demande de réservation a donc été suspendue et le propriétaire en a été informé.
+		%p
+			Vous pouvez de nouveau soumettre une demande de réservation au propriétaire depuis votre espace personnel.
+		%p
+			= link_to "Refaire une demande de réservation", @url
+		%p
+			Bien cordialement,
+			%br
+			= link_to "L'équipe de Share Stockage", root_url

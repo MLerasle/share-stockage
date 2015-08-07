@@ -38,7 +38,7 @@ class ReservationsController < ApplicationController
   end
 
   def payment
-    return redirect_to advert_path(@advert) if @reservation.paid
+    return redirect_to advert_path(@advert) if @reservation.paid and @reservation.validated
   end
   
   def preview_validate
@@ -57,6 +57,7 @@ class ReservationsController < ApplicationController
       )
       UserMailer.validate_reservation(reservation_user, @reservation).deliver
       UserMailer.validate_reservation_owner(advert_user, @reservation).deliver
+      @reservation.update_attributes(customer_id: nil)
       # FeedbackEmail.perform_at((@reservation.end_date.to_time + 10.hours).to_i, @reservation.advert_id, @reservation.advert.user_id, @reservation.user_id)
       flash[:notice] = "La réservation a bien été validée. Veuillez consulter vos mails pour obtenir un exemplaire du contrat de location."
     else
@@ -64,8 +65,10 @@ class ReservationsController < ApplicationController
     end
     redirect_to owner_space_users_path
   rescue Stripe::CardError => e
-    flash[:error] = e.message
-    redirect_to payment_advert_reservation_path(advert, reservation)
+    @reservation.update_attributes(validated: false, paid: false, customer_id: nil, commission_amount: nil)
+    flash[:alert] = "Le paiement de la commission par carte bancaire du locataire a été refusé. Un email lui a été envoyé pour l'en informer. Sa demande de réservation a en conséquence été suspendue. Nous nous excusons pour ce désagrément."
+    UserMailer.payment_default(@reservation).deliver
+    redirect_to edit_advert_path(@advert)
   end
   
   def cancel

@@ -1,4 +1,14 @@
 %section#main-content
+	.row
+		.small-12.large-12.columns
+			- unless notice.nil?
+				.alert-box.info.radius{ "data-alert" => "" }
+					= notice
+					%a{ href: "#", class: "close" } &times;
+			- unless alert.nil?
+				.alert-box.alert.radius{ "data-alert" => "" }
+					= alert
+					%a{ href: "#", class: "close" } &times;
 	.row.body.sign-in
 		.large-10.small-12.columns.large-centered.small-centered
 			.create-account
@@ -31,4 +41,4 @@
 							.small-6.large-6.columns
 								= link_to "Cliquez ici pour valider la réservation", validate_advert_reservation_path(@advert, @reservation), method: :put, class: "button radius expand success"
 							.small-6.large-6.columns
-								= link_to "Annuler", edit_advert_path(@advert), class: "button radius expand"
+								= link_to "Retour", edit_advert_path(@advert), class: "button radius expand"
