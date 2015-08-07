@@ -38,10 +38,11 @@ class ReservationsController < ApplicationController
   end
 
   def payment
-    return redirect_to advert_path(@advert) if @reservation.paid and @reservation.validated
+    return redirect_to advert_path(@advert) if current_user != @reservation.user or (@reservation.paid and @reservation.validated)
   end
   
   def preview_validate
+    return redirect_to owner_space_users_path if current_user != @advert.user
   end
   
   def validate
@@ -84,6 +85,7 @@ class ReservationsController < ApplicationController
   end
   
   def preview_cancel
+    return redirect_to owner_space_users_path if current_user != @advert.user
   end
   
   def edit
