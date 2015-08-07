@@ -121,14 +121,15 @@ ActiveRecord::Schema.define(version: 20150804133336) do
   create_table "reservations", force: true do |t|
     t.integer  "user_id"
     t.integer  "advert_id"
-    t.boolean  "validated",  default: false
+    t.boolean  "validated",                                 default: false
     t.date     "start_date"
     t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "canceled",   default: false
-    t.boolean  "paid",       default: false
-    t.string   "charge_id"
+    t.boolean  "canceled",                                  default: false
+    t.boolean  "paid",                                      default: false
+    t.string   "customer_id"
+    t.decimal  "commission_amount", precision: 8, scale: 2
   end
 
   create_table "users", force: true do |t|

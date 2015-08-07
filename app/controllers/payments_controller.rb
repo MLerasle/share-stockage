@@ -7,17 +7,10 @@ class PaymentsController < ApplicationController
 
     customer = Stripe::Customer.create(
       email: params[:stripeEmail],
-      card:  params[:stripeToken]
-    )
-
-    charge = Stripe::Charge.create(
-      customer:     customer.id,
-      amount:       @amount,
-      description:  "Règlement de #{customer.email} pour réservation #{reservation.id}",
-      currency:     'chf'
+      source:  params[:stripeToken]
     )
     
-    reservation.update_attributes(paid: true, charge_id: charge.id)
+    reservation.update_attributes(paid: true, customer_id: customer.id, commission_amount: @amount)
     UserMailer.new_reservation(reservation).deliver
     UserMailer.pending_reservation(reservation).deliver
     

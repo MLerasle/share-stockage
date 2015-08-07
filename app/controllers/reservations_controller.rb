@@ -47,9 +47,14 @@ class ReservationsController < ApplicationController
   def validate
     return redirect_to owner_space_users_path if current_user != @advert.user or @reservation.validated
     if @reservation.update_attributes(validated: true)
-      recipients = User.where(id: @reservation.user_id)
       advert_user = User.find(@advert.user_id)
       reservation_user = User.find(@reservation.user_id)
+      charge = Stripe::Charge.create(
+        customer:     @reservation.customer_id,
+        amount:       @reservation.commission_amount.to_i,
+        description:  "Règlement de #{reservation_user.email} pour réservation #{@reservation.id}",
+        currency:     'chf'
+      )
       UserMailer.validate_reservation(reservation_user, @reservation).deliver
       UserMailer.validate_reservation_owner(advert_user, @reservation).deliver
       # FeedbackEmail.perform_at((@reservation.end_date.to_time + 10.hours).to_i, @reservation.advert_id, @reservation.advert.user_id, @reservation.user_id)
@@ -58,13 +63,15 @@ class ReservationsController < ApplicationController
       flash[:alert] = "Une erreur est survenue durant la validation de la réservation. Veuillez réessayer s'il vous plaît. Si le problème persiste, n'hésitez pas à contacter le support."
     end
     redirect_to owner_space_users_path
+  rescue Stripe::CardError => e
+    flash[:error] = e.message
+    redirect_to payment_advert_reservation_path(advert, reservation)
   end
   
   def cancel
     return redirect_to owner_space_users_path if current_user != @advert.user or @reservation.canceled
     if @reservation.update_attributes(canceled: true)
-      ch = Stripe::Charge.retrieve(@reservation.charge_id)
-      ch.refunds.create
+      @reservation.update_attributes(paid: false, customer_id: nil, commission_amount: nil)
       UserMailer.cancel_reservation(@reservation).deliver
       flash[:notice] = "La réservation a bien été annulée. Un email a été envoyé au locataire pour l'en informer."
     else
