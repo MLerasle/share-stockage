@@ -1,10 +1,10 @@
 - if advert.pictures.any?
-	%td.image_cell= image_tag advert.pictures.first.image.url(:medium)
+	%td.image_cell.hide-for-small= image_tag advert.pictures.first.image.url(:medium)
 - else
-	%td.image_cell= image_tag "camera.png"
+	%td.image_cell.hide-for-small= image_tag "camera.png"
 %td
 	%h5
-		%i.fa.fa-map-marker
+		%i.fa.fa-map-marker.hide-for-small
 		= advert.full_address
 	%ul
 		%li
