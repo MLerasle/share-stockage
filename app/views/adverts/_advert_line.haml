@@ -5,7 +5,7 @@
 %td
 	%h5
 		%i.fa.fa-map-marker
-		= advert.full_address
+		= advert.full_address if advert.address
 	%ul
 		%li
 			Type d'espace:
@@ -19,9 +19,10 @@
 			= advert.access_type_hr
 %td{ style: "text-align:right;" }
 	%h4
-		CHF
-		= advert.price_with_commission
-	%em.subheader par mois
+		- if advert.price
+			CHF
+			= advert.price_with_commission
+			%em.subheader par mois
 		
 - content_for :scripts do
 	:javascript
