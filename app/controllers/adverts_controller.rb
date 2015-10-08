@@ -21,6 +21,7 @@ class AdvertsController < ApplicationController
     return redirect_to advert_step_path(existing_advert, Advert.form_steps.first) if existing_advert
     @advert = current_user.adverts.new
     @advert.save(validate: false) unless current_user.adverts.where(created_at: Time.now).any?
+    UserMailer.new_advert_mail(@advert).deliver
     redirect_to advert_step_path(@advert, Advert.form_steps.first)
   end
   

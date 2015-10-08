@@ -1,5 +1,10 @@
 class UserMailer < ActionMailer::Base
   default from: ENV["contact_email"]
+
+  def new_advert_mail(advert)
+    @advert = advert
+    mail(to: "admin@sharestockage.ch", subject: "Nouvelle annonce sur le site")
+  end
   
   def validate_reservation(receiver, reservation)
     @receiver = receiver
