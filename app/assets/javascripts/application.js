@@ -21,6 +21,7 @@
 //= require raty
 //= require geocomplete.min
 //= require slick
+//= require analytics
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
