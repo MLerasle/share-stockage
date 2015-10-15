@@ -87,8 +87,10 @@
 								<hr/>
 								<!-- <p>En cas de difficulté ou pour nous aider à améliorer le site:</p> -->
 		            <p><i class="fa fa-envelope"></i> <%= mail_to ENV["contact_email"], "contact (at) sharestockage (dot) ch"%> </p>
-								<p>Pour nous soutenir et nous aider à améliorer le service, vous pouvez également nous faire un don:</p>
-								<p><%= render partial: 'pages/paypal_button' %></p>
+								<p><i class="fa fa-facebook"></i> <%= link_to "Facebook", "https://www.facebook.com/sharestockage", target: '_blank' %></p>
+								<p><i class="fa fa-twitter"></i> <%= link_to "Twitter", "https://twitter.com/ShareStockage", target: '_blank' %></p>
+								<!-- <p>Pour nous soutenir et nous aider à améliorer le service, vous pouvez également nous faire un don:</p>
+								<p><%= render partial: 'pages/paypal_button' %></p> -->
 								<!-- <p><i class="fa fa-facebook"></i> Facebook</p>
 								<p><i class="fa fa-twitter"></i> Twitter</p>
 								<p><i class="fa fa-google-plus"></i> Google plus</p> -->
