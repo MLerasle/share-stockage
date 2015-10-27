@@ -55,8 +55,11 @@
 				%br
 				%h3.subheader Tarif mensuel
 				%p
-					CHF
-					= @advert.price_with_commission
+					- if @advert.price
+						CHF
+						= @advert.price_with_commission
+					- else
+						Non renseigné
 				%br
 				%h3.subheader Disponibilité
 				%p
