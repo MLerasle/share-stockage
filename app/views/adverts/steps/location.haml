@@ -60,6 +60,7 @@
 
 						.large-8.medium-8.small-12.columns
 							%h4 Indiquez l'addresse exacte de votre espace
+							%em{ style: "color:red; font-size: 80%" } Les champs marqués d'un * sont obligatoires.
 							%hr
 							= form_for @advert, url: wizard_path, method: :put do |f|
 								= f.label "Adresse", nil, class: 'required'

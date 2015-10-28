@@ -59,6 +59,7 @@
 
 					.large-8.medium-8.small-12.columns
 						%h4 Informations générales
+						%em{ style: "color:red; font-size: 80%" } Les champs marqués d'un * sont obligatoires.
 						%hr
 						= form_for @advert, url: wizard_path, method: :put do |f|
 							= f.label "Choisissez le titre de votre annonce", nil, class: 'required'

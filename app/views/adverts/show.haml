@@ -64,7 +64,10 @@
 				%h3.subheader Disponibilité
 				%p
 					À partir du
-					= @advert.from_date.strftime("%d/%m/%Y")
+					- if @advert.from_date
+						= @advert.from_date.strftime("%d/%m/%Y")
+					- else
+						Non renseigné
 					%br
 					Voir la section calendrier pour plus de détails.
 				%br

@@ -60,6 +60,7 @@
 
 						.large-8.medium-8.small-12.columns
 							%h4 Choisissez le prix de votre espace
+							%em{ style: "color:red; font-size: 80%" } Les champs marqués d'un * sont obligatoires.
 							%hr
 							= form_for @advert, url: wizard_path, method: :put do |f|
 								%br
@@ -75,10 +76,10 @@
 											- if @advert.price
 												Soit un montant quotidien de CHF
 												= @advert.daily_price
-										%h6#price_with_commission
-											- if @advert.price
-												Le montant affiché sur le site, tenant compte de la commission perçue par Share Stockage, sera de CHF
-												= @advert.price_with_commission
+										-#%h6#price_with_commission
+											-#- if @advert.price
+												-#Le montant affiché sur le site, tenant compte de la commission perçue par Share Stockage, sera de CHF
+												-#= @advert.price_with_commission
 								%hr
 								= link_to "Précédent", previous_wizard_path, class: "button small"
 								= f.submit "Suivant", class: "button right small"
