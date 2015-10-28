@@ -56,6 +56,7 @@
 		var handler = StripeCheckout.configure({
 			key: "#{Rails.configuration.stripe[:publishable_key]}",
 			image: "#{asset_path('logo.jpg')}",
+			locale: 'auto',
 			token: function(token) {
 				document.getElementById("stripeToken").value = token.id;
 				document.getElementById("stripeEmail").value = token.email;
