@@ -201,6 +201,11 @@
 								%a.close-reveal-modal ×
 						- else
 							= link_to "Me connecter pour contacter le propriétaire", new_user_session_path, class: "button radius expand"
+
+			.panel
+				%h3 Partager
+				%hr
+				= social_share_button_tag(@advert.title, popup: true)
 					
 - content_for :scripts do
 	:javascript

@@ -40,6 +40,9 @@ gem 'foundation_rails_helper'
 # Authentication
 gem 'devise'
 
+# Social buttons
+gem 'social-share-button'
+
 # Geocode adverts
 gem "geocoder"
 

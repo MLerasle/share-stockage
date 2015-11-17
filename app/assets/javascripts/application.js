@@ -22,6 +22,7 @@
 //= require geocomplete.min
 //= require slick
 //= require analytics
+//= require social-share-button
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
