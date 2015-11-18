@@ -1,0 +1,11 @@
+.row
+	.small-12.medium-12.large-12.columns
+		%h2 Share Stockage - Nouvel article de blog
+
+		= form_for @article do |f|
+			= f.text_field :title
+			= f.text_area :content, rows: 20
+
+			= f.submit
+			
+		= link_to "Retour au blog", articles_path, class: "button"

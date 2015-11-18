@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804133336) do
+ActiveRecord::Schema.define(version: 20151117151819) do
 
   create_table "adverts", force: true do |t|
     t.string   "address"
@@ -44,6 +44,16 @@ ActiveRecord::Schema.define(version: 20150804133336) do
   end
 
   add_index "adverts", ["slug"], name: "index_adverts_on_slug", unique: true, using: :btree
+
+  create_table "articles", force: true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "slug",       null: false
+  end
+
+  add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true, using: :btree
 
   create_table "evaluations", force: true do |t|
     t.integer  "user_id"

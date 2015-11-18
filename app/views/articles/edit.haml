@@ -1,0 +1,11 @@
+.row
+	.small-12.medium-12.large-12.columns
+		%h2
+			Modifier
+			= @article.title
+
+		= form_for @article, url: article_path(@article), method: :put do |f|
+			= f.text_field :title
+			= f.text_area :content, rows: 20
+
+			= f.submit

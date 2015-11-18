@@ -2,8 +2,8 @@
 
 footer {
 	margin-top: 20px;
-    background-color: rgb(25,61,83);
-    padding: 20px 0 20px 0;
+  background-color: rgb(25,61,83);
+  padding: 20px 0 20px 0;
 }
 
 footer h4, p {
@@ -212,4 +212,20 @@ a[class*="social-share-button-google_plus"] {
   width: 32px;
   height: 32px;
 	background: asset_url('google_plus.png') no-repeat;
+}
+
+.blog {
+  font-family: "Kepler Std";
+  font-size: 115%;
+  line-height: 1.8em;
+}
+
+.blog_content h2, .new-post h1 {
+  color: rgb(46,121,168);
+}
+
+.blog_header {
+  width: 100%;
+  background-color: rgb(25,61,83);
+  padding: 20px 0 20px 0;
 }

@@ -1,0 +1,21 @@
+.blog_header.large-12.columns.large-centered
+	%h1{ style: "text-align: center; color: white" } Blog Share Stockage
+.blog.row.bump-25
+	.large-12.columns
+		.post-box
+			- @articles.each do |article|
+				.row
+					.large-8.columns.large-centered
+						.new-post
+							%hr
+							%h1.light= link_to article.title, article_path(article)
+							%hr
+							= article.content[0..400].gsub(/\n/,"<br/>").html_safe
+							\...
+						= link_to "Lire plus", article_path(article), class: "button radius success small right"
+						- if current_user and current_user.admin?
+							= link_to "Modifier", edit_article_path(article)
+							= link_to "Supprimer", article_path(article), method: :delete
+
+	
+= link_to "Créer nouvel article", new_article_path if current_user and current_user.admin?

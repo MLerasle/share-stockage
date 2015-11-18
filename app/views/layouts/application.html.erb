@@ -38,6 +38,8 @@
 				      <li class="divider"></li>
 				      <li><%= link_to "Inscription", new_user_registration_path %></li>
 						<% end %>
+						<li class="divider"></li>
+						<li><%= link_to "Blog", articles_path %></li>
 			    </ul>
 				</section>
 			</nav>
@@ -89,6 +91,7 @@
 		            <p><i class="fa fa-envelope"></i> <%= mail_to ENV["contact_email"], "contact (at) sharestockage (dot) ch"%> </p>
 								<p><i class="fa fa-facebook"></i> <%= link_to "Facebook", "https://www.facebook.com/sharestockage", target: '_blank' %></p>
 								<p><i class="fa fa-twitter"></i> <%= link_to "Twitter", "https://twitter.com/ShareStockage", target: '_blank' %></p>
+								<p><i class="fa fa-rss"></i> <%= link_to "Blog", articles_path %></p>
 								<!-- <p>Pour nous soutenir et nous aider à améliorer le service, vous pouvez également nous faire un don:</p>
 								<p><%= render partial: 'pages/paypal_button' %></p> -->
 								<!-- <p><i class="fa fa-facebook"></i> Facebook</p>

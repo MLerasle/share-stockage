@@ -1,0 +1,20 @@
+.blog.row.bump-25
+	.large-12.columns
+		.post-box
+			.row
+				.large-8.columns.large-centered
+					.new-post
+						%br
+						%h1.light= @article.title
+						%hr
+						.blog_content= @article.content.gsub(/\n/,"<br/>").html_safe
+
+					- if current_user and current_user.admin?
+						= link_to "Modifier", edit_article_path(@article)
+						= link_to "Supprimer", article_path(@article), method: :delete
+			.row
+				.large-8.columns.large-centered
+					%hr
+					Partagez cet article
+					= social_share_button_tag(@article.title, popup: true)
+					= link_to "Retour au blog", articles_path, class: "button radius success small right"
