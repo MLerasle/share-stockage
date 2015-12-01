@@ -10,8 +10,8 @@
 						.blog_content= @article.content.gsub(/\n/,"<br/>").html_safe
 
 					- if current_user and current_user.admin?
-						= link_to "Modifier", edit_article_path(@article)
-						= link_to "Supprimer", article_path(@article), method: :delete
+						= link_to "Modifier", edit_article_path(@article), class: "button radius small"
+						= link_to "Supprimer", article_path(@article), method: :delete, class: "button radius alert small"
 			.row
 				.large-8.columns.large-centered
 					%hr
