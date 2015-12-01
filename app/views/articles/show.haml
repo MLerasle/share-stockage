@@ -18,3 +18,5 @@
 					Partagez cet article
 					= social_share_button_tag(@article.title, popup: true)
 					= link_to "Retour au blog", articles_path, class: "button radius success small right"
+					
+					= render 'disqus'
