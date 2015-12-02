@@ -7,7 +7,7 @@
 						%br
 						%h1.light= @article.title
 						%hr
-						.blog_content= @article.content.gsub(/\n/,"<br/>").html_safe
+						.blog_content= @article.content.html_safe#gsub(/\n/,"<br/>")
 
 					- if current_user and current_user.admin?
 						= link_to "Modifier", edit_article_path(@article), class: "button radius small"

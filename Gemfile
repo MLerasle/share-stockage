@@ -84,6 +84,9 @@ gem 'sidekiq'
 # Use unicorn as the app server
 gem 'unicorn'
 
+# Text editor
+gem 'ckeditor'
+
 # Monitoring
 gem 'newrelic_rpm'
 

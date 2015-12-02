@@ -6,6 +6,30 @@
 
 		= form_for @article, url: article_path(@article), method: :put do |f|
 			= f.text_field :title
-			= f.text_area :content, rows: 20
-
+			= f.cktext_area :content, rows: 20, id: "article_content"
+			%br
 			= f.submit
+		= link_to "Retour au blog", articles_path, class: "button"
+		= link_to "Prévisualiser", '#', id: "preview", class: "button"
+		= link_to "Masquer la prévisualisation", '#', id: "hide_preview", class: "button"
+		.blog.row.bump-25
+			.large-12.columns
+				.post-box
+					.row
+						.large-8.columns.large-centered
+							#preview_html.new-post
+
+- content_for :scripts do
+	:javascript
+		$("#hide_preview").hide();
+		$('#preview').on('click', function () {
+			var content = CKEDITOR.instances['article_content'].getData();
+			$('#preview_html').html('<h1>'+ $('#article_title').val() + '</h1>' + '<hr/>' + content);
+			$("#preview").hide();
+			$("#hide_preview").show();
+		});
+		$('#hide_preview').on('click', function () {
+			$('#preview_html').html('');
+			$("#hide_preview").hide();
+			$("#preview").show();
+		});

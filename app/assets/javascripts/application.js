@@ -23,6 +23,8 @@
 //= require slick
 //= require analytics
 //= require social-share-button
+//= require ckeditor/init
+//= require_tree ./ckeditor
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
