@@ -25,6 +25,7 @@
 			$('#preview_html').html('<h1>'+ $('#article_title').val() + '</h1>' + '<hr/>' + content);
 			$("#preview").hide();
 			$("#hide_preview").show();
+			$('html, body').animate({scrollTop: $("#preview_html").offset().top}, 'slow');
 		});
 		$('#hide_preview').on('click', function () {
 			$('#preview_html').html('');
