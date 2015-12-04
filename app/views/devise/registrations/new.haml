@@ -17,28 +17,28 @@
 						= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'mean'}) do |f|
 							.row
 								.small-12.large-12.columns
-									= f.label "Photo de profil"
-									= f.file_field :avatar, label: false, id: "pictureInput"
+									= f.label "pictureInput", "Photo de profil"
+									= f.file_field :avatar, label: false, id: "user_pictureInput"
 							.row
 								.small-12.medium-6.large-6.columns
-									= f.label "Prénom", nil, class: 'required'
+									= f.label "first_name", "Prénom", class: 'required'
 									= f.text_field :first_name, autofocus: true, label: false
 								.small-12.medium-6.large-6.columns
-									= f.label "Nom", nil, class: 'required'
+									= f.label "last_name", "Nom", class: 'required'
 									= f.text_field :last_name, label: false
 							.row
 								.small-12.medium-6.large-6.columns
-									= f.label "Email", nil, class: 'required'
+									= f.label "email", "Email", class: 'required'
 									= f.email_field :email, label: false
 								.small-12.medium-6.large-6.columns
-									= f.label "Choisissez un nom d'utilisateur", nil, class: 'required'
+									= f.label "username", "Choisissez un nom d'utilisateur", class: 'required'
 									= f.text_field :username, label: false
 							.row
 								.small-12.medium-6.large-6.columns
-									= f.label "Mot de passe", nil, class: 'required'
+									= f.label "password", "Mot de passe", class: 'required'
 									= f.password_field :password, autocomplete: "off", placeholder: "8 caractères minimum", label: false
 								.small-12.medium-6.large-6.columns
-									= f.label "Confirmer le mot de passe", nil, class: 'required'
+									= f.label "password_confirmation", "Confirmer le mot de passe", class: 'required'
 									= f.password_field :password_confirmation, autocomplete: "off", placeholder: "8 caractères minimum", label: false
 							.row
 								.small-12.large-12.columns

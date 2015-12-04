@@ -29,21 +29,22 @@
 							= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "mean", method: :put }) do |f|
 								.row
 									.small-12.large-12.columns
-										#user_avatar= image_tag resource.avatar(:thumb)
+										#user_avatar
+										-#= image_tag resource.avatar(:thumb)
 										= f.file_field :avatar, label: false, id: "pictureInput"
 								.row
 									.small-12.medium-6.large-6.columns
-										= f.label "Prénom", nil, class: 'required'
+										= f.label "first_name", "Prénom", class: 'required'
 										= f.text_field :first_name, autofocus: true, label: false
 									.small-12.medium-6.large-6.columns
-										= f.label "Nom", nil, class: 'required'
+										= f.label "last_name", "Nom", class: 'required'
 										= f.text_field :last_name, label: false
 								.row
 									.small-12.medium-6.large-6.columns
-										= f.label "Nom d'utilisateur", nil, class: "required"
+										= f.label "username", "Nom d'utilisateur", class: "required"
 										= f.text_field :username, label: false
 									.small-12.medium-6.large-6.columns
-										= f.label "Email", nil, class: "required"
+										= f.label "email", "Email", class: "required"
 										= f.email_field :email, label: false
 
 								- if devise_mapping.confirmable? && resource.pending_reconfirmation?
@@ -51,13 +52,13 @@
 										En attente de confirmation pour: 
 										= resource.unconfirmed_email
 
-								= f.label "Nouveau Mot de passe (ne pas remplir si vous ne souhaitez pas le changer)"
+								= f.label "password", "Nouveau Mot de passe (ne pas remplir si vous ne souhaitez pas le changer)"
 								= f.password_field :password, autocomplete: "off", label: false
 
-								= f.label "Confirmer le nouveau mot de passe"
+								= f.label "password_confirmation", "Confirmer le nouveau mot de passe"
 								= f.password_field :password_confirmation, autocomplete: "off", label: false
 
-								= f.label "Mot de passe actuel (requis pour valider vos changements)", nil, class: "required"
+								= f.label "current_password", "Mot de passe actuel (requis pour valider vos changements)", class: "required"
 								= f.password_field :current_password, autocomplete: "off", label: false
 
 								= f.submit "Mettre à jour", class: "button right success"
