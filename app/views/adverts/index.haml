@@ -5,24 +5,24 @@
 			%h5 Que recherchez-vous?
 			%hr
 			= form_for '#', method: :get, id: "adverts_filter_form" do
-				= label_tag "Lieu"
+				= label_tag "location_field", "Lieu"
 				= text_field_tag "filter[address]", (params[:filter][:address] rescue nil), id: "location_field"
 				
-				= label_tag "Dans un rayon de"
+				= label_tag "filter_kilometers", "Dans un rayon de"
 				.row.collapse
 					.small-9.large-10.columns
 						= text_field_tag "filter[kilometers]", (params[:filter][:kilometers] rescue nil)
 					.small-3.large-2.columns
 						%span.postfix Km
 				
-				= label_tag "Type"
+				= label_tag "filter_advert_type", "Type"
 				= select_tag "filter[advert_type]", options_for_select([["Box", 1], ["Cave", 2], ["Garage", 3], ["Grenier", 4]], params[:filter][:advert_type]), prompt: "Tous"
 				
-				= label_tag "Dates"
+				= label_tag "filter_start_date", "Dates"
 				= text_field_tag "filter[start_date]", (params[:filter][:start_date] rescue nil), placeholder: "Début"
 				= text_field_tag "filter[end_date]", (params[:filter][:end_date] rescue nil), placeholder: "Fin"
 				
-				= label_tag "Affichage"
+				= label_tag "filter_sorting", "Affichage"
 				= select_tag "filter[sorting]", options_for_select([["Plus récentes d'abord", "created_at DESC"], ["Plus anciennes d'abord", "created_at ASC"], ["Prix croissant", "price ASC"], ["Prix décroissant", "price DESC"]], params[:filter][:sorting])
 				
 				= submit_tag "Rechercher", class: "button radius expand"

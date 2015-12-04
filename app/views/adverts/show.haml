@@ -161,7 +161,7 @@
 				%h3 Pré-réserver
 				%hr
 				= form_for([@advert, @advert.reservations.build]) do |f|
-					= f.label "Choisissez vos dates"
+					= f.label "start_date", "Choisissez vos dates"
 					.row.collapse
 						.small-9.large-10.columns
 							= f.text_field :start_date, placeholder: "Début de la location", label: false
