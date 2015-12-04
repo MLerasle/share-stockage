@@ -9,28 +9,27 @@
 			%dd= link_to "Espace locataire", lodger_space_users_path
 			%dd.active= link_to "Messagerie", conversations_path
 		%hr
-		#main-content
-			.row
-				.small-12.large-12.columns
-					%h1.subheader Messagerie
-					%hr
-		
-				.small-12.medium-4.large-3.columns
-					= render partial: "mailboxes", locals: { box: @box }
+		.row
+			.small-12.large-12.columns
+				%h1.subheader Messagerie
+				%hr
+	
+			.small-12.medium-4.large-3.columns
+				= render partial: "mailboxes", locals: { box: @box }
 
-				.small-12.medium-8.large-9.columns
-					%table#messages_table
-						%thead
-							%th Sujet
-							%th Contenu
-							%th Date
-							%th.right
-								- if @box == 'trash'
-									= link_to 'Vider la corbeille', empty_trash_conversations_path, method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir vider la corbeille?' }
-						%tbody
-							= render partial: 'conversations/conversation', collection: @conversations
+			.small-12.medium-8.large-9.columns
+				%table#messages_table
+					%thead
+						%th Sujet
+						%th Contenu
+						%th Date
+						%th.right
+							- if @box == 'trash'
+								= link_to 'Vider la corbeille', empty_trash_conversations_path, method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir vider la corbeille?' }
+					%tbody
+						= render partial: 'conversations/conversation', collection: @conversations
 
-					- if @conversations.empty?
-						%h6 Vous n'avez aucun message dans cette mailbox.
+				- if @conversations.empty?
+					%h6 Vous n'avez aucun message dans cette mailbox.
 
-					= paginate @conversations
+				= paginate @conversations

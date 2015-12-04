@@ -9,73 +9,72 @@
 			%dd= link_to "Espace locataire", lodger_space_users_path
 			%dd= link_to "Messagerie", conversations_path
 		%hr
-		#main-content
-			.row
-				.small-12.large-12.columns
-					- unless notice.nil?
-						.alert-box.info.radius{ "data-alert" => "" }
-							= notice
-							%a{ href: "#", class: "close" } &times;
-					- unless alert.nil?
-						.alert-box.alert.radius{ "data-alert" => "" }
-							= alert
-							%a{ href: "#", class: "close" } &times;
-			.row
-				.medium-8.medium-centered.columns.centered-text
-					%h5.subheader.margin-top-40px
-						Votre espace personnel vous permet de gérer vos données, vos annonces et vos réservations.
-		#main-content
-			.row
-				%hr
-				.medium-8.medium-centered.columns.centered-text{ style: "text-align: center" }
-					%h2{ style: "color:rgb(46, 121, 168)" } Mon profil
+		.row
+			.small-12.large-12.columns
+				- unless notice.nil?
+					.alert-box.info.radius{ "data-alert" => "" }
+						= notice
+						%a{ href: "#", class: "close" } &times;
+				- unless alert.nil?
+					.alert-box.alert.radius{ "data-alert" => "" }
+						= alert
+						%a{ href: "#", class: "close" } &times;
+		.row
+			.medium-8.medium-centered.columns.centered-text
+				%h5.subheader.margin-top-40px
+					Votre espace personnel vous permet de gérer vos données, vos annonces et vos réservations.
+	#main-content
+		.row
+			%hr
+			.medium-8.medium-centered.columns.centered-text{ style: "text-align: center" }
+				%h2{ style: "color:rgb(46, 121, 168)" } Mon profil
+				%br
+				%h5.subheader
+					Vous permet de modifier vos données personnelles: nom d'utilisateur, email ou mot de passe.
 					%br
-					%h5.subheader
-						Vous permet de modifier vos données personnelles: nom d'utilisateur, email ou mot de passe.
-						%br
-						%br
-						C'est aussi dans cette section que vous pouvez supprimer votre compte.
-		#main-content
-			.row
-				%hr
-				.medium-8.medium-centered.columns.centered-text{ style: "text-align: center" }
-					%h2{ style: "color:rgb(46, 121, 168)" } Espace propriétaire
 					%br
-					%h5.subheader
-						L'espace propriétaire permet aux utilisateurs de gérer leurs annonces créées sur le site.
-						%br
-						%br
-						Vous pouvez ainsi modifier, activer, désactiver ou supprimer vos annonces. C'est aussi depuis cette section que vous pouvez gérer les réservations que vous recevez pour vos espaces à louer.
-						%br
-						%br
-						L'activation et la désactivation des annonces vous permettent de les rendre visibles ou non sur le site.
-						%br
-						%br
-						Notez qu'après leur création, les annonces sont soumises à validation par le site et ne seront visibles qu'une fois validées et activées.
-		#main-content
-			.row
-				%hr
-				.medium-8.medium-centered.columns.centered-text{ style: "text-align: center" }
-					%h2{ style: "color:rgb(46, 121, 168)" } Espace locataire
+					C'est aussi dans cette section que vous pouvez supprimer votre compte.
+	#main-content
+		.row
+			%hr
+			.medium-8.medium-centered.columns.centered-text{ style: "text-align: center" }
+				%h2{ style: "color:rgb(46, 121, 168)" } Espace propriétaire
+				%br
+				%h5.subheader
+					L'espace propriétaire permet aux utilisateurs de gérer leurs annonces créées sur le site.
 					%br
-					%h5.subheader
-						L'espace locataire permet aux utilisateurs ayant effectué une réservation sur le site de retrouver les informations s'y rapportant.
-						%br
-						%br
-						Vous pouvez ainsi retrouver l'annonce de l'espace correspondant et ainsi contacter le propriétaire, modifier les dates de réservation si cette dernière n'a pas encore été validée par le propriétaire, ou encore consulter les dates et le tarif de votre réservation.
-		#main-content
-			.row
-				%hr
-				.medium-8.medium-centered.columns.centered-text{ style: "text-align: center" }
-					%h2{ style: "color:rgb(46, 121, 168)" } Messagerie
 					%br
-					%h5.subheader
-						La messagerie interne de Share Stockage a pour but de préserver la confidentialité des utilisateurs du site tant qu'aucun accord n'a été trouvé entre propriétaire et locataire.
-						%br
-						%br
-						En effet, seul votre nom d'utilisateur permet de vous identifier sur le site et vos données personnelles ne sont pas divulguées.
-						%br
-						%br
-						C'est ici que vous retrouverez les demandes de renseignements concernant vos espaces ainsi que les demandes de réservation. Vous pouvez répondre directement depuis cette messagerie.
-						%br
-						%br
+					Vous pouvez ainsi modifier, activer, désactiver ou supprimer vos annonces. C'est aussi depuis cette section que vous pouvez gérer les réservations que vous recevez pour vos espaces à louer.
+					%br
+					%br
+					L'activation et la désactivation des annonces vous permettent de les rendre visibles ou non sur le site.
+					%br
+					%br
+					Notez qu'après leur création, les annonces sont soumises à validation par le site et ne seront visibles qu'une fois validées et activées.
+	#main-content
+		.row
+			%hr
+			.medium-8.medium-centered.columns.centered-text{ style: "text-align: center" }
+				%h2{ style: "color:rgb(46, 121, 168)" } Espace locataire
+				%br
+				%h5.subheader
+					L'espace locataire permet aux utilisateurs ayant effectué une réservation sur le site de retrouver les informations s'y rapportant.
+					%br
+					%br
+					Vous pouvez ainsi retrouver l'annonce de l'espace correspondant et ainsi contacter le propriétaire, modifier les dates de réservation si cette dernière n'a pas encore été validée par le propriétaire, ou encore consulter les dates et le tarif de votre réservation.
+	#main-content
+		.row
+			%hr
+			.medium-8.medium-centered.columns.centered-text{ style: "text-align: center" }
+				%h2{ style: "color:rgb(46, 121, 168)" } Messagerie
+				%br
+				%h5.subheader
+					La messagerie interne de Share Stockage a pour but de préserver la confidentialité des utilisateurs du site tant qu'aucun accord n'a été trouvé entre propriétaire et locataire.
+					%br
+					%br
+					En effet, seul votre nom d'utilisateur permet de vous identifier sur le site et vos données personnelles ne sont pas divulguées.
+					%br
+					%br
+					C'est ici que vous retrouverez les demandes de renseignements concernant vos espaces ainsi que les demandes de réservation. Vous pouvez répondre directement depuis cette messagerie.
+					%br
+					%br

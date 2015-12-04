@@ -9,55 +9,54 @@
 			%dd.active= link_to "Espace locataire", lodger_space_users_path
 			%dd= link_to "Messagerie", conversations_path
 		%hr
-		#main-content
-			.row
-				.small-12.large-12.columns
-					- unless notice.nil?
-						.alert-box.info.radius{ "data-alert" => "" }
-							= notice
-							%a{ href: "#", class: "close" } &times;
-					- unless alert.nil?
-						.alert-box.alert.radius{ "data-alert" => "" }
-							= alert
-							%a{ href: "#", class: "close" } &times;
-			.row
-				.small-12.large-12.columns
-					%h1.subheader Mes réservations
-					%hr
-					- if @user.reservations.pending_or_running.any?
-						%table#adverts_table{ style: "width: 100%" }
-							%tbody
-								- @user.reservations.pending_or_running.order("id DESC").each do |r|
-									%tr{ "data-link" => advert_path(r.advert) }
-										= render partial: 'adverts/advert_line', locals: { advert: r.advert }
-									%tr.adverts_action_line
-										%td.hide-for-small{ style: "text-align:center;" }
-											- if r.validated
-												%span{ style: "color: green" } RESERVATION VALIDEE
-											- elsif r.paid and !r.validated
-												%span{ style: "color: red" } En attente de validation
-											- else
-												%span{ style: "color: red" } Réservation non payée
-										%td
-											Réservation du
-											%strong= r.start_date.strftime("%d/%m/%Y")
-											au
-											%strong= r.end_date.strftime("%d/%m/%Y")
-											\-
-											Durée:
-											%strong= r.duration
-											jours
-											\-
-											Prix: CHF
-											%strong= r.price_with_commission
-										%td
-											- unless r.paid or r.validated
-												= link_to "Annuler la réservation", advert_reservation_path(r.advert, r), method: :delete, data: { confirm: "Êtes-vous sûr de vouloir supprimer cette réservation?" }, class: "button tiny alert right"
-												= link_to "Modifier les dates", edit_advert_reservation_path(r.advert, r), data: {'reveal-id' => 'editReservationModal'}, class: "button tiny right"
-												= link_to "Payer", payment_advert_reservation_path(r.advert, r), class: "button tiny success right"
-					
-										#editReservationModal.reveal-modal{"data-reveal" => ""}
-											= render partial: 'reservations/edit', locals: { advert: r.advert, reservation: r }
-											%a.close-reveal-modal ×
-					- else
-						%h4.subheader Vous n'avez aucune réservation en cours ou demande de réservation en attente.
+		.row
+			.small-12.large-12.columns
+				- unless notice.nil?
+					.alert-box.info.radius{ "data-alert" => "" }
+						= notice
+						%a{ href: "#", class: "close" } &times;
+				- unless alert.nil?
+					.alert-box.alert.radius{ "data-alert" => "" }
+						= alert
+						%a{ href: "#", class: "close" } &times;
+		.row
+			.small-12.large-12.columns
+				%h1.subheader Mes réservations
+				%hr
+				- if @user.reservations.pending_or_running.any?
+					%table#adverts_table{ style: "width: 100%" }
+						%tbody
+							- @user.reservations.pending_or_running.order("id DESC").each do |r|
+								%tr{ "data-link" => advert_path(r.advert) }
+									= render partial: 'adverts/advert_line', locals: { advert: r.advert }
+								%tr.adverts_action_line
+									%td.hide-for-small{ style: "text-align:center;" }
+										- if r.validated
+											%span{ style: "color: green" } RESERVATION VALIDEE
+										- elsif r.paid and !r.validated
+											%span{ style: "color: red" } En attente de validation
+										- else
+											%span{ style: "color: red" } Réservation non payée
+									%td
+										Réservation du
+										%strong= r.start_date.strftime("%d/%m/%Y")
+										au
+										%strong= r.end_date.strftime("%d/%m/%Y")
+										\-
+										Durée:
+										%strong= r.duration
+										jours
+										\-
+										Prix: CHF
+										%strong= r.price_with_commission
+									%td
+										- unless r.paid or r.validated
+											= link_to "Annuler la réservation", advert_reservation_path(r.advert, r), method: :delete, data: { confirm: "Êtes-vous sûr de vouloir supprimer cette réservation?" }, class: "button tiny alert right"
+											= link_to "Modifier les dates", edit_advert_reservation_path(r.advert, r), data: {'reveal-id' => 'editReservationModal'}, class: "button tiny right"
+											= link_to "Payer", payment_advert_reservation_path(r.advert, r), class: "button tiny success right"
+				
+									#editReservationModal.reveal-modal{"data-reveal" => ""}
+										= render partial: 'reservations/edit', locals: { advert: r.advert, reservation: r }
+										%a.close-reveal-modal ×
+				- else
+					%h4.subheader Vous n'avez aucune réservation en cours ou demande de réservation en attente.

@@ -9,66 +9,65 @@
 			%dd= link_to "Espace locataire", lodger_space_users_path
 			%dd= link_to "Messagerie", conversations_path
 		%hr
-		#main-content
-			.row
-				.small-12.large-12.columns
-					- unless notice.nil?
-						.alert-box.info.radius{ "data-alert" => "" }
-							= notice
-							%a{ href: "#", class: "close" } &times;
-					- unless alert.nil?
-						.alert-box.alert.radius{ "data-alert" => "" }
-							= alert
-							%a{ href: "#", class: "close" } &times;
-			.row.body.sign-in
-				.large-8.small-12.columns.large-centered.small-centered
-					.create-account
-						.row.sign-up
-							.large-12.small-12.columns
-								%h1.subheader Modifier mes informations personnelles
-								%hr
-								= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "mean", method: :put }) do |f|
-									.row
-										.small-12.large-12.columns
-											#user_avatar= image_tag resource.avatar(:thumb)
-											= f.file_field :avatar, label: false, id: "pictureInput"
-									.row
-										.small-12.medium-6.large-6.columns
-											= f.label "Prénom", nil, class: 'required'
-											= f.text_field :first_name, autofocus: true, label: false
-										.small-12.medium-6.large-6.columns
-											= f.label "Nom", nil, class: 'required'
-											= f.text_field :last_name, label: false
-									.row
-										.small-12.medium-6.large-6.columns
-											= f.label "Nom d'utilisateur", nil, class: "required"
-											= f.text_field :username, label: false
-										.small-12.medium-6.large-6.columns
-											= f.label "Email", nil, class: "required"
-											= f.email_field :email, label: false
-
-									- if devise_mapping.confirmable? && resource.pending_reconfirmation?
-										%span
-											En attente de confirmation pour: 
-											= resource.unconfirmed_email
-
-									= f.label "Nouveau Mot de passe (ne pas remplir si vous ne souhaitez pas le changer)"
-									= f.password_field :password, autocomplete: "off", label: false
-
-									= f.label "Confirmer le nouveau mot de passe"
-									= f.password_field :password_confirmation, autocomplete: "off", label: false
-
-									= f.label "Mot de passe actuel (requis pour valider vos changements)", nil, class: "required"
-									= f.password_field :current_password, autocomplete: "off", label: false
-
-									= f.submit "Mettre à jour", class: "button right success"
-
+		.row
+			.small-12.large-12.columns
+				- unless notice.nil?
+					.alert-box.info.radius{ "data-alert" => "" }
+						= notice
+						%a{ href: "#", class: "close" } &times;
+				- unless alert.nil?
+					.alert-box.alert.radius{ "data-alert" => "" }
+						= alert
+						%a{ href: "#", class: "close" } &times;
+		.row.body.sign-in
+			.large-8.small-12.columns.large-centered.small-centered
+				.create-account
+					.row.sign-up
+						.large-12.small-12.columns
+							%h1.subheader Modifier mes informations personnelles
+							%hr
+							= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "mean", method: :put }) do |f|
 								.row
-									.large-12.small-12.columns
-										%h3 Supprimer mon compte
+									.small-12.large-12.columns
+										#user_avatar= image_tag resource.avatar(:thumb)
+										= f.file_field :avatar, label: false, id: "pictureInput"
+								.row
+									.small-12.medium-6.large-6.columns
+										= f.label "Prénom", nil, class: 'required'
+										= f.text_field :first_name, autofocus: true, label: false
+									.small-12.medium-6.large-6.columns
+										= f.label "Nom", nil, class: 'required'
+										= f.text_field :last_name, label: false
+								.row
+									.small-12.medium-6.large-6.columns
+										= f.label "Nom d'utilisateur", nil, class: "required"
+										= f.text_field :username, label: false
+									.small-12.medium-6.large-6.columns
+										= f.label "Email", nil, class: "required"
+										= f.email_field :email, label: false
 
-										%h6 Pour supprimer votre compte, veuillez cliquer sur le bouton ci-dessous. 
-										%h6 Attention si vous avez un espace en location ou que vous louez un espace, vous devez attendre la fin de la réservation en cours pour supprimer votre compte!
-										%h6 Toutes vos données et vos annonces seront supprimées. Cette action est irrévocable.
-										%br
-										= link_to "Supprimer mon compte", registration_path(resource_name), data: { confirm: "Êtes-vous sûr de vouloir supprimer votre compte?" }, method: :delete, class: "button radius expand alert"
+								- if devise_mapping.confirmable? && resource.pending_reconfirmation?
+									%span
+										En attente de confirmation pour: 
+										= resource.unconfirmed_email
+
+								= f.label "Nouveau Mot de passe (ne pas remplir si vous ne souhaitez pas le changer)"
+								= f.password_field :password, autocomplete: "off", label: false
+
+								= f.label "Confirmer le nouveau mot de passe"
+								= f.password_field :password_confirmation, autocomplete: "off", label: false
+
+								= f.label "Mot de passe actuel (requis pour valider vos changements)", nil, class: "required"
+								= f.password_field :current_password, autocomplete: "off", label: false
+
+								= f.submit "Mettre à jour", class: "button right success"
+
+							.row
+								.large-12.small-12.columns
+									%h3 Supprimer mon compte
+
+									%h6 Pour supprimer votre compte, veuillez cliquer sur le bouton ci-dessous. 
+									%h6 Attention si vous avez un espace en location ou que vous louez un espace, vous devez attendre la fin de la réservation en cours pour supprimer votre compte!
+									%h6 Toutes vos données et vos annonces seront supprimées. Cette action est irrévocable.
+									%br
+									= link_to "Supprimer mon compte", registration_path(resource_name), data: { confirm: "Êtes-vous sûr de vouloir supprimer votre compte?" }, method: :delete, class: "button radius expand alert"
