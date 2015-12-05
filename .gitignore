@@ -36,3 +36,4 @@ config/google_analytics.yml
 *.rdb
 /public/images
 /public/system
+/public/sitemap.xml.gz
