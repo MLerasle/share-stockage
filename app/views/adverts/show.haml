@@ -1,4 +1,5 @@
 %script{:src => "https://maps.google.com/maps/api/js?sensor=false&amp;language=en", :type => "text/javascript"}
+- content_for(:title, "#{@advert.title}")
 %section#main-content
 	.row
 		.small-12.large-12.columns
@@ -57,7 +58,7 @@
 				%p
 					- if @advert.price
 						CHF
-						= @advert.price_with_commission
+						= number_with_precision(@advert.price_with_commission, precision: 2)
 					- else
 						Non renseigné
 				%br

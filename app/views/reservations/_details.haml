@@ -12,15 +12,15 @@
 	Coût total de la réservation:
 	%strong
 		CHF
-		= reservation.price_with_commission
+		= number_with_precision(reservation.price_with_commission, precision: 2)
 %h5
 	Montant dû au propriétaire:
 	%strong
 		CHF
-		= reservation.price
+		= number_with_precision(reservation.price, precision: 2)
 %h5
 	Montant de la commission:
 	%strong
 		CHF
-		= reservation.commission
+		= number_with_precision(reservation.commission, precision: 2)
 %br

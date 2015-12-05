@@ -12,4 +12,9 @@ module ApplicationHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
+
+  def full_title(page_title)
+    base_title = "Share Stockage"
+    page_title.empty? ?  base_title : "#{base_title} | #{page_title}"
+  end
 end

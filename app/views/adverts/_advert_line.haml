@@ -21,7 +21,7 @@
 	%h4
 		- if advert.price
 			CHF
-			= advert.price_with_commission
+			= number_with_precision(advert.price_with_commission, precision: 2)
 			%em.subheader par mois
 		
 - content_for :scripts do

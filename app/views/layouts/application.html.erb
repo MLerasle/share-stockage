@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content="Garde-meuble entre particuliers en Suisse Romande. Louez votre cave, votre garage ou toute pièce inutilisée pour rentabiliser votre espace.">
 
-    <title><%= content_for?(:title) ? yield(:title) : "Share Stockage" %></title>
+    <title><%= full_title(yield :title) %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -114,10 +114,13 @@
 		<!-- COPYRIGHT SECTION -->
 		<section class="full-width copyright-section">
 		    <div class="row">
-		        <div class="large-6 medium-6 small-10 columns">
+		        <div class="large-6 medium-6 small-12 columns">
 		            <p>&copy; <%= Date.today.year %> Share Stockage</p>
 		        </div>
-						<div class="large-4 medium-4 small-12 columns">
+						<div class="large-6 medium-6 small-12 columns">
+							<ul class="home-social">
+								<li><a class="fc-webicon twitter" href="https://twitter.com/ShareStockage"></a></li>
+							</ul>
 						</div>
 		        <!-- <div class="large-2 medium-2 small-12 columns">
 		            <p class="right"><%= render partial: 'pages/paypal_button' %></p>

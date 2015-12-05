@@ -1,3 +1,4 @@
+- content_for(:title, 'Prix')
 %section#main-content
 	.row.body.sign-in
 		.large-10.small-12.columns.large-centered.small-centered
@@ -76,10 +77,7 @@
 											- if @advert.price
 												Soit un montant quotidien de CHF
 												= @advert.daily_price
-										-#%h6#price_with_commission
-											-#- if @advert.price
-												-#Le montant affiché sur le site, tenant compte de la commission perçue par Share Stockage, sera de CHF
-												-#= @advert.price_with_commission
+
 								%hr
 								= link_to "Précédent", previous_wizard_path, class: "button small"
 								= f.submit "Suivant", class: "button right small"
