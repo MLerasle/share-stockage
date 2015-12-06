@@ -12,7 +12,6 @@ class UserMailer < ActionMailer::Base
     @advert = @reservation.advert
     contract = ContractPdf.new(@advert, @reservation, view_context)
     attachments["contrat.pdf"] = { mime_type: 'application/pdf', content: contract.render }
-    @advert_url = "http://sharestockage.ch/adverts/#{@advert.id}"
     mail(to: @receiver.email, subject: "Votre réservation pour #{@advert.title} a été validée")
   end
 
@@ -21,8 +20,14 @@ class UserMailer < ActionMailer::Base
     @advert = reservation.advert
     contract = ContractPdf.new(@advert, reservation, view_context)
     attachments["contrat.pdf"] = { mime_type: 'application/pdf', content: contract.render }
-    @advert_url = "http://sharestockage.ch/adverts/#{@advert.id}"
     mail(to: @receiver.email, subject: "La réservation pour #{@advert.title} a été validée")
+  end
+
+  def validate_advert(receiver, advert)
+    @advert = advert
+    @receiver = receiver
+    @advert_url = "http://sharestockage.ch/adverts/#{@advert.id}"
+    mail(to: @receiver.email, subject: "Votre annonce #{@advert.title} est en ligne")
   end
 
   # def reservation_feedback(advert, reservation_user)
@@ -48,7 +53,6 @@ class UserMailer < ActionMailer::Base
   def pending_reservation(reservation)
     @user = reservation.user
     @advert = reservation.advert
-    @advert_url = "http://sharestockage.ch/adverts/#{@advert.id}"
     mail(to: @user.email, subject: "Merci pour votre demande de réservation")
   end
 

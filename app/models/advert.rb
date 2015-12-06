@@ -13,7 +13,8 @@ class Advert < ActiveRecord::Base
   has_many :pictures, dependent: :destroy
   geocoded_by :full_address
   after_validation :geocode, if: :address_changed?
-  
+  after_save :send_email_if_validated?
+
   default_value_for :validated, false
   default_value_for :activated, true
   default_value_for :light, false
@@ -215,5 +216,13 @@ class Advert < ActiveRecord::Base
 
   def full_address
     "#{self.address}, #{self.city}, #{self.country}"
+  end
+
+  private
+
+  def send_email_if_validated?
+    if validated_changed? and validated
+      UserMailer.validate_advert(self.user, self).deliver
+    end
   end
 end

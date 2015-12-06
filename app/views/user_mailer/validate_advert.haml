@@ -1,0 +1,27 @@
+!!!
+%html
+	%head
+		%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+	%body
+		%p Bonjour,
+		%p
+			Votre annonce 
+			= @advert.title 
+			vient d'être validée et est en ligne sur
+			= link_to "sharestockage.ch", root_url
+		%p
+			Pour la visualiser, cliquez simplement sur le lien suivant: 
+			= link_to "#{url_for([@advert, {only_path: false}])}", advert_url(@advert)
+			ou copiez le dans la barre d’adresse de votre navigateur.
+		%p
+			Vous pouvez dès à présent gérer votre annonce depuis votre espace personnel.
+		%p
+			N’hésitez pas à consulter la
+			= link_to "rubrique FAQ", faq_url
+			de notre site si vous avez des questions ou prenez contact avec nous directement, nous nous ferons un plaisir de vous aider.
+		%p
+			Merci pour votre confiance et à bientôt sur notre site.
+		%p
+			Bien cordialement,
+			%br
+			= link_to "L'équipe de Share Stockage", root_url
