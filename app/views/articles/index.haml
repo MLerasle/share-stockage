@@ -14,7 +14,7 @@
 								%hr
 							%h1.light= link_to article.title, article_path(article)
 							%hr
-							= article.content[0..400].html_safe#.gsub(/\n/,"<br/>")
+							= article.content[0..400].gsub(/<\/?[^>]+>/, '').html_safe
 							\[...]
 						= link_to "Lire plus", article_path(article), class: "button radius success small right"
 						- if current_user and (current_user.admin? or current_user.email == "b.berlier@gmail.com")

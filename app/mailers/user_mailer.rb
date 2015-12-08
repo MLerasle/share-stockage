@@ -26,7 +26,6 @@ class UserMailer < ActionMailer::Base
   def validate_advert(receiver, advert)
     @advert = advert
     @receiver = receiver
-    @advert_url = "http://sharestockage.ch/adverts/#{@advert.id}"
     mail(to: @receiver.email, subject: "Votre annonce #{@advert.title} est en ligne")
   end
 
