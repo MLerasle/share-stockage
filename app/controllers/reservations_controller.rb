@@ -29,8 +29,10 @@ class ReservationsController < ApplicationController
     end
     @reservation.user = current_user
     if @reservation.save
+      UserMailer.new_reservation(@reservation).deliver
+      UserMailer.pending_reservation(@reservation).deliver
       flash[:notice] = "Votre demande de réservation a bien été prise en compte."
-      redirect_to payment_advert_reservation_path(@advert, @reservation)
+      redirect_to advert_path(@advert, @reservation)
     else
       flash[:alert] = "Les données saisies pour votre réservation sont incorrectes. Veuillez vérifier que les dates choisies sont valides et réessayer."
       redirect_to advert_path(@advert)
@@ -38,7 +40,7 @@ class ReservationsController < ApplicationController
   end
 
   def payment
-    return redirect_to advert_path(@advert) if current_user != @reservation.user or (@reservation.paid and @reservation.validated)
+    return redirect_to advert_path(@advert) if current_user != @reservation.user or @reservation.validated
   end
   
   def preview_validate
@@ -50,32 +52,31 @@ class ReservationsController < ApplicationController
     if @reservation.update_attributes(validated: true)
       advert_user = User.find(@advert.user_id)
       reservation_user = User.find(@reservation.user_id)
-      charge = Stripe::Charge.create(
-        customer:     @reservation.customer_id,
-        amount:       @reservation.commission_amount.to_i,
-        description:  "Règlement de #{reservation_user.email} pour réservation #{@reservation.id}",
-        currency:     'chf'
-      )
+      # charge = Stripe::Charge.create(
+      #   customer:     @reservation.customer_id,
+      #   amount:       @reservation.commission_amount.to_i,
+      #   description:  "Règlement de #{reservation_user.email} pour réservation #{@reservation.id}",
+      #   currency:     'chf'
+      # )
       UserMailer.validate_reservation(reservation_user, @reservation).deliver
       UserMailer.validate_reservation_owner(advert_user, @reservation).deliver
-      @reservation.update_attributes(customer_id: nil)
-      # FeedbackEmail.perform_at((@reservation.end_date.to_time + 10.hours).to_i, @reservation.advert_id, @reservation.advert.user_id, @reservation.user_id)
+      # @reservation.update_attributes(customer_id: nil)
       flash[:notice] = "La réservation a bien été validée. Veuillez consulter vos mails pour obtenir un exemplaire du contrat de location."
     else
       flash[:alert] = "Une erreur est survenue durant la validation de la réservation. Veuillez réessayer s'il vous plaît. Si le problème persiste, n'hésitez pas à contacter le support."
     end
     redirect_to owner_space_users_path
-  rescue Stripe::CardError => e
-    @reservation.update_attributes(validated: false, paid: false, customer_id: nil, commission_amount: nil)
-    flash[:alert] = "Le paiement de la commission par carte bancaire du locataire a été refusé. Un email lui a été envoyé pour l'en informer. Sa demande de réservation a en conséquence été suspendue. Nous nous excusons pour ce désagrément."
-    UserMailer.payment_default(@reservation).deliver
-    redirect_to edit_advert_path(@advert)
+  # rescue Stripe::CardError => e
+  #   @reservation.update_attributes(validated: false, paid: false, customer_id: nil, commission_amount: nil)
+  #   flash[:alert] = "Le paiement de la commission par carte bancaire du locataire a été refusé. Un email lui a été envoyé pour l'en informer. Sa demande de réservation a en conséquence été suspendue. Nous nous excusons pour ce désagrément."
+  #   UserMailer.payment_default(@reservation).deliver
+  #   redirect_to edit_advert_path(@advert)
   end
   
   def cancel
     return redirect_to owner_space_users_path if current_user != @advert.user or @reservation.canceled
     if @reservation.update_attributes(canceled: true)
-      @reservation.update_attributes(paid: false, customer_id: nil, commission_amount: nil)
+      # @reservation.update_attributes(customer_id: nil, commission_amount: nil)
       UserMailer.cancel_reservation(@reservation).deliver
       flash[:notice] = "La réservation a bien été annulée. Un email a été envoyé au locataire pour l'en informer."
     else
@@ -92,7 +93,7 @@ class ReservationsController < ApplicationController
   end
   
   def update
-    return redirect_to users_path if current_user != @reservation.user or @reservation.paid or @reservation.validated
+    return redirect_to users_path if current_user != @reservation.user or @reservation.validated
     if @reservation.update_attributes(reservation_params)
       flash[:notice] = "Votre demande de modification concernant votre réservation a bien été prise en compte."
       redirect_to payment_advert_reservation_path(@advert, @reservation)
@@ -103,7 +104,7 @@ class ReservationsController < ApplicationController
   end
   
   def destroy
-    return redirect_to lodger_space_users_path if current_user != @reservation.user or @reservation.paid or @reservation.validated
+    return redirect_to lodger_space_users_path if current_user != @reservation.user or @reservation.validated
     if @reservation.destroy
       flash[:notice] = "La réservation a bien été supprimée"
     else

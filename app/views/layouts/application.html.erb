@@ -54,6 +54,16 @@
 				  <a href="#" class="close">&times;</a>
 				</div>
 			<% end %>
+			<%- if current_user and current_user.pending_reservations.any? %>
+				<div data-alert class="alert-box radius">
+					<%= link_to owner_space_users_path, style: "color: white;" do %>
+						Vous avez
+						<%= current_user.pending_reservations.count %>
+						demandes(s) de réservation en attente.
+					<% end %>
+					<a href="#" class="close">&times;</a>
+				</div>
+			<% end %>
 		</div>
 		
 		

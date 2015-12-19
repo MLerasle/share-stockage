@@ -34,10 +34,8 @@
 									%td.hide-for-small{ style: "text-align:center;" }
 										- if r.validated
 											%span{ style: "color: green" } RESERVATION VALIDEE
-										- elsif r.paid and !r.validated
-											%span{ style: "color: red" } En attente de validation
 										- else
-											%span{ style: "color: red" } Réservation non payée
+											%span{ style: "color: red" } En attente de validation
 									%td
 										Réservation du
 										%strong= r.start_date.strftime("%d/%m/%Y")
@@ -48,13 +46,13 @@
 										%strong= r.duration
 										jours
 										\-
-										Prix: CHF
-										%strong= number_with_precision(r.price_with_commission, precision: 2)
+										Prix:
+										%strong= number_with_precision(r.price, precision: 2)
+										CHF
 									%td
-										- unless r.paid or r.validated
+										- unless r.validated
 											= link_to "Annuler la réservation", advert_reservation_path(r.advert, r), method: :delete, data: { confirm: "Êtes-vous sûr de vouloir supprimer cette réservation?" }, class: "button tiny alert right"
 											= link_to "Modifier les dates", edit_advert_reservation_path(r.advert, r), data: {'reveal-id' => 'editReservationModal'}, class: "button tiny right"
-											= link_to "Valider la réservation", payment_advert_reservation_path(r.advert, r), class: "button tiny success right"
 				
 									#editReservationModal.reveal-modal{"data-reveal" => ""}
 										= render partial: 'reservations/edit', locals: { advert: r.advert, reservation: r }

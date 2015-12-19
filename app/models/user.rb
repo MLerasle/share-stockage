@@ -66,6 +66,10 @@ class User < ActiveRecord::Base
     end
     total
   end
+
+  def pending_reservations
+    Reservation.includes(:advert).where("adverts.user_id = ? and reservations.validated = ? and canceled = ?", self.id, 0, 0).references(:advert)
+  end
   
   def admin?
     email == ENV["admin_email"]

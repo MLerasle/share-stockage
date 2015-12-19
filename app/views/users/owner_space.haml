@@ -46,9 +46,9 @@
 										- if advert.is_deletable?
 											= link_to "Supprimer l'annonce", advert_path(advert), method: :delete, data: { confirm: "Ètes-vous sûr de vouloir supprimer cette annonce?" }, class: "button radius alert small"
 									%td
-										- if advert.reservations.paid.pending.any?
+										- if advert.reservations.pending.any?
 											%span.right
-												= link_to "#{advert.reservations.paid.pending.count} demande(s) de réservation en attente", edit_advert_path(advert), class: "red_link"
+												= link_to "#{advert.reservations.pending.count} demande(s) de réservation en attente", edit_advert_path(advert), class: "red_link"
 
 				- else
 					%h4.subheader Vous n'avez créé aucune annonce.
