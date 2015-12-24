@@ -28,8 +28,6 @@
 			  <section class="top-bar-section">
 			    <ul class="right">
 			      <li class="divider"></li>
-						<li><%= link_to 'Publier une annonce', adverts_path, method: :post %></li>
-			      <li class="divider"></li>
 						<% if user_signed_in? %>
 							<li><%= link_to "Mon compte", users_path %></li>
 							<li class="divider"></li>
@@ -41,6 +39,8 @@
 						<% end %>
 						<li class="divider"></li>
 						<li><%= link_to "Blog", articles_path %></li>
+						<li class="divider"></li>
+						<li class="has-form"><%= link_to 'Publier une annonce', adverts_path, method: :post, class: "button" %></li>
 			    </ul>
 				</section>
 			</nav>
