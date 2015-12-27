@@ -256,5 +256,21 @@ a[class*="social-share-button-google_plus"] {
 
 .has-form a.button {
   padding: 0 0 0 0;
-//  margin: auto;
+}
+
+.wizard_menu {
+  background-color: white;
+}
+
+.wizard_menu h4 {
+  color: rgb(185, 185, 185);
+}
+
+.wizard_menu_active {
+  background-color: white;
+  border: 1px solid rgb(84, 151, 86);
+}
+
+.wizard_menu_active h4 {
+  color: rgb(84, 151, 86);
 }

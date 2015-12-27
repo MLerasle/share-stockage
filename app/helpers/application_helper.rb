@@ -17,4 +17,15 @@ module ApplicationHelper
     base_title = "Share Stockage"
     page_title.empty? ?  base_title : "#{base_title} | #{page_title}"
   end
+
+  def wizard_menu(step, icon, title)
+    content = ""
+    content += content_tag(:div, class: "panel wizard_menu", id: step) do
+      content_tag(:h4) do
+        concat content_tag(:i, "", class: "fa fa-#{icon}")
+        concat " #{title}"
+      end
+    end
+    content.html_safe
+  end
 end
