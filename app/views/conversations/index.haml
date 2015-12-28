@@ -1,15 +1,8 @@
 - content_for(:title, 'Messagerie')
 %section#main-content
 	.row
-		%dl.sub-nav
-			%dd
-				= link_to users_path do
-					%i.fa.fa-home
-			%dd= link_to "Mon profil", edit_user_registration_path
-			%dd= link_to "Espace propriétaire", owner_space_users_path
-			%dd= link_to "Espace locataire", lodger_space_users_path
-			%dd.active= link_to "Messagerie", conversations_path
-		%hr
+		= render partial: "users/account_menu", locals: { item: "mail" }
+
 		.row
 			.small-12.large-12.columns
 				%h1.subheader Messagerie

@@ -1,6 +1,8 @@
 - content_for(:title, 'Réservations')
 %section#main-content
 	.row
+		= render partial: "users/account_menu", locals: { item: "owner" }
+	.row
 		.small-12.large-12.columns
 			- unless notice.nil?
 				.alert-box.info.radius{ "data-alert" => "" }
