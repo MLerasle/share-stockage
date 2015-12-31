@@ -92,6 +92,7 @@ gem 'ckeditor'
 
 # Monitoring
 gem 'newrelic_rpm'
+gem 'rollbar', '~> 2.4.0'
 
 # Handle environments variables
 gem "figaro"

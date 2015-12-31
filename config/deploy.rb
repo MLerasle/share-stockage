@@ -28,6 +28,10 @@ set :scm, :git
 set :repo_url, 'git@bitbucket.org:mlerasle/sharing_space.git'
 set :deploy_to, '/home/deploy/sharestockage'
 
+set :rollbar_token, 'b0f28dfa0b5f457bb2fbc942918765d4'
+set :rollbar_env, Proc.new { fetch :stage }
+set :rollbar_role, Proc.new { :app }
+
 # Default value for :scm is :git
 # set :scm, :git
 
