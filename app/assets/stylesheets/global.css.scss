@@ -260,7 +260,6 @@ a[class*="social-share-button-google_plus"] {
 
 .blog_header {
   width: 100%;
-//  background-color: rgb(25,61,83);
   background-color: rgb(38,38,38);
   padding: 20px 0 20px 0;
 }
@@ -268,10 +267,6 @@ a[class*="social-share-button-google_plus"] {
 .blog_header h1 {
   text-align: center;
   color: rgb(191,192,191);
-}
-
-.has-form a.button {
-  padding: 0 0 0 0;
 }
 
 .wizard_menu {
@@ -301,4 +296,10 @@ a[class*="social-share-button-google_plus"] {
   position: fixed;
   margin: 0;
   padding: 0;
+}
+
+.top-bar {
+  -moz-box-shadow: 0 1px rgb(191,192,191);
+  -webkit-box-shadow: 0 1px rgb(191,192,191);
+  box-shadow: 0 1px rgb(191,192,191);
 }

@@ -13,7 +13,7 @@
   </head>
 
   <body>
-		<div class="contain-to-grid sticky">
+		<div class="sticky">
 			<nav class="top-bar" data-topbar>
 			  <ul class="title-area">
 			    <li class="name">
@@ -40,7 +40,7 @@
 						<li class="divider"></li>
 						<li><%= link_to "Blog", articles_path %></li>
 						<li class="divider"></li>
-						<li class="has-form"><%= link_to 'Publier une annonce', adverts_path, method: :post, class: "button" %></li>
+						<li class="active"><%= link_to 'Publier une annonce', adverts_path, method: :post %></li>
 			    </ul>
 				</section>
 			</nav>
