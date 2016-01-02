@@ -12,6 +12,7 @@ class AdvertsController < ApplicationController
       my_adverts_address << { address: a.full_address, data: a.full_address, tag: "/adverts/#{a.slug}" }
     end
     @my_json_address = my_adverts_address.to_json
+    render layout: 'search_adverts'
   end
   
   def show

@@ -65,71 +65,9 @@
 				</div>
 			<% end %>
 		</div>
-		
-		
-		<!-- <div class="row">
-			<% unless notice.nil? %>
-				<div data-alert class="alert-box info radius">
-				  <%= notice %>
-				  <a href="#" class="close">&times;</a>
-				</div>
-			<% end %>
-			<% unless alert.nil? %>
-				<div data-alert class="alert-box alert radius">
-					<%= alert %>
-					<a href="#" class="close">&times;</a>
-				</div>
-			<% end %>
-		</div> -->
 
     <%= yield %>
-		
-		
-		<!-- FOOTER SECTION -->
-		<footer>
-		    <div class="row">
-		        <div class="small-12 medium-6 large-6 columns section">
-		            <h4>À propos</h4>
-								<hr/>
-		            <p>Share Stockage est le garde-meuble entre particuliers en Suisse Romande. Trouvez un garage, une cave ou tout autre espace de stockage près de chez vous et réduisez les coûts.</p>
-								<p>Share Stockage suit la tendance de la consommation collaborative, permettant à tout un chacun de mettre à disposition un espace de sa maison, pour le proposer à un autre particulier en ayant besoin pour stocker ses affaires pendant une durée définie.</p>
-		        </div>
-						
-		        <div class="small-12 medium-3 large-3 columns section">
-		            <h4>Contact</h4>
-								<hr/>
-		            <p><i class="fa fa-envelope"></i> <%= mail_to ENV["contact_email"], "contact (at) sharestockage (dot) ch"%> </p>
-								<p><i class="fa fa-facebook"></i> <%= link_to "Facebook", "https://www.facebook.com/sharestockage", target: '_blank' %></p>
-								<p><i class="fa fa-twitter"></i> <%= link_to "Twitter", "https://twitter.com/ShareStockage", target: '_blank' %></p>
-								<p><i class="fa fa-google-plus"></i> <%= link_to "Google plus", "http://google.com/+SharestockageCh0", target: '_blank' %></p>
-		        </div>
- 
-		        <div class="small-12 medium-3 large-3 columns section">
-		            <h4>Aide</h4>
-								<hr/>
-								<p><%= link_to "Comment ça marche?", help_path %></p>
-								<p><%= link_to "FAQ", faq_path %></p>
-								<p><%= link_to "Conditions générales d'utilisation", cgu_path %></p>
-								<p><%= link_to "Modèle de lettre pour la régie", '/files/lettre_agence_model.pdf', target: '_blank' %></p>
-		        </div>
-		    </div>
-		</footer>
- 
-		<!-- COPYRIGHT SECTION -->
-		<section class="full-width copyright-section">
-		    <div class="row">
-		        <div class="large-6 medium-6 small-12 columns">
-		            <p>&copy; <%= Date.today.year %> Share Stockage</p>
-		        </div>
-						<div class="large-6 medium-6 small-12 columns">
-						</div>
-		        <!-- <div class="large-2 medium-2 small-12 columns">
-		            <p class="right"><%= render partial: 'pages/paypal_button' %></p>
-		        </div> -->
-		    </div>
-		</section>
-		
-		
+
     <%= javascript_include_tag "application" %>
 		<%= yield :scripts %>
 		<%= render 'layouts/footer' %>
