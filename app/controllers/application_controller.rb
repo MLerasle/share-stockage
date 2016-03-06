@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   
   def store_location
     return unless request.get? 
-    if (!request.fullpath.match("/users") && !request.xhr?)
+    if (!request.fullpath.match("/mon-compte") && !request.xhr?)
       session[:previous_url] = request.fullpath if request.format == "text/html" || request.content_type == "text/html"
     end
   end
