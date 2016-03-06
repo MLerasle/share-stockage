@@ -3,6 +3,8 @@
 		%h2
 			Modifier
 			= @article.title
+			\| ID:
+			= @article.id
 
 		= form_for @article, url: article_path(@article), method: :put do |f|
 			= f.text_field :title
