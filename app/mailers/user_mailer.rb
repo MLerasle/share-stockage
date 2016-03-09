@@ -32,7 +32,7 @@ class UserMailer < ActionMailer::Base
   # def reservation_feedback(advert, reservation_user)
   #   @advert = advert
   #   @reservation_user = reservation_user
-  #   @advert_url = "http://sharestockage.ch/adverts/#{@advert.id}"
+  #   @advert_url = "http://sharestockage.ch/garde-meuble/#{@advert.id}"
   #   @gift_url = "http://sharestockage.ch/charges/new"
   #   mail(to: @reservation_user.email, subject: "Votre avis nous importe!")
   # end
@@ -45,7 +45,7 @@ class UserMailer < ActionMailer::Base
 
   def notify_user(user)
     @user = user
-    @url = "http://sharestockage.ch/users/sign_in"
+    @url = "http://sharestockage.ch/mon-compte/sign_in"
     mail(to: @user.email, subject: "Vous avez reçu un nouveau message sur Share Stockage")
   end
 
@@ -65,14 +65,14 @@ class UserMailer < ActionMailer::Base
   def new_reservation(reservation)
     @advert = reservation.advert
     @owner = @advert.user
-    @url = "http://sharestockage.ch/users/sign_in"
+    @url = "http://sharestockage.ch/mon-compte/sign_in"
     mail(to: @owner.email, subject: "Demande de réservation de votre espace")
   end
   
   def payment_default(reservation)
     @user = reservation.user
     @advert = reservation.advert
-    @url = "http://sharestockage.ch/users/lodger_space"
+    @url = "http://sharestockage.ch/mon-compte/lodger_space"
     mail(to: @user.email, subject: "Carte bancaire refusée")
   end
 end

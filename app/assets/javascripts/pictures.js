@@ -27,7 +27,7 @@ $(document).ready(function(){
       if (data == "1") {
         $.ajax({
           type: 'GET',
-          url: '/adverts/' + advert_id + '/preload_pictures',
+          url: '/garde-meuble/' + advert_id + '/preload_pictures',
   				success: function(data){
             $.each(data, function(key,value) {
               var mockFile = { name: value.name, size: value.size };

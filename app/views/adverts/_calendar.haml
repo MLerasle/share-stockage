@@ -20,15 +20,15 @@
 				lang: 'fr',
 		    eventSources: [
 		        {
-		            url: '/adverts/#{@advert.id}/reservations.json'
+		            url: '/garde-meuble/#{@advert.id}/reservations.json'
 		        },
 						{
-		            url: '/adverts/#{@advert.id}/reservations/pending.json',
+		            url: '/garde-meuble/#{@advert.id}/reservations/pending.json',
 		            color: 'orange',
 		            textColor: 'black'
 						},
 						{
-								url: '/adverts/#{@advert.id}/unavailable_dates.json',
+								url: '/garde-meuble/#{@advert.id}/unavailable_dates.json',
 								color: 'red',
 								textColor: 'white'
 						}
