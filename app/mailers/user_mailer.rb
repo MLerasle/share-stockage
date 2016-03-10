@@ -43,10 +43,12 @@ class UserMailer < ActionMailer::Base
   #   mail(to: @user.email, subject: "Votre avis nous importe!")
   # end
 
-  def notify_user(user)
+  def notify_user(user, body, subject, sender)
     @user = user
+    @body = body
+    @sender = sender
     @url = "http://sharestockage.ch/mon-compte/sign_in"
-    mail(to: @user.email, subject: "Vous avez reçu un nouveau message sur Share Stockage")
+    mail(to: @user.email, subject: subject)
   end
 
   def pending_reservation(reservation)
@@ -66,7 +68,7 @@ class UserMailer < ActionMailer::Base
     @advert = reservation.advert
     @owner = @advert.user
     @url = "http://sharestockage.ch/mon-compte/sign_in"
-    mail(to: @owner.email, subject: "Demande de réservation de votre espace")
+    mail(to: @owner.email, subject: "Demande de réservation de votre espace de stockage")
   end
   
   def payment_default(reservation)

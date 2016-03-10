@@ -10,10 +10,9 @@ class MessagesController < ApplicationController
     elsif params[:reservation_id].present?
       Reservation.find(params[:reservation_id])
     end
-    recipients = User.where(id: @resource.user_id)
-    if current_user.send_message(recipients, params[:message][:body], params[:message][:subject]).conversation
+    user = User.find(@resource.user_id)
+    if UserMailer.notify_user(user, params[:message][:body], params[:message][:subject], current_user).deliver
       user = User.find(@resource.user_id)
-      UserMailer.notify_user(user).deliver
       flash[:notice] = "Votre message a bien été envoyé."
     else
       flash[:alert] = "Une erreur est survenue durant l'envoi de votre message. Veuillez réessayer s'il vous plaît ou nous contacter si le problème persiste."
