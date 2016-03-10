@@ -12,6 +12,9 @@ Rails.application.routes.draw do
       get 'lodger_space', path: :'espace-stockage-locataire'
     end
   end
+
+  get '/users/sign_in', to: redirect('/mon-compte/sign_in')
+  get '/users/sign_up', to: redirect('/mon-compte/sign_up')
   
   resources :adverts, path: :'garde-meuble' do
     resources :steps, only: [:show, :update], controller: 'adverts/steps'
