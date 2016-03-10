@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20160310093537) do
 
   create_table "categories", force: true do |t|
     t.string "name"
+    t.string "slug", null: false
   end
 
   create_table "evaluations", force: true do |t|

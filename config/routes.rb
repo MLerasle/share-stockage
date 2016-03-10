@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   resources :messages, only: [:new, :create]
   resources :payments, only: :create
   resources :articles, path: :blog
+  resources :categories, only: :show, path: :'blog-category'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
