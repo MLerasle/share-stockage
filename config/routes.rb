@@ -35,6 +35,9 @@ Rails.application.routes.draw do
     end
     resources :pictures, except: :destroy
   end
+
+  get '/adverts/:id', to: redirect('/garde-meuble/%{id}')
+
   resources :pictures, only: :destroy
   resources :evaluations, only: :create
   resources :charges, only: [:new, :create]
