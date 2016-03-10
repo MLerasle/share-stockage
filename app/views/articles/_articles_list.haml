@@ -1,0 +1,22 @@
+.blog.row.bump-25
+	.large-12.columns
+		.post-box
+			- articles.each do |article|
+				.row
+					.large-9.columns.large-centered
+						.new-post
+							%br
+							%h1.light= link_to article.title, article_path(article)
+							%hr
+							%img{src: "http://s3.eu-central-1.amazonaws.com/sharestockage/blog/blog-sharestockage-#{article.id}.jpg", alt: "header-garde-meuble-#{article.id}"}
+							= article.content[0..400].gsub(/<\/?[^>]+>/, '').html_safe
+							\[...]
+						%br
+						= link_to "Lire la suite", article_path(article), class: "button radius secondary small"
+						- if current_user and (current_user.admin? or current_user.email == "b.berlier@gmail.com")
+							= link_to "Modifier", edit_article_path(article), class: "button radius small right"
+							= link_to "Supprimer", article_path(article), method: :delete, class: "button radius alert small right", data: { confirm: "T'es sûr de vouloir supprimer l'article '#{article.title}' gros?" }
+
+			= link_to "Créer nouvel article", new_article_path, class: "button radius expand" if current_user and (current_user.admin? or current_user.email == "b.berlier@gmail.com")
+
+			= paginate articles

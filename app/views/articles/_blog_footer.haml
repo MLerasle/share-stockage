@@ -1,0 +1,13 @@
+.blog.row.bump-25
+	.large-9.columns.large-centered
+		%hr
+		.row
+			.medium-6.large-6.columns
+				%h4 Catégories
+				%ul
+					- Category.order(:name).each do |category|
+						%li= link_to category.name, category_path(category)
+
+			.medium-6.large-6.columns
+				%h4 Like Us
+				<div class="fb-page" data-href="https://www.facebook.com/sharestockage" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" hide_cta="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/sharestockage"><a href="https://www.facebook.com/sharestockage">Share Stockage</a></blockquote></div></div>
