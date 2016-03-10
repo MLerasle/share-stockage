@@ -4,7 +4,13 @@ class ArticlesController < ApplicationController
   before_filter :find_article, except: [:index, :new, :create]
   
   def index
-    @articles = Article.order("created_at DESC").page(params[:page]).per(10)
+    if params[:category_id].present?      
+      @category = Category.find(params[:category_id])
+      @articles = @category.articles
+    else
+      @articles = Article.all
+    end
+    @articles = @articles.order("created_at DESC").page(params[:page]).per(10)
   end
 
   def show
@@ -46,7 +52,7 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title, :content)
+    params.require(:article).permit(:title, :content, :category_ids => [])
   end
 
   def admin_authorization

@@ -1,12 +1,13 @@
 - content_for(:title, 'Blog')
 .blog_header.large-12.columns.large-centered
 	%h1 Blog Share Stockage
+
 .blog.row.bump-25
 	.large-12.columns
 		.post-box
 			- @articles.each do |article|
 				.row
-					.large-8.columns.large-centered
+					.large-9.columns.large-centered
 						.new-post
 							%br
 							%h1.light= link_to article.title, article_path(article)
@@ -23,3 +24,17 @@
 			= link_to "Créer nouvel article", new_article_path, class: "button radius expand" if current_user and (current_user.admin? or current_user.email == "b.berlier@gmail.com")
 
 			= paginate @articles
+			
+.blog.row.bump-25
+	.large-9.columns.large-centered
+		%hr
+		.row
+			.medium-6.large-6.columns
+				%h4 Catégories
+				%ul
+					- Category.order(:name).each do |category|
+						%li= link_to category.name, articles_path(category_id: category.id)
+
+			.medium-6.large-6.columns
+				%h4 Like Us
+				<div class="fb-page" data-href="https://www.facebook.com/sharestockage" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/sharestockage"><a href="https://www.facebook.com/sharestockage">Share Stockage</a></blockquote></div></div>

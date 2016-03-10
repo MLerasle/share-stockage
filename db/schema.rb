@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151117151819) do
+ActiveRecord::Schema.define(version: 20160310093537) do
 
   create_table "adverts", force: true do |t|
     t.string   "address"
@@ -54,6 +54,18 @@ ActiveRecord::Schema.define(version: 20151117151819) do
   end
 
   add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true, using: :btree
+
+  create_table "articles_categories", id: false, force: true do |t|
+    t.integer "article_id"
+    t.integer "category_id"
+  end
+
+  add_index "articles_categories", ["article_id"], name: "index_articles_categories_on_article_id", using: :btree
+  add_index "articles_categories", ["category_id"], name: "index_articles_categories_on_category_id", using: :btree
+
+  create_table "categories", force: true do |t|
+    t.string "name"
+  end
 
   create_table "evaluations", force: true do |t|
     t.integer  "user_id"
