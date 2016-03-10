@@ -2,28 +2,53 @@
 .blog_header.large-12.columns.large-centered
 	%h1 Blog Share Stockage
 
-.blog.row.bump-25
-	.large-12.columns
-		.post-box
-			- @articles.each do |article|
+.row.hide-for-small
+	.medium-12.columns.large-centered
+		.medium-3.large-3.columns{style: "text-align:center; padding-top:10px; padding-bottom:10px"}
+			%h5= link_to "Accueil", articles_path, class: "blog_category_menu"
+		- Category.order(:name).each do |category|
+			.medium-3.large-3.columns{style: "text-align:center; padding-top:10px"}
+				%h5= link_to category.name, category_path(category), class: "blog_category_menu", id: "category_#{category.id}"
+	%hr
+
+.row
+	.large-9.columns.large-centered
+		%br
+		%h2{style: "text-align:center"}
+			%i.fa.fa-folder-open{style: "color:rgb(57,141,183)"}
+			= @category.name
+
+- if @articles.blank?
+	.blog.row.bump-25
+		.large-12.columns
+			.post-box
 				.row
 					.large-9.columns.large-centered
 						.new-post
+							%h4.subheader{style: "text-align:center"} Aucun article actuellement dans cette catégorie.
+- else
+	.blog.row.bump-25
+		.large-12.columns
+			.post-box
+				- @articles.each do |article|
+					.row
+						.large-9.columns.large-centered
+							.new-post
+								%br
+								%h1.light= link_to article.title, article_path(article)
+								%hr
+								%img{src: "http://s3.eu-central-1.amazonaws.com/sharestockage/blog/blog-sharestockage-#{article.id}.jpg", alt: "header-garde-meuble-#{article.id}"}
+								= article.content[0..400].gsub(/<\/?[^>]+>/, '').html_safe
+								\[...]
 							%br
-							%h1.light= link_to article.title, article_path(article)
-							%hr
-							%img{src: "http://s3.eu-central-1.amazonaws.com/sharestockage/blog/blog-sharestockage-#{article.id}.jpg", alt: "header-garde-meuble-#{article.id}"}
-							= article.content[0..400].gsub(/<\/?[^>]+>/, '').html_safe
-							\[...]
-						%br
-						= link_to "Lire la suite", article_path(article), class: "button radius secondary small"
-						- if current_user and (current_user.admin? or current_user.email == "b.berlier@gmail.com")
-							= link_to "Modifier", edit_article_path(article), class: "button radius small right"
-							= link_to "Supprimer", article_path(article), method: :delete, class: "button radius alert small right", data: { confirm: "T'es sûr de vouloir supprimer l'article '#{article.title}' gros?" }
+							= link_to "Lire la suite", article_path(article), class: "button radius secondary small"
+							- if current_user and (current_user.admin? or current_user.email == "b.berlier@gmail.com")
+								= link_to "Modifier", edit_article_path(article), class: "button radius small right"
+								= link_to "Supprimer", article_path(article), method: :delete, class: "button radius alert small right", data: { confirm: "T'es sûr de vouloir supprimer l'article '#{article.title}' gros?" }
 
-			= link_to "Créer nouvel article", new_article_path, class: "button radius expand" if current_user and (current_user.admin? or current_user.email == "b.berlier@gmail.com")
+				= link_to "Créer nouvel article", new_article_path, class: "button radius expand" if current_user and (current_user.admin? or current_user.email == "b.berlier@gmail.com")
 
-			= paginate @articles
+				= paginate @articles
 			
 .blog.row.bump-25
 	.large-9.columns.large-centered
@@ -38,3 +63,8 @@
 			.medium-6.large-6.columns
 				%h4 Like Us
 				<div class="fb-page" data-href="https://www.facebook.com/sharestockage" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/sharestockage"><a href="https://www.facebook.com/sharestockage">Share Stockage</a></blockquote></div></div>
+
+- content_for :scripts do
+	:javascript
+		var category_menu = document.getElementById('category_#{@category.id}');
+		category_menu.className = category_menu.className + " active_category";

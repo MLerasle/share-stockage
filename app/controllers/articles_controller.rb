@@ -4,13 +4,7 @@ class ArticlesController < ApplicationController
   before_filter :find_article, except: [:index, :new, :create]
   
   def index
-    if params[:category_id].present?      
-      @category = Category.find(params[:category_id])
-      @articles = @category.articles
-    else
-      @articles = Article.all
-    end
-    @articles = @articles.order("created_at DESC").page(params[:page]).per(10)
+    @articles = Article.order("created_at DESC").page(params[:page]).per(10)
   end
 
   def show

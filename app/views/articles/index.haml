@@ -2,6 +2,15 @@
 .blog_header.large-12.columns.large-centered
 	%h1 Blog Share Stockage
 
+.row.hide-for-small
+	.medium-12.columns.large-centered
+		.medium-3.large-3.columns{style: "text-align:center; padding-top:10px; padding-bottom:10px"}
+			%h5= link_to "Accueil", articles_path, class: "blog_category_menu active_category"
+		- Category.order(:name).each do |category|
+			.medium-3.large-3.columns{style: "text-align:center; padding-top:10px"}
+				%h5= link_to category.name, category_path(category), class: "blog_category_menu"
+	%hr
+
 .blog.row.bump-25
 	.large-12.columns
 		.post-box

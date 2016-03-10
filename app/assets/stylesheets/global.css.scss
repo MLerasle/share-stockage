@@ -303,3 +303,17 @@ a[class*="social-share-button-google_plus"] {
   -webkit-box-shadow: 0 1px rgb(191,192,191);
   box-shadow: 0 1px rgb(191,192,191);
 }
+
+.blog_category_menu {
+  color: rgb(111,111,111);
+  font-weight: bold;
+}
+
+.blog_category_menu:hover {
+  color: rgb(111,111,111);
+  border-top: 3px solid rgb(57,141,183);
+}
+
+.active_category {
+  border-top: 3px solid rgb(57,141,183);
+}
