@@ -29,20 +29,6 @@ class UserMailer < ActionMailer::Base
     mail(to: @receiver.email, subject: "Votre annonce #{@advert.title} est en ligne")
   end
 
-  # def reservation_feedback(advert, reservation_user)
-  #   @advert = advert
-  #   @reservation_user = reservation_user
-  #   @advert_url = "http://sharestockage.ch/garde-meuble/#{@advert.id}"
-  #   @gift_url = "http://sharestockage.ch/charges/new"
-  #   mail(to: @reservation_user.email, subject: "Votre avis nous importe!")
-  # end
-  #
-  # def advert_feedback(user)
-  #   @user = user
-  #   @gift_url = "http://sharestockage.ch/charges/new"
-  #   mail(to: @user.email, subject: "Votre avis nous importe!")
-  # end
-
   def notify_user(user, body, subject, sender)
     @user = user
     @body = body

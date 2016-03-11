@@ -73,11 +73,6 @@ gem 'rails_admin'
 gem 'prawn'
 gem 'prawn-table'
 
-# Background jobs
-gem 'sinatra', require: false
-gem 'slim'
-gem 'sidekiq'
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
