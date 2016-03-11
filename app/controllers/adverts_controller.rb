@@ -1,5 +1,5 @@
 class AdvertsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :unavailable_dates]
   before_filter :find_advert, except: [:index, :new, :create, :preview]
   
   def index
