@@ -63,9 +63,6 @@ gem 'dalli'
 # Nice urls
 gem 'friendly_id', '~> 5.1.0'
 
-# Internal Messaging
-gem "mailboxer"
-
 # Easy default values
 gem "default_value_for", "~> 3.0.0"
 
@@ -96,9 +93,6 @@ gem 'rollbar', '~> 2.4.0'
 
 # Handle environments variables
 gem "figaro"
-
-# Wizard
-gem 'wicked'
 
 gem 'therubyracer'
 

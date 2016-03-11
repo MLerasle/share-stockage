@@ -31,7 +31,7 @@
 										- else
 											%span{ style: "color: red" } En attente de validation
 									%td
-										= link_to "Modifier l'annonce", advert_step_path(advert, Advert.form_steps.first), class: "button radius small"
+										= link_to "Modifier l'annonce", '#', class: "button radius small"
 										= link_to "Gérer les réservations", edit_advert_path(advert), class: "button radius small"
 										- if advert.valid?
 											- button_color = advert.activated ? "alert small" : "success small"

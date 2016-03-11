@@ -1,38 +1,17 @@
 - content_for(:title, 'Photos')
 %section#main-content
 	.row
-		- unless notice.nil?
-			.alert-box.info.radius{ "data-alert" => "" }
-				= notice
-				%a.close{ href:"#" } x
+		.small-10.columns.small-centered
+			%h2.subheader Ajouter des images à votre annonce
+			%em{ style: "color:red; font-size: 80%" } 
+				Vous pouvez ajouter 3 photos au plus sur votre annonce.
+				%br
+				La taille maximale pour une photo est de 3 Mo.
 
-	.row.body.sign-in
-		.large-10.medium-12.small-12.columns.large-centered.small-centered
-			.create-account
-				.row.sign-up
-					.large-12.small-12.columns
-						%h2 À propos de votre espace
-						%hr
-
-				.row.sign-up
-					.row
-						= render partial: "adverts/steps/menu", locals: { advert: @advert, step: "pictures" }
-
-						.large-8.medium-8.small-12.columns
-							%h4 Ajouter des photos à votre annonce
-							%hr
-							.row
-								.small-12.large-12.columns
-									%h6
-										Vous pouvez ajouter 3 photos au plus sur votre annonce.
-										%br
-										La taille maximale pour une photo est de 3 Mo.
-							#picture_advert{advert_id: @advert.id, data_present: @advert.pictures.count > 0 ? 1 : 0}
-								= form_for @picture, url: advert_pictures_path(@advert), html: { multipart: true, class: "dropzone", id: "new-picture" } do |f|
-									.fallback
-										= f.file_field :image
-										= f.submit "Ajouter"
-					
-							%hr
-							= link_to "Précédent", advert_step_path(@advert, Advert.form_steps.last), class: "button small"
-							= link_to "Valider", advert_path(@advert), class: "button right small", method: :get
+			#picture_advert{advert_id: @advert.id, data_present: @advert.pictures.count > 0 ? 1 : 0}
+				= form_for @picture, url: advert_pictures_path(@advert), html: { multipart: true, class: "dropzone", id: "new-picture" } do |f|
+					.fallback
+						= f.file_field :image
+						= f.submit "Ajouter"
+			%br
+			= link_to "J'ai terminé", users_path, class: "button radius expand"

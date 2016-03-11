@@ -1,0 +1,18 @@
+%h5{ style: "font-weight:bold" }
+	%i.fa.fa-euro{style: "color:rgb(57,141,183); font-size: 120%"}
+	Choisissez le prix de votre espace
+%hr
+
+= f.label "Veuillez indiquer le prix mensuel de votre espace", nil, class: 'required'
+.row.collapse
+	.small-3.large-2.columns
+		%span.prefix CHF
+	.small-9.large-10.columns
+		= f.number_field :price, step: "any", label: false, id: "price"
+.row
+	.small-12.large-12.columns
+		%h6#daily_price
+			- if @advert.price
+				Soit un montant quotidien de
+				= @advert.daily_price
+				CHF

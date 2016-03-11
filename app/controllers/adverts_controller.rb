@@ -18,13 +18,25 @@ class AdvertsController < ApplicationController
   def show
   end
 
-  def create
-    existing_advert = current_user.adverts.where("adverts.created_at >= ?", Time.now - 5).last if current_user.adverts.where("adverts.created_at >= ?", Time.now - 5).any?
-    return redirect_to advert_step_path(existing_advert, Advert.form_steps.first) if existing_advert
+  def new
     @advert = current_user.adverts.new
-    @advert.save(validate: false) unless current_user.adverts.where(created_at: Time.now).any?
-    UserMailer.new_advert_mail(@advert).deliver
-    redirect_to advert_step_path(@advert, Advert.form_steps.first)
+  end
+
+  def create
+    @advert = current_user.adverts.new(advert_params)
+    if @advert.save
+      # UserMailer.new_advert_mail(@advert).deliver
+      redirect_to new_advert_picture_path(@advert)
+    else
+      render action: :new
+    end
+    
+    # existing_advert = current_user.adverts.where("adverts.created_at >= ?", Time.now - 5).last if current_user.adverts.where("adverts.created_at >= ?", Time.now - 5).any?
+    # return redirect_to advert_step_path(existing_advert, Advert.form_steps.first) if existing_advert
+    # @advert = current_user.adverts.new
+    # @advert.save(validate: false) unless current_user.adverts.where(created_at: Time.now).any?
+    # UserMailer.new_advert_mail(@advert).deliver
+    # redirect_to advert_step_path(@advert, Advert.form_steps.first)
   end
   
   def activate
@@ -75,6 +87,6 @@ class AdvertsController < ApplicationController
   end
   
   def advert_params
-    params.require(:advert).permit(:address, :city, :country, :area, :price, :advert_type, :user, :activated, :title, :light, :elevator, :concierge, :car_access, :access_type, :description, :height, :slug)
+    params.require(:advert).permit(:address, :city, :country, :area, :price, :advert_type, :user, :activated, :title, :light, :elevator, :concierge, :car_access, :access_type, :description, :height, :slug, :security, :preservation, :floor)
   end
 end

@@ -1,0 +1,19 @@
+%h5{ style: "font-weight:bold" }
+	%i.fa.fa-map-marker{style: "color:rgb(57,141,183); font-size: 120%"}
+	Indiquez l'addresse exacte de votre espace
+%hr
+
+.row
+	.small-12.columns
+		= f.label "Adresse", nil, class: 'required'
+		= f.text_field :address, id: "address_field", label: false
+
+.row
+	.small-12.columns
+		= f.label "Ville", nil, class: 'required'
+		= f.text_field :city, id: "city_field", label: false
+
+.row
+	.small-12.columns
+		= f.label "Pays", nil, class: 'required'
+		= f.select :country, options_for_select([["Suisse", "Suisse"]]), label: false

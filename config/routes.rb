@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   get '/users/password/new', to: redirect('/mon-compte/password/new')
   
   resources :adverts, path: :'garde-meuble' do
-    resources :steps, only: [:show, :update], controller: 'adverts/steps'
     member do
       put 'activate'
       get 'unavailable_dates'
@@ -43,15 +42,6 @@ Rails.application.routes.draw do
   resources :pictures, only: :destroy
   resources :evaluations, only: :create
   resources :charges, only: [:new, :create]
-  resources :conversations, only: [:index, :show, :destroy] do
-    member do
-      post :reply
-      post :restore
-    end
-    collection do
-      delete :empty_trash
-    end
-  end
   resources :messages, only: [:new, :create]
   resources :payments, only: :create
   resources :articles, path: :blog

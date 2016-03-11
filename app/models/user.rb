@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  acts_as_messageable
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :accept_cgu, presence: true
   has_many :adverts, dependent: :destroy
@@ -22,10 +21,6 @@ class User < ActiveRecord::Base
 
   def login
     @login || self.username || self.email
-  end
-
-  def mailboxer_email(object)
-    email
   end
 
   def name

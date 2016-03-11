@@ -1,0 +1,21 @@
+- content_for(:title, 'Nouvelle annonce')
+%section#main-content{ style: "background-color: rgb(245,245,245); margin-top:0px" }
+	.row
+		.small-10.columns.small-centered
+			%h2.subheader Créer une nouvelle annonce
+			%em{ style: "color:red; font-size: 80%" } Les champs marqués d'un * sont obligatoires.
+
+			= form_for @advert do |f|
+				.panel{ style: "background-color: white" }
+					= render partial: "general_info", locals: { f: f }
+				%br
+				.panel{ style: "background-color: white" }
+					= render partial: "location_info", locals: { f: f }
+				%br
+				.panel{ style: "background-color: white" }
+					= render partial: "description_info", locals: { f: f }
+				%br
+				.panel{ style: "background-color: white" }
+					= render partial: "price_info", locals: { f: f }
+
+				= f.submit "Valider mon annonce", class: "button radius expand"

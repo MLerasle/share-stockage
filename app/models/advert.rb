@@ -2,11 +2,6 @@ class Advert < ActiveRecord::Base
   include FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
-  cattr_accessor :form_steps do
-    %w(general location description price)
-  end
-  attr_accessor :form_step
-
   belongs_to :user
   has_many :reservations
   has_many :evaluations
@@ -23,18 +18,12 @@ class Advert < ActiveRecord::Base
   default_value_for :elevator, false
   default_value_for :access_type, 0
   default_value_for :complete, false
-  default_value_for :slug do
-    SecureRandom.uuid
-  end
   default_value_for :from_date do
     Date.today
   end
 
-  validates :title, :area, :height, :advert_type, presence: true, if: -> { required_for_step?(:general) }
-  validates :area, :height, numericality: true, if: -> { required_for_step?(:general) }
-  validates :address, :city, :country, presence: true, if: -> { required_for_step?(:location) }
-  validates :description, :access_type, :floor, :preservation, :security, presence: true, if: -> { required_for_step?(:description) }
-  validates :price, presence: true, numericality: true, if: -> { required_for_step?(:price) }
+  validates :title, :area, :height, :advert_type, :address, :city, :country, :description, :access_type, :floor, :preservation, :security, presence: true
+  validates :price, :area, :height, presence: true, numericality: true
 
   def slug_candidates
     [
@@ -68,16 +57,7 @@ class Advert < ActiveRecord::Base
   end
 
   def should_generate_new_friendly_id?
-    return false unless self.validated
     validated_changed? || title_changed? || address_changed? || advert_type_changed? || price_changed? || super
-  end
-  
-  def required_for_step?(step)
-    # All fields are required if no form step is present
-    # return true if form_step.nil?
-    # All fields from previous steps are required if the
-    # step parameter appears before or we are on the current step
-    return true if self.form_steps.index(step.to_s) == self.form_steps.index(form_step)
   end
 
   def area=(area)
