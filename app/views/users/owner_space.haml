@@ -15,7 +15,9 @@
 						%a{ href: "#", class: "close" } &times;
 		.row
 			.small-12.large-12.columns
-				%h1.subheader Mes annonces
+				%h2{style: "text-align:center"}
+					%i.fa.fa-folder-open{style: "color:rgb(57,141,183)"}
+					Espace propriétaire
 				%hr
 
 				- if @user.adverts.any?
@@ -31,13 +33,15 @@
 										- else
 											%span{ style: "color: red" } En attente de validation
 									%td
-										= link_to "Modifier l'annonce", '#', class: "button radius small"
-										= link_to "Gérer les réservations", edit_advert_path(advert), class: "button radius small"
+										= link_to "Modifier l'annonce", '#'
+										\|
+										= link_to "Gérer les réservations", edit_advert_path(advert)
+										\|
 										- if advert.valid?
-											- button_color = advert.activated ? "alert small" : "success small"
-											%span{ id: "activation_link_#{advert.id}" }= link_to advert.activate_title, activate_advert_path(advert), method: :put, remote: true, class: "button radius #{button_color}"
+											%span{ id: "activation_link_#{advert.id}" }= link_to advert.activate_title, activate_advert_path(advert), method: :put, remote: true
+											\|
 										- if advert.is_deletable?
-											= link_to "Supprimer l'annonce", advert_path(advert), method: :delete, data: { confirm: "Ètes-vous sûr de vouloir supprimer cette annonce?" }, class: "button radius alert small"
+											= link_to "Supprimer l'annonce", advert_path(advert), method: :delete, data: { confirm: "Ètes-vous sûr de vouloir supprimer cette annonce?" }
 									%td
 										- if advert.reservations.pending.any?
 											%span.right

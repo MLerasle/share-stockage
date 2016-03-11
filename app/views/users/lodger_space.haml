@@ -15,7 +15,9 @@
 						%a{ href: "#", class: "close" } &times;
 		.row
 			.small-12.large-12.columns
-				%h1.subheader Mes réservations
+				%h2{style: "text-align:center"}
+					%i.fa.fa-folder-open{style: "color:rgb(57,141,183)"}
+					Espace locataire
 				%hr
 				- if @user.reservations.pending_or_running.any?
 					%table#adverts_table{ style: "width: 100%" }

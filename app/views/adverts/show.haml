@@ -11,50 +11,26 @@
 				.alert-box.alert.radius{ "data-alert" => "" }
 					= alert
 					%a{ href: "#", class: "close" } &times;
-	.row
-		.small-12.large-12.columns
-			- if current_user == @advert.user
-				%h4 Que souhaitez-vous faire?
-				= link_to "Accéder à mon compte", users_path, class: "button radius success small"
-				= link_to "Modifier l'annonce", '#', class: "button radius small"
-				- if @advert.valid?
-					- button_color = @advert.activated ? "alert" : "success"
-					%span{ id: "activation_link_#{@advert.id}" }= link_to @advert.activate_title, activate_advert_path(@advert), method: :put, class: "button radius #{button_color} small", remote: true
-				- if @advert.is_deletable?
-					= link_to "Supprimer l'annonce", advert_path(@advert), method: :delete, data: { confirm: "Ètes-vous sûr de vouloir supprimer cette annonce?" }, class: "button radius alert small"
-					%hr
 
 			%h2= @advert.title
 			%h4.subheader= "#{@advert.type_name} - #{@advert.volume if @advert.area and @advert.height} m³ - #{@advert.full_address}"
 			%br
 	
-		.small-12.medium-12.large-8.columns	
+		.small-12.medium-12.large-8.columns
 			.panel{ style: "background-color: white" }
-				%dl.tabs{"data-tab" => ""}
-					%dd.active
-						%a{:href => "#panel1"} Photos
-					%dd
-						%a{:href => "#panel2", id: "date_tab"} Calendrier
+				- if @advert.pictures.any?
+					.small-12.medium-12.large-10.columns.large-centered.small-centered
+						.slick_images
+							- @advert.pictures.each do |p|
+								%div= image_tag p.image(:large)
+				- else
+					= image_tag "camera.png"
+					Aucune photo n'est disponible pour cette annonce.
 				%hr
-				.tabs-content
-					#panel1.content.active
-						.row
-							- if @advert.pictures.any?
-								.small-12.medium-12.large-10.columns.large-centered.small-centered
-									.slick_images
-										- @advert.pictures.each do |p|
-											%div= image_tag p.image(:large)
-							- else
-								= image_tag "camera.png"
-								Aucune photo n'est disponible pour cette annonce.
-					#panel2.content
-						= render partial: "calendar"
-		
-				%hr
-				%h3.subheader Description
+				%h4{ style: "font-weight:bold" } Description
 				%p= @advert.description.gsub(/\n/,"<br/>").html_safe if @advert.description
 				%br
-				%h3.subheader Tarif mensuel
+				%h4{ style: "font-weight:bold" } Tarif mensuel
 				%p
 					- if @advert.price
 						= number_with_precision(@advert.price, precision: 2)
@@ -62,7 +38,7 @@
 					- else
 						Non renseigné
 				%br
-				%h3.subheader Disponibilité
+				%h4#calendar_section{ style: "font-weight:bold" } Disponibilité
 				%p
 					À partir du
 					- if @advert.from_date
@@ -70,9 +46,13 @@
 					- else
 						Non renseigné
 					%br
-					Voir la section calendrier pour plus de détails.
+					= link_to "Voir le calendrier", '#', id: "preview"
+					= link_to "Masquer le calendrier", '#', id: "hide_preview"
+					#preview_calendar
+						= render partial: "calendar"
+
 				%br
-				%h3.subheader Détails
+				%h4{ style: "font-weight:bold" } Détails
 				%ul
 					.row
 						.small-6.large-6.columns
@@ -146,8 +126,22 @@
 									%hr
 				- else
 					%h5.subheader Il n'y a actuellement aucun commentaire pour cet espace.
-								
-	
+
+
+		- if current_user == @advert.user
+			.small-12.medium-12.large-4.columns
+				.panel
+					%h3 Menu propriétaire
+					%hr
+					%ul.side-nav
+						%li= link_to "Accéder à mon compte", owner_space_users_path
+						%li= link_to "Modifier l'annonce", '#'
+						- if @advert.valid?
+							- button_color = @advert.activated ? "alert" : "success"
+							%li{ id: "activation_link_#{@advert.id}" }= link_to @advert.activate_title, activate_advert_path(@advert), method: :put, remote: true
+						- if @advert.is_deletable?
+							%li= link_to "Supprimer l'annonce", advert_path(@advert), method: :delete, data: { confirm: "Ètes-vous sûr de vouloir supprimer cette annonce?" }
+
 		.small-12.medium-12.large-4.columns
 			- if @advert.authorize_evaluation_for_user?(current_user)
 				= link_to "Laisser une évaluation", '#', data: {'reveal-id' => 'evaluationModal'}, class: "button radius expand success"
@@ -178,8 +172,8 @@
 					%p
 						= f.submit "Pré-réserver", class: "button radius expand"
 					%p
-						%i.fa.fa-exclamation-triangle
-						Pensez à véfifier les disponibilités de l'espace dans la section "Calendrier" pour que votre demande puisse aboutir.
+						%i.fa.fa-exclamation-triangle{style: "color: red"}
+						Pensez à véfifier les disponibilités de l'espace pour que votre demande puisse aboutir.
 					
 			.panel
 				%h3 Propriétaire
@@ -264,4 +258,18 @@
 			readOnly: true,
 			score: "#{@advert.user.evaluations_score}",
 			path: ''
+		});
+		$("#hide_preview").hide();
+		$("#preview_calendar").hide();
+		$('#preview').on('click', function () {
+			$("#preview").hide();
+			$("#hide_preview").show();
+			$("#preview_calendar").show(1000);
+			$('html, body').animate({scrollTop: $("#preview_calendar").offset().top}, 'slow');
+		});
+		$('#hide_preview').on('click', function () {
+			$('#preview_calendar').hide();
+			$('html, body').animate({scrollTop: $("#calendar_section").offset().top}, 'fast');
+			$("#hide_preview").hide();
+			$("#preview").show();
 		});

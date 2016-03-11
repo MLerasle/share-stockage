@@ -15,23 +15,21 @@
 
 - content_for :scripts do
 	:javascript
-		$('#date_tab').on('click', function() {
-			$('#calendar').fullCalendar({
-				lang: 'fr',
-		    eventSources: [
-		        {
-		            url: '/garde-meuble/#{@advert.id}/reservations.json'
-		        },
-						{
-		            url: '/garde-meuble/#{@advert.id}/reservations/pending.json',
-		            color: 'orange',
-		            textColor: 'black'
-						},
-						{
-								url: '/garde-meuble/#{@advert.id}/unavailable_dates.json',
-								color: 'red',
-								textColor: 'white'
-						}
-		    ]
-			});
+		$('#calendar').fullCalendar({
+			lang: 'fr',
+			eventSources: [
+				{
+					url: '/garde-meuble/#{@advert.id}/reservations.json'
+				},
+				{
+					url: '/garde-meuble/#{@advert.id}/reservations/pending.json',
+					color: 'orange',
+					textColor: 'black'
+				},
+				{
+					url: '/garde-meuble/#{@advert.id}/unavailable_dates.json',
+					color: 'red',
+					textColor: 'white'
+				}
+			]
 		});
