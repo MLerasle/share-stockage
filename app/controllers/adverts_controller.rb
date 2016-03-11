@@ -31,6 +31,17 @@ class AdvertsController < ApplicationController
       render action: :new
     end
   end
+
+  def edit
+  end
+
+  def update
+    if @advert.update_attributes(advert_params)
+      redirect_to new_advert_picture_path(@advert)
+    else
+      render action: :edit
+    end
+  end
   
   def activate
     return redirect_to edit_advert_path(@advert) unless current_user == @advert.user
@@ -80,6 +91,6 @@ class AdvertsController < ApplicationController
   end
   
   def advert_params
-    params.require(:advert).permit(:address, :city, :country, :area, :price, :advert_type, :user, :activated, :title, :light, :elevator, :concierge, :car_access, :access_type, :description, :height, :slug, :security, :preservation, :floor)
+    params.require(:advert).permit(:address, :city, :country, :area, :price, :advert_type, :user, :activated, :title, :light, :elevator, :concierge, :car_access, :access_type, :description, :height, :slug, :security, :preservation, :floor, :complete)
   end
 end

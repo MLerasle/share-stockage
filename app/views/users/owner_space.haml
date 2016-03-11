@@ -33,9 +33,9 @@
 										- else
 											%span{ style: "color: red" } En attente de validation
 									%td
-										= link_to "Modifier l'annonce", '#'
+										= link_to "Modifier l'annonce", edit_advert_path(advert)
 										\|
-										= link_to "Gérer les réservations", edit_advert_path(advert)
+										= link_to "Gérer les réservations", advert_reservations_path(advert)
 										\|
 										- if advert.valid?
 											%span{ id: "activation_link_#{advert.id}" }= link_to advert.activate_title, activate_advert_path(advert), method: :put, remote: true

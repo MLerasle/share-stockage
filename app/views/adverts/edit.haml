@@ -1,91 +1,21 @@
-- content_for(:title, 'Réservations')
-%section#main-content
+- content_for(:title, 'Nouvelle annonce')
+%section#main-content{ style: "background-color: rgb(245,245,245); margin-top:0px" }
 	.row
-		= render partial: "users/account_menu", locals: { item: "owner" }
-	.row
-		.small-12.large-12.columns
-			- unless notice.nil?
-				.alert-box.info.radius{ "data-alert" => "" }
-					= notice
-					%a{ href: "#", class: "close" } &times;
-			- unless alert.nil?
-				.alert-box.alert.radius{ "data-alert" => "" }
-					= alert
-					%a{ href: "#", class: "close" } &times;
-	.row.body.sign-in
-		.large-10.small-12.columns.large-centered.small-centered
-			.create-account
-				.row.sign-up
-					.large-12.small-12.columns
-						%h1
-							Réservations
-							= @advert.title
-						%hr
-					
-						.panel{ style: "background-color: white" }
-							%dl.tabs{"data-tab" => ""}
-								%dd.active
-									%a{:href => "#panel2"} Réservations
-								%dd
-									%a{:href => "#panel3", id: "date_tab"} Calendrier
-							%br
-							.tabs-content
-								#panel2.content.active
-									#reservations_section
-										- if @advert.reservations.pending_or_running.any?
-											%h4.subheader Locations en cours ou à venir
-											- @advert.reservations.pending_or_running.each do |r|
-												%p
-													Locataire:
-													%strong= r.user.username
-													\-
-													Réservation du
-													%strong= r.start_date.strftime("%d/%m/%Y")
-													au
-													%strong= r.end_date.strftime("%d/%m/%Y")
-													\-
-													Durée:
-													%strong= r.duration
-													jours
-													\-
-													Prix perçu:
-													%strong= r.price
-													CHF
-										- else
-											%h4.subheader Aucune location réservée à ce jour.
-										%hr
-										- if @advert.reservations.pending.any?
-											%p
-												%i.fa.fa-exclamation-triangle
-												Avant de valider une réservation, assurez-vous que votre box de stockage est disponible à ces dates en consultant la section "Calendrier". Autrement dit, veillez à ce que 2 réservations ne se chevauchent pas. En cas de problème, veuillez contacter le demandeur.
-										
-											%table#reservations_table{ style: "width:100%;" }
-												%thead
-													%tr
-														%th Début
-														%th Fin
-														%th Prix perçu
-														%th{ colspan: 3 } Réservation
-												%tbody
-													- @advert.reservations.pending.each do |r|
-														%tr{ id: "row-#{r.id}" }
-															%td= r.start_date.strftime("%d/%m/%Y")
-															%td= r.end_date.strftime("%d/%m/%Y")
-															%td
-																= r.price
-																CHF
-															%td= link_to "Valider", preview_validate_advert_reservation_path(@advert, r)
-															%td= link_to "Annuler", preview_cancel_advert_reservation_path(@advert, r)
-															%td
-																= link_to "Contacter", '#', data: {'reveal-id' => 'contactModal'}
-																#contactModal.reveal-modal{"data-reveal" => ""}
-																	= render partial: 'messages/contact_asker', locals: { reservation: r }
-																	%a.close-reveal-modal ×
+		.small-10.columns.small-centered
+			%h2.subheader Modifier mon annonce
+			%em{ style: "color:red; font-size: 80%" } Les champs marqués d'un * sont obligatoires.
 
-										- else
-											%h4.subheader Vous n'avez aucune demande de réservation en attente pour ce box de stockage.
-											
-								#panel3.content
-									= render partial: "calendar"
-							%br
-							= link_to "Retour à mon compte", owner_space_users_path, class: "button radius"
+			= form_for @advert, url: advert_path(@advert), method: :put do |f|
+				.panel{ style: "background-color: white" }
+					= render partial: "general_info", locals: { f: f }
+				%br
+				.panel{ style: "background-color: white" }
+					= render partial: "location_info", locals: { f: f }
+				%br
+				.panel{ style: "background-color: white" }
+					= render partial: "description_info", locals: { f: f }
+				%br
+				.panel{ style: "background-color: white" }
+					= render partial: "price_info", locals: { f: f }
+
+				= f.submit "Valider mon annonce", class: "button radius expand"

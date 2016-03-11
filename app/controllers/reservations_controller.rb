@@ -4,9 +4,12 @@ class ReservationsController < ApplicationController
   before_filter :find_reservation, only: [:edit, :update, :preview_validate, :preview_cancel, :destroy, :validate, :cancel, :payment]
   
   def index
-    @reservations = @advert.validated_reservations.json_format
     respond_to do |format|
-      format.json { render json: @reservations }
+      format.html
+      format.json do
+        @reservations = @advert.validated_reservations.json_format
+        render json: @reservations
+      end
     end
   end
   

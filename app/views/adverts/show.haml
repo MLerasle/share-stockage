@@ -135,7 +135,8 @@
 					%hr
 					%ul.side-nav
 						%li= link_to "Accéder à mon compte", owner_space_users_path
-						%li= link_to "Modifier l'annonce", '#'
+						%li= link_to "Modifier l'annonce", edit_advert_path(@advert)
+						%li= link_to "Gérer les réservations", advert_reservations_path(@advert)
 						- if @advert.valid?
 							- button_color = @advert.activated ? "alert" : "success"
 							%li{ id: "activation_link_#{@advert.id}" }= link_to @advert.activate_title, activate_advert_path(@advert), method: :put, remote: true
