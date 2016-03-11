@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   get '/users/sign_in', to: redirect('/mon-compte/sign_in')
   get '/users/sign_up', to: redirect('/mon-compte/sign_up')
+  get '/users/password/new', to: redirect('/mon-compte/password/new')
   
   resources :adverts, path: :'garde-meuble' do
     resources :steps, only: [:show, :update], controller: 'adverts/steps'
@@ -37,6 +38,7 @@ Rails.application.routes.draw do
   end
 
   get '/adverts/:id', to: redirect('/garde-meuble/%{id}')
+  get '/adverts', to: redirect('/garde-meuble')
 
   resources :pictures, only: :destroy
   resources :evaluations, only: :create
@@ -64,6 +66,7 @@ Rails.application.routes.draw do
   get 'faq' => 'pages#faq'
   get 'cgu' => 'pages#cgu'
   get 'help' => 'pages#help', path: :aide_stockage
+  get '/help', to: redirect('/aide_stockage')
   get 'pending_signup' => 'pages#pending_signup'
 
   # Example of regular route:
