@@ -2,6 +2,7 @@
 SitemapGenerator::Sitemap.default_host = "https://sharestockage.ch"
 
 SitemapGenerator::Sitemap.create do
+  add root_path
   add faq_path
   add cgu_path
   add help_path
