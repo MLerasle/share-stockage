@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   devise_for :users, path: :'mon-compte', controllers: { registrations: 'registrations' }
   resource :users, path: :'mon-compte', only: :show do
     member do
-      get 'owner_space', path: :'espace-stockage-proprietaire'
-      get 'lodger_space', path: :'espace-stockage-locataire'
+      get 'owner_space', path: :'espace-proprietaire'
+      get 'lodger_space', path: :'espace-locataire'
     end
   end
 
@@ -51,7 +51,7 @@ Rails.application.routes.draw do
   get '/' => 'pages#index'
   get 'faq' => 'pages#faq'
   get 'cgu' => 'pages#cgu'
-  get 'help' => 'pages#help', path: :aide_stockage
+  get 'help' => 'pages#help', path: :aide
   get '/help', to: redirect('/aide_stockage')
   get 'pending_signup' => 'pages#pending_signup'
 
