@@ -9,7 +9,7 @@
 						%h1.light= @article.title
 						%hr
 						%img{src: "http://s3.eu-central-1.amazonaws.com/sharestockage/blog/blog-sharestockage-#{@article.id}.jpg", alt: "header-garde-meuble-#{@article.id}"}
-						.blog_content= @article.content.html_safe#gsub(/\n/,"<br/>")
+						.blog_content{style: "text-align:justify"}= @article.content.html_safe#gsub(/\n/,"<br/>")
 
 					- if current_user and current_user.admin?
 						= link_to "Modifier", edit_article_path(@article), class: "button radius small"
