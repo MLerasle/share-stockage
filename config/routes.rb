@@ -52,7 +52,7 @@ Rails.application.routes.draw do
   get 'faq' => 'pages#faq'
   get 'cgu' => 'pages#cgu'
   get 'help' => 'pages#help', path: :aide
-  get '/help', to: redirect('/aide_stockage')
+  get '/help', to: redirect('/aide')
   get 'pending_signup' => 'pages#pending_signup'
 
   # Example of regular route:
