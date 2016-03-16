@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: ENV["contact_email"]
+  default from: "Share Stockage <contact@sharestockage.ch>"
 
   def new_advert_mail(advert)
     @advert = advert
