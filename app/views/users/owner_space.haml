@@ -15,7 +15,7 @@
 						%a{ href: "#", class: "close" } &times;
 		.row
 			.small-12.large-12.columns
-				%h2{style: "text-align:center"}
+				%h2.text-center
 					%i.fa.fa-folder-open{style: "color:rgb(57,141,183)"}
 					Espace propriétaire
 				%hr
@@ -45,8 +45,9 @@
 									%td
 										- if advert.reservations.pending.any?
 											%span.right
-												= link_to "#{advert.reservations.pending.count} demande(s) de réservation en attente", edit_advert_path(advert), class: "red_link"
+												= link_to "#{advert.reservations.pending.count} demande(s) de réservation en attente", advert_reservations_path(advert), class: "red_link"
 
 				- else
-					%h4.subheader Vous n'avez créé aucune annonce.
-					= link_to "Publier une annonce maintenant", adverts_path, method: :post, class: "button radius success"
+					%h4.subheader.text-center Vous ne proposez actuellement aucun espace à la location.
+					%br
+					= link_to "Publier une annonce maintenant", new_advert_path, class: "button radius expand"

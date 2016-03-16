@@ -4,6 +4,11 @@
 	au
 	%strong= reservation.end_date.strftime("%d/%m/%Y")
 %h5
+	Volume demandé:
+	%strong
+		= reservation.volume.to_i
+		m³
+%h5
 	Durée de la location:
 	%strong
 		= reservation.duration

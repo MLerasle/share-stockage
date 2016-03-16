@@ -56,6 +56,19 @@ class Advert < ActiveRecord::Base
     dates
   end
 
+  def available_space_for_date(date)
+    reservations = self.reservations_for_date(date)
+    if reservations.any?
+      self.volume - reservations.sum(:volume)
+    else
+      self.volume
+    end
+  end
+
+  def reservations_for_date(date)
+    self.validated_reservations.where("start_date <= #{date} and end_date >= #{date}")
+  end
+
   def should_generate_new_friendly_id?
     validated_changed? || title_changed? || address_changed? || advert_type_changed? || price_changed? || super
   end
@@ -177,13 +190,13 @@ class Advert < ActiveRecord::Base
     self.reservations.where(validated: true)
   end
 
-  def running_reservation
-    self.validated_reservations.where("start_date <= ? and end_date >= ?", Date.today, Date.today).last
+  def running_reservations
+    self.validated_reservations.where("start_date <= ? and end_date >= ?", Date.today, Date.today)
   end
   
   def has_running_reservations?
     # self.validated_reservations.where("start_date <= ? and end_date >= ?", Date.today, Date.today).any?
-    running_reservation.present?
+    running_reservations.any?
   end
   
   def is_deletable?

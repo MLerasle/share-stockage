@@ -58,7 +58,7 @@ class ContractPdf < Prawn::Document
     
     bounding_box([0, 490], width: 240, height: 70) do
       transparent(0) { stroke_bounds }
-      text "<strong>Superficie :</strong> #{@advert.area} m²", size: 10, inline_format: true
+      text "<strong>Volume :</strong> #{@reservation.volume.to_i} m³", size: 10, inline_format: true
       move_down 5
       text "<strong>Conditions d'accès :</strong> #{@advert.access_type_hr}", size: 10, inline_format: true
       move_down 5
@@ -71,7 +71,7 @@ class ContractPdf < Prawn::Document
       move_down 5
       text "<strong>Fin de la location :</strong> #{@reservation.end_date.strftime("%d/%m/%y")}", size: 10, inline_format: true
       move_down 5
-      text "<strong>Prix :</strong>#{@reservation.price} CHF", size: 10, inline_format: true
+      text "<strong>Prix :</strong> #{@reservation.price} CHF", size: 10, inline_format: true
     end
   end
   

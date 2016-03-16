@@ -26,4 +26,4 @@
 							.small-6.large-6.columns
 								= link_to "Cliquez ici pour annuler la réservation", cancel_advert_reservation_path(@advert, @reservation), method: :put, class: "button radius expand alert"
 							.small-6.large-6.columns
-								= link_to "Retour", edit_advert_path(@advert), class: "button radius expand"
+								= link_to "Retour", advert_reservations_path(@advert), class: "button radius expand"

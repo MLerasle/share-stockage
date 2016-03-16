@@ -13,7 +13,7 @@
 					= alert
 					%a{ href: "#", class: "close" } &times;
 	.row.body.sign-in
-		.large-10.small-12.columns.large-centered.small-centered
+		.large-12.small-12.columns.large-centered.small-centered
 			.create-account
 				.row.sign-up
 					.large-12.small-12.columns
@@ -37,6 +37,11 @@
 											au
 											%strong= r.end_date.strftime("%d/%m/%Y")
 											\-
+											Volume:
+											%strong
+												= r.volume.to_i
+												m³
+											\-
 											Durée:
 											%strong= r.duration
 											jours
@@ -50,13 +55,14 @@
 								- if @advert.reservations.pending.any?
 									%p
 										%i.fa.fa-exclamation-triangle
-										Avant de valider une réservation, assurez-vous que votre box de stockage est disponible à ces dates en consultant la section "Calendrier". Autrement dit, veillez à ce que 2 réservations ne se chevauchent pas. En cas de problème, veuillez contacter le demandeur.
+										Avant de valider une réservation, assurez-vous que vous avez suffisamment d'espace disponible dans votre box de stockage à ces dates.
 								
 									%table#reservations_table{ style: "width:100%;" }
 										%thead
 											%tr
 												%th Début
 												%th Fin
+												%th Volume
 												%th Prix perçu
 												%th{ colspan: 3 } Réservation
 										%tbody
@@ -64,6 +70,9 @@
 												%tr{ id: "row-#{r.id}" }
 													%td= r.start_date.strftime("%d/%m/%Y")
 													%td= r.end_date.strftime("%d/%m/%Y")
+													%td
+														= r.volume.to_i
+														m³
 													%td
 														= r.price
 														CHF

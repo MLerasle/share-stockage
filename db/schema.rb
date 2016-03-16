@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310093537) do
+ActiveRecord::Schema.define(version: 20160316100308) do
 
   create_table "adverts", force: true do |t|
     t.string   "address"
@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(version: 20160310093537) do
     t.boolean  "paid",                                      default: false
     t.string   "customer_id"
     t.decimal  "commission_amount", precision: 8, scale: 2
+    t.decimal  "volume",            precision: 8, scale: 2
   end
 
   create_table "users", force: true do |t|
@@ -186,11 +187,5 @@ ActiveRecord::Schema.define(version: 20160310093537) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
-
-  add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", name: "mb_opt_outs_on_conversations_id", column: "conversation_id"
-
-  add_foreign_key "mailboxer_notifications", "mailboxer_conversations", name: "notifications_on_conversation_id", column: "conversation_id"
-
-  add_foreign_key "mailboxer_receipts", "mailboxer_notifications", name: "receipts_on_notification_id", column: "notification_id"
 
 end

@@ -37,6 +37,11 @@
 										au
 										%strong= r.end_date.strftime("%d/%m/%Y")
 										\-
+										Volume:
+										%strong
+											= r.volume.to_i
+											m³
+										\-
 										Durée:
 										%strong= r.duration
 										jours
@@ -47,7 +52,7 @@
 									%td
 										- unless r.validated
 											= link_to "Annuler la réservation", advert_reservation_path(r.advert, r), method: :delete, data: { confirm: "Êtes-vous sûr de vouloir supprimer cette réservation?" }, class: "button tiny alert right"
-											= link_to "Modifier les dates", edit_advert_reservation_path(r.advert, r), data: {'reveal-id' => 'editReservationModal'}, class: "button tiny right"
+											= link_to "Modifier la réservation", edit_advert_reservation_path(r.advert, r), data: {'reveal-id' => 'editReservationModal'}, class: "button tiny right"
 				
 									#editReservationModal.reveal-modal{"data-reveal" => ""}
 										= render partial: 'reservations/edit', locals: { advert: r.advert, reservation: r }

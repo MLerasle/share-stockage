@@ -46,10 +46,23 @@
 					- else
 						Non renseigné
 					%br
-					= link_to "Voir le calendrier", '#', id: "preview"
-					= link_to "Masquer le calendrier", '#', id: "hide_preview"
-					#preview_calendar
-						= render partial: "calendar"
+					- if @advert.has_running_reservations?
+						- @advert.running_reservations.each do |r|
+							%p
+								Du
+								= r.start_date.strftime("%d/%m/%Y")
+								au
+								= r.end_date.strftime("%d/%m/%Y")
+								\,
+								= r.volume.to_i
+								m³ de cet espace sont déjà loués.
+					- else
+						L'intégralité de l'espace est actuellement disponible.
+
+					/ = link_to "Voir le calendrier", '#', id: "preview"
+					/ = link_to "Masquer le calendrier", '#', id: "hide_preview"
+					/ #preview_calendar
+					/ 	= render partial: "calendar"
 
 				%br
 				%h4{ style: "font-weight:bold" } Détails
@@ -74,6 +87,10 @@
 								Conservation:
 								= @advert.preservation_hr
 						.small-6.large-6.columns
+							%li
+								Surface:
+								= @advert.area
+								m²
 							%li
 								Ascenseur:
 								= @advert.elevator_hr
@@ -138,7 +155,6 @@
 						%li= link_to "Modifier l'annonce", edit_advert_path(@advert)
 						%li= link_to "Gérer les réservations", advert_reservations_path(@advert)
 						- if @advert.valid?
-							- button_color = @advert.activated ? "alert" : "success"
 							%li{ id: "activation_link_#{@advert.id}" }= link_to @advert.activate_title, activate_advert_path(@advert), method: :put, remote: true
 						- if @advert.is_deletable?
 							%li= link_to "Supprimer l'annonce", advert_path(@advert), method: :delete, data: { confirm: "Ètes-vous sûr de vouloir supprimer cette annonce?" }
@@ -170,6 +186,15 @@
 						.small-3.large-2.columns
 							%span.postfix
 								%i.fa.fa-calendar
+					.row.collapse
+						.small-9.large-10.columns
+							= f.number_field :volume, label: false, min: 1, max: "#{@advert.volume.round}", step: "any", placeholder: "Volume souhaité"
+						.small-3.large-2.columns
+							%span.postfix m³
+					%em{style: "font-size:80%; margin-top: 0"}
+						Vous pouvez louer jusqu'à
+						= @advert.volume.round
+						m³, ce qui correspond à l'intégralité de l'espace.
 					%p
 						= f.submit "Pré-réserver", class: "button radius expand"
 					%p
@@ -260,17 +285,17 @@
 			score: "#{@advert.user.evaluations_score}",
 			path: ''
 		});
-		$("#hide_preview").hide();
-		$("#preview_calendar").hide();
-		$('#preview').on('click', function () {
-			$("#preview").hide();
-			$("#hide_preview").show();
-			$("#preview_calendar").show(1000);
-			$('html, body').animate({scrollTop: $("#preview_calendar").offset().top}, 'slow');
-		});
-		$('#hide_preview').on('click', function () {
-			$('#preview_calendar').hide();
-			$('html, body').animate({scrollTop: $("#calendar_section").offset().top}, 'fast');
-			$("#hide_preview").hide();
-			$("#preview").show();
-		});
+		// $("#hide_preview").hide();
+		// $("#preview_calendar").hide();
+		// $('#preview').on('click', function () {
+		// 	$("#preview").hide();
+		// 	$("#hide_preview").show();
+		// 	$("#preview_calendar").show(1000);
+		// 	$('html, body').animate({scrollTop: $("#preview_calendar").offset().top}, 'slow');
+		// });
+		// $('#hide_preview').on('click', function () {
+		// 	$('#preview_calendar').hide();
+		// 	$('html, body').animate({scrollTop: $("#calendar_section").offset().top}, 'fast');
+		// 	$("#hide_preview").hide();
+		// 	$("#preview").show();
+		// });

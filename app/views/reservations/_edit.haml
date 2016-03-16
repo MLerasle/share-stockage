@@ -6,6 +6,8 @@
 	= f.text_field :start_date, label: false
 	= f.label "Fin souhaitée"
 	= f.text_field :end_date, label: false
+	= f.label "Volume souhaité en m³"
+	= f.number_field :volume, label: false, min: 1, max: "#{advert.volume.round}", step: "any"
 
 	= f.submit "Confirmer les changements", class: "button radius expand"
 
