@@ -1,17 +1,19 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/my_admin_zone', as: 'rails_admin'
 
-  devise_for :users, path: :'mon-compte', controllers: { registrations: 'registrations' }
-  resource :users, path: :'mon-compte', only: :show do
+  devise_for :users, path: :'mon-compte', controllers: { registrations: 'registrations', omniauth_callbacks: "users/omniauth_callbacks", confirmations: 'users/confirmations', passwords: 'users/passwords' }
+  resource :users, path: :'mon-compte' do
     member do
       get 'owner_space', path: :'espace-proprietaire'
       get 'lodger_space', path: :'espace-locataire'
     end
+    get 'pending_password', on: :collection
   end
 
   get '/users/sign_in', to: redirect('/mon-compte/sign_in')
   get '/users/sign_up', to: redirect('/mon-compte/sign_up')
   get '/users/password/new', to: redirect('/mon-compte/password/new')
+  get '/users/pending_password', to: redirect('/mon-compte/pending_password')
   
   resources :adverts, path: :'garde-meuble' do
     member do
@@ -53,7 +55,7 @@ Rails.application.routes.draw do
   get 'cgu' => 'pages#cgu'
   get 'help' => 'pages#help', path: :aide
   get '/help', to: redirect('/aide')
-  get 'pending_signup' => 'pages#pending_signup'
+  get 'welcome' => 'pages#welcome'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

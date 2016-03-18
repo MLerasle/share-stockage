@@ -100,7 +100,7 @@ class ReservationsController < ApplicationController
   end
   
   def update
-    return redirect_to users_path if current_user != @reservation.user or @reservation.validated
+    return redirect_to lodger_space_users_path if current_user != @reservation.user or @reservation.validated
     if @reservation.update_attributes(reservation_params)
       flash[:notice] = "Votre demande de modification concernant votre réservation a bien été prise en compte."
       redirect_to payment_advert_reservation_path(@advert, @reservation)

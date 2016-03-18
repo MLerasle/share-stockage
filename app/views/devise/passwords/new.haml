@@ -1,13 +1,24 @@
 %section#main-content
 	.row.body.sign-in
-		.large-7.small-12.columns.large-centered.small-centered
+		.large-6.medium-8.small-12.columns.large-centered.small-centered
 			.create-account
 				.row.sign-up
 					.large-12.small-12.columns
-						%h1.subheader Mot de passe oublié?
+						%h3.subheader.text-center Réinitialisation de votre mot de passe
 						%hr
-						%h6.subheader Veuillez entrer votre adresse email, nous vous enverrons les instructions pour changer votre mot de passe.
+						%h6.subheader.text-center{style: "font-size:90%"} Veuillez entrer votre adresse email, nous vous enverrons les instructions pour changer votre mot de passe.
 						%br
 						= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-							= f.email_field :email, autofocus: true
-							= f.submit "Valider", class: "button radius success"
+							= f.email_field :email, autofocus: true, placeholder: "Adresse email", label: false
+							= f.submit "Réinitialiser mon mot de passe", class: "button radius expand small"
+						%br
+						%ol{ style: "font-size: 90%" }
+							%li
+								Vous allez recevoir un email avec un lien qui sera 
+								%strong valide 24 heures.
+							%br
+							%li
+								En cliquant sur ce lien, vous serez redirigé sur une page vous permettant de choisir votre
+								%strong nouveau mot de passe.
+							%br
+							%li Une fois ce mot de passe validé, vous serez de nouveau connecté à votre compte.

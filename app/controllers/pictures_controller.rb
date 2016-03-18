@@ -5,7 +5,7 @@ class PicturesController < ApplicationController
   def new
     if @advert.user != current_user
       flash[:alert] = "Vous n'êtes pas autorisé à accéder à cette page."
-      redirect_to users_path
+      redirect_to owner_space_users_path
     else
       @picture = @advert.pictures.new
     end

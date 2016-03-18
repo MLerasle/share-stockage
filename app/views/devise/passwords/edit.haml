@@ -1,19 +1,15 @@
 %section#main-content
 	.row.body.sign-in
-		.large-8.small-12.columns.large-centered.small-centered
+		.large-6.medium-8.small-12.columns.large-centered.small-centered
 			.create-account
 				.row.sign-up
 					.large-12.small-12.columns
-						%h1.subheader Choisissez un nouveau mot de passe
+						%h3.subheader.text-center Choisissez un nouveau mot de passe
 						%hr
-						%h6.subheader Votre mot de passe doit contenir au moins 8 caractères.
+						%h6.subheader.text-center{ style: "font-size:90%" } Il ne vous reste plus qu'à choisir votre nouveau mot de passe et vous serez de nouveau connecté à votre compte.
 						%br
 						= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
 							= f.hidden_field :reset_password_token
-							= f.label :password, "Votre nouveau mot de passe"
-							= f.password_field :password, autofocus: true, autocomplete: "off", label: false
+							= f.password_field :password, autofocus: true, autocomplete: "off", label: false, placeholder: "Nouveau mot de passe"
 
-							= f.label :password_confirmation, "Confirmez votre nouveau mot de passe"
-							= f.password_field :password_confirmation, autocomplete: "off", label: false
-
-							= f.submit "Changer mon mot de passe", class: "button radius right success"
+							= f.submit "Changer mon mot de passe", class: "button radius expand small"

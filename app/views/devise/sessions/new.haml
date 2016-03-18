@@ -1,11 +1,11 @@
 - content_for(:title, 'Connexion')
 %section#main-content
 	.row.body.sign-in
-		.large-7.small-12.columns.large-centered.small-centered
+		.large-4.medium-6.small-12.columns.large-centered.small-centered
 			.create-account
 				.row.sign-up
 					.large-12.small-12.columns
-						%h1.subheader Connexion
+						%h2.subheader.text-center Connexion
 						%hr
 						.row
 							.small-12.large-12.columns
@@ -19,20 +19,14 @@
 										%a{ href: "#", class: "close" } &times;
 
 						= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-							= f.label "login", "Email ou nom d'utilisateur", class: 'required'
-							= f.text_field :login, autofocus: true, label: false
+							= f.text_field :login, autofocus: true, label: false, placeholder: "Adresse email"
+							= f.password_field :password, autocomplete: "off", label: false, placeholder: "Mot de passe"
 
-							= f.label "password", "Mot de passe", class: 'required'
-							= f.password_field :password, autocomplete: "off", label: false
-
-							- if devise_mapping.rememberable?
-								= f.check_box :remember_me, label: false
-								= f.label "remember_me", "Se souvenir de moi"
+							= f.submit "Se connecter", class: "button radius expand small"
 							%br
-							= link_to "Mot de passe oublié?", new_password_path(resource_name)
-
-							= f.submit "Valider", class: "button radius expand"
+							%span{ style: "font-size: 90%" }= link_to "Mot de passe oublié?", new_password_path(resource_name)
 						
 							%hr
-							%h3.subheader Pas encore inscrit?
-							= link_to "Créer un compte", new_registration_path(resource_name), class: "button radius secondary expand"
+							= link_to user_omniauth_authorize_path(:facebook), class: "facebook button split left-icon small radius" do
+								%span
+								Se connecter avec Facebook

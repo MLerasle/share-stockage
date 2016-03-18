@@ -1,0 +1,34 @@
+%section.main-content
+	.row
+		.large-8.small-12.columns.small-centered
+			.row
+				%h2.subheader.text-center
+					Bienvenue sur Share Stockage
+					= current_user.first_name if current_user
+					\!
+
+				- unless current_user
+					%br
+					%br
+					%br
+					%p.text-center Votre inscription a bien été prise en compte.
+					%p.text-center Pour la finaliser, veuillez cliquer sur le lien contenu dans le mail de confirmation que nous vous avons envoyé.
+					%p.text-center Pensez à consulter vos couriers indésirables si rien ne vous est parvenu!
+					%p.text-center Nous nous réjouissons de vous compter parmi nous.
+					%p.text-center À tout de suite sur Share Stockage!
+					%br
+					%br
+
+				- else
+					%p.text-center Nous sommes très heureux de vous accueillir sur notre site, premier garde-meuble entre particuliers de Suisse.
+					%br
+					%h3.subheader.text-center Que souhaitez-vous faire?
+					%br
+					%h5.text-center J'aimerais rentabiliser mon espace inutilisé.
+					= link_to "Créer une annonce maintenant", new_advert_path, class: "button radius expand"
+
+					%h5.text-center{ style: "margin-top: 25px" } Je souhaite trouver un espace de stockage près de chez moi.
+					= link_to "Rechercher un espace de stockage depuis la page d'accueil", root_path, class: "button radius expand info"
+
+					%h5.text-center{ style: "margin-top: 25px" } Je souhaite en savoir plus sur le fonctionnement de Share Stockage.
+					= link_to "Expliquez moi comment ça marche", help_path, class: "button radius expand secondary"

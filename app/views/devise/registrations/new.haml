@@ -1,7 +1,7 @@
 - content_for(:title, 'Inscription')
 %section#main-content
 	.row.body.sign-in
-		.large-7.small-12.columns.large-centered.small-centered
+		.large-4.medium-6.small-12.columns.large-centered.small-centered
 			.create-account
 				.row.sign-up
 					.large-12.small-12.columns
@@ -13,41 +13,33 @@
 							.alert-box.alert.radius{ "data-alert" => "" }
 								= alert
 								%a{ href: "#", class: "close" } &times;
-						%h1.subheader Inscription
+						%h2.subheader.text-center Inscription
 						%hr			
 						= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'mean'}) do |f|
+							/ .row
+							/ 	.small-12.large-12.columns
+							/ 		= f.label "pictureInput", "Photo de profil"
+							/ 		= f.file_field :avatar, label: false, id: "user_pictureInput"
+							.row
+								.small-12.medium-6.large-6.columns
+									= f.text_field :first_name, autofocus: true, label: false, placeholder: "Prénom"
+								.small-12.medium-6.large-6.columns
+									= f.text_field :last_name, label: false, placeholder: "Nom"
+							.row
+								.small-12.medium-12.large-12.columns
+									= f.email_field :email, label: false, placeholder: "Adresse email"
+							.row
+								.small-12.medium-12.large-12.columns
+									= f.password_field :password, autocomplete: "off", placeholder: "Mot de passe (au moins 8 caractères)", label: false
 							.row
 								.small-12.large-12.columns
-									= f.label "pictureInput", "Photo de profil"
-									= f.file_field :avatar, label: false, id: "user_pictureInput"
-							.row
-								.small-12.medium-6.large-6.columns
-									= f.label "first_name", "Prénom", class: 'required'
-									= f.text_field :first_name, autofocus: true, label: false
-								.small-12.medium-6.large-6.columns
-									= f.label "last_name", "Nom", class: 'required'
-									= f.text_field :last_name, label: false
-							.row
-								.small-12.medium-6.large-6.columns
-									= f.label "email", "Email", class: 'required'
-									= f.email_field :email, label: false
-								.small-12.medium-6.large-6.columns
-									= f.label "username", "Choisissez un nom d'utilisateur", class: 'required'
-									= f.text_field :username, label: false
-							.row
-								.small-12.medium-6.large-6.columns
-									= f.label "password", "Mot de passe", class: 'required'
-									= f.password_field :password, autocomplete: "off", placeholder: "8 caractères minimum", label: false
-								.small-12.medium-6.large-6.columns
-									= f.label "password_confirmation", "Confirmer le mot de passe", class: 'required'
-									= f.password_field :password_confirmation, autocomplete: "off", placeholder: "8 caractères minimum", label: false
-							.row
-								.small-12.large-12.columns
-									= f.check_box :accept_cgu, label: false, style: "float:left; margin-top: 5px; margin-right:10px"
-									= "J'ai lu et j'accepte les <a href='/cgu'>conditions générales d'utilisation</a>".html_safe
+									%span{style: "font-size: 90%"}
+										= f.check_box :accept_cgu, label: false, style: "float:left; margin-top: 5px; margin-right:10px", checked: true
+										= "J'accepte les <a href='/cgu'>conditions générales d'utilisation</a>".html_safe
 							
-							= f.submit "Valider", class: "button radius expand"
+							= f.submit "Créer un compte", class: "button radius expand small"
 						
 							%hr
-							%h3.subheader Vous possédez déjà un compte?
-							= link_to "Se connecter", new_session_path(resource_name), class: "button radius secondary expand"
+							= link_to user_omniauth_authorize_path(:facebook), class: "facebook button split left-icon small radius" do
+								%span
+								S'inscrire avec Facebook

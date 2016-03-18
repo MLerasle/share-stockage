@@ -1,19 +1,20 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  validates :username, presence: true, uniqueness: { case_sensitive: false }
+  # validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :accept_cgu, presence: true
   has_many :adverts, dependent: :destroy
   has_many :reservations, dependent: :destroy
   has_many :evaluations
-  has_attached_file :avatar, styles: { thumb: "100x100#" }, 
-                             default_url: ->(attachment) { ActionController::Base.helpers.asset_path('user.png') },
+  has_attached_file :avatar, styles: { thumb: "50x50#" }, 
+                             default_url: ->(attachment) { ActionController::Base.helpers.asset_path('user.jpg') },
                              path: "users/:id/:style/avatar",
                              url: ':s3_domain_url',
                              use_timestamp: false
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :trackable, :validatable,
+         :omniauthable, :omniauth_providers => [:facebook, :google]
          
   def login=(login)
     @login = login
@@ -23,8 +24,26 @@ class User < ActiveRecord::Base
     @login || self.username || self.email
   end
 
-  def name
-    username
+  def username
+    "#{first_name.capitalize}" if first_name
+  end
+
+  def self.from_omniauth(auth)
+    if user = User.where(email: auth.info.email).first
+      return user
+    end
+    where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.email = auth.info.email
+      user.first_name = auth.info.first_name
+      user.last_name = auth.info.last_name
+      user.remote_photo = auth.info.image
+      user.password = Devise.friendly_token[0,20]
+      user.accept_cgu = true
+      user.skip_confirmation!
+      user.save!
+    end
   end
 
   def self.find_for_database_authentication(warden_conditions)

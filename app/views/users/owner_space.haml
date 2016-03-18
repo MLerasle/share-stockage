@@ -1,53 +1,52 @@
 - content_for(:title, 'Espace propriétaire')
-%section#main-content
+%section
+	= render partial: "account_menu", locals: { item: "owner" }
+
 	.row
-		= render partial: "account_menu", locals: { item: "owner" }
+		.small-12.large-12.columns
+			- unless notice.nil?
+				.alert-box.info.radius{ "data-alert" => "" }
+					= notice
+					%a{ href: "#", class: "close" } &times;
+			- unless alert.nil?
+				.alert-box.alert.radius{ "data-alert" => "" }
+					= alert
+					%a{ href: "#", class: "close" } &times;
+	.row
+		.small-12.large-12.columns
+			%h2.text-center
+				%i.fa.fa-folder-open{style: "color:rgb(57,141,183)"}
+				Espace propriétaire
+			%hr
 
-		.row
-			.small-12.large-12.columns
-				- unless notice.nil?
-					.alert-box.info.radius{ "data-alert" => "" }
-						= notice
-						%a{ href: "#", class: "close" } &times;
-				- unless alert.nil?
-					.alert-box.alert.radius{ "data-alert" => "" }
-						= alert
-						%a{ href: "#", class: "close" } &times;
-		.row
-			.small-12.large-12.columns
-				%h2.text-center
-					%i.fa.fa-folder-open{style: "color:rgb(57,141,183)"}
-					Espace propriétaire
-				%hr
-
-				- if @user.adverts.any?
-					%table#adverts_table
-						%tbody
-							- @user.adverts.order("id DESC").each do |advert|
-								%tr{ "data-link" => advert_path(advert) }
-									= render partial: 'adverts/advert_line', locals: { advert: advert }
-								%tr.adverts_action_line
-									%td{ style: "text-align:center;" }
-										- if advert.validated
-											%span{ style: "color: green" } ANNONCE VALIDEE
-										- else
-											%span{ style: "color: red" } En attente de validation
-									%td
-										= link_to "Modifier l'annonce", edit_advert_path(advert)
+			- if @user.adverts.any?
+				%table#adverts_table
+					%tbody
+						- @user.adverts.order("id DESC").each do |advert|
+							%tr{ "data-link" => advert_path(advert) }
+								= render partial: 'adverts/advert_line', locals: { advert: advert }
+							%tr.adverts_action_line
+								%td{ style: "text-align:center;" }
+									- if advert.validated
+										%span{ style: "color: green" } ANNONCE VALIDEE
+									- else
+										%span{ style: "color: red" } En attente de validation
+								%td
+									= link_to "Modifier l'annonce", edit_advert_path(advert)
+									\|
+									= link_to "Gérer les réservations", advert_reservations_path(advert)
+									\|
+									- if advert.valid?
+										%span{ id: "activation_link_#{advert.id}" }= link_to advert.activate_title, activate_advert_path(advert), method: :put, remote: true
 										\|
-										= link_to "Gérer les réservations", advert_reservations_path(advert)
-										\|
-										- if advert.valid?
-											%span{ id: "activation_link_#{advert.id}" }= link_to advert.activate_title, activate_advert_path(advert), method: :put, remote: true
-											\|
-										- if advert.is_deletable?
-											= link_to "Supprimer l'annonce", advert_path(advert), method: :delete, data: { confirm: "Ètes-vous sûr de vouloir supprimer cette annonce?" }
-									%td
-										- if advert.reservations.pending.any?
-											%span.right
-												= link_to "#{advert.reservations.pending.count} demande(s) de réservation en attente", advert_reservations_path(advert), class: "red_link"
+									- if advert.is_deletable?
+										= link_to "Supprimer l'annonce", advert_path(advert), method: :delete, data: { confirm: "Ètes-vous sûr de vouloir supprimer cette annonce?" }
+								%td
+									- if advert.reservations.pending.any?
+										%span.right
+											= link_to "#{advert.reservations.pending.count} demande(s) de réservation en attente", advert_reservations_path(advert), class: "red_link"
 
-				- else
-					%h4.subheader.text-center Vous ne proposez actuellement aucun espace à la location.
-					%br
-					= link_to "Publier une annonce maintenant", new_advert_path, class: "button radius expand"
+			- else
+				%h4.subheader.text-center Vous ne proposez actuellement aucun espace à la location.
+				%br
+				= link_to "Publier une annonce maintenant", new_advert_path, class: "button radius expand"

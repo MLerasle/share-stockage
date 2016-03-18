@@ -2,37 +2,26 @@
 
 footer {
 	margin-top: 20px;
-  background-color: rgb(25,61,83);
+  background-color: rgb(47,53,57);
   padding: 20px 0 20px 0;
 }
 
-footer h4, p {
-	color: #fff;
+footer h4 {
+	color: white;
+}
+
+footer p {
+	color: rgb(206,206,206);
 }
 
 footer p {
 	font-size: 80%;
 }
-
-footer .section {
-	border-left: 1px solid rgb(55, 93, 113);
-	border-right: 1px solid rgb(55, 93, 113);
-}
-
-footer .section:last-child {
-	border-left:0;
-	border-right: 0;
-}
-
-footer .section:first-child {
-	border-left:0;
-	border-right: 0;
-}
  
 .copyright-section {
-    background-color: #333;
-    color: #fff;
-    padding: 20px 0 0 0;
+  background-color: rgb(47,53,57);
+  color: rgb(206,206,206) !important;
+  padding: 20px 0 0 0;
 }
 
 
@@ -272,13 +261,13 @@ a[class*="social-share-button-google_plus"] {
 
 .blog_header {
   width: 100%;
-  background-color: rgb(38,38,38);
+  background-color: rgb(47,53,57);
   padding: 20px 0 20px 0;
 }
 
 .blog_header h1 {
   text-align: center;
-  color: rgb(191,192,191);
+  color: rgb(206,206,206);
 }
 
 .wizard_menu {
@@ -328,4 +317,26 @@ a[class*="social-share-button-google_plus"] {
 
 .active_category {
   border-bottom: 4px solid rgb(57,141,183);
+}
+
+.split.button {
+  width: 100%
+}
+
+.split.button.facebook {
+  background: #3b5998;
+  text-transform: uppercase;
+  font-size: 75%;
+}
+
+.split.button.facebook span {
+  background: #2d4373; 
+}
+
+.split.button.facebook span:after {
+  border: none;
+  font-family: "FontAwesome";
+  content: "\f09a";
+  font-size: 1.1rem;
+  line-height: 0.2rem;
 }

@@ -11,7 +11,7 @@ class PagesController < ApplicationController
   def help
   end
   
-  def pending_signup
-    return redirect_to root_url if current_user and current_user.confirmed_at.present?
+  def welcome
+    return redirect_to root_url if current_user and current_user.sign_in_count > 1
   end
 end

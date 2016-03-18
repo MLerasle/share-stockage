@@ -8,18 +8,18 @@
 	.small-12.medium-12.large-8.columns{style: "margin-top: 20px;"}
 		= form_for '#', method: :get, id: "adverts_filter_form" do
 			.row
-				.small-12.medium-6.columns
+				.small-12.columns
 					= text_field_tag "filter[address]", (params[:filter][:address] rescue nil), id: "location_field"
-				.small-12.medium-3.columns
-					= text_field_tag "filter[start_date]", (params[:filter][:start_date] rescue nil), placeholder: "Début"
-				.small-12.medium-3.columns
-					= text_field_tag "filter[end_date]", (params[:filter][:end_date] rescue nil), placeholder: "Fin"
+				/ .small-12.medium-3.columns
+				/ 	= text_field_tag "filter[start_date]", (params[:filter][:start_date] rescue nil), placeholder: "Début"
+				/ .small-12.medium-3.columns
+				/ 	= text_field_tag "filter[end_date]", (params[:filter][:end_date] rescue nil), placeholder: "Fin"
 			.row
 				.small-12.medium-5.columns
 					= select_tag "filter[advert_type]", options_for_select([["Box", 1], ["Cave", 2], ["Garage", 3], ["Grenier", 4]], params[:filter][:advert_type]), prompt: "Type d'espace"
 				.small-12.medium-5.columns
 					= select_tag "filter[sorting]", options_for_select([["Plus récentes d'abord", "created_at DESC"], ["Plus anciennes d'abord", "created_at ASC"], ["Prix croissant", "price ASC"], ["Prix décroissant", "price DESC"]], params[:filter][:sorting])
-				.small-12.medium-2.columns
+				.small-12.medium-2.columns.text-right
 					= submit_tag "Rechercher", class: "button radius tiny info"
 			%hr
 

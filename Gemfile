@@ -42,6 +42,9 @@ gem 'sitemap_generator'
 
 # Authentication
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-google'
 
 # Social buttons
 gem 'social-share-button'

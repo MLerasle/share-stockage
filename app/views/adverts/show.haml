@@ -122,12 +122,7 @@
 				- if @advert.evaluations.where(validated: true).any?
 					- @advert.evaluations.where(validated: true).each do |e|
 						.row
-							.small-2.large-2.columns
-								- if User.exists?(e.user_id)
-									= image_tag e.user.avatar(:thumb) unless Rails.env.development?
-								- else
-									= image_tag "user.png"
-							.small-10.large-10.columns
+							.small-12.large-12.columns
 								%h5
 									%span{ style: "color:rgb(46,121,168)" }
 										- if User.exists?(e.user_id)
@@ -205,11 +200,9 @@
 				%h3 Propriétaire
 				%hr
 				.row
-					.small-4.large-4.columns
-						= image_tag @advert.user.avatar(:thumb) unless Rails.env.development?
-					.small-8.large-8.columns
+					.small-12.large-12.columns
 						%h5
-							%strong= @advert.user.username
+							%strong= "#{@advert.user.username} #{@advert.user.last_name.capitalize[0]}."
 						%h6{ style: "margin-top: 20px" }
 							Evaluation:
 							%span#user_star
