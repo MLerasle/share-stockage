@@ -28,6 +28,10 @@ class User < ActiveRecord::Base
     "#{first_name.capitalize}" if first_name
   end
 
+  def name
+    username
+  end
+
   def self.from_omniauth(auth)
     if user = User.where(email: auth.info.email).first
       return user
