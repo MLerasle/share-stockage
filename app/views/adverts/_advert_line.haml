@@ -3,22 +3,20 @@
 - else
 	%td.image_cell.hide-for-small= image_tag "camera.png"
 %td
-	%h5
-		%i.fa.fa-map-marker
-		= advert.full_address if advert.address
-	%ul
+	%h5{ style: "font-weight: bold; color:rgb(57,141,183)" }
+		= advert.type_name
+		de
+		= advert.volume
+		m³
+	%ul.no-bullet
 		%li
-			Type d'espace:
-			%strong= advert.type_name
-		%li
-			Peut accueillir
-			%strong
-				= advert.volume if advert.area and advert.height
-				m³
-		%li
+			%i.fa.fa-map-marker
+			= advert.full_address if advert.address
+		%li.hide-for-small
 			= advert.access_type_hr
-%td{ style: "text-align:right;" }
-	%h4
+
+%td{ style: "text-align:right" }
+	%h5
 		- if advert.price
 			= number_with_precision(advert.price, precision: 2)
 			CHF

@@ -128,14 +128,12 @@ tr[data-link] {
 #adverts_table tr {
   background-color: white;
   border-bottom: 1px solid #D5D5D5;
+  border-top: 1px solid #D5D5D5;
   margin-bottom: 10px;
 }
 
 #adverts_table tr:hover {
-  border-top-style: solid;
-  border-bottom-style: solid;
-  border-width: 2px;
-  border-color: rgb(155,200,224);
+  background-color: rgb(242,242,242);
 }
 
 tr.adverts_action_line:hover {
@@ -151,14 +149,6 @@ tr.adverts_action_line:hover {
 
 .red_link:hover {
   color: red;
-}
-
-#adverts_table tr:last-child {
-  border-bottom: 1px solid white;
-}
-
-#adverts_table tr:last-child:hover {
-  border-bottom: 2px solid rgb(155,200,224);
 }
 
 #messages_table {
