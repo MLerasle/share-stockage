@@ -137,10 +137,7 @@ tr[data-link] {
 }
 
 tr.adverts_action_line:hover {
-  border-top-style: none !important;
-  border-bottom-style: none !important;
-  border-width: none !important;
-  border-color: none !important;
+  background-color: white !important;
 }
 
 .red_link {
@@ -329,4 +326,36 @@ a[class*="social-share-button-google_plus"] {
   content: "\f09a";
   font-size: 1.1rem;
   line-height: 0.2rem;
+}
+
+.social a {
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  background-color: rgb(57,63,67);
+  border-radius: 2px;
+  font-size: 1.6rem;
+  color: #fff;
+  text-align: center;
+  padding-top: 8%;
+}
+
+.social li {
+  margin-bottom: 3px;
+}
+
+.social .mail:hover {
+  background-color: rgb(0,140,186);
+}
+
+.social .facebook:hover {
+  background-color: rgb(72,100,159);
+}
+
+.social .twitter:hover {
+  background-color: rgb(29,161,242);
+}
+
+.social .google-plus:hover {
+  background-color: rgb(219,68,55);
 }
