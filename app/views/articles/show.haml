@@ -3,7 +3,7 @@
 	.large-12.columns
 		.post-box
 			.row
-				.large-8.columns.large-centered
+				.large-9.columns.large-centered
 					.new-post
 						%br
 						%h1.light= @article.title
@@ -15,7 +15,7 @@
 						= link_to "Modifier", edit_article_path(@article), class: "button radius small"
 						= link_to "Supprimer", article_path(@article), method: :delete, class: "button radius alert small"
 			.row
-				.large-8.columns.large-centered
+				.large-9.columns.large-centered
 					%hr
 					Partagez cet article
 					= social_share_button_tag(@article.title, popup: true)

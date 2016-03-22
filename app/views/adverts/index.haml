@@ -1,6 +1,10 @@
+%script{:src => "https://maps.google.com/maps/api/js?libraries=places&amp;language=en", :type => "text/javascript"}
 - content_for(:title, "Annonces")
 .row#adverts_container
-	.small-12.medium-12.large-9.columns.large-centered{style: "margin-top: 20px;"}
+	.small-12.medium-12.large-3.columns.hide-for-small.hide-for-medium#map_container
+		.panel.map_panel
+			#map
+	.small-12.medium-12.large-9.columns{style: "margin-top: 20px;"}
 		= form_for '#', method: :get, id: "adverts_filter_form" do
 			.row
 				.small-12.columns
@@ -65,3 +69,52 @@
 			checkout.hide();
 		}).data('datepicker');
 		$("#filter_address").geocomplete();
+		console.log("Addresses:" + #{@my_json_address})
+		$("#map").width("100%").gmap3({
+			marker:{
+				values: #{@my_json_address},
+				events:{
+					mouseover: function(marker, event, context){
+						var map = $(this).gmap3("get"),
+								infowindow = $(this).gmap3({get:{name:"infowindow"}});
+						if (infowindow){
+							infowindow.open(map, marker);
+							infowindow.setContent(context.data);
+						} else {
+							$(this).gmap3({
+								infowindow:{
+									anchor:marker,
+									options:{content: context.data}
+								}
+							});
+						}
+					},
+					click: function(marker, event, context){
+						window.location = context.tag;
+					},
+					mouseout: function(){
+						var infowindow = $(this).gmap3({get:{name:"infowindow"}});
+						if (infowindow){
+							infowindow.close();
+						}
+					}
+				}
+			},
+			map:{
+				options:{
+					center:[46.5196168, 6.6322095],
+					zoom:9,
+					mapTypeControl: true,
+					navigationControl: true,
+					scrollwheel: false
+				}
+			}
+		});
+		$('#map').height(function(index, height) {
+			return window.innerHeight - $('.top-bar').outerHeight(true);
+		});
+		$(window).resize(function(){
+			$('#map').height(function(index, height) {
+				return window.innerHeight - $('.top-bar').outerHeight(true);
+			});
+		});

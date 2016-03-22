@@ -54,12 +54,16 @@ footer p {
 .index-header-panel h3 {
 	color: white;
 }
-/*.tabs dd > a {display:block;background:#fff;color:#333;padding:.5em 1.5em .5em 1.5em;font-size:.9em;float:left;border-bottom:1px solid #ddd}
-.tabs dd > a span.icon {color:#999;font-style:normal;padding-right:5%;float:left;}
-.tabs dd.active a:hover span.icon {color:#fa5051;}
-.tabs dd > a:hover {color:#316CFA;background-color:#fff;}
-.tabs dd.active a {border-top:1px solid #316CFA;border-left:1px solid #ddd;border-right:1px solid #ddd;border-bottom:0;}
-.tabs dd.active a:hover {color:#316CFA;}*/
+
+.home-page-icon {
+  width: 1.7em;
+  min-height: 1.7em;
+  text-align: center;
+  padding-top: 17px;
+  background: rgb(0,140,186);
+  color: #fff;
+  border-radius: 50%;
+}
 
 #homepage-hero {
 	background-image: asset_url('sharing_space_header.png');
@@ -71,7 +75,7 @@ footer p {
 }
 
 .main-content {
-	margin-top: 30px;
+	margin-top: 40px;
 }
 
 /* Calendar navigation button */
@@ -217,7 +221,6 @@ a[class*="social-share-button-google_plus"] {
 }
 
 .blog {
-  font-family: "Kepler Std";
   font-size: 110%;
   line-height: 1.8em;
 }
@@ -227,20 +230,17 @@ a[class*="social-share-button-google_plus"] {
 }
 
 .blog_content ul li {
-  font-family: "Kepler Std";
   font-size: 110%;
   line-height: 1.8em;
 }
 
 .blog_content p {
-  font-family: "Kepler Std";
   font-size: 100%;
   line-height: 1.8em;
   color: black;
 }
 
 .new-post p {
-  font-family: "Kepler Std";
   font-size: 100%;
   line-height: 1.8em;
   color: black;
