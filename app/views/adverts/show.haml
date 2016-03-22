@@ -186,12 +186,8 @@
 							= f.number_field :volume, label: false, min: 1, max: "#{@advert.volume.round}", step: "any", placeholder: "Volume souhaité"
 						.small-3.large-2.columns
 							%span.postfix m³
-					%em{style: "font-size:80%; margin-top: 0"}
-						Vous pouvez louer jusqu'à
-						= @advert.volume.round
-						m³, ce qui correspond à l'intégralité de l'espace.
 					%p
-						= f.submit "Pré-réserver", class: "button radius expand"
+						= f.submit "Pré-réserver", class: "button radius expand small"
 					%p
 						%i.fa.fa-exclamation-triangle{style: "color: red"}
 						Pensez à véfifier les disponibilités de l'espace pour que votre demande puisse aboutir.
@@ -214,7 +210,7 @@
 								= render partial: 'messages/new'
 								%a.close-reveal-modal ×
 						- else
-							= link_to "Me connecter pour contacter le propriétaire", new_user_session_path, class: "button radius expand"
+							= link_to "Me connecter pour contacter le propriétaire", new_user_session_path, class: "button radius expand small"
 
 			.panel
 				%h3 Partager
