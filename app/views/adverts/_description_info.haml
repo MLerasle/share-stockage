@@ -7,35 +7,35 @@
 = f.text_area :description, rows: 6, label: false
 
 .row
-	.large-6.medium-6.small-6.columns
+	.large-6.medium-6.small-12.columns
 		= f.label "Type d'accès", nil, class: 'required'
 		= f.select :access_type, options_for_select([["Accès sur rendez-vous", 0], ["Accès permanent", 1]], f.object.access_type), label: false
-	.large-6.medium-6.small-6.columns
+	.large-6.medium-6.small-12.columns
 		= f.label "Sécurité", nil, class: 'required'
 		= f.select :security, options_for_select([["1 porte verrouillée", 1], ["2 portes verrouillées", 2], ["3 portes verrouillées", 3], ["4 portes verrouillées", 4], ["5 portes verrouillées", 5]], f.object.security), label: false
 .row
-	.large-6.medium-6.small-6.columns
+	.large-6.medium-6.small-12.columns
 		= f.label "Etage", nil, class: 'required'
 		= f.select :floor, options_for_select([["-3", -3], ["-2", -2], ["-1", -1], ["0", 0], ["1", 1], ["2", 2], ["3", 3], ["4", 4], ["5", 5]], f.object.floor), label: false
-	.large-6.medium-6.small-6.columns
+	.large-6.medium-6.small-12.columns
 		= f.label "Conservation", nil, class: 'required'
 		= f.select :preservation, options_for_select([["De base (résisitant à l'humidité)", 0], ["Normale (cartons)", 1], ["Haute (électronique)", 2]], f.object.preservation), label: false
 
 .row
-	.large-6.medium-6.small-6.columns
+	.large-6.medium-6.small-12.columns
 		= f.label "Eclairage"
 		= f.radio_button :light, true, checked: f.object.light, label: "Oui"
 		= f.radio_button :light, false, checked: !f.object.light, label: "Non"
-	.large-6.medium-6.small-6.columns
+	.large-6.medium-6.small-12.columns
 		= f.label "Gardien"
 		= f.radio_button :concierge, true, checked: f.object.concierge, label: "Oui"
 		= f.radio_button :concierge, false, checked: !f.object.concierge, label: "Non"
 .row
-	.large-6.medium-6.small-6.columns
+	.large-6.medium-6.small-12.columns
 		= f.label "Accès en voiture"
 		= f.radio_button :car_access, true, checked: f.object.car_access, label: "Oui"
 		= f.radio_button :car_access, false, checked: !f.object.car_access, label: "Non"
-	.large-6.medium-6.small-6.columns
+	.large-6.medium-6.small-12.columns
 		= f.label "Ascenceur"
 		= f.radio_button :elevator, true, checked: f.object.elevator, label: "Oui"
 		= f.radio_button :elevator, false, checked: !f.object.elevator, label: "Non"

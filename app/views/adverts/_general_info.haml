@@ -6,10 +6,10 @@
 = f.label "Choisissez le titre de votre annonce", nil, class: 'required'
 = f.text_field :title, label: false
 .row
-	.large-6.medium-6.small-6.columns
+	.large-6.medium-6.small-12.columns
 		= f.label "Quel type d'espace proposez-vous?", nil, class: 'required'
 		= f.select :advert_type, options_for_select([["Box", 1], ["Cave", 2], ["Garage", 3], ["Grenier", 4]], f.object.advert_type), label: false
-	.large-6.medium-6.small-6.columns
+	.large-6.medium-6.small-12.columns
 		= f.label "S'agit-il d'en espace complet ou partagé?", nil
 		= f.select :complete, options_for_select([["Espace partagé", false], ["Espace complet", true]], f.object.complete), label: false
 .row.collapse
