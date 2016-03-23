@@ -49,22 +49,51 @@
 / 		.small-12.medium-8.large-6.columns.small-centered.medium-centered.large-centered
 / 			%h3.text-center{ style: "color: rgb(62,65,73); font-weight: bold; padding-bottom: 30px" } Vous cherchez un espace de stockage?
 / 	.row
-/ 		.small-12.medium-12.large-8.columns.small-centered.medium-centered.large-centered
+/ 		.small-12.medium-12.large-10.columns.small-centered
 / 			.row
 / 				.small-12.medium-12.large-6.columns
+/ 					.panel.text-center{ style: "background-color: rgb(246,247,250)" }
+/ 						= image_tag "garde-meuble-search.png"
 / 				.small-12.medium-12.large-6.columns
-/ 					%h3{ style: "color: rgb(62,65,73); font-weight: bold; padding-top: 30px" } Simple
-/ 					%h5.subheader Choisissez la ville de votre choix
+/ 					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Choisissez l'endroit où vous voulez stocker
+/ 					%h5.small-only-text-center.medium-only-text-center.subheader Saisissez le nom de la ville ou l'adresse exacte où vous souhaitez stocker vos affaires, nous trouverons pour vous tous les espaces à proximité.
+/
+/ 			.row.hide-for-small.hide-for-medium{ style: "margin-top: 30px; margin-bottom: 30px"}
+/ 				.small-12.medium-12.large-6.columns
+/ 					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Sélectionnez l'espace qui vous convient
+/ 					%h5.small-only-text-center.medium-only-text-center.subheader Faites votre choix parmi les garde-meubles trouvés près de chez vous. S'il vous manque des informations, contactez directement le propriétaire.
+/ 				.small-12.medium-12.large-6.columns
+/ 					.panel.text-center{ style: "background-color: rgb(246,247,250)" }
+/ 						= image_tag "garde-meuble-find.png"
+/ 			.row.hide-for-large{ style: "margin-top: 30px; margin-bottom: 30px"}
+/ 				.small-12.medium-12.large-6.columns
+/ 					.panel.text-center{ style: "background-color: rgb(246,247,250)" }
+/ 						= image_tag "garde-meuble-find.png"
+/ 				.small-12.medium-12.large-6.columns
+/ 					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Sélectionnez l'espace qui vous convient
+/ 					%h5.small-only-text-center.medium-only-text-center.subheader Faites votre choix parmi les garde-meubles trouvés près de chez vous. S'il vous manque des informations, contactez directement le propriétaire.
+/
 / 			.row
 / 				.small-12.medium-12.large-6.columns
-/ 					%h3{ style: "color: rgb(62,65,73); font-weight: bold; padding-top: 30px" } Rapide
-/ 					%h5.subheader Sélectionnez l'espace qui vous convient le mieux
+/ 					.panel.text-center{ style: "background-color: rgb(246,247,250)" }
+/ 						= image_tag "garde-meuble-book.png"
 / 				.small-12.medium-12.large-6.columns
-/ 			.row
-/ 				.small-12.medium-12.large-6.columns
-/ 				.small-12.medium-12.large-6.columns
-/ 					%h3{ style: "color: rgb(62,65,73); font-weight: bold; padding-top: 30px" } Efficace
-/ 					%h5.subheader Miglez le stain en 3 secondes
+/ 					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Réservez simplement
+/ 					%h5.small-only-text-center.medium-only-text-center.subheader Une fois votre choix fait, choisissez vos dates de stockage et précisez le volume souhaité. Vous recevrez un email de confirmation une fois votre réservation validée par le propriétaire.
+/
+/ %section.main-content{ style: "background-color: rgb(246,247,250)" }
+/ 	.row
+/ 		.small-12.medium-8.large-6.columns.small-centered.medium-centered.large-centered
+/ 			%h3.text-center{ style: "color: rgb(62,65,73); font-weight: bold; padding-top: 30px; padding-bottom: 30px" } Toujours accessible, où que vous soyez
+/ 			.text-center= image_tag "responsive.png"
+/ 			%h5.text-center{ style: "color: rgb(62,65,73); font-weight: bold; padding-top: 30px; padding-bottom: 30px" } Grâce à la technologie responsive design, accédez à Share Stockage depuis votre smartphone, tablette ou ordinateur.
+/
+/ %section.main-content
+/ 	.row
+/ 		.small-12.medium-8.large-6.columns.small-centered.medium-centered.large-centered
+/ 			%h3.text-center{ style: "color: rgb(62,65,73); font-weight: bold; padding-bottom: 30px" } Rejoignez-nous!
+/ 			= link_to "Je propose un espace de stockage", new_advert_path, class: "button radius expand"
+/ 			= link_to "J'aimerais en savoir plus", help_path, class: "button radius expand secondary"
 
 
 %section.main-content

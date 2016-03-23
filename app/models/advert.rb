@@ -98,7 +98,8 @@ class Advert < ActiveRecord::Base
   def authorize_evaluation_for_user?(user)
     return false if user.nil?
     reservation = self.reservations.where(validated: true, user_id: user.id).last
-    (reservation.nil? or reservation.end_date > Date.today) ? false : true
+    # (reservation.nil? or reservation.end_date > Date.today) ? false : true
+    reservation
   end
   
   def self.for_filter(filter)

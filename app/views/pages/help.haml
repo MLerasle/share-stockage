@@ -1,92 +1,146 @@
 - content_for(:title, 'Aide')
-%section#main-content
+
+%section.main-content
 	.row
-		.large-8.medium-10.small-12.columns.large-centered.medium-centered
-			%h1 Comment ça marche?
-			%hr
-			
-			.panel{ style: "background-color: white" }	
-				%h3{ style: "color:rgb(210, 63, 47)" } Vous proposez un espace de stockage?
-				%hr
-				%br
-				%h4{ style: "color:rgb(210, 63, 47)" }
-					%i.fa.fa-edit
-					Créez votre annonce
-				%br
-				%p 
-					Pour proposer votre garde-meuble, il vous suffit de créer gratuitement votre compte sur Share Stockage puis de vous rendre sur la page "Publier une annonce" en cliquant sur le lien situé dans le menu en haut à droite.
-				%p
-					Remplissez alors le formulaire qui vous est proposé aussi explicitement que possible. Celle-ci apparaîtra sur le site une fois validée par Share Stockage.
-				
-				%br
-				%h4{ style: "color:rgb(210, 63, 47)" }
-					%i.fa.fa-comments
-					Communiquez
-				%br
-				%p
-					Répondez aux demandes de renseignements que vous envoient les utilisateurs directement depuis votre boîte mail.
-				
-				%br
-				%h4{ style: "color:rgb(210, 63, 47)" }
-					%i.fa.fa-check
-					Validez
-				%br
-				%p
-					Pour valider une demande de réservation de votre garde-meuble, rendez-vous d'abord dans votre compte depuis le menu en haut à droite puis choisissez l'"Espace propriétaire".
-				%p
-					Vous y trouverez la liste de vos espaces de stockage et l'accès aux réservations de ceux-ci. Il vous suffit alors de sélectionner la réservation de votre choix depuis la liste des réservations puis de cliquer sur "Valider".
-				%p
-					Vous recevrez par email un modèle de contrat de location ainsi que les coordonnées de votre locataire.
-				%p
-					Prenez contact avec lui pour convenir d'un rendez-vous.
-				
-				%br
-				%h4{ style: "color:rgb(210, 63, 47)" }
-					%i.fa.fa-home
-					Accueillez
-				%br
-				%p
-					Faites l'inventaire, l'état des lieux et signez le contrat avec le locataire. Obtenez de bonnes appréciations pour augmenter vos chances de relouer!
-				
-			%br
-			
-			.panel{ style: "background-color: white" }
-				%h3{ style: "color:rgb(84, 151, 86)" } Vous cherchez un espace de stockage?
-				%hr
-				%br
-				%h4{ style: "color:rgb(84, 151, 86)" }
-					%i.fa.fa-search
-					Cherchez un garde-meuble
-				%br
-				%p
-					Pour trouver un espace de stockage, il vous suffit de choisir le lieu qui vous intéresse directement depuis la page d'accueil du site, puis de choisir le box de stockage qui vous convient le mieux!
-				%p
-					Vous devrez créer un compte gratuitement sur le site pour prendre contact avec un annonceur ou effectuer une demande de réservation.
-				
-				%br
-				%h4{ style: "color:rgb(84, 151, 86)" }
-					%i.fa.fa-envelope
-					Contactez le propriétaire
-				%br
-				%p
-					Si des informations vous manquent, contactez directement le propriétaire en vous rendant sur l'annonce de votre choix puis en cliquant sur "Contacter le propriétaire".
-				
-				%br
-				%h4{ style: "color:rgb(84, 151, 86)" }
-					%i.fa.fa-book
-					Réservez votre box de stockage
-				%br
-				%p
-					Votre choix est fait, envoyez une demande de réservation au propriétaire.
-				
-				%br
-				%h4{ style: "color:rgb(84, 151, 86)" }
-					%i.fa.fa-suitcase
-					Déposez vos affaires
-				%br
-				%p
-					Faites l'inventaire, l'état des lieux et signez le contrat avec le propriétaire.
-				%p
-					Vous pouvez également laisser un commentaire sur le garde-meuble que vous louez en vous rendant sur la page de l'annonce. Ceci a pour but d'instaurer un climat de confiance sur le site. On compte sur vous!
+		.small-12.columns.small-centered
+			%h1.text-center{ style: "color: rgb(62,65,73); font-weight: bold; padding-bottom: 30px" } Fonctionnement de Share Stockage
+
+	.row
+		.small-12.columns.small-centered
+			%h2.text-center.subheader{ style: "padding-bottom: 30px" } Vous proposez un espace
+		
+	.row
+		.small-12.medium-12.large-10.columns.small-centered
+			.row
+				.small-12.medium-12.large-6.columns
+					.panel.text-center{ style: "background-color: rgb(0,140,186)" }
+						= image_tag "aide-proprietaire-1.png"
+				.small-12.medium-12.large-6.columns
+					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Inscrivez-vous gratuitement
+					%h5.small-only-text-center.medium-only-text-center.subheader Une fois le formulaire rempli, vous devrez simplement confirmer votre adresse email en cliquant sur le lien contenu dans le mail que nous vous envoyons. Vous pouvez aussi vous inscrire en 1 clic avec votre compte Facebook!
+
+			.row.hide-for-small.hide-for-medium{ style: "margin-top: 30px; margin-bottom: 30px"}
+				.small-12.medium-12.large-6.columns
+					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Créez votre annonce
+					%h5.small-only-text-center.medium-only-text-center.subheader Remplissez soigneusement et avec exactitude le formulaire de création d'annonce. Vous pouvez ajouter jusqu'à 3 photos pour optimiser vos chances de louer votre espace. Votre annonce sera en ligne une fois validée par Share Stockage.
+				.small-12.medium-12.large-6.columns
+					.panel.text-center{ style: "background-color: rgb(0,140,186)" }
+						= image_tag "aide-proprietaire-2.png"
+			.row.hide-for-large{ style: "margin-top: 30px; margin-bottom: 30px"}
+				.small-12.medium-12.large-6.columns
+					.panel.text-center{ style: "background-color: rgb(0,140,186)" }
+						= image_tag "aide-proprietaire-2.png"
+				.small-12.medium-12.large-6.columns
+					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Créez votre annonce
+					%h5.small-only-text-center.medium-only-text-center.subheader Remplissez soigneusement et avec exactitude le formulaire de création d'annonce. Vous pouvez ajouter jusqu'à 3 photos pour optimiser vos chances de louer votre espace. Votre annonce sera en ligne une fois validée par Share Stockage.
+
+			.row
+				.small-12.medium-12.large-6.columns
+					.panel.text-center{ style: "background-color: rgb(0,140,186)" }
+						= image_tag "aide-proprietaire-3.png"
+				.small-12.medium-12.large-6.columns
+					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Répondez aux demandes des utilisateurs
+					%h5.small-only-text-center.medium-only-text-center.subheader Rassurez les locataires potentiels de votre espace de stockage en répondant directement à leurs demandes depuis votre boîte mail.
+
+			.row.hide-for-small.hide-for-medium{ style: "margin-top: 30px; margin-bottom: 30px"}
+				.small-12.medium-12.large-6.columns
+					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Validez la réservation
+					%h5.small-only-text-center.medium-only-text-center.subheader Lorsqu'un locataire effectue une demande de réservation pour votre espace, vous recevez un email pour vous en informer. Connectez-vous alors simplement à votre compte et gérez vos réservations depuis votre espace propriétaire.
+				.small-12.medium-12.large-6.columns
+					.panel.text-center{ style: "background-color: rgb(0,140,186)" }
+						= image_tag "aide-proprietaire-4.png"
+			.row.hide-for-large{ style: "margin-top: 30px; margin-bottom: 30px"}
+				.small-12.medium-12.large-6.columns
+					.panel.text-center{ style: "background-color: rgb(0,140,186)" }
+						= image_tag "aide-proprietaire-4.png"
+				.small-12.medium-12.large-6.columns
+					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Validez la réservation
+					%h5.small-only-text-center.medium-only-text-center.subheader Lorsqu'un locataire effectue une demande de réservation pour votre espace, vous recevez un email pour vous en informer. Connectez-vous alors simplement à votre compte et gérez vos réservations depuis votre espace propriétaire.
+
+			.row
+				.small-12.medium-12.large-6.columns
+					.panel.text-center{ style: "background-color: rgb(0,140,186)" }
+						= image_tag "aide-proprietaire-5.png"
+				.small-12.medium-12.large-6.columns
+					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Accueillez les affaires de votre locataire
+					%h5.small-only-text-center.medium-only-text-center.subheader Une fois la réservation validée, le locataire et vous recevez un email de confirmation avec un modèle de contrat en pièce jointe. Faites alors l'inventaire et l'état des lieux ensemble et signez le contrat de location!
+
+
+
+	.row
+		.small-12.columns.small-centered
+			%h2.text-center.subheader{ style: "padding-top: 60px; padding-bottom: 30px" } Vous recherchez un espace
+		
+	.row
+		.small-12.medium-12.large-10.columns.small-centered
+			.row
+				.small-12.medium-12.large-6.columns
+					.panel.text-center{ style: "background-color: rgb(160,211,232)" }
+						= image_tag "garde-meuble-search.png"
+				.small-12.medium-12.large-6.columns
+					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Choisissez l'endroit où vous voulez stocker
+					%h5.small-only-text-center.medium-only-text-center.subheader Saisissez le nom de la ville ou l'adresse exacte où vous souhaitez stocker vos affaires, nous trouverons pour vous tous les espaces à proximité.
+
+			.row.hide-for-small.hide-for-medium{ style: "margin-top: 30px; margin-bottom: 30px"}
+				.small-12.medium-12.large-6.columns
+					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Sélectionnez l'espace qui vous convient
+					%h5.small-only-text-center.medium-only-text-center.subheader Faites votre choix parmi les garde-meubles trouvés près de chez vous. S'il vous manque des informations, contactez directement le propriétaire.
+				.small-12.medium-12.large-6.columns
+					.panel.text-center{ style: "background-color: rgb(160,211,232)" }
+						= image_tag "garde-meuble-find.png"
+			.row.hide-for-large{ style: "margin-top: 30px; margin-bottom: 30px"}
+				.small-12.medium-12.large-6.columns
+					.panel.text-center{ style: "background-color: rgb(160,211,232)" }
+						= image_tag "garde-meuble-find.png"
+				.small-12.medium-12.large-6.columns
+					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Sélectionnez l'espace qui vous convient
+					%h5.small-only-text-center.medium-only-text-center.subheader Faites votre choix parmi les garde-meubles trouvés près de chez vous. S'il vous manque des informations, contactez directement le propriétaire.
+
+			.row
+				.small-12.medium-12.large-6.columns
+					.panel.text-center{ style: "background-color: rgb(160,211,232)" }
+						= image_tag "garde-meuble-contact.png"
+				.small-12.medium-12.large-6.columns
+					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Contactez le propriétaire
+					%h5.small-only-text-center.medium-only-text-center.subheader Si des informations vous manquent, posez vos questions au propriétaire depuis la page de l'annonce qui vous intéresse. Un email lui sera envoyé avec votre message et votre adresse email afin que vous puissiez communiquer simplement.
+
+			.row.hide-for-small.hide-for-medium{ style: "margin-top: 30px; margin-bottom: 30px"}
+				.small-12.medium-12.large-6.columns
+					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Réservez l'espace de stockage
+					%h5.small-only-text-center.medium-only-text-center.subheader Une fois votre choix fait, choisissez vos dates de stockage et précisez le volume souhaité. Un email sera envoyé au propriétaire pour l'informer de votre demande.
+				.small-12.medium-12.large-6.columns
+					.panel.text-center{ style: "background-color: rgb(160,211,232)" }
+						= image_tag "garde-meuble-book-2.png"
+			.row.hide-for-large{ style: "margin-top: 30px; margin-bottom: 30px"}
+				.small-12.medium-12.large-6.columns
+					.panel.text-center{ style: "background-color: rgb(160,211,232)" }
+						= image_tag "garde-meuble-book-2.png"
+				.small-12.medium-12.large-6.columns
+					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Réservez l'espace de stockage
+					%h5.small-only-text-center.medium-only-text-center.subheader Une fois votre choix fait, choisissez vos dates de stockage et précisez le volume souhaité. Un email sera envoyé au propriétaire pour l'informer de votre demande.
+
+			.row
+				.small-12.medium-12.large-6.columns
+					.panel.text-center{ style: "background-color: rgb(160,211,232)" }
+						= image_tag "aide-proprietaire-5.png"
+				.small-12.medium-12.large-6.columns
+					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Stockez vos affaires
+					%h5.small-only-text-center.medium-only-text-center.subheader Une fois la réservation validée, le propriétaire et vous recevez un email de confirmation avec un modèle de contrat en pièce jointe. Faites alors l'inventaire et l'état des lieux ensemble et signez le contrat de location!
+
+			.row.hide-for-small.hide-for-medium{ style: "margin-top: 30px; margin-bottom: 30px"}
+				.small-12.medium-12.large-6.columns
+					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Évaluez l'espace
+					%h5.small-only-text-center.medium-only-text-center.subheader Votre réservation s'est bien passée? Pensez à laisser une appréciation sur l'espace que vous avez loué afin d'aider les futurs locataires à faire leur choix! La fiabilité de Share Stockage dépend de vous!
+				.small-12.medium-12.large-6.columns
+					.panel.text-center{ style: "background-color: rgb(160,211,232)" }
+						= image_tag "garde-meuble-evaluation.png"
+			.row.hide-for-large{ style: "margin-top: 30px; margin-bottom: 30px"}
+				.small-12.medium-12.large-6.columns
+					.panel.text-center{ style: "background-color: rgb(160,211,232)" }
+						= image_tag "garde-meuble-evaluation.png"
+				.small-12.medium-12.large-6.columns
+					%h3.small-only-text-center.medium-only-text-center{ style: "color: rgb(62,65,73); font-weight: bold;" } Évaluez l'espace
+					%h5.small-only-text-center.medium-only-text-center.subheader Votre réservation s'est bien passée? Pensez à laisser une appréciation sur l'espace que vous avez loué afin d'aider les futurs locataires à faire leur choix! La fiabilité de Share Stockage dépend de vous!
+
 
 			= link_to "Retour à l'accueil", root_path, class: "button radius expand"
