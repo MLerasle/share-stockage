@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160318112740) do
+ActiveRecord::Schema.define(version: 20160323131328) do
 
   create_table "adverts", force: true do |t|
     t.string   "address"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20160318112740) do
     t.string   "slug",                                                            null: false
     t.string   "city"
     t.string   "country"
+    t.integer  "nip"
   end
 
   add_index "adverts", ["slug"], name: "index_adverts_on_slug", unique: true, using: :btree

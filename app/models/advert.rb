@@ -18,6 +18,7 @@ class Advert < ActiveRecord::Base
   default_value_for :elevator, false
   default_value_for :access_type, 0
   default_value_for :complete, false
+  default_value_for :country, 'Suisse'
   default_value_for :from_date do
     Date.today
   end
@@ -209,7 +210,7 @@ class Advert < ActiveRecord::Base
   end
 
   def full_address
-    "#{self.address}, #{self.city}, #{self.country}"
+    "#{self.address}, #{self.nip} #{self.city}"
   end
 
   private

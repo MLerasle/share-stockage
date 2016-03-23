@@ -1,21 +1,18 @@
-- content_for(:title, 'Nouvelle annonce')
-%section#main-content{ style: "background-color: rgb(245,245,245); margin-top:0px" }
+- content_for(:title, 'Mon annonce')
+%section{ style: "background-color: rgb(246,247,250)" }
 	.row
 		.small-10.columns.small-centered
-			%h2.subheader Modifier mon annonce
+			%h2{ style: "color: rgb(62,65,73); font-weight: bold; padding-top: 30px" } Modifier mon annonce
 			%em{ style: "color:red; font-size: 80%" } Les champs marqués d'un * sont obligatoires.
 
 			= form_for @advert, url: advert_path(@advert), method: :put do |f|
 				.panel{ style: "background-color: white" }
 					= render partial: "general_info", locals: { f: f }
-				%br
-				.panel{ style: "background-color: white" }
+					%br
 					= render partial: "location_info", locals: { f: f }
-				%br
-				.panel{ style: "background-color: white" }
+					%br
 					= render partial: "description_info", locals: { f: f }
-				%br
-				.panel{ style: "background-color: white" }
+					%br
 					= render partial: "price_info", locals: { f: f }
 
 				= f.submit "Valider mon annonce", class: "button radius expand"
