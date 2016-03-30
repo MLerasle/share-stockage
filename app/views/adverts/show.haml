@@ -142,7 +142,7 @@
 
 		- if current_user == @advert.user
 			.small-12.medium-12.large-4.columns
-				.panel
+				.panel{ style: "background-color: rgb(246,247,250)" }
 					%h3 Menu propriétaire
 					%hr
 					%ul.side-nav
@@ -164,7 +164,7 @@
 				.panel.map_panel
 					#map
 		.small-12.medium-12.large-4.columns
-			.panel
+			.panel{ style: "background-color: rgb(246,247,250)" }
 				%h3 Pré-réserver
 				%hr
 				= form_for([@advert, @advert.reservations.build]) do |f|
@@ -192,7 +192,7 @@
 						%i.fa.fa-exclamation-triangle{style: "color: red"}
 						Pensez à véfifier les disponibilités de l'espace pour que votre demande puisse aboutir.
 					
-			.panel
+			.panel{ style: "background-color: rgb(246,247,250)" }
 				%h3 Propriétaire
 				%hr
 				.row
@@ -212,7 +212,7 @@
 						- else
 							= link_to "Me connecter pour contacter le propriétaire", new_user_session_path, class: "button radius expand small"
 
-			.panel
+			.panel{ style: "background-color: rgb(246,247,250)" }
 				%h3 Partager
 				%hr
 				= social_share_button_tag(@advert.title, popup: true)
