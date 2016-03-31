@@ -30,6 +30,10 @@ class ReservationsController < ApplicationController
     #   flash[:alert] = "Cet espace n'est pas disponible aux dates sélectionnées. Veuillez vérifier la disponibilité de l'espace dans la section Calendrier."
     #   return redirect_to advert_path(@advert)
     # end
+    if !@reservation.volume
+      flash[:alert] = "Vous n'avez pas indiqué le volume de stockage souhaité."
+      return redirect_to advert_path(@advert)
+    end
     if @reservation.volume > @advert.volume
       flash[:alert] = "La surface demandée est trop grande pour cet espace. Veuillez consulter la section Disponibilité pour plus de détails."
       return redirect_to advert_path(@advert)
