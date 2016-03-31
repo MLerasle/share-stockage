@@ -9,7 +9,7 @@ class AdvertsController < ApplicationController
     @adverts = @adverts.for_filter(params[:filter]) unless params[:filter].blank?
     my_adverts_address = []
     @adverts.each do |a|
-      my_adverts_address << { address: a.full_address, data: a.full_address, tag: "/garde-meuble/#{a.slug}" }
+      my_adverts_address << { address: a.full_address, data: "<h6 style='font-weight: bold; color:rgb(57,141,183)'>#{a.type_name} de #{a.volume} m³</h6><h6>#{a.full_address}</h6>", tag: "/garde-meuble/#{a.slug}" }
     end
     @my_json_address = my_adverts_address.to_json
     render layout: 'search_adverts'
