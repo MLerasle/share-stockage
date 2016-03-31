@@ -1,5 +1,5 @@
 class AdvertsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :unavailable_dates]
+  before_action :authenticate_user!, except: [:index, :show, :unavailable_dates, :new]
   before_filter :find_advert, except: [:index, :new, :create, :preview]
   
   def index
@@ -19,6 +19,7 @@ class AdvertsController < ApplicationController
   end
 
   def new
+    return redirect_to users_sign_up_path unless current_user
     @advert = current_user.adverts.new
   end
 
