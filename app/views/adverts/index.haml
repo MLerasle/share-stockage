@@ -8,7 +8,7 @@
 		= form_for '#', method: :get, id: "adverts_filter_form" do
 			.row
 				.small-12.columns
-					= text_field_tag "filter[address]", (params[:filter][:address] rescue nil), id: "location_field", placeholder: "Où souhaitez-cous stocker?"
+					= text_field_tag "filter[address]", (params[:filter][:address] rescue nil), id: "location_field", placeholder: "Où souhaitez-vous stocker?"
 				/ .small-12.medium-3.columns
 				/ 	= text_field_tag "filter[start_date]", (params[:filter][:start_date] rescue nil), placeholder: "Début"
 				/ .small-12.medium-3.columns
