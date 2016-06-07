@@ -1,0 +1,28 @@
+%section#main-content
+	.row
+		.large-10.medium-10.small-12.columns.large-centered.medium-centered
+			%h2{ style: "color:rgb(46, 121, 168); text-align: center" } Tu as besoin d’espace cet été pour entreposer tes affaires?
+			%br
+	.row
+		.small-12.medium-6.large-6.columns.small-centered
+			%h5{style: "text-align:center"} Inutile de tout vendre ou de les ramener chez tes parents!
+			%br
+			%h5{style: "text-align:center"} Share Stockage te permet de louer un espace chez un particulier jusqu'à 60% moins cher que chez un professionnel. Et en plus, c'est convivial 😃
+			%br
+			.row.sign-up
+				.large-12.small-12.columns
+					= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'mean'}) do |f|
+						.row
+							.small-12.medium-6.large-6.columns
+								= f.text_field :first_name, autofocus: true, label: false, placeholder: "Prénom"
+							.small-12.medium-6.large-6.columns
+								= f.text_field :last_name, label: false, placeholder: "Nom"
+						.row
+							.small-12.medium-12.large-12.columns
+								= f.email_field :email, label: false, placeholder: "Adresse email"
+						.row
+							.small-12.medium-12.large-12.columns
+								= f.password_field :password, autocomplete: "off", placeholder: "Mot de passe (8 caractères minimum)", label: false
+						= f.hidden_field :accept_cgu, value: true
+				
+						= f.submit "Je m'inscris", class: "button radius expand large"

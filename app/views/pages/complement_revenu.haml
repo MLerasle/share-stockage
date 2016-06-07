@@ -1,0 +1,28 @@
+%section#main-content
+	.row
+		.large-10.medium-10.small-12.columns.large-centered.medium-centered
+			%h2{ style: "color:rgb(46, 121, 168); text-align: center" } Louez simplement l’espace disponible de chez vous
+			%br
+	.row
+		.small-12.medium-6.large-6.columns.small-centered
+			%h5{style: "text-align:center"} Qu’il s’agisse d’une partie de votre cave, d’un garage ou d’une chambre inoccupée, tout espace libre peut accueillir quelques affaires.
+			%br
+			%h5{style: "text-align:center"} Fixez librement votre tarif et touchez-en l’intégralité, notre site est gratuit 😃 Essayez-le!
+			%br
+			.row.sign-up
+				.large-12.small-12.columns
+					= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'mean'}) do |f|
+						.row
+							.small-12.medium-6.large-6.columns
+								= f.text_field :first_name, autofocus: true, label: false, placeholder: "Prénom"
+							.small-12.medium-6.large-6.columns
+								= f.text_field :last_name, label: false, placeholder: "Nom"
+						.row
+							.small-12.medium-12.large-12.columns
+								= f.email_field :email, label: false, placeholder: "Adresse email"
+						.row
+							.small-12.medium-12.large-12.columns
+								= f.password_field :password, autocomplete: "off", placeholder: "Mot de passe (8 caractères minimum)", label: false
+						= f.hidden_field :accept_cgu, value: true
+				
+						= f.submit "Je rentabilise mon espace", class: "button radius expand large"

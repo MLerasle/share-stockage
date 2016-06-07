@@ -57,6 +57,12 @@ Rails.application.routes.draw do
   get '/help', to: redirect('/aide')
   get 'welcome' => 'pages#welcome'
 
+  # Landing proprios
+  get 'complement-revenu' => 'pages#complement_revenu'
+  get 'espace-libre' => 'pages#espace_libre'
+  # Landing locataires
+  get 'garde-meuble-entre-particuliers' => 'pages#garde_meuble_entre_particuliers'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="Garde-meuble entre particuliers en Suisse Romande. Louez votre cave, votre garage ou toute pièce inutilisée pour rentabiliser votre espace.">
+    <meta name="google-site-verification" content="IHzGTeH3USy4WSIrbCefbpcIiwTLqK62E5mZNFImpg8" />
+    <title><%= full_title(yield :title) %></title>
+		<%= favicon_link_tag 'favicon-sharestockage.ico'%>
+		<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+		<!-- Include Facebook SDK -->
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.5";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+
+		<div class="sticky">
+			<nav class="top-bar" data-topbar>
+			  <ul class="title-area">
+			    <li class="name">
+						<h1>
+				      <%= link_to '#', method: :get do %>
+								<%= image_tag "logo-sharestockage.gif", style: "margin-left: 5px;" %><span style="color: rgb(62,65,73)">Share Stockage</span>
+							<% end %>
+						</h1>
+			    </li>
+			  </ul>
+			</nav>
+		</div>
+		
+		
+		<!-- <div class="row">
+			<% unless notice.nil? %>
+				<div data-alert class="alert-box info radius">
+				  <%= notice %>
+				  <a href="#" class="close">&times;</a>
+				</div>
+			<% end %>
+			<% unless alert.nil? %>
+				<div data-alert class="alert-box alert radius">
+					<%= alert %>
+					<a href="#" class="close">&times;</a>
+				</div>
+			<% end %>
+		</div> -->
+
+    <%= yield %>
+		
+		
+		<!-- FOOTER SECTION -->
+		
+    <%= javascript_include_tag "application" %>
+		<%= yield :scripts %>
+		<%= render 'layouts/footer' %>
+  </body>
+</html>
