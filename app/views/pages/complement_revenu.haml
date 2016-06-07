@@ -9,6 +9,10 @@
 			%br
 			%h5{style: "text-align:center"} Fixez librement votre tarif et touchez-en l’intégralité, notre site est gratuit 😃 Essayez-le!
 			%br
+			= link_to user_omniauth_authorize_path(:facebook), class: "facebook button split left-icon radius" do
+				%span
+				S'inscrire avec Facebook
+			%p{style: "text-align:center"} - OU -
 			.row.sign-up
 				.large-12.small-12.columns
 					= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'mean'}) do |f|

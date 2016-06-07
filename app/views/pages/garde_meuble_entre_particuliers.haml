@@ -9,6 +9,10 @@
 			%br
 			%h5{style: "text-align:center"} Share Stockage te permet de louer un espace chez un particulier jusqu'à 60% moins cher que chez un professionnel. Et en plus, c'est convivial 😃
 			%br
+			= link_to user_omniauth_authorize_path(:facebook), class: "facebook button split left-icon radius" do
+				%span
+				S'inscrire avec Facebook
+			%p{style: "text-align:center"} - OU -
 			.row.sign-up
 				.large-12.small-12.columns
 					= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'mean'}) do |f|
