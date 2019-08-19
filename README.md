@@ -1,4 +1,5 @@
 **Share Stockage** is a website I created to simply create a full website from scratch :)
+It allows people to rent available storage space they don't use to other people who could need it.
 
 The purpose was not to launch it in production, even if I did, but just to practice my **Ruby On Rails** skills and to learn new stuff in the process.
 
