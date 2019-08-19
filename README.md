@@ -2,11 +2,11 @@
 
 The purpose was not to launch it in production, even if I did, but just to practice my **Ruby On Rails** skills and to learn new stuff in the process.
 
-I kept the code as I originally wrote it a few years ago, so you won't find any Docker container or stuff like that to help you out if you want to launch the app, but you should be able to do so by following the following steps.
+I kept the code as I originally wrote it a few years ago, so you won't find any Docker container or stuff like that to help you out if you want to launch the app, but you should be able to do so by following the next few steps.
 
 Just a side note before that: it is very likely that all the features won't work as expected, regarding the fact that I stopped working on this project a long time ago and didn't touch it since then (I'm thinking about the emails for example which I only partially deactivated) but feel free to play around with the code if you want to.
 
-Ok, so to install the project, you have to:
+So, to install the project, you have to:
 
 1. Clone the repo: `git clone git@gitlab.com:maxlerasle/share-stockage.git`
 
