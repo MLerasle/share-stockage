@@ -18,11 +18,11 @@ Ok, so to install the project, you have to:
 
 ```yml
 development:
-	adapter: mysql2
-	encoding: utf8
-	database: share_stockage
-	username: root
-	host: localhost
+  adapter: mysql2
+  encoding: utf8
+  database: share_stockage
+  username: root
+  host: localhost
 ```
 5. Launch the migration: `bundle exec rake db:migrate`
 
@@ -32,6 +32,6 @@ development:
 
 ```yml
 development:
-	secret_key_base: your_key_here
+  secret_key_base: your_key_here
 ```
 8. Launch the server and you should be good to go: `bundle exec unicorn`
