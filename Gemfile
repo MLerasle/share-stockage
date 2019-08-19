@@ -53,7 +53,7 @@ gem 'social-share-button'
 gem "geocoder"
 
 # Images
-gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+gem "paperclip"
 gem 'dropzonejs-rails'
 gem 'aws-sdk', '< 2.0'
 
@@ -95,12 +95,12 @@ gem "figaro"
 gem 'therubyracer'
 
 # Payments
-gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'stripe'
 
 # Deploy with Capistrano
 group :development do
   gem 'capistrano', '~> 3.3.0', require: false
-  gem 'capistrano-rbenv', '~> 2.0', require: false 
+  gem 'capistrano-rbenv', '~> 2.0', require: false
   gem 'capistrano-rails', '~> 1.1', require: false
   gem 'capistrano-bundler', '~> 1.1', require: false
   gem 'capistrano-passenger'

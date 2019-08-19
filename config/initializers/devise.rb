@@ -5,16 +5,17 @@ Devise.setup do |config|
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
   # config.secret_key = '64a00570592fe8303b655ef994d5ca6b711c502a28b986e28a91a0e454264bcaf5265c7bf54cbd7d939752b9607d4ffd7dbd8fd59825f81616f124f81f775b21'
-  config.secret_key = ENV['DEVISE_SECRET_KEY']
+  config.secret_key = '54b589d61022c067f975d763be9fa9780b817377b766a7ae9489d1390618c0ad1e214ab718631269fa113921f373a6345f3afab514bfdde819e77505428eeddf'
+  # config.secret_key = ENV['DEVISE_SECRET_KEY']
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'Share Stockage <contact@sharestockage.ch>'
+  # config.mailer_sender = 'Share Stockage <contact@sharestockage.ch>'
 
   # Configure the class responsible to send e-mails.
-  config.mailer = 'Devise::Mailer'
+  # config.mailer = 'Devise::Mailer'
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -106,7 +107,7 @@ Devise.setup do |config|
   # able to access the website for two days without confirming their account,
   # access will be blocked just in the third day. Default is 0.days, meaning
   # the user cannot access the website without confirming their account.
-  # config.allow_unconfirmed_access_for = 2.days
+  config.allow_unconfirmed_access_for = 2.days
 
   # A period that the user is allowed to confirm their account before their
   # token becomes invalid. For example, if set to 3.days, the user can confirm
